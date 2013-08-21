@@ -31,6 +31,9 @@
 #ifndef _NILCONF_H_
 #define _NILCONF_H_
 
+#define NIL_USE_SEMAPHORES TRUE
+#define NIL_USE_MAILBOXES TRUE
+
 /**
  * @brief   Number of user threads in the application.
  * @note    This number is not inclusive of the idle thread which is

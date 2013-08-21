@@ -695,6 +695,10 @@ extern "C" {
    the OS services like assertions.*/
 #include "nilcore.h"
 
+#if NIL_USE_MAILBOXES
+#include "nilmboxes.h"
+
+#endif
 #endif /* _NIL_H_ */
 
 /** @} */

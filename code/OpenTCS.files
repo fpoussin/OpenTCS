@@ -78,3 +78,6 @@ nil/os/ports/GCC/ARMCM0/rules.mk
 src/hwinit.c
 src/main.c
 Makefile
+src/light.c
+nil/os/kernel/nilmboxes.h
+nil/os/kernel/nilmboxes.c

@@ -69,7 +69,7 @@ LDSCRIPT= $(PORTLD)/STM32F051x8.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       src/hwinit.c src/main.c
+       src/hwinit.c src/main.c src/light.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
