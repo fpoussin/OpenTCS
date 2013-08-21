@@ -58,7 +58,7 @@ endif
 PROJECT = nil
 
 # Imported source files and paths
-NILRTOS = ../..
+NILRTOS = nil
 include $(NILRTOS)/os/ports/GCC/ARMCM0/STM32F0xx/port.mk
 include $(NILRTOS)/os/kernel/kernel.mk
 
