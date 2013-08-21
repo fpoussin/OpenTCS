@@ -69,7 +69,7 @@ LDSCRIPT= $(PORTLD)/STM32F051x8.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       hwinit.c main.c
+       src/hwinit.c src/main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -98,7 +98,7 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(PORTASM)
 
-INCDIR = $(PORTINC) $(KERNINC)
+INCDIR = $(PORTINC) $(KERNINC) inc
 
 #
 # Project, sources and paths
