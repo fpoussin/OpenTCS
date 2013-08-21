@@ -178,10 +178,10 @@ UADEFS =
 UINCDIR =
 
 # List the user directory to look for the libraries here
-ULIBDIR =
+ULIBDIR = lib
 
 # List all user libraries here
-ULIBS =
+ULIBS = -lstm32f0
 
 #
 # End of user defines
