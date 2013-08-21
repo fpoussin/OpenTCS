@@ -6568,7 +6568,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <parts>
 <part name="IC1" library="misc" deviceset="STM32F05XC" device=""/>
 <part name="IC2" library="misc" deviceset="MCP6N11" device="" value="MCP6N11-10"/>
-<part name="IC3" library="misc" deviceset="MCP45X1" device=""/>
+<part name="IC3" library="misc" deviceset="MCP45X1" device="" value="MCP4551-100K"/>
 <part name="IC4" library="v-reg" deviceset="LD117A?*" device="DT" technology="33TR"/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>

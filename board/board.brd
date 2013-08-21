@@ -1248,7 +1248,7 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="VALUE" x="33.655" y="3.4925" size="0.4064" layer="28" rot="MR90"/>
 <attribute name="NAME" x="32.7025" y="1.5875" size="1.27" layer="26" font="vector" ratio="16" rot="MR180"/>
 </element>
-<element name="IC3" library="misc" package="MSOP-8" value="MCP45X1" x="44.45" y="4.445" smashed="yes" rot="MR180">
+<element name="IC3" library="misc" package="MSOP-8" value="MCP4551-100K" x="44.45" y="4.445" smashed="yes" rot="MR180">
 <attribute name="VALUE" x="43.35" y="5.045" size="0.4064" layer="28" rot="MR180"/>
 <attribute name="NAME" x="42.5975" y="1.405" size="1.27" layer="26" font="vector" ratio="16" rot="MR180"/>
 </element>
