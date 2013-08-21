@@ -1,0 +1,8 @@
+*.o
+*.o.d
+*.a
+*.b#*
+*.s#*
+
+code/build/
+code/dep/
