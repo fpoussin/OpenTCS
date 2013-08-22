@@ -10,7 +10,7 @@
 #define LIGHT_STATE_BLINK 2
 #define LIGHT_STATE_PULSE 3
 
-void startlight(void);
+void startlight(void) __attribute__ ((noreturn));
 struct __light_settings {
 
     uint8_t state;
@@ -23,13 +23,13 @@ extern light_settings_t light_settings;
 
 
 /* ADC */
-void startAdc(void);
+void startAdc(void) __attribute__ ((noreturn));
 /* End of ADC */
 
 
 /* Ignition */
 
-void startIgnition(void);
+void startIgnition(void) __attribute__ ((noreturn));
 struct __ign_cut {
     uint8_t type;
     uint16_t duration;
@@ -41,5 +41,5 @@ extern ign_cut_t ign_cut;
 
 
 /* OLED */
-void startOled(void);
+void startOled(void) __attribute__ ((noreturn));
 /* End of OLED */

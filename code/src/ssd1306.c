@@ -165,7 +165,7 @@ void ssd1306Init(uint8_t vccstate)
   DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
   DMA_InitStructure.DMA_PeripheralBaseAddr =  (uint32_t)SPI1->DR;
   DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)buffer;
-  DMA_InitStructure.DMA_BufferSize = sizeof(buffer)/sizeof(buffer[0]);
+  DMA_InitStructure.DMA_BufferSize = 1024;
   /* write */
   DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -301,16 +301,15 @@ void ssd1306Refresh(void)
   gpioClearPad( SSD1306_CS_PORT, SSD1306_CS_PIN);
 
   DMA_Cmd(DMA1_Channel3, DISABLE);
+  DMA_ClearFlag(DMA1_FLAG_TC3);
   DMA1_Channel3->CMAR = (uint32_t)buffer;
-  DMA1_Channel3->CNDTR = sizeof(buffer)/sizeof(buffer[0]);
+  DMA1_Channel3->CNDTR = 1024;
 
   /* start */
   DMA_Cmd(DMA1_Channel3, ENABLE);
 
-  while(DMA_GetFlagStatus(DMA1_FLAG_TC3) == RESET) { // Wait for transfer to finish
-
-      DELAY(25);
-  };
+  /* Wait for transfer to finis  */
+  while(DMA_GetFlagStatus(DMA1_FLAG_TC3) == RESET) DELAY(25);
   DMA_ClearFlag(DMA1_FLAG_TC3);
 
   gpioSetPad( SSD1306_CS_PORT, SSD1306_CS_PIN);
