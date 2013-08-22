@@ -81,3 +81,5 @@ Makefile
 src/light.c
 nil/os/kernel/nilmboxes.h
 nil/os/kernel/nilmboxes.c
+nil/os/kernel/nilmsg.h
+nil/os/kernel/nilmsg.c

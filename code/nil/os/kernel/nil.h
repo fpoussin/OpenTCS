@@ -249,6 +249,16 @@ struct nil_thread {
   } u1;
   volatile systime_t    timeout;/**< @brief Timeout counter, zero
                                             if disabled.                    */
+  #if CH_USE_MESSAGES || defined(__DOXYGEN__)
+  /**
+   * @brief Messages queue.
+   */
+  ThreadsQueue          p_msgqueue;
+  /**
+   * @brief Thread message.
+   */
+  msg_t                 p_msg;
+  #endif
   /* Optional extra fields.*/
   NIL_CFG_THREAD_EXT_FIELDS
 };
@@ -695,10 +705,6 @@ extern "C" {
    the OS services like assertions.*/
 #include "nilcore.h"
 
-#if NIL_USE_MAILBOXES
-#include "nilmboxes.h"
-
-#endif
 #endif /* _NIL_H_ */
 
 /** @} */

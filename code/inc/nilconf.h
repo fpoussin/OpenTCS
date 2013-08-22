@@ -33,6 +33,7 @@
 
 #define NIL_USE_SEMAPHORES TRUE
 #define NIL_USE_MAILBOXES TRUE
+#define NIL_USE_MESSAGES TRUE
 
 /**
  * @brief   Number of user threads in the application.
