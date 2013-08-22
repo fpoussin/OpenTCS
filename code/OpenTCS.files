@@ -83,3 +83,7 @@ nil/os/kernel/nilmboxes.h
 nil/os/kernel/nilmboxes.c
 nil/os/kernel/nilmsg.h
 nil/os/kernel/nilmsg.c
+inc/threads.h
+src/ignition.c
+src/adc.c
+src/oled.c

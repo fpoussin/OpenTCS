@@ -1,5 +1,6 @@
 #include "nil.h"
 #include "hwinit.h"
+#include "threads.h"
 
 /*
  * Thread 1.
@@ -8,12 +9,8 @@ NIL_WORKING_AREA(waThread1, 128);
 NIL_THREAD(Thread1, arg) {
 
   (void)arg;
-
   while (true) {
-    gpioSetPad(GPIOC, GPIOC_LED4);
-    nilThdSleepMilliseconds(500);
-    gpioClearPad(GPIOC, GPIOC_LED4);
-    nilThdSleepMilliseconds(500);
+    startlight();
   }
 }
 

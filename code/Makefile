@@ -55,7 +55,7 @@ endif
 #
 
 # Define project name here
-PROJECT = nil
+PROJECT = opentcs
 
 # Imported source files and paths
 NILRTOS = nil
@@ -63,13 +63,13 @@ include $(NILRTOS)/os/ports/GCC/ARMCM0/STM32F0xx/port.mk
 include $(NILRTOS)/os/kernel/kernel.mk
 
 # Define linker script file here
-LDSCRIPT= $(PORTLD)/STM32F051x8.ld
+LDSCRIPT= $(PORTLD)/STM32F050x4.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       src/hwinit.c src/main.c src/light.c
+       src/hwinit.c src/main.c src/light.c src/ignition.c src/adc.c src/oled.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
