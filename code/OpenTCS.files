@@ -87,3 +87,8 @@ inc/threads.h
 src/ignition.c
 src/adc.c
 src/oled.c
+inc/ssd1306.h
+src/ssd1306.c
+src/smallfonts.c
+inc/smallfonts.h
+nil/os/ports/GCC/ARMCM0/STM32F0xx/ld/STM32F050x4.ld

@@ -23,10 +23,20 @@ NIL_THREAD(Thread2, arg) {
   (void)arg;
 
   while (true) {
-    gpioSetPad(GPIOC, GPIOC_LED3);
-    nilThdSleepMilliseconds(250);
-    gpioClearPad(GPIOC, GPIOC_LED3);
-    nilThdSleepMilliseconds(250);
+    startOled();
+  }
+}
+
+/*
+ * Thread 3.
+ */
+NIL_WORKING_AREA(waThread3, 128);
+NIL_THREAD(Thread3, arg) {
+
+  (void)arg;
+
+  while (true) {
+    startIgnition();
   }
 }
 
@@ -35,8 +45,9 @@ NIL_THREAD(Thread2, arg) {
  * match NIL_CFG_NUM_THREADS.
  */
 NIL_THREADS_TABLE_BEGIN()
-  NIL_THREADS_TABLE_ENTRY("thread1", Thread1, NULL, waThread1, sizeof(waThread1))
-  NIL_THREADS_TABLE_ENTRY("thread2", Thread2, NULL, waThread2, sizeof(waThread2))
+  NIL_THREADS_TABLE_ENTRY("light", Thread1, NULL, waThread1, sizeof(waThread1))
+  NIL_THREADS_TABLE_ENTRY("oled", Thread2, NULL, waThread2, sizeof(waThread2))
+  NIL_THREADS_TABLE_ENTRY("ignition", Thread2, NULL, waThread3, sizeof(waThread3))
 NIL_THREADS_TABLE_END()
 
 /*

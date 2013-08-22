@@ -31,16 +31,12 @@
 #ifndef _NILCONF_H_
 #define _NILCONF_H_
 
-#define NIL_USE_SEMAPHORES TRUE
-#define NIL_USE_MAILBOXES TRUE
-#define NIL_USE_MESSAGES TRUE
-
 /**
  * @brief   Number of user threads in the application.
  * @note    This number is not inclusive of the idle thread which is
  *          Implicitly handled.
  */
-#define NIL_CFG_NUM_THREADS                 2
+#define NIL_CFG_NUM_THREADS                 3
 
 /**
  * @brief   System tick frequency.
@@ -55,7 +51,7 @@
  *          The value one is not valid, timeouts are rounded up to
  *          this value.
  */
-#define NIL_CFG_TIMEDELTA                   2
+#define NIL_CFG_TIMEDELTA                   0
 
 /**
  * @brief   System assertions.

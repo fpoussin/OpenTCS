@@ -20,7 +20,7 @@ endif
 
 # Enable this if you want the linker to remove unused code and data
 ifeq ($(USE_LINK_GC),)
-  USE_LINK_GC = no
+  USE_LINK_GC = yes
 endif
 
 # If enabled, this option allows to compile the application in THUMB mode.
@@ -69,7 +69,7 @@ LDSCRIPT= $(PORTLD)/STM32F050x4.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       src/hwinit.c src/main.c src/light.c src/ignition.c src/adc.c src/oled.c
+       src/hwinit.c src/main.c src/light.c src/ignition.c src/adc.c src/oled.c src/ssd1306.c src/smallfonts.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -98,7 +98,7 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(PORTASM)
 
-INCDIR = $(PORTINC) $(KERNINC) inc lib/STM32F0xx_StdPeriph_Driver/inc 
+INCDIR = $(PORTINC) $(KERNINC) inc lib lib/STM32F0xx_StdPeriph_Driver/inc
 
 #
 # Project, sources and paths
