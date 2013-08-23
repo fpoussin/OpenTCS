@@ -1,3 +1,6 @@
+#include "nil.h"
+#include "hwinit.h"
+#include "stm32f0xx.h"
 /*
  * This file contains all the function prototypes
  * and global structures used in threads.
@@ -17,12 +20,14 @@ struct __settings {
         uint8_t cut_time;
         uint8_t cut_type;
         uint16_t sensor_threshold;
+        uint16_t slip_threshold;
         uint8_t sensor_gain;
 
     } data;
-    volatile uint32_t CRCValue;
+    __IO uint32_t CRCValue;
 };
 typedef struct __settings settings_t;
+extern settings_t settings;
 
 
 
@@ -93,8 +98,16 @@ void startDisplay(void) __attribute__ ((noreturn));
 #define SENSORS_OFF 0
 #define SENSORS_ON 1
 
+struct __sensors {
+    uint8_t shifting;
+    uint8_t slipping_pct;
+};
+typedef struct __sensors sensors_t;
+extern sensors_t sensors;
+
 void startSensors(void) __attribute__ ((noreturn));
 
 /* End of Sensors */
+
 
 

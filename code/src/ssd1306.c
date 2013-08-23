@@ -44,17 +44,11 @@
 
 inline void ssd1306SendByte(uint8_t byte);
 
-#define CMD(c)        do { gpioSetPad( SSD1306_CS_PORT, SSD1306_CS_PIN); \
-                           gpioClearPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
-                           gpioClearPad( SSD1306_CS_PORT, SSD1306_CS_PIN); \
+#define CMD(c)        do { gpioClearPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
                            ssd1306SendByte( c ); \
-                           gpioSetPad( SSD1306_CS_PORT, SSD1306_CS_PIN); \
                          } while (0);
-#define DATA(c)       do { gpioSetPad( SSD1306_CS_PORT, SSD1306_CS_PIN); \
-                           gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
-                           gpioClearPad( SSD1306_CS_PORT, SSD1306_CS_PIN); \
+#define DATA(c)       do { gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
                            ssd1306SendByte( c ); \
-                           gpioSetPad( SSD1306_CS_PORT, SSD1306_CS_PIN); \
                          } while (0);
 
 #define DELAY(mS)     nilThdSleepMilliseconds(mS);
@@ -76,7 +70,7 @@ uint8_t buffer[SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8];
 inline void ssd1306SendByte(uint8_t byte)
 {
   SPI_SendData8(SSD1306_SPI, byte);
-  while (SPI_I2S_GetFlagStatus(SSD1306_SPI, SPI_I2S_FLAG_BSY) == SET) {};
+  while (SSD1306_SPI->SR & SPI_SR_BSY) {};
 }
 
 /**************************************************************************/
@@ -138,7 +132,7 @@ void ssd1306Init(uint8_t vccstate)
   SPI_InitTypeDef SPI_InitStructure;
   DMA_InitTypeDef  DMA_InitStructure;
 
-  RCC_APB1PeriphClockCmd(RCC_APB2Periph_SPI1 , ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1 , ENABLE);
   SPI_Cmd(SSD1306_SPI, DISABLE);
 
   //configure spi
@@ -171,7 +165,7 @@ void ssd1306Init(uint8_t vccstate)
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
   DMA_Init(DMA1_Channel3, &DMA_InitStructure);
 
-  /* Enable the SPI Rx DMA request */
+  /* Enable the SPI Tx DMA request */
   SPI_I2S_DMACmd(SPI1, SPI_I2S_DMAReq_Tx, ENABLE);
 
   // Reset the LCD
@@ -298,7 +292,6 @@ void ssd1306Refresh(void)
   CMD(SSD1306_SETSTARTLINE | 0x0); // line #0
 
   gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN);
-  gpioClearPad( SSD1306_CS_PORT, SSD1306_CS_PIN);
 
   DMA_Cmd(DMA1_Channel3, DISABLE);
   DMA_ClearFlag(DMA1_FLAG_TC3);
@@ -311,8 +304,6 @@ void ssd1306Refresh(void)
   /* Wait for transfer to finis  */
   while(DMA_GetFlagStatus(DMA1_FLAG_TC3) == RESET) DELAY(25);
   DMA_ClearFlag(DMA1_FLAG_TC3);
-
-  gpioSetPad( SSD1306_CS_PORT, SSD1306_CS_PIN);
 }
 
 /**************************************************************************/

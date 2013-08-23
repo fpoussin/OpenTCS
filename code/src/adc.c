@@ -1,6 +1,5 @@
 #include "nil.h"
 #include "threads.h"
-#include "stm32f0xx.h"
 
 adc_status_t adc_status = { ADC_STOPPED };
 uint16_t adc_samples[20];
@@ -81,8 +80,7 @@ void startAdc(void)
     adc_status.status = ADC_STARTED;
 }
 
-/* DMA1_Channel1_IRQHandler */
-void Vector64(void)
+void DMA1_Ch1_IRQHandler(void)
 {
   /* Test on DMA1 Channel1 Transfer Complete interrupt */
   if(DMA_GetITStatus(DMA1_IT_TC1))

@@ -1,6 +1,5 @@
 #include "nil.h"
 #include "threads.h"
-#include "stm32f0xx.h"
 
 settings_t* readSettings(void) {
 

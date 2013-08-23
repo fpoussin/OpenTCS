@@ -181,7 +181,7 @@ UINCDIR =
 ULIBDIR = lib
 
 # List all user libraries here
-ULIBS = -lstm32f0
+ULIBS = -lstm32f0 -lm2tk
 
 #
 # End of user defines

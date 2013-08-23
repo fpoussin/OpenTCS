@@ -3,33 +3,38 @@ AR=arm-none-eabi-ar
 
 ###########################################
 
-vpath %.c STM32F0xx_StdPeriph_Driver/src
+FW_PATH = STM32F0xx_StdPeriph_Driver/src
 
 CFLAGS  = -g -Os -Wall -ffunction-sections -fdata-sections
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0 -march=armv6s-m
 CFLAGS += -ffreestanding -nostdlib
-CFLAGS += -includestm32f0xx_conf.h -ICMSIS/Include -ICMSIS/Device/ST/STM32F0xx/Include -ISTM32F0xx_StdPeriph_Driver/inc
+CFLAGS += -I./ -ICMSIS/Include -ICMSIS/Device/ST/STM32F0xx/Include -ISTM32F0xx_StdPeriph_Driver/inc
 CFLAGS += -Wl,--gc-sections
 
 
-SRCS = stm32f0xx_adc.c stm32f0xx_cec.c stm32f0xx_comp.c stm32f0xx_crc.c \
-	stm32f0xx_dac.c stm32f0xx_dbgmcu.c stm32f0xx_dma.c stm32f0xx_exti.c \
-	stm32f0xx_flash.c stm32f0xx_gpio.c stm32f0xx_i2c.c stm32f0xx_iwdg.c \
-	stm32f0xx_misc.c stm32f0xx_pwr.c stm32f0xx_rcc.c stm32f0xx_rtc.c \
-	stm32f0xx_spi.c stm32f0xx_syscfg.c stm32f0xx_tim.c \
-	stm32f0xx_usart.c stm32f0xx_wwdg.c
+FW_SRCS =  $(FW_PATH)/stm32f0xx_adc.c $(FW_PATH)/stm32f0xx_cec.c $(FW_PATH)/stm32f0xx_comp.c $(FW_PATH)/stm32f0xx_crc.c \
+	$(FW_PATH)/stm32f0xx_dac.c $(FW_PATH)/stm32f0xx_dbgmcu.c $(FW_PATH)/stm32f0xx_dma.c $(FW_PATH)/stm32f0xx_exti.c \
+	$(FW_PATH)/stm32f0xx_flash.c $(FW_PATH)/stm32f0xx_gpio.c $(FW_PATH)/stm32f0xx_i2c.c $(FW_PATH)/stm32f0xx_iwdg.c \
+	$(FW_PATH)/stm32f0xx_misc.c $(FW_PATH)/stm32f0xx_pwr.c $(FW_PATH)/stm32f0xx_rcc.c $(FW_PATH)/stm32f0xx_rtc.c \
+	$(FW_PATH)/stm32f0xx_spi.c $(FW_PATH)/stm32f0xx_syscfg.c $(FW_PATH)/stm32f0xx_tim.c \
+	$(FW_PATH)/stm32f0xx_usart.c $(FW_PATH)/stm32f0xx_wwdg.c
+  
+include m2tk_u8g/m2tk.mk
 
-OBJS = $(SRCS:.c=.o)
+FW_OBJS = $(FW_SRCS:.c=.o)
 
-.PHONY: libstm32f0.a
+.PHONY: all
 
-all: libstm32f0.a
+all: libstm32f0.a libm2tk.a
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
-libstm32f0.a: $(OBJS)
-	$(AR) -r $@ $(OBJS)
+libstm32f0.a: $(FW_OBJS)
+	$(AR) -r $@ $(FW_OBJS)
+  
+libm2tk.a: $(M2TK_OBJS)
+	$(AR) -r $@ $(M2TK_OBJS)
 
 clean:
-	rm -f $(OBJS) libstm32f0.a
+	rm -f $(FW_OBJS) $(M2TK_OBJS) libstm32f0.a libm2tk.a

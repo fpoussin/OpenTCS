@@ -51,7 +51,7 @@
  *          The value one is not valid, timeouts are rounded up to
  *          this value.
  */
-#define NIL_CFG_TIMEDELTA                   0
+#define NIL_CFG_TIMEDELTA                   4
 
 /**
  * @brief   System assertions.

@@ -1,6 +1,6 @@
 #include "nil.h"
-#include "ssd1306.h"
 #include "threads.h"
+#include "ssd1306.h"
 
 void startDisplay(void) {
 
