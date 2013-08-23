@@ -98,7 +98,7 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(PORTASM)
 
-INCDIR = $(PORTINC) $(KERNINC) inc lib lib/STM32F0xx_StdPeriph_Driver/inc
+INCDIR = $(PORTINC) $(KERNINC) inc lib lib/STM32F0xx_StdPeriph_Driver/inc lib/m2tk_u8g/inc
 
 #
 # Project, sources and paths

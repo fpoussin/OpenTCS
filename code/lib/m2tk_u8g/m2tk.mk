@@ -1,7 +1,6 @@
 CFLAGS += -Im2tk_u8g/inc
 M2TK_PATH = m2tk_u8g/src
 
-M2TK_SRCS += $(M2TK_PATH)/chessengine.c
 M2TK_SRCS += $(M2TK_PATH)/m2.c
 M2TK_SRCS += $(M2TK_PATH)/m2align.c
 M2TK_SRCS += $(M2TK_PATH)/m2dfs.c
@@ -35,18 +34,6 @@ M2TK_SRCS += $(M2TK_PATH)/m2elradio.c
 M2TK_SRCS += $(M2TK_PATH)/u8g_clip.c
 M2TK_SRCS += $(M2TK_PATH)/u8g_com_api.c
 M2TK_SRCS += $(M2TK_PATH)/u8g_com_api_16gr.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_common.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_fast_parallel.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_hw_spi.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_no_en_parallel.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_parallel.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_port_d_wr.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_ssd_i2c.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_st7920_hw_spi.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_st7920_spi.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_std_sw_spi.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_sw_spi.c
-M2TK_SRCS += $(M2TK_PATH)/u8g_com_arduino_t6963.c
 M2TK_SRCS += $(M2TK_PATH)/u8g_com_i2c.c
 M2TK_SRCS += $(M2TK_PATH)/u8g_dev_ssd1322_nhd31oled_bw.c
 M2TK_SRCS += $(M2TK_PATH)/u8g_dev_ssd1322_nhd31oled_gr.c
