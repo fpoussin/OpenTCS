@@ -1,32 +1,9 @@
-#include "nil.h"
-#include "ssd1306.h"
+#include "menu.h"
 
 struct menuStruct;
-void item2Handle(void);
-
-//Font for the arrows
-const unsigned short Arrows5x6[] = {
-        0x30, 0x3C, 0x3F, 0x3C, 0x30,
-        0x03, 0x0F, 0x3F, 0x0F, 0x03
-        };
-
-//Menu item structure
-typedef struct menuItem
-               {
-                char *itemName;                 //Name of this item
-                void (*handler)(void);          //Pointer to function, null if not used
-                struct menuStruct *subMenu;     //Pointer to sub menu, null if not used
-               } menuItem;
-
-//Menu structure
-typedef struct menuStruct
-               {
-                char *menuName;                 //Name of menu
-                unsigned short numberItems;     //Number of menu items
-                menuItem *items;                //Pointer to array of items
-               } menuStruct;
 
 //Demo menu. Menus are declared in reverse order,
+/*
 menuItem subItem1ItemList[] = {{"Sub Sub Item 1", 0, 0}, {"Sub Sub Item 2", 0, 0}};
 
 menuStruct subItem1Menu = {"Sub Item 1 Sub Menu", 2, subItem1ItemList};
@@ -44,21 +21,20 @@ menuStruct mainMenu = {"Main Menu", 10, mainMenuItemList};
 void item2Handle(void)
 {
   ssd1306ClearScreen();
-  ssd1306DrawString(0, 0, "test", Font_System5x8);
+  ssd1306DrawString(0, 0, "item2Handle", Font_System5x8);
 
- while(!gpioReadPad(GPIOC, GPIOC_BUTTON_SEL)) {};
+  while(!gpioReadPad(GPIOC, GPIOC_BUTTON_SEL)) {};
 
- return;
+  return;
 }
-
+*/
 //Draws the actual menu
-void drawMenu(menuStruct *menuToShow, short selectedIndex)
+void drawMenu(menuStruct_t *menuToShow, short selectedIndex)
 {
  unsigned short i;
 
- //~ GLCD_Fill(0x00);
- //~ GLCD_Set_Font(FontSystem5x8,5,8,32);
- //~ GLCD_Write_Text(menuToShow->menuName, 0, 0, 1);
+ ssd1306ClearScreen();
+ ssd1306DrawString(0, 0, menuToShow->menuName, Font_System5x8);
 
  for(i=0;i < (menuToShow->numberItems > 6 ? 6 : menuToShow->numberItems) ;i++)
  {
@@ -69,28 +45,31 @@ void drawMenu(menuStruct *menuToShow, short selectedIndex)
   else if (selectedIndex < 6)
   {
    //~ GLCD_Write_Text(menuToShow->items[i]->itemName, 5, i+1, (selectedIndex == i) ? 0 : 1);
+      ssd1306DrawString(5, i+1, menuToShow->items[i].itemName, Font_System5x8);
   }
   else
   {
    //~ GLCD_Write_Text(menuToShow->items[i+(selectedIndex-5)]->itemName, 5, i+1, (selectedIndex == i+(selectedIndex-5)) ? 0 : 1);
+      ssd1306DrawString(5, i+1, menuToShow->items[i+(selectedIndex-5)].itemName, Font_System5x8);
   }
  }
 
- //~ Glcd_H_Line(0,127,7,1);
- //~ Glcd_H_Line(0,127,55,1);
- //~ GLCD_Set_Font(Arrows5x6,5,6,30);
- //~ GLCD_Write_Char(30, 5, 7, 1);
- //~ GLCD_Write_Char(31, 25, 7, 1);
- //~ GLCD_Set_Font(FontSystem5x8,5,8,32);
- //~ GLCD_Write_Text("Select", 45, 7, 1);
- //~ GLCD_Write_Text("Back", 101, 7, 1);
+//ssd1306DrawLine(0, 7, 127, 7);
+//ssd1306DrawLine(0, 55, 127, 55);
+
+//ssd1306DrawChar(5, 7, '>', Font_System5x8);
+//ssd1306DrawChar(25, 7, '?', Font_System5x8);
+
+//ssd1306DrawString(45, 7, "Select", Font_System5x8);
+//ssd1306DrawString(101, 7, "Back", Font_System5x8);
+
  return;
 }
 
 //Main menu function
-void openMenu(menuStruct *menuToShow)
+void openMenu(menuStruct_t *menuToShow)
 {
- short selectedIndex = 0;               //Current selected item
+ int8_t selectedIndex = 0;               //Current selected item
 
  nilThdSleepMilliseconds(50);
  drawMenu(menuToShow, selectedIndex);
@@ -116,15 +95,15 @@ void openMenu(menuStruct *menuToShow)
      }
      else if (gpioReadPad(GPIOC, GPIOC_BUTTON_SEL))
      {
-         if (menuToShow->items[selectedIndex].handler != 0)
-         {
-          menuToShow->items[selectedIndex].handler();
-         }
-         else if (menuToShow->items[selectedIndex].subMenu != 0)
-         {
-          openMenu(menuToShow->items[selectedIndex].subMenu);
-         }
-         drawMenu(menuToShow, selectedIndex);
+        if (menuToShow->items[selectedIndex].handler != 0)
+        {
+        menuToShow->items[selectedIndex].handler();
+        }
+        else if (menuToShow->items[selectedIndex].subMenu != 0)
+        {
+        openMenu(menuToShow->items[selectedIndex].subMenu);
+        }
+        drawMenu(menuToShow, selectedIndex);
      }
      /*
      else if (Button(&PORTA, 3, 5, 1))

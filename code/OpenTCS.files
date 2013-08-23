@@ -289,3 +289,4 @@ lib/m2tk_u8g/src/u8g_u16toa.c
 lib/m2tk_u8g/src/u8g_virtual_screen.c
 lib/m2tk_u8g/Makefile
 src/menu.c
+inc/menu.h

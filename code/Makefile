@@ -101,7 +101,7 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(PORTASM)
 
-INCDIR = $(PORTINC) $(KERNINC) inc lib lib/STM32F0xx_StdPeriph_Driver/inc lib/m2tk_u8g/inc
+INCDIR = $(PORTINC) $(KERNINC) inc lib lib/STM32F0xx_StdPeriph_Driver/inc
 
 #
 # Project, sources and paths
@@ -184,7 +184,7 @@ UINCDIR =
 ULIBDIR = lib
 
 # List all user libraries here
-ULIBS = -lstm32f0 -lm2tk
+ULIBS = -lstm32f0
 
 #
 # End of user defines

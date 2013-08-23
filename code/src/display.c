@@ -1,6 +1,14 @@
 #include "nil.h"
 #include "threads.h"
 #include "ssd1306.h"
+#include "menu.h"
+
+void showDiag(void);
+void showSettings(void);
+
+menuItem_t mainMenuItemList[] = {{"Diagnostics", &showDiag, NULL}, {"Settings", &showSettings, NULL}};
+
+menuStruct_t mainMenu = {"Main Menu", 10, mainMenuItemList};
 
 void startDisplay(void) {
 
@@ -18,5 +26,15 @@ void startDisplay(void) {
         ssd1306Refresh();
 
         nilThdSleepMilliseconds(250);
+
+        openMenu(&mainMenu);
     }
+}
+
+void showDiag(void) {
+
+}
+
+void showSettings(void) {
+
 }

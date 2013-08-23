@@ -89,7 +89,11 @@ void    ssd1306ClearPixel ( uint8_t x, uint8_t y );
 uint8_t ssd1306GetPixel ( uint8_t x, uint8_t y );
 void    ssd1306ClearScreen ( void );
 void    ssd1306Refresh ( void );
-void    ssd1306DrawString( uint16_t x, uint16_t y, char* text, struct FONT_DEF font );
+void    ssd1306DrawChar(uint8_t x, uint8_t y, uint8_t c, struct FONT_DEF font);
+void    ssd1306DrawString( uint8_t x, uint8_t y, char* text, struct FONT_DEF font );
 void    ssd1306ShiftFrameBuffer( uint8_t height );
+void    ssd1306DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
+void    ssd1306DrawCircle(uint8_t x, uint8_t y, uint8_t radius);
+void    ssd1306FillArea(uint8_t x, uint8_t y, uint8_t cx, uint8_t cy);
 
 #endif

@@ -53,7 +53,7 @@ inline void ssd1306SendByte(uint8_t byte);
 
 #define DELAY(mS)     nilThdSleepMilliseconds(mS);
 
-uint8_t buffer[SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8];
+static uint8_t buffer[SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8];
 
 /**************************************************************************/
 /* Private Methods                                                        */
@@ -78,7 +78,7 @@ inline void ssd1306SendByte(uint8_t byte)
     @brief  Draws a single graphic character using the supplied font
 */
 /**************************************************************************/
-static void ssd1306DrawChar(uint16_t x, uint16_t y, uint8_t c, struct FONT_DEF font)
+void ssd1306DrawChar(uint8_t x, uint8_t y, uint8_t c, struct FONT_DEF font)
 {
   uint8_t col, column[font.u8Width];
 
@@ -281,6 +281,110 @@ void ssd1306ClearScreen()
 }
 
 /**************************************************************************/
+/*!
+    @brief Draws a line
+*/
+/**************************************************************************/
+void ssd1306DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1) {
+    uint8_t dy, dx;
+    uint8_t addx, addy;
+    int16_t P, diff, i;
+
+    if (x1 >= x0) {
+        dx = x1 - x0;
+        addx = 1;
+    } else {
+        dx = x0 - x1;
+        addx = -1;
+    }
+    if (y1 >= y0) {
+        dy = y1 - y0;
+        addy = 1;
+    } else {
+        dy = y0 - y1;
+        addy = -1;
+    }
+
+    if (dx >= dy) {
+        dy *= 2;
+        P = dy - dx;
+        diff = P - dx;
+
+        for(i=0; i<=dx; ++i) {
+            buffer[x0+ (y0/8)*SSD1306_LCDWIDTH] |= ~(1 << y0%8);
+            if (P < 0) {
+                P  += dy;
+                x0 += addx;
+            } else {
+                P  += diff;
+                x0 += addx;
+                y0 += addy;
+            }
+        }
+    } else {
+        dx *= 2;
+        P = dx - dy;
+        diff = P - dy;
+
+        for(i=0; i<=dy; ++i) {
+            buffer[x0+ (y0/8)*SSD1306_LCDWIDTH] |= ~(1 << y0%8);
+            if (P < 0) {
+                P  += dx;
+                y0 += addy;
+            } else {
+                P  += diff;
+                x0 += addx;
+                y0 += addy;
+            }
+        }
+    }
+}
+
+/**************************************************************************/
+/*!
+    @brief Draws a circle
+*/
+/**************************************************************************/
+void ssd1306DrawCircle(uint8_t x, uint8_t y, uint8_t radius) {
+    int16_t a, b, P;
+
+    a = 0;
+    b = radius;
+    P = 1 - radius;
+
+    do {
+        buffer[(x+a)+ ((y+b)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y+b)%8);
+        buffer[(x+b)+ ((y+a)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y+a)%8);
+        buffer[(x-a)+ ((y+b)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y+b)%8);
+        buffer[(x-b)+ ((y+a)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y+a)%8);
+        buffer[(x+b)+ ((y-a)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y-a)%8);
+        buffer[(x+a)+ ((y+b)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y+b)%8);
+        buffer[(x-a)+ ((y-b)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y-b)%8);
+        buffer[(x-b)+ ((y-a)/8)*SSD1306_LCDWIDTH] |= ~(1 << (y-a)%8);
+        if (P < 0)
+            P += 3 + 2*a++;
+        else
+            P += 5 + 2*(a++ - b--);
+    } while(a <= b);
+}
+
+/**************************************************************************/
+/*!
+    @brief Draws a filled rectangle
+*/
+/**************************************************************************/
+void ssd1306FillArea(uint8_t x, uint8_t y, uint8_t cx, uint8_t cy) {
+    uint8_t x0, x1, y1;
+
+    x0 = x;
+    x1 = x + cx;
+    y1 = y + cy;
+    for(; y < y1; y++)
+        for(x = x0; x < x1; x++)
+            buffer[x+ (y/8)*SSD1306_LCDWIDTH] |= ~(1 << y%8);
+}
+
+/**************************************************************************/
 /*! 
     @brief Renders the contents of the pixel buffer on the LCD
 */
@@ -339,7 +443,7 @@ void ssd1306Refresh(void)
     @endcode
 */
 /**************************************************************************/
-void ssd1306DrawString(uint16_t x, uint16_t y, char* text, struct FONT_DEF font)
+void ssd1306DrawString(uint8_t x, uint8_t y, char* text, struct FONT_DEF font)
 {
   uint8_t l;
   for (l = 0; l < strlen(text); l++)
