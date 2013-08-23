@@ -1,8 +1,8 @@
 #include "nil.h"
 #include "ssd1306.h"
+#include "threads.h"
 
-
-void startOled(void) {
+void startDisplay(void) {
 
     ssd1306Init(SSD1306_SWITCHCAPVCC);
 

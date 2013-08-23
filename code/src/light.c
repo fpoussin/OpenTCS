@@ -5,6 +5,7 @@
  * Function prototypes.
  */
 
+light_settings_t light_settings = {LIGHT_STATE_OFF, 0};
 void updateLight(light_settings_t s);
 
 /*

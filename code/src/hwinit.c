@@ -138,9 +138,9 @@ void hwInit(void) {
   PWR->CR |= PWR_CR_PVDE | (STM32_PLS & STM32_PLS_MASK);
 #endif /* STM32_PVD_ENABLE */
 
-  /* GPIO initialization.*/
+  /* GPIO - DMA - CRC initialization.*/
   rccEnableAHB((RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN | RCC_AHBENR_GPIOCEN |
-                RCC_AHBENR_GPIODEN | RCC_AHBENR_GPIOFEN),
+                RCC_AHBENR_GPIODEN | RCC_AHBENR_GPIOFEN | RCC_AHBENR_DMA1EN | RCC_AHBENR_CRCEN),
                TRUE);
   initgpio(GPIOA, &gpio_default_config.PAData);
   initgpio(GPIOB, &gpio_default_config.PBData);
