@@ -70,6 +70,10 @@
 #define GPIOC_LED4              8
 #define GPIOC_LED3              9
 
+#define GPIOC_BUTTON_SEL            13
+#define GPIOC_BUTTON_UP            14
+#define GPIOC_BUTTON_DOWN            15
+
 /*
  * I/O ports initial setup, this configuration is established soon after reset
  * in the initialization code.

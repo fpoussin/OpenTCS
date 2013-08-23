@@ -69,7 +69,10 @@ LDSCRIPT= $(PORTLD)/STM32F050x4.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       src/hwinit.c src/main.c src/light.c src/ignition.c src/adc.c src/display.c src/ssd1306.c src/smallfonts.c src/sensors.c src/settings.c
+       src/hwinit.c src/main.c \
+       src/light.c src/ignition.c src/adc.c src/display.c \
+       src/ssd1306.c src/smallfonts.c src/sensors.c \
+       src/settings.c src/menu.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
