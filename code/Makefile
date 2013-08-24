@@ -43,7 +43,7 @@ endif
 
 # Enable this if you really want to use the STM FWLib.
 ifeq ($(USE_FWLIB),)
-  USE_FWLIB = no
+  USE_FWLIB = yes
 endif
 
 #
@@ -158,10 +158,10 @@ DADEFS =
 DINCDIR =
 
 # List the default directory to look for the libraries here
-DLIBDIR =
+DLIBDIR = lib
 
 # List all default libraries here
-DLIBS =
+DLIBS = -lstm32f0
 
 #
 # End of default section
@@ -181,19 +181,19 @@ UADEFS =
 UINCDIR =
 
 # List the user directory to look for the libraries here
-ULIBDIR = lib
+ULIBDIR =
 
 # List all user libraries here
-ULIBS = -lstm32f0
+ULIBS =
 
 #
 # End of user defines
 ##############################################################################
 
 ifeq ($(USE_FWLIB),yes)
-  include $(NILRTOS)/ext/stm32lib/stm32lib.mk
-  CSRC += $(STM32SRC)
-  INCDIR += $(STM32INC)
+  #include $(NILRTOS)/ext/stm32lib/stm32lib.mk
+  #CSRC += $(STM32SRC)
+  #INCDIR += $(STM32INC)
   USE_OPT += -DUSE_STDPERIPH_DRIVER
 endif
 

@@ -145,6 +145,7 @@ void hwInit(void) {
   initgpio(GPIOA, &gpio_default_config.PAData);
   initgpio(GPIOB, &gpio_default_config.PBData);
   initgpio(GPIOC, &gpio_default_config.PCData);
+  initgpio(GPIOD, &gpio_default_config.PDData);
   initgpio(GPIOF, &gpio_default_config.PFData);
 
 #endif /* !STM32_NO_INIT */

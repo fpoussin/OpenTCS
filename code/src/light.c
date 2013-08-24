@@ -12,18 +12,19 @@ void updateLight(light_settings_t s);
  * Actual functions.
  */
 
-void startlight(void) {
-
-    while (1) {
-
+void startLight(void)
+{
+    while (1)
+    {
         updateLight(light_settings);
 
-
+        gpioTogglePad(GPIOC, GPIOC_LED4);
+        nilThdSleepMilliseconds(500);
     }
 }
 
-void updateLight(light_settings_t s) {
-
+void updateLight(light_settings_t s)
+{
     switch (s.state) {
         case LIGHT_STATE_OFF:
             // Turn light off
@@ -37,5 +38,4 @@ void updateLight(light_settings_t s) {
             // Turn light off
             break;
     }
-
 }

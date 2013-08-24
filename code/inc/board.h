@@ -253,8 +253,8 @@
                                      PIN_MODE_ANALOG(5) |                    \
                                      PIN_MODE_ANALOG(6) |                    \
                                      PIN_MODE_ANALOG(7) |                    \
-                                     PIN_MODE_ANALOG(8) |                   \
-                                     PIN_MODE_ANALOG(9) |                   \
+                                     PIN_MODE_OUTPUT(8) |                   \
+                                     PIN_MODE_OUTPUT(9) |                   \
                                      PIN_MODE_ANALOG(10) |                   \
                                      PIN_MODE_ANALOG(11) |                   \
                                      PIN_MODE_ANALOG(12) |                   \
@@ -269,8 +269,8 @@
                                     PIN_OTYPE_PUSHPULL(5) |                   \
                                     PIN_OTYPE_PUSHPULL(6) |                   \
                                     PIN_OTYPE_PUSHPULL(7) |                   \
-                                    PIN_OTYPE_PUSHPULL(8) |                   \
-                                    PIN_OTYPE_PUSHPULL(9) |                   \
+                                    PIN_PUDR_FLOATING(8) |                   \
+                                    PIN_PUDR_FLOATING(9) |                   \
                                     PIN_OTYPE_PUSHPULL(10) |                   \
                                     PIN_OTYPE_PUSHPULL(11) |                   \
                                     PIN_OTYPE_PUSHPULL(12) |                   \

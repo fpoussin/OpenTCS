@@ -25,6 +25,7 @@ NIL_THREAD(Thread0, arg) {
   WWDG_Enable(127);
   while (true) {
     nilThdSleepMilliseconds(33);
+    gpioTogglePad(GPIOC, GPIOC_LED3);
     WWDG_SetCounter(127);
   }
 }
@@ -37,33 +38,34 @@ NIL_THREAD(Thread1, arg) {
 
   (void)arg;
   while (true) {
-    startlight();
+    startLight();
   }
 }
 
 /*
  * Thread 2.
  */
-NIL_WORKING_AREA(waThread2, 128);
+NIL_WORKING_AREA(waThread2, 256);
 NIL_THREAD(Thread2, arg) {
 
   (void)arg;
-
   while (true) {
-    startDisplay();
+//    startDisplay();
+//    gpioTogglePad(GPIOC, GPIOC_LED4);
+    nilThdSleepMilliseconds(100);
   }
 }
 
 /*
  * Thread 3.
  */
-NIL_WORKING_AREA(waThread3, 128);
+NIL_WORKING_AREA(waThread3, 256);
 NIL_THREAD(Thread3, arg) {
 
   (void)arg;
-
   while (true) {
     startIgnition();
+//    nilThdSleepMilliseconds(100);
   }
 }
 
@@ -74,10 +76,10 @@ NIL_WORKING_AREA(waThread4, 128);
 NIL_THREAD(Thread4, arg) {
 
   (void)arg;
-
   startAdc();
   while (true) {
-      startSensors();
+    startSensors();
+//    nilThdSleepMilliseconds(100);
   }
 }
 
@@ -106,6 +108,8 @@ int main(void) {
    */
   hwInit();
   nilSysInit();
+
+//  gpioTogglePad(GPIOC, GPIOC_LED4);
 
   /* This is now the idle thread loop, you may perform here a low priority
      task but you must never try to sleep or wait in this loop.*/

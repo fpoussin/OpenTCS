@@ -45,7 +45,7 @@ uint8_t writeSettings(settings_t* settings);
 #define LIGHT_STATE_BLINK 2
 #define LIGHT_STATE_PULSE 3
 
-void startlight(void) __attribute__ ((noreturn));
+void startLight(void) __attribute__ ((noreturn));
 struct __light_settings {
 
     uint8_t state;
