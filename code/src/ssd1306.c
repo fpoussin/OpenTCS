@@ -42,6 +42,8 @@
 #include "ssd1306.h"
 #include "stm32f0xx.h"
 
+
+
 inline void ssd1306SendByte(uint8_t byte);
 
 #define CMD(c)        do { gpioClearPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
@@ -212,8 +214,26 @@ void ssd1306Init(uint8_t vccstate)
   else
     { CMD(0x14) }
 
-  // Enabled the OLED panel
-  CMD(SSD1306_DISPLAYON);
+  // Auto refresh 50ms
+  TIM17->PSC = 23999;	         // Set prescaler to 24 000 (PSC + 1) (1KHz)
+  TIM17->ARR = 50;	           // Auto reload value
+  TIM17->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
+}
+
+void ssd1306TurnOn(void)
+{
+    // Enabled the OLED panel
+    CMD(SSD1306_DISPLAYON);
+    NVIC_EnableIRQ(TIM17_IRQn); // Enable interrupt from TIM17 (NVIC level)
+    TIM17->CR1 |= TIM_CR1_CEN;   // Enable timer
+}
+
+void ssd1306TurnOff(void)
+{
+    TIM17->CR1 &= ~TIM_CR1_CEN;   // Disable timer
+    NVIC_DisableIRQ(TIM17_IRQn); // Disable interrupt from TIM17 (NVIC level)
+    // Enabled the OLED panel
+    CMD(SSD1306_DISPLAYOFF);
 }
 
 /**************************************************************************/
@@ -405,7 +425,7 @@ void ssd1306Refresh(void)
   /* start */
   DMA_Cmd(DMA1_Channel3, ENABLE);
 
-  /* Wait for transfer to finis  */
+  /* Wait for transfer to finish  */
   while(DMA_GetFlagStatus(DMA1_FLAG_TC3) == RESET) DELAY(25);
   DMA_ClearFlag(DMA1_FLAG_TC3);
 }
@@ -521,4 +541,26 @@ void ssd1306ShiftFrameBuffer( uint8_t height )
       }
     }
   }
+}
+
+void TIM17_IRQHandler(void) {
+
+    if(TIM17->SR & TIM_SR_UIF) // if UIF flag is set
+      {
+      TIM17->SR &= ~TIM_SR_UIF; // clear UIF flag
+
+      CMD(SSD1306_SETLOWCOLUMN | 0x0);  // low col = 0
+      CMD(SSD1306_SETHIGHCOLUMN | 0x0);  // hi col = 0
+      CMD(SSD1306_SETSTARTLINE | 0x0); // line #0
+
+      gpioSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
+
+      DMA_Cmd(DMA1_Channel3, DISABLE);
+      DMA_ClearFlag(DMA1_FLAG_TC3);
+      DMA1_Channel3->CMAR = (uint32_t)buffer;
+      DMA1_Channel3->CNDTR = 1024;
+
+      /* start */
+      DMA_Cmd(DMA1_Channel3, ENABLE);
+      }
 }

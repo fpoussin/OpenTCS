@@ -1,3 +1,6 @@
+#ifndef _THREADS_H_
+#define _THREADS_H_
+
 #include "nil.h"
 #include "hwinit.h"
 #include "stm32f0xx.h"
@@ -90,6 +93,12 @@ extern ign_cut_t ign_cut;
 #define DISPLAY_OFF 0
 #define DISPLAY_ON 1
 
+struct __display {
+    uint8_t state;
+};
+typedef struct __display display_t;
+extern display_t display;
+
 void startDisplay(void) __attribute__ ((noreturn));
 
 /* End of Display */
@@ -109,5 +118,4 @@ void startSensors(void) __attribute__ ((noreturn));
 
 /* End of Sensors */
 
-
-
+#endif

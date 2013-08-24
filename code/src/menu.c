@@ -45,12 +45,14 @@ void drawMenu(menuStruct_t *menuToShow, short selectedIndex)
   else if (selectedIndex < 6)
   {
    //~ GLCD_Write_Text(menuToShow->items[i]->itemName, 5, i+1, (selectedIndex == i) ? 0 : 1);
-      ssd1306DrawString(5, i+1, menuToShow->items[i].itemName, Font_System5x8);
+      if (selectedIndex == i) ssd1306DrawChar(0, (i*7)+1, '>', Font_System5x8);
+      ssd1306DrawString(7, (i*7)+1, menuToShow->items[i].itemName, Font_System5x8);
   }
   else
   {
    //~ GLCD_Write_Text(menuToShow->items[i+(selectedIndex-5)]->itemName, 5, i+1, (selectedIndex == i+(selectedIndex-5)) ? 0 : 1);
-      ssd1306DrawString(5, i+1, menuToShow->items[i+(selectedIndex-5)].itemName, Font_System5x8);
+      if (selectedIndex == i+(selectedIndex-5)) ssd1306DrawChar(0, (i*7)+1, '>', Font_System5x8);
+      ssd1306DrawString(7, (i*7)+1, menuToShow->items[i+(selectedIndex-5)].itemName, Font_System5x8);
   }
  }
 
@@ -111,7 +113,7 @@ void openMenu(menuStruct_t *menuToShow)
           return;
      }
     */
-     nilThdSleepMilliseconds(30);
+     nilThdSleepMilliseconds(100);
   } while (1);
 
  return;
