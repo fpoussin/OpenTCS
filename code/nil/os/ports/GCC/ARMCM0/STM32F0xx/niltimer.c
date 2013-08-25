@@ -49,15 +49,15 @@
 /*===========================================================================*/
 
 /**
- * @brief   TIM2 interrupt handler.
+ * @brief   TIM14 interrupt handler.
  *
  * @isr
  */
-NIL_IRQ_HANDLER(Vector7C) {
+NIL_IRQ_HANDLER(Vector8C) {
 
   NIL_IRQ_PROLOGUE();
 
-  STM32F0_TIM2->SR = 0;
+  TICK_TIMER->SR = 0;
 
   nilSysLockFromISR();
   nilSysTimerHandlerI();

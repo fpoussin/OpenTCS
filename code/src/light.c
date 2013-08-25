@@ -18,8 +18,8 @@ void startLight(void)
     {
         updateLight(light_settings);
 
-        gpioTogglePad(GPIOC, GPIOC_LED4);
-        nilThdSleepMilliseconds(500);
+//        gpioTogglePad(GPIOC, GPIOC_LED4);
+//        nilThdSleepMilliseconds(250);
     }
 }
 

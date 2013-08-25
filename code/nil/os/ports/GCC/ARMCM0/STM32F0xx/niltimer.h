@@ -28,6 +28,8 @@
 #ifndef _NILTIMER_H_
 #define _NILTIMER_H_
 
+#include "stm32f0xx.h"
+
 /*===========================================================================*/
 /* Module constants.                                                         */
 /*===========================================================================*/
@@ -44,47 +46,11 @@
 /* Module data structures and types.                                         */
 /*===========================================================================*/
 
-typedef struct {
-  volatile uint16_t     CR1;
-  uint16_t              _resvd0;
-  volatile uint16_t     CR2;
-  uint16_t              _resvd1;
-  volatile uint16_t     SMCR;
-  uint16_t              _resvd2;
-  volatile uint16_t     DIER;
-  uint16_t              _resvd3;
-  volatile uint16_t     SR;
-  uint16_t              _resvd4;
-  volatile uint16_t     EGR;
-  uint16_t              _resvd5;
-  volatile uint16_t     CCMR1;
-  uint16_t              _resvd6;
-  volatile uint16_t     CCMR2;
-  uint16_t              _resvd7;
-  volatile uint16_t     CCER;
-  uint16_t              _resvd8;
-  volatile uint32_t     CNT;
-  volatile uint16_t     PSC;
-  uint16_t              _resvd9;
-  volatile uint32_t     ARR;
-  volatile uint16_t     RCR;
-  uint16_t              _resvd10;
-  volatile uint32_t     CCR[4];
-  volatile uint16_t     BDTR;
-  uint16_t              _resvd11;
-  volatile uint16_t     DCR;
-  uint16_t              _resvd12;
-  volatile uint16_t     DMAR;
-  uint16_t              _resvd13;
-  volatile uint16_t     OR;
-  uint16_t              _resvd14;
-} stm32f0_tim_t;
-
 /*===========================================================================*/
 /* Module macros.                                                            */
 /*===========================================================================*/
 
-#define STM32F0_TIM2    ((stm32f0_tim_t *)0x40000000)
+#define TICK_TIMER    TIM14
 
 /*===========================================================================*/
 /* External declarations.                                                    */
@@ -101,13 +67,13 @@ typedef struct {
  */
 static inline void port_timer_init(void) {
 
-  STM32F0_TIM2->ARR     = 0xFFFFFFFF;
-  STM32F0_TIM2->CCMR1   = 0;
-  STM32F0_TIM2->CCR[0]  = 0;
-  STM32F0_TIM2->DIER    = 0;
-  STM32F0_TIM2->CR2     = 0;
-  STM32F0_TIM2->EGR     = 1;            /* UG, CNT initialized.             */
-  STM32F0_TIM2->CR1     = 1;            /* CEN */
+  TICK_TIMER->ARR     = 0xFFFF;
+  TICK_TIMER->CCMR1   = 0;
+  TICK_TIMER->CCR1  = 0;
+  TICK_TIMER->DIER    = 0;
+  TICK_TIMER->CR2     = 0;
+  TICK_TIMER->EGR     = 1;            /* UG, CNT initialized.             */
+  TICK_TIMER->CR1     = 1;            /* CEN */
 }
 
 /**
@@ -119,7 +85,7 @@ static inline void port_timer_init(void) {
  */
 static inline systime_t port_timer_get_time(void) {
 
-  return STM32F0_TIM2->CNT;
+  return TICK_TIMER->CNT;
 }
 
 /**
@@ -133,13 +99,13 @@ static inline systime_t port_timer_get_time(void) {
  */
 static inline void port_timer_start_alarm(systime_t time) {
 
-  nilDbgAssert((STM32F0_TIM2->DIER & 2) == 0,
+  nilDbgAssert((TICK_TIMER->DIER & 2) == 0,
                "port_timer_start_alarm(), #1",
                "already started");
 
-  STM32F0_TIM2->CCR[0]  = time;
-  STM32F0_TIM2->SR      = 0;
-  STM32F0_TIM2->DIER    = 2;            /* CC1IE */
+  TICK_TIMER->CCR1  = time;
+  TICK_TIMER->SR      = 0;
+  TICK_TIMER->DIER    = 2;            /* CC1IE */
 }
 
 /**
@@ -149,11 +115,11 @@ static inline void port_timer_start_alarm(systime_t time) {
  */
 static inline void port_timer_stop_alarm(void) {
 
-  nilDbgAssert((STM32F0_TIM2->DIER & 2) != 0,
+  nilDbgAssert((TICK_TIMER->DIER & 2) != 0,
                "port_timer_stop_alarm(), #1",
                "not started");
 
-  STM32F0_TIM2->DIER    = 0;
+  TICK_TIMER->DIER    = 0;
 }
 
 /**
@@ -165,11 +131,11 @@ static inline void port_timer_stop_alarm(void) {
  */
 static inline void port_timer_set_alarm(systime_t time) {
 
-  nilDbgAssert((STM32F0_TIM2->DIER & 2) != 0,
+  nilDbgAssert((TICK_TIMER->DIER & 2) != 0,
                "port_timer_set_alarm(), #1",
                "not started");
 
-  STM32F0_TIM2->CCR[0]  = time;
+  TICK_TIMER->CCR1  = time;
 }
 
 /**
@@ -181,11 +147,11 @@ static inline void port_timer_set_alarm(systime_t time) {
  */
 static inline systime_t port_timer_get_alarm(void) {
 
-  nilDbgAssert((STM32F0_TIM2->DIER & 2) != 0,
+  nilDbgAssert((TICK_TIMER->DIER & 2) != 0,
                "port_timer_get_alarm(), #1",
                "not started");
 
-  return STM32F0_TIM2->CCR[0];
+  return TICK_TIMER->CCR1;
 }
 
 #endif /* _NILTIMER_H_ */

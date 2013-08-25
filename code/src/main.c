@@ -10,7 +10,7 @@ NIL_THREAD(Thread0, arg) {
 
   (void)arg;
   /* Enable WWDG clock */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG, ENABLE);
+//  RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG, ENABLE);
 
   /* WWDG clock counter = (PCLK1 (48MHz)/4096)/8 = 1464Hz (~683 us)  */
   WWDG_SetPrescaler(WWDG_Prescaler_8);
@@ -22,11 +22,12 @@ NIL_THREAD(Thread0, arg) {
   /* Enable WWDG and set counter value to 127, WWDG timeout = ~683 us * 64 = 43.7 ms
      In this case the refresh window is: ~683 * (127-80)= 32.1ms < refresh window < ~683 * 64 = 43.7ms
      */
-  WWDG_Enable(127);
+//  WWDG_Enable(127);
   while (true) {
-    nilThdSleepMilliseconds(33);
+//    nilThdSleepMilliseconds(35);
+    nilThdSleepMilliseconds(250);
     gpioTogglePad(GPIOC, GPIOC_LED3);
-    WWDG_SetCounter(127);
+//    WWDG_SetCounter(127);
   }
 }
 
@@ -51,8 +52,8 @@ NIL_THREAD(Thread2, arg) {
   (void)arg;
   while (true) {
 //    startDisplay();
-//    gpioTogglePad(GPIOC, GPIOC_LED4);
-    nilThdSleepMilliseconds(100);
+    gpioTogglePad(GPIOC, GPIOC_LED4);
+    nilThdSleepMilliseconds(500);
   }
 }
 
