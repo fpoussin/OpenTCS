@@ -53,11 +53,11 @@
  *
  * @isr
  */
-NIL_IRQ_HANDLER(Vector8C) {
+NIL_IRQ_HANDLER(SYSTICK_TIMER_VECTOR) {
 
   NIL_IRQ_PROLOGUE();
 
-  TICK_TIMER->SR = 0;
+  SYSTICK_TIMER->SR = 0;
 
   nilSysLockFromISR();
   nilSysTimerHandlerI();

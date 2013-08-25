@@ -50,7 +50,13 @@
 /* Module macros.                                                            */
 /*===========================================================================*/
 
-#define TICK_TIMER    TIM14
+//#define SYSTICK_TIMER          TIM2
+//#define SYSTICK_TIMER_VECTOR   Vector7C
+//#define SYSTICK_TIMER_VECTOR_POS   15
+
+#define SYSTICK_TIMER          TIM14
+#define SYSTICK_TIMER_VECTOR   Vector8C
+#define SYSTICK_TIMER_VECTOR_POS   19
 
 /*===========================================================================*/
 /* External declarations.                                                    */
@@ -67,13 +73,14 @@
  */
 static inline void port_timer_init(void) {
 
-  TICK_TIMER->ARR     = 0xFFFF;
-  TICK_TIMER->CCMR1   = 0;
-  TICK_TIMER->CCR1  = 0;
-  TICK_TIMER->DIER    = 0;
-  TICK_TIMER->CR2     = 0;
-  TICK_TIMER->EGR     = 1;            /* UG, CNT initialized.             */
-  TICK_TIMER->CR1     = 1;            /* CEN */
+  SYSTICK_TIMER->ARR     = 0xFFFFFFFF;
+  SYSTICK_TIMER->CNT     = 0;
+  SYSTICK_TIMER->CCMR1   = 0;
+  SYSTICK_TIMER->CCR1    = 0;
+  SYSTICK_TIMER->DIER    = 0;
+  SYSTICK_TIMER->CR2     = 0;
+  SYSTICK_TIMER->EGR    |= TIM_EGR_UG;            /* UG, CNT initialized.             */
+  SYSTICK_TIMER->CR1    |= TIM_CR1_CEN;            /* CEN */
 }
 
 /**
@@ -85,7 +92,7 @@ static inline void port_timer_init(void) {
  */
 static inline systime_t port_timer_get_time(void) {
 
-  return TICK_TIMER->CNT;
+  return SYSTICK_TIMER->CNT;
 }
 
 /**
@@ -99,13 +106,13 @@ static inline systime_t port_timer_get_time(void) {
  */
 static inline void port_timer_start_alarm(systime_t time) {
 
-  nilDbgAssert((TICK_TIMER->DIER & 2) == 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & 2) == 0,
                "port_timer_start_alarm(), #1",
                "already started");
 
-  TICK_TIMER->CCR1  = time;
-  TICK_TIMER->SR      = 0;
-  TICK_TIMER->DIER    = 2;            /* CC1IE */
+  SYSTICK_TIMER->CCR1    = time;
+  SYSTICK_TIMER->SR      = 0;
+  SYSTICK_TIMER->DIER   |= TIM_DIER_CC1IE;           /* CC1IE */
 }
 
 /**
@@ -115,11 +122,11 @@ static inline void port_timer_start_alarm(systime_t time) {
  */
 static inline void port_timer_stop_alarm(void) {
 
-  nilDbgAssert((TICK_TIMER->DIER & 2) != 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & 2) != 0,
                "port_timer_stop_alarm(), #1",
                "not started");
 
-  TICK_TIMER->DIER    = 0;
+  SYSTICK_TIMER->DIER &= ~TIM_DIER_CC1IE;
 }
 
 /**
@@ -131,11 +138,11 @@ static inline void port_timer_stop_alarm(void) {
  */
 static inline void port_timer_set_alarm(systime_t time) {
 
-  nilDbgAssert((TICK_TIMER->DIER & 2) != 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & 2) != 0,
                "port_timer_set_alarm(), #1",
                "not started");
 
-  TICK_TIMER->CCR1  = time;
+  SYSTICK_TIMER->CCR1 = time;
 }
 
 /**
@@ -147,11 +154,11 @@ static inline void port_timer_set_alarm(systime_t time) {
  */
 static inline systime_t port_timer_get_alarm(void) {
 
-  nilDbgAssert((TICK_TIMER->DIER & 2) != 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & 2) != 0,
                "port_timer_get_alarm(), #1",
                "not started");
 
-  return TICK_TIMER->CCR1;
+  return SYSTICK_TIMER->CCR1;
 }
 
 #endif /* _NILTIMER_H_ */

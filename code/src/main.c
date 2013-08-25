@@ -24,8 +24,7 @@ NIL_THREAD(Thread0, arg) {
      */
 //  WWDG_Enable(127);
   while (true) {
-//    nilThdSleepMilliseconds(35);
-    nilThdSleepMilliseconds(250);
+    nilThdSleepMilliseconds(35);
     gpioTogglePad(GPIOC, GPIOC_LED3);
 //    WWDG_SetCounter(127);
   }
@@ -46,7 +45,7 @@ NIL_THREAD(Thread1, arg) {
 /*
  * Thread 2.
  */
-NIL_WORKING_AREA(waThread2, 256);
+NIL_WORKING_AREA(waThread2, 128);
 NIL_THREAD(Thread2, arg) {
 
   (void)arg;
