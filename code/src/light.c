@@ -4,7 +4,7 @@
  * Function prototypes.
  */
 
-light_settings_t light_settings = {LIGHT_STATE_OFF, 0};
+light_settings_t light_settings = {LIGHT_STATE_OFF, 250};
 void updateLight(light_settings_t s);
 
 static TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
@@ -29,7 +29,7 @@ void startLight(void)
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Active;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
     TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
-    TIM_OCInitStructure.TIM_Pulse = 250; // period in ms
+    TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
     TIM_OC1Init(TIM16, &TIM_OCInitStructure);
 
     while (1)
@@ -60,6 +60,14 @@ void updateLight(light_settings_t s)
         case LIGHT_STATE_BLINK:
             // Blink light
             TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
+            TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
+            TIM_OC1Init(TIM16, &TIM_OCInitStructure);
+            break;
+
+        case LIGHT_STATE_PULSE:
+            // Blink light
+            TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
+            TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
             TIM_OC1Init(TIM16, &TIM_OCInitStructure);
             break;
 

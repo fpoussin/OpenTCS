@@ -132,11 +132,11 @@ void startSensors(void) {
     while (1) {
 
         /*
-         * Everything happens within IRQ Handlers.
+         * Almost everything happens within IRQ Handlers.
          */
 
-//        getSpeedSensors();
-        nilThdSleepMilliseconds(500);
+        getStrainGauge();
+        nilThdSleepMilliseconds(100);
     }
 }
 
@@ -205,6 +205,20 @@ void setupStrainGauge()
 
     pot.wiper = rxdata[0];
 
+}
+
+void getStrainGauge(void)
+{
+    uint32_t straing = 0;
+
+    straing += adc_samples[0];
+    straing += adc_samples[4];
+    straing += adc_samples[8];
+    straing += adc_samples[12];
+    straing += adc_samples[16];
+    straing /= 5;
+    /* Returns true is strain gauge voltage exceeds threshold. */
+    sensors.shifting = (straing >= settings.data.sensor_threshold);
 }
 
 void getSpeedSensors(void)
