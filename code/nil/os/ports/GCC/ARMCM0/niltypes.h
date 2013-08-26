@@ -38,7 +38,7 @@
  */
 typedef uint8_t         tstate_t;   /**< @brief Type of a thread state.     */
 typedef int32_t         msg_t;      /**< @brief Type of a message.          */
-typedef uint32_t        systime_t;  /**< @brief Type of system time.        */
+typedef uint16_t        systime_t;  /**< @brief Type of system time.        */
 typedef int32_t         cnt_t;      /**< @brief Type of signed counter.     */
 /** @} */
 
