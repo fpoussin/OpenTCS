@@ -17,18 +17,18 @@ NIL_THREAD(Thread0, arg) {
   /* WWDG clock counter = (PCLK1 (48MHz)/4096)/8 = 1464Hz (~683 us)  */
   WWDG_SetPrescaler(WWDG_Prescaler_8);
 
-  /* Set Window value to 80; WWDG counter should be refreshed only when the counter
-    is below 80 (and greater than 64) otherwise a reset will be generated */
-  WWDG_SetWindowValue(80);
+  /* Set Window value to 126; WWDG counter should be refreshed only when the counter
+    is below 126 (and greater than 64) otherwise a reset will be generated */
+  WWDG_SetWindowValue(126);
 
   /* Enable WWDG and set counter value to 127, WWDG timeout = ~683 us * 64 = 43.7 ms
-     In this case the refresh window is: ~683 * (127-80)= 32.1ms < refresh window < ~683 * 64 = 43.7ms
+     In this case the refresh window is: ~683 * (127-126)= 0.683ms < refresh window < ~683 * 64 = 43.7ms
      */
-//  WWDG_Enable(127);
+  WWDG_Enable(127);
   while (true) {
-    nilThdSleepMilliseconds(35);
-    gpioTogglePad(GPIOC, GPIOC_LED3);
-//    WWDG_SetCounter(127);
+    nilThdSleepMilliseconds(25);
+    gpioTogglePad(GPIOC, GPIOC_LED3); /* Watchdog heartbeat */
+    WWDG_SetCounter(127);
   }
 }
 
@@ -105,10 +105,10 @@ int main(void) {
    * - Nil RTOS initialization.
    */
   hwInit();
-  nilSysInit();
 
-//  gpioTogglePad(GPIOC, GPIOC_LED4);
   settings = readSettings();
+
+  nilSysInit();
 
   /* This is now the idle thread loop, you may perform here a low priority
      task but you must never try to sleep or wait in this loop.*/

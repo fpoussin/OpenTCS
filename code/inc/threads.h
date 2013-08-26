@@ -41,7 +41,7 @@ extern settings_t settings;
 
 
 settings_t readSettings(void);
-uint8_t writeSettings(settings_t* settings);
+uint8_t writeSettings(settings_t* st);
 
 /* End of misc functions */
 

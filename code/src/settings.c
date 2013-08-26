@@ -17,13 +17,15 @@ settings_t readSettings(void) {
     return tmp_st;
 }
 
-uint8_t writeSettings(settings_t *settings) {
+uint8_t writeSettings(settings_t *st) {
 
     #define FLASH_PAGE_SIZE         ((uint32_t)0x00000400)   /* FLASH Page Size */
     #define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS)   /* Start @ of user Flash area */
     #define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE)   /* End @ of user Flash area */
 
     uint32_t Address = 0x00;
+    uint32_t* tmp_data;
+    uint8_t i = 0;
 
     /* Unlock the Flash to enable the flash control register access *************/
     FLASH_Unlock();
@@ -40,17 +42,15 @@ uint8_t writeSettings(settings_t *settings) {
       return 1;
     }
 
-    settings->CRCValue = CRC_CalcBlockCRC((uint32_t *)&settings->data, sizeof(settings->data));
+    st->CRCValue = CRC_CalcBlockCRC((uint32_t *)&st->data, sizeof(st->data));
 
-    uint32_t* tmp_data;
-    uint8_t i = 0;
-    while (Address < (FLASH_USER_START_ADDR+sizeof(settings)))
+    while (Address < (FLASH_USER_START_ADDR+sizeof(st)))
     {
-      tmp_data = (uint32_t*)settings+i;
+      tmp_data = (uint32_t*)st+i;
       if (FLASH_ProgramWord(Address, *tmp_data) == FLASH_COMPLETE)
       {
         Address = Address + 4;
-        i+=4;
+        i += 4;
       }
       else
       {
