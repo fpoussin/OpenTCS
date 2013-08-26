@@ -41,7 +41,7 @@
 /**
  * @brief   System tick frequency.
  */
-#define NIL_CFG_FREQUENCY                   50000
+#define NIL_CFG_FREQUENCY                   30000
 
 /**
  * @brief   Time delta constant for the tick-less mode.

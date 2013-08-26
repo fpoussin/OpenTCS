@@ -130,7 +130,7 @@ void startSensors(void) {
     setupI2C();
     pot.wiper = 0;
     setupStrainGauge();
-    while (1) {
+    while (true) {
 
         /*
          * Almost everything happens within IRQ Handlers.

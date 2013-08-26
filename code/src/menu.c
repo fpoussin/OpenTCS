@@ -116,7 +116,7 @@ void openMenu(menuStruct_t *menuToShow)
         drawMenu(menuToShow, selectedIndex);
      }
      nilThdSleepMilliseconds(250);
-  } while (1);
+  } while (true);
 
  return;
 }

@@ -34,7 +34,7 @@ void startIgnition(void) {
     /* One Pulse Mode selection */
     TIM_SelectOnePulseMode(IGN_TIMER, TIM_OPMode_Single);
 
-    while (1) {
+    while (true) {
 
         nilThdSleepMilliseconds(10);
 

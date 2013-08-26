@@ -26,7 +26,7 @@ NIL_THREAD(Thread0, arg) {
      */
   WWDG_Enable(127);
   while (true) {
-    nilThdSleepMilliseconds(25);
+    nilThdSleepMilliseconds(20);
     gpioTogglePad(GPIOC, GPIOC_LED3); /* Watchdog heartbeat */
     WWDG_SetCounter(127);
   }

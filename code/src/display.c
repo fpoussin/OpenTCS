@@ -22,17 +22,20 @@ void startDisplay(void) {
     ssd1306Init(SSD1306_SWITCHCAPVCC);
     ssd1306TurnOn();
     display.state = DISPLAY_ON;
+    gpioSetPad(GPIOC, GPIOC_LED4);
 
     ssd1306DrawString(40, 20, "OpenTCS", Font_System7x8);
-    nilThdSleepMilliseconds(2000);
+//    nilThdSleepMilliseconds(100); // Fails
+    gpioClearPad(GPIOC, GPIOC_LED4);
 
-    while (1) {
+    while (true) {
 
         ssd1306TurnOff();
         display.state = DISPLAY_OFF;
 
         while (!gpioReadPad(GPIOC, GPIOC_BUTTON_SEL))
         {
+            gpioTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
             nilThdSleepMilliseconds(250);
         }
         ssd1306ClearScreen();
