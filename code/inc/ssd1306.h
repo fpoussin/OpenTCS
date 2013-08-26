@@ -42,6 +42,9 @@
 #include "threads.h"
 
 #define SSD1306_SPI SPI1
+#define SSD1306_TIMER TIM17 /* Timer used for auto refresh interrupt */
+#define SSD1306_TIMER_IRQn TIM17_IRQn
+#define SSD1306_TIMER_IRQHandler TIM17_IRQHandler
 
 // Pin Definitions
 #define SSD1306_DC_PORT                    GPIOB     // Data/Command

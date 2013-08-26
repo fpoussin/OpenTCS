@@ -1,15 +1,20 @@
-#include "nil.h"
 #include "threads.h"
 
-settings_t* readSettings(void) {
+settings_t settings = { {0, 0, 0, 0, 0, 0}, 0};
 
-    settings_t* st = (settings_t*)SETTINGS_ADDRESS;
+settings_t readSettings(void) {
 
-    uint32_t CRCValue = CRC_CalcBlockCRC((uint32_t *)&st->data, sizeof(st->data));
+    settings_t tmp_st;
+    const settings_t* const st = (settings_t*)SETTINGS_ADDRESS;
 
-    if (CRCValue == st->CRCValue) return st;
+    const uint32_t CRCValue = CRC_CalcBlockCRC((uint32_t *)&st->data, sizeof(st->data));
 
-    return NULL;
+    tmp_st = *st; /* Copy struct from flash to ram */
+
+    /* If CRC fails to match, assign 0 for fault detection */
+    if (CRCValue != st->CRCValue) tmp_st.CRCValue = 0;
+
+    return tmp_st;
 }
 
 uint8_t writeSettings(settings_t *settings) {

@@ -20,8 +20,8 @@
 /*
  * ST32F050x4 memory setup.
  */
-__main_stack_size__     = 0x0200;
-__process_stack_size__  = 0x0200;
+__main_stack_size__     = 0x0180;
+__process_stack_size__  = 0x0180;
 
 MEMORY
 {

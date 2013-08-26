@@ -1,4 +1,3 @@
-#include "nil.h"
 #include "threads.h"
 #include "ssd1306.h"
 #include "menu.h"
@@ -6,9 +5,15 @@
 display_t display = {DISPLAY_OFF};
 
 void showDiag(void);
-void showSettings(void);
+void showAbout(void);
+void setFunctions(void);
+void setCutMode(void);
 
-menuItem_t mainMenuItemList[] = {{"Diagnostics", &showDiag, NULL}, {"Settings", &showSettings, NULL}};
+menuItem_t settingsMenuList[] = {{"Functions", &setFunctions, 0}, {"Cut mode", &setCutMode, 0}};
+
+menuStruct_t settingsMenu = {"Settings Menu", 2, settingsMenuList};
+
+menuItem_t mainMenuItemList[] = {{"Diagnostics", &showDiag, NULL}, {"Settings", NULL, &settingsMenu}, {"About", &showAbout, NULL}};
 
 menuStruct_t mainMenu = {"Main Menu", sizeof(mainMenuItemList)/sizeof(menuItem_t), mainMenuItemList};
 
@@ -41,6 +46,14 @@ void showDiag(void) {
 
 }
 
-void showSettings(void) {
+void showAbout(void) {
+
+}
+
+void setFunctions(void) {
+
+}
+
+void setCutMode(void) {
 
 }

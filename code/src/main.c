@@ -3,15 +3,17 @@
 #include "threads.h"
 
 /*
+ * All clocks are enabled in hwInit();
+ * All Pin Mux are set in board.h
+ */
+
+/*
  * Thread 0.
  */
 NIL_WORKING_AREA(waThread0, 64);
 NIL_THREAD(Thread0, arg) {
 
   (void)arg;
-  /* Enable WWDG clock */
-//  RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG, ENABLE);
-
   /* WWDG clock counter = (PCLK1 (48MHz)/4096)/8 = 1464Hz (~683 us)  */
   WWDG_SetPrescaler(WWDG_Prescaler_8);
 
@@ -45,27 +47,24 @@ NIL_THREAD(Thread1, arg) {
 /*
  * Thread 2.
  */
-NIL_WORKING_AREA(waThread2, 128);
+NIL_WORKING_AREA(waThread2, 256);
 NIL_THREAD(Thread2, arg) {
 
   (void)arg;
   while (true) {
-//    startDisplay();
-    gpioTogglePad(GPIOC, GPIOC_LED4);
-    nilThdSleepMilliseconds(500);
+    startDisplay();
   }
 }
 
 /*
  * Thread 3.
  */
-NIL_WORKING_AREA(waThread3, 256);
+NIL_WORKING_AREA(waThread3, 128);
 NIL_THREAD(Thread3, arg) {
 
   (void)arg;
   while (true) {
     startIgnition();
-//    nilThdSleepMilliseconds(100);
   }
 }
 
@@ -79,7 +78,6 @@ NIL_THREAD(Thread4, arg) {
   startAdc();
   while (true) {
     startSensors();
-//    nilThdSleepMilliseconds(100);
   }
 }
 
@@ -110,6 +108,7 @@ int main(void) {
   nilSysInit();
 
 //  gpioTogglePad(GPIOC, GPIOC_LED4);
+  settings = readSettings();
 
   /* This is now the idle thread loop, you may perform here a low priority
      task but you must never try to sleep or wait in this loop.*/

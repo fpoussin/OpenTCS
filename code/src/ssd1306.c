@@ -53,8 +53,6 @@ inline void ssd1306SendByte(uint8_t byte);
                            ssd1306SendByte( c ); \
                          } while (0);
 
-#define DELAY(mS)     nilThdSleepMilliseconds(mS);
-
 static uint8_t buffer[SSD1306_LCDWIDTH * SSD1306_LCDHEIGHT / 8];
 
 /**************************************************************************/
@@ -73,50 +71,6 @@ inline void ssd1306SendByte(uint8_t byte)
 {
   SPI_SendData8(SSD1306_SPI, byte);
   while (SSD1306_SPI->SR & SPI_SR_BSY) {};
-}
-
-/**************************************************************************/
-/*!
-    @brief  Draws a single graphic character using the supplied font
-*/
-/**************************************************************************/
-void ssd1306DrawChar(uint8_t x, uint8_t y, uint8_t c, struct FONT_DEF font)
-{
-  uint8_t col, column[font.u8Width];
-
-  // Check if the requested character is available
-  if ((c >= font.u8FirstChar) && (c <= font.u8LastChar))
-  {
-    // Retrieve appropriate columns from font data
-    for (col = 0; col < font.u8Width; col++)
-    {
-      column[col] = font.au8FontTable[((c - 32) * font.u8Width) + col];    // Get first column of appropriate character
-    }
-  }
-  else
-  {    
-    // Requested character is not available in this font ... send a space instead
-    for (col = 0; col < font.u8Width; col++)
-    {
-      column[col] = 0xFF;    // Send solid space
-    }
-  }
-
-  // Render each column
-  uint16_t xoffset, yoffset;
-  for (xoffset = 0; xoffset < font.u8Width; xoffset++)
-  {
-    for (yoffset = 0; yoffset < (font.u8Height + 1); yoffset++)
-    {
-      uint8_t bit = 0x00;
-      bit = (column[xoffset] << (8 - (yoffset + 1)));     // Shift current row bit left
-      bit = (bit >> 7);                     // Shift current row but right (results in 0x01 for black, and 0x00 for white)
-      if (bit)
-      {
-        ssd1306DrawPixel(x + xoffset, y + yoffset);
-      }
-    }
-  }
 }
 
 /**************************************************************************/
@@ -172,9 +126,9 @@ void ssd1306Init(uint8_t vccstate)
 
   // Reset the LCD
   gpioClearPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
-  DELAY(10);
+  nilThdSleepMilliseconds(10);
   gpioSetPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
-  DELAY(10);
+  nilThdSleepMilliseconds(10);
 
   // Initialisation sequence
   CMD(SSD1306_DISPLAYOFF);                    // 0xAE
@@ -214,24 +168,26 @@ void ssd1306Init(uint8_t vccstate)
   else
     { CMD(0x14) }
 
-  // Auto refresh 50ms
-  TIM17->PSC = 23999;	         // Set prescaler to 24 000 (PSC + 1) (1KHz)
-  TIM17->ARR = 50;	           // Auto reload value
-  TIM17->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
+  // Auto refresh 50ms - 20fps
+  SSD1306_TIMER->CR1 = 0;
+  SSD1306_TIMER->CR2 = 0;
+  SSD1306_TIMER->PSC = 23999;	         // Set prescaler to 24 000 (PSC + 1) (1KHz)
+  SSD1306_TIMER->ARR = 50;	           // Auto reload value
+  SSD1306_TIMER->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
 }
 
 void ssd1306TurnOn(void)
 {
     // Enabled the OLED panel
     CMD(SSD1306_DISPLAYON);
-    NVIC_EnableIRQ(TIM17_IRQn); // Enable interrupt from TIM17 (NVIC level)
-    TIM17->CR1 |= TIM_CR1_CEN;   // Enable timer
+    NVIC_EnableIRQ(SSD1306_TIMER_IRQn); // Enable interrupt from SSD1306_TIMER (NVIC level)
+    SSD1306_TIMER->CR1 |= TIM_CR1_CEN;   // Enable timer
 }
 
 void ssd1306TurnOff(void)
 {
-    TIM17->CR1 &= ~TIM_CR1_CEN;   // Disable timer
-    NVIC_DisableIRQ(TIM17_IRQn); // Disable interrupt from TIM17 (NVIC level)
+    SSD1306_TIMER->CR1 &= ~TIM_CR1_CEN;   // Disable timer
+    NVIC_DisableIRQ(SSD1306_TIMER_IRQn); // Disable interrupt from SSD1306_TIMER (NVIC level)
     // Enabled the OLED panel
     CMD(SSD1306_DISPLAYOFF);
 }
@@ -417,17 +373,61 @@ void ssd1306Refresh(void)
 
   gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN);
 
-  DMA_Cmd(DMA1_Channel3, DISABLE);
-  DMA_ClearFlag(DMA1_FLAG_TC3);
+  DMA1_Channel3->CCR &= ~DMA_CCR_EN; /* Stop DMA1_Channel3 */
+  DMA1->IFCR |= DMA_IFCR_CTCIF3; /* Clear transfer complete flag */
   DMA1_Channel3->CMAR = (uint32_t)buffer;
   DMA1_Channel3->CNDTR = 1024;
 
-  /* start */
-  DMA_Cmd(DMA1_Channel3, ENABLE);
+  /* Start DMA1_Channel3 */
+  DMA1_Channel3->CCR |= DMA_CCR_EN;
 
   /* Wait for transfer to finish  */
-  while(DMA_GetFlagStatus(DMA1_FLAG_TC3) == RESET) DELAY(25);
-  DMA_ClearFlag(DMA1_FLAG_TC3);
+  while((DMA1->ISR & DMA_ISR_TCIF3) == RESET) nilThdSleepMilliseconds(25);
+  DMA1->IFCR |= DMA_IFCR_CTCIF3; /* Clear transfer complete flag */
+}
+
+/**************************************************************************/
+/*!
+    @brief  Draws a single graphic character using the supplied font
+*/
+/**************************************************************************/
+void ssd1306DrawChar(uint8_t x, uint8_t y, uint8_t c, struct FONT_DEF font)
+{
+  uint8_t col, column[font.u8Width];
+
+  // Check if the requested character is available
+  if ((c >= font.u8FirstChar) && (c <= font.u8LastChar))
+  {
+    // Retrieve appropriate columns from font data
+    for (col = 0; col < font.u8Width; col++)
+    {
+      column[col] = font.au8FontTable[((c - 32) * font.u8Width) + col];    // Get first column of appropriate character
+    }
+  }
+  else
+  {
+    // Requested character is not available in this font ... send a space instead
+    for (col = 0; col < font.u8Width; col++)
+    {
+      column[col] = 0xFF;    // Send solid space
+    }
+  }
+
+  // Render each column
+  uint16_t xoffset, yoffset;
+  for (xoffset = 0; xoffset < font.u8Width; xoffset++)
+  {
+    for (yoffset = 0; yoffset < (font.u8Height + 1); yoffset++)
+    {
+      uint8_t bit = 0x00;
+      bit = (column[xoffset] << (8 - (yoffset + 1)));     // Shift current row bit left
+      bit = (bit >> 7);                     // Shift current row but right (results in 0x01 for black, and 0x00 for white)
+      if (bit)
+      {
+        ssd1306DrawPixel(x + xoffset, y + yoffset);
+      }
+    }
+  }
 }
 
 /**************************************************************************/
@@ -505,7 +505,7 @@ void ssd1306DrawString(uint8_t x, uint8_t y, char* text, struct FONT_DEF font)
       // Refresh the screen to see the results
       ssd1306Refresh();    
       // Wait a bit before writing the next line
-      systickDelay(1000);
+      systicknilThdSleepMilliseconds(1000);
     }
 
     @endcode
@@ -543,24 +543,28 @@ void ssd1306ShiftFrameBuffer( uint8_t height )
   }
 }
 
-void TIM17_IRQHandler(void) {
+void SSD1306_TIMER_IRQHandler(void)
+{
+    if(SSD1306_TIMER->SR & TIM_SR_UIF) // if UIF flag is set
+    {
+        SSD1306_TIMER->SR &= ~TIM_SR_UIF; // clear UIF flag
 
-    if(TIM17->SR & TIM_SR_UIF) // if UIF flag is set
-      {
-      TIM17->SR &= ~TIM_SR_UIF; // clear UIF flag
+        CMD(SSD1306_SETLOWCOLUMN | 0x0);  // low col = 0
+        CMD(SSD1306_SETHIGHCOLUMN | 0x0);  // hi col = 0
+        CMD(SSD1306_SETSTARTLINE | 0x0); // line #0
 
-      CMD(SSD1306_SETLOWCOLUMN | 0x0);  // low col = 0
-      CMD(SSD1306_SETHIGHCOLUMN | 0x0);  // hi col = 0
-      CMD(SSD1306_SETSTARTLINE | 0x0); // line #0
+        gpioSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
 
-      gpioSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
+        /* Stop and re-initialise DMA1
+         * We don't care if it was running,
+         * we'll restart from the beginning of the buffer
+         */
+        DMA1_Channel3->CCR &= ~DMA_CCR_EN; /* Stop DMA1_Channel3 */
+        DMA1->IFCR |= DMA_IFCR_CTCIF3; /* Clear transfer complete flag */
+        DMA1_Channel3->CMAR = (uint32_t)buffer;
+        DMA1_Channel3->CNDTR = 1024;
 
-      DMA_Cmd(DMA1_Channel3, DISABLE);
-      DMA_ClearFlag(DMA1_FLAG_TC3);
-      DMA1_Channel3->CMAR = (uint32_t)buffer;
-      DMA1_Channel3->CNDTR = 1024;
-
-      /* start */
-      DMA_Cmd(DMA1_Channel3, ENABLE);
-      }
+        /* Start DMA1_Channel3 */
+        DMA1_Channel3->CCR |= DMA_CCR_EN;
+    }
 }

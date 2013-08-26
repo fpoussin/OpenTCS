@@ -1,4 +1,3 @@
-#include "nil.h"
 #include "threads.h"
 
 /*
@@ -39,7 +38,10 @@ void startLight(void)
 
     while (1)
     {
-        updateLight(light_settings);
+        if (settings.data.functions & SETTINGS_FUNCTION_LED)
+        {
+            updateLight(light_settings);
+        }
         nilThdSleepMilliseconds(50);
     }
 }

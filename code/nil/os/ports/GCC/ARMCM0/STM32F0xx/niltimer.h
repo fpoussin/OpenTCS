@@ -28,7 +28,7 @@
 #ifndef _NILTIMER_H_
 #define _NILTIMER_H_
 
-#include "stm32f0xx.h"
+#include "hwinit.h"
 
 /*===========================================================================*/
 /* Module constants.                                                         */
@@ -50,13 +50,13 @@
 /* Module macros.                                                            */
 /*===========================================================================*/
 
-//#define SYSTICK_TIMER          TIM2
-//#define SYSTICK_TIMER_VECTOR   Vector7C
-//#define SYSTICK_TIMER_VECTOR_POS   15
+//#define SYSTICK_TIMER              TIM2
+//#define SYSTICK_TIMER_VECTOR       TIM2_IRQHandler
+//#define SYSTICK_TIMER_VECTOR_POS   TIM2_IRQn
 
-#define SYSTICK_TIMER          TIM14
-#define SYSTICK_TIMER_VECTOR   Vector8C
-#define SYSTICK_TIMER_VECTOR_POS   19
+#define SYSTICK_TIMER                TIM14
+#define SYSTICK_TIMER_VECTOR         TIM14_IRQHandler
+#define SYSTICK_TIMER_VECTOR_POS     TIM14_IRQn
 
 /*===========================================================================*/
 /* External declarations.                                                    */

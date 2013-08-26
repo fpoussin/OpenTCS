@@ -3,7 +3,7 @@
 
 #include "nil.h"
 #include "hwinit.h"
-#include "stm32f0xx.h"
+
 /*
  * This file contains all the function prototypes
  * and global structures used in threads.
@@ -16,10 +16,17 @@
 
 /* Last flash page is used to store settings */
 #define SETTINGS_ADDRESS 0x8007C00
+#define SETTINGS_FUNCTION_TC 0x1
+#define SETTINGS_FUNCTION_SHIFTER 0x2
+#define SETTINGS_FUNCTION_LED 0x4
+
+#define SETTINGS_CUT_NORMAL 0x0
+#define SETTINGS_CUT_PROGRESSIVE 0x1
 
 struct __settings {
 
     struct {
+        uint8_t functions;
         uint8_t cut_time;
         uint8_t cut_type;
         uint16_t sensor_threshold;
@@ -33,8 +40,7 @@ typedef struct __settings settings_t;
 extern settings_t settings;
 
 
-
-settings_t* readSettings(void);
+settings_t readSettings(void);
 uint8_t writeSettings(settings_t* settings);
 
 /* End of misc functions */

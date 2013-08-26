@@ -31,39 +31,43 @@ void item2Handle(void)
 //Draws the actual menu
 void drawMenu(menuStruct_t *menuToShow, short selectedIndex)
 {
- unsigned short i;
+ uint8_t i, y;
 
  ssd1306ClearScreen();
  ssd1306DrawString(0, 0, menuToShow->menuName, Font_System5x8);
 
- for(i=0;i < (menuToShow->numberItems > 6 ? 6 : menuToShow->numberItems) ;i++)
+ for(i=0;i < ((menuToShow->numberItems+1) > 6 ? 6 : (menuToShow->numberItems+1)) ;i++)
  {
+  y = (i*7)+1;
   if (i > 5 + (selectedIndex > 5 ? selectedIndex - 5 : 0))
   {
    break;
   }
   else if (selectedIndex < 6)
   {
-   //~ GLCD_Write_Text(menuToShow->items[i]->itemName, 5, i+1, (selectedIndex == i) ? 0 : 1);
-      if (selectedIndex == i) ssd1306DrawChar(0, (i*7)+1, '>', Font_System5x8);
-      ssd1306DrawString(7, (i*7)+1, menuToShow->items[i].itemName, Font_System5x8);
+      if (selectedIndex == i) ssd1306DrawChar(0, y, '>', Font_System5x8);
+      if (selectedIndex > menuToShow->numberItems)
+      {
+          ssd1306DrawString(7, y, "Go Back", Font_System5x8);
+      }
+      else
+      {
+          ssd1306DrawString(7, y, menuToShow->items[i].itemName, Font_System5x8);
+      }
   }
   else
   {
-   //~ GLCD_Write_Text(menuToShow->items[i+(selectedIndex-5)]->itemName, 5, i+1, (selectedIndex == i+(selectedIndex-5)) ? 0 : 1);
-      if (selectedIndex == i+(selectedIndex-5)) ssd1306DrawChar(0, (i*7)+1, '>', Font_System5x8);
-      ssd1306DrawString(7, (i*7)+1, menuToShow->items[i+(selectedIndex-5)].itemName, Font_System5x8);
+      if (selectedIndex == i+(selectedIndex-5)) ssd1306DrawChar(0, y, '>', Font_System5x8);
+      if (selectedIndex > menuToShow->numberItems)
+      {
+          ssd1306DrawString(7, y, "Go Back", Font_System5x8);
+      }
+      else
+      {
+          ssd1306DrawString(7, y, menuToShow->items[i+(selectedIndex-5)].itemName, Font_System5x8);
+      }
   }
  }
-
-//ssd1306DrawLine(0, 7, 127, 7);
-//ssd1306DrawLine(0, 55, 127, 55);
-
-//ssd1306DrawChar(5, 7, '>', Font_System5x8);
-//ssd1306DrawChar(25, 7, '?', Font_System5x8);
-
-//ssd1306DrawString(45, 7, "Select", Font_System5x8);
-//ssd1306DrawString(101, 7, "Back", Font_System5x8);
 
  return;
 }
@@ -82,14 +86,14 @@ void openMenu(menuStruct_t *menuToShow)
         selectedIndex--;
         if (selectedIndex < 0)
         {
-           selectedIndex = menuToShow->numberItems - 1;
+           selectedIndex = menuToShow->numberItems + 1;
         }
         drawMenu(menuToShow, selectedIndex);
      }
      else if (gpioReadPad(GPIOC, GPIOC_BUTTON_UP))
      {
         selectedIndex++;
-        if (selectedIndex > (menuToShow->numberItems) - 1)
+        if (selectedIndex > (menuToShow->numberItems + 1))
         {
            selectedIndex = 0;
         }
@@ -97,23 +101,21 @@ void openMenu(menuStruct_t *menuToShow)
      }
      else if (gpioReadPad(GPIOC, GPIOC_BUTTON_SEL))
      {
-        if (menuToShow->items[selectedIndex].handler != 0)
+        if (selectedIndex > menuToShow->numberItems) /* Last item is "exit" */
+        {
+            return;
+        }
+        else if (menuToShow->items[selectedIndex].handler != NULL)
         {
         menuToShow->items[selectedIndex].handler();
         }
-        else if (menuToShow->items[selectedIndex].subMenu != 0)
+        else if (menuToShow->items[selectedIndex].subMenu != NULL)
         {
         openMenu(menuToShow->items[selectedIndex].subMenu);
         }
         drawMenu(menuToShow, selectedIndex);
      }
-     /*
-     else if (Button(&PORTA, 3, 5, 1))
-     {
-          return;
-     }
-    */
-     nilThdSleepMilliseconds(100);
+     nilThdSleepMilliseconds(250);
   } while (1);
 
  return;
