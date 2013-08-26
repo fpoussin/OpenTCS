@@ -75,7 +75,7 @@ NIL_WORKING_AREA(waThread4, 128);
 NIL_THREAD(Thread4, arg) {
 
   (void)arg;
-  startAdc();
+  startAdc(); /* ADC runs in continuous mode with DMA */
   while (true) {
     startSensors();
   }
@@ -105,9 +105,7 @@ int main(void) {
    * - Nil RTOS initialization.
    */
   hwInit();
-
-  settings = readSettings();
-
+  settingsInit();
   nilSysInit();
 
   /* This is now the idle thread loop, you may perform here a low priority

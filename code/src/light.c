@@ -16,14 +16,10 @@ static TIM_OCInitTypeDef  TIM_OCInitStructure;
 
 void startLight(void)
 {
-    uint16_t PrescalerValue;
-
-    /* Compute the prescaler value */
-    PrescalerValue = (uint16_t) ((STM32_PCLK ) / 24000000) - 1; // 1KHz
 
     /* Time base configuration */
     TIM_TimeBaseStructure.TIM_Period = 65535;
-    TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;
+    TIM_TimeBaseStructure.TIM_Prescaler = 24000 - 1; // 1Khz clock
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 

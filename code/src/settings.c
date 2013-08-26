@@ -1,6 +1,11 @@
 #include "threads.h"
 
-settings_t settings = { {0, 0, 0, 0, 0, 0}, 0};
+settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0}, 0};
+
+void settingsInit()
+{
+    settings = readSettings();
+}
 
 settings_t readSettings(void) {
 

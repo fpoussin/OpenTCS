@@ -32,6 +32,8 @@ struct __settings {
         uint16_t sensor_threshold;
         uint16_t slip_threshold;
         uint8_t sensor_gain;
+        uint16_t min_speed;
+        uint16_t min_rpm;
 
     } data;
     __IO uint32_t CRCValue;
@@ -40,6 +42,7 @@ typedef struct __settings settings_t;
 extern settings_t settings;
 
 
+void settingsInit(void);
 settings_t readSettings(void);
 uint8_t writeSettings(settings_t* st);
 
@@ -115,7 +118,9 @@ void startDisplay(void) __attribute__ ((noreturn));
 
 struct __sensors {
     uint8_t shifting;
-    uint8_t slipping_pct;
+    int8_t slipping_pct;
+    uint16_t rpm;
+    uint16_t spd;
 };
 typedef struct __sensors sensors_t;
 extern sensors_t sensors;

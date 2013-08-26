@@ -8,11 +8,10 @@ void startAdc(void)
 {
     ADC_InitTypeDef ADC_InitStructure;
     DMA_InitTypeDef DMA_InitStructure;
-//    NVIC_InitTypeDef NVIC_InitStructure;
 
     ADC_DeInit(ADC1);
 
-    RCC_ADCCLKConfig(RCC_ADCCLK_HSI14); /* Enable ADC1 clock so that we can talk to it */
+    RCC_ADCCLKConfig(RCC_ADCCLK_HSI14); /* Enable ADC1 clock (14MHz HSI) so that we can talk to it */
     RCC_HSI14Cmd(ENABLE);
 
     DMA_DeInit(DMA1_Channel1);
@@ -28,15 +27,7 @@ void startAdc(void)
     DMA_InitStructure.DMA_Priority = DMA_Priority_High;
     DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
     DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-    /* Enable DMA1 Channel1 Transfer Complete interrupt */
-//    DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
 
-    /* Enable DMA1 channel1 IRQ Channel */
-//    NVIC_InitStructure.NVIC_IRQChannel = DMA1_Channel1_IRQn;
-//    NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
-//    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-//    NVIC_Init(&NVIC_InitStructure);
-    /* DMA1 Channel1 enable */
     DMA_Cmd(DMA1_Channel1, ENABLE);
     ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE); // Enable ADC1 EOC interrupt
     /* ADC DMA request in circular mode */
@@ -57,7 +48,7 @@ void startAdc(void)
     ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;
     ADC_Init(ADC1, &ADC_InitStructure);
 
-    /* Convert the ADC1 temperature sensor  with 55.5 Cycles as sampling time */
+    /* Convert the ADC1 temperature sensor  with 239.5 Cycles as sampling time */
     ADC_ChannelConfig(ADC1, ADC_Channel_0 , ADC_SampleTime_239_5Cycles);
     ADC_ChannelConfig(ADC1, ADC_Channel_1 , ADC_SampleTime_239_5Cycles);
     ADC_ChannelConfig(ADC1, ADC_Channel_2 , ADC_SampleTime_239_5Cycles);
