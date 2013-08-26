@@ -128,6 +128,7 @@ void startSensors(void) {
     TIM_Cmd(RPM_TIMER, ENABLE);
 
     setupI2C();
+    pot.wiper = 0;
     setupStrainGauge();
     while (1) {
 
@@ -161,7 +162,7 @@ void setupI2C(void)
 
 void setupStrainGauge()
 {
-    uint8_t wiper = 127;
+    uint8_t wiper = pot.wiper;
     uint8_t txdata[2] = {POT_CMD_SET_WIPER | ((wiper & 0x80) >> 7), wiper & 0x7F};
     uint8_t rxdata[1];
     uint8_t i, timeout;
@@ -203,22 +204,22 @@ void setupStrainGauge()
         rxdata[i] = POT_I2C->RXDR;
     }
 
+    /* Save value read from the device */
     pot.wiper = rxdata[0];
-
 }
 
 void getStrainGauge(void)
 {
-    uint32_t straing = 0;
+    uint32_t strain_gauge = 0;
 
-    straing += adc_samples[0];
-    straing += adc_samples[4];
-    straing += adc_samples[8];
-    straing += adc_samples[12];
-    straing += adc_samples[16];
-    straing /= 5;
+    strain_gauge += adc_samples[0];
+    strain_gauge += adc_samples[4];
+    strain_gauge += adc_samples[8];
+    strain_gauge += adc_samples[12];
+    strain_gauge += adc_samples[16];
+    strain_gauge /= 5;
     /* Returns true is strain gauge voltage exceeds threshold. */
-    sensors.shifting = (straing >= settings.data.sensor_threshold);
+    sensors.shifting = (strain_gauge >= settings.data.sensor_threshold);
 }
 
 void getSpeedSensors(void)

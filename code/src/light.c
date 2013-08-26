@@ -60,14 +60,14 @@ void updateLight(light_settings_t s)
         case LIGHT_STATE_BLINK:
             // Blink light
             TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
-            TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
+            TIM_OCInitStructure.TIM_Pulse = s.duration; // period in ms
             TIM_OC1Init(TIM16, &TIM_OCInitStructure);
             break;
 
         case LIGHT_STATE_PULSE:
             // Blink light
             TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
-            TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
+            TIM_OCInitStructure.TIM_Pulse = s.duration; // period in ms
             TIM_OC1Init(TIM16, &TIM_OCInitStructure);
             break;
 
