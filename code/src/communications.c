@@ -64,6 +64,7 @@ uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
             nilThdSleepMicroseconds(20);
             if (!timeout--)
             {
+                nilSemSignalI(&i2c1_sem);
                 return 1;
             }
         };
@@ -90,6 +91,7 @@ uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t le
             nilThdSleepMicroseconds(50);
             if (!timeout--)
             {
+                nilSemSignalI(&i2c1_sem);
                 return 1;
             }
         };
@@ -150,7 +152,7 @@ void usartInit(USART_TypeDef* USARTx)
 
 uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
 {
-    uint8_t ret = 0;
+    uint8_t ret = 1;
     if (USARTx == USART1)
     {
         if (nilSemWaitTimeout(&usart1_sem, MS2ST(100)) != NIL_MSG_OK)
@@ -178,7 +180,7 @@ uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
 
 uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
 {
-    uint8_t ret = 0;
+    uint8_t ret = 1;
     if (USARTx == USART1)
     {
         /* Wait for transfer to finish  */
@@ -292,7 +294,7 @@ uint8_t spiSendI(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
 
 uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
 {
-    uint8_t ret = 0;
+    uint8_t ret = 1;
     if (SPIx == SPI1)
     {
         /* Wait for transfer to finish  */
