@@ -64,12 +64,12 @@ uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
             nilThdSleepMicroseconds(20);
             if (!timeout--)
             {
-                nilSemSignalI(&i2c1_sem);
+                nilSemSignal(&i2c1_sem);
                 return 1;
             }
         };
     }
-    nilSemSignalI(&i2c1_sem);
+    nilSemSignal(&i2c1_sem);
     return 0;
 }
 
@@ -91,13 +91,13 @@ uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t le
             nilThdSleepMicroseconds(50);
             if (!timeout--)
             {
-                nilSemSignalI(&i2c1_sem);
+                nilSemSignal(&i2c1_sem);
                 return 1;
             }
         };
         *buffer++ = I2Cx->RXDR;
     }
-    nilSemSignalI(&i2c1_sem);
+    nilSemSignal(&i2c1_sem);
     return 0;
 }
 
@@ -173,7 +173,7 @@ uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
 
         /* Start DMA1_Channel3 */
         DMA_CHANNEL_USART1_TX->CCR |= DMA_CCR_EN;
-        nilSemSignalI(&usart1_sem);
+        nilSemSignal(&usart1_sem);
     }
     return ret;
 }
@@ -282,7 +282,7 @@ uint8_t spiSendI(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
 
         /* Start DMA1_Channel3 */
         DMA_CHANNEL_SPI1_TX->CCR |= DMA_CCR_EN;
-        nilSemSignalI(&spi1_sem);
+        nilSemSignal(&spi1_sem);
 
         return 0;
     }
