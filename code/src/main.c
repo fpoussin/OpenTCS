@@ -106,6 +106,7 @@ int main(void) {
    */
   hwInit();
   settingsInit();
+  usartInit(DBG_USART);
   nilSysInit();
 
   /* This is now the idle thread loop, you may perform here a low priority

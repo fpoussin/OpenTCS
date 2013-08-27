@@ -1,7 +1,5 @@
 #include "menu.h"
 
-struct menuStruct;
-
 //Demo menu. Menus are declared in reverse order,
 /*
 menuItem subItem1ItemList[] = {{"Sub Sub Item 1", 0, 0}, {"Sub Sub Item 2", 0, 0}};
@@ -23,7 +21,7 @@ void item2Handle(void)
   ssd1306ClearScreen();
   ssd1306DrawString(0, 0, "item2Handle", Font_System5x8);
 
-  while(!gpioReadPad(GPIOC, GPIOC_BUTTON_SEL)) {};
+  while(BUTTON_SEL) {};
 
   return;
 }
@@ -81,7 +79,7 @@ void openMenu(menuStruct_t *menuToShow)
  drawMenu(menuToShow, selectedIndex);
 
    do {
-     if (gpioReadPad(GPIOC, GPIOC_BUTTON_DOWN))
+     if (BUTTON_DOWN)
      {
         selectedIndex--;
         if (selectedIndex < 0)
@@ -90,7 +88,7 @@ void openMenu(menuStruct_t *menuToShow)
         }
         drawMenu(menuToShow, selectedIndex);
      }
-     else if (gpioReadPad(GPIOC, GPIOC_BUTTON_UP))
+     else if (BUTTON_UP)
      {
         selectedIndex++;
         if (selectedIndex > (menuToShow->numberItems + 1))
@@ -99,7 +97,7 @@ void openMenu(menuStruct_t *menuToShow)
         }
         drawMenu(menuToShow, selectedIndex);
      }
-     else if (gpioReadPad(GPIOC, GPIOC_BUTTON_SEL))
+     else if (BUTTON_SEL)
      {
         if (selectedIndex > menuToShow->numberItems) /* Last item is "exit" */
         {

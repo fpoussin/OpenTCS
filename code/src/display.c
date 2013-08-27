@@ -8,8 +8,9 @@ void showDiag(void);
 void showAbout(void);
 void setFunctions(void);
 void setCutMode(void);
+void setShifter(void);
 
-menuItem_t settingsMenuList[] = {{"Functions", &setFunctions, 0}, {"Cut mode", &setCutMode, 0}};
+menuItem_t settingsMenuList[] = {{"Functions", &setFunctions, 0}, {"Cut mode", &setCutMode, 0}, {"Shifter setup", &setShifter, 0} };
 
 menuStruct_t settingsMenu = {"Settings Menu", 2, settingsMenuList};
 
@@ -33,7 +34,7 @@ void startDisplay(void) {
         ssd1306TurnOff();
         display.state = DISPLAY_OFF;
 
-        while (!gpioReadPad(GPIOC, GPIOC_BUTTON_SEL))
+        while (!BUTTON_SEL) /* Wait until the select button is pressed */
         {
             gpioTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
             nilThdSleepMilliseconds(250);
@@ -45,18 +46,27 @@ void startDisplay(void) {
     }
 }
 
-void showDiag(void) {
+void showDiag(void)
+{
 
 }
 
-void showAbout(void) {
+void showAbout(void)
+{
 
 }
 
-void setFunctions(void) {
+void setFunctions(void)
+{
 
 }
 
-void setCutMode(void) {
+void setCutMode(void)
+{
+
+}
+
+void setShifter(void)
+{
 
 }

@@ -26,7 +26,6 @@ void startLight(void)
     TIM_TimeBaseInit(TIM16, &TIM_TimeBaseStructure);
     TIM16->CR1 &= ~TIM_CR1_CEN;
 
-
     /* TIM16 OC1 Mode configuration: Channel1 */
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Active;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;

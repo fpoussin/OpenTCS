@@ -14,6 +14,25 @@
  * Misc functions used by threads
  */
 
+extern semaphore_t usart1_sem;
+extern semaphore_t spi1_sem;
+extern semaphore_t i2c1_sem;
+
+
+void spiInit(SPI_TypeDef* SPIx);
+uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len);
+uint8_t spiSendI(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len);
+
+void i2cInit(I2C_TypeDef* I2Cx);
+uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len);
+uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len);
+
+void usartInit(USART_TypeDef* USARTx);
+void usartPrintString(USART_TypeDef* USARTx, uint8_t *StringPtr);
+uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len);
+uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len);
+inline void serDbg(uint8_t *StringPtr);
+
 /* Last flash page is used to store settings */
 #define SETTINGS_ADDRESS 0x8007C00
 #define SETTINGS_FUNCTION_TC 0x1

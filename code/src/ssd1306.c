@@ -85,44 +85,7 @@ inline void ssd1306SendByte(uint8_t byte)
 void ssd1306Init(uint8_t vccstate)
 {
 
-  SPI_InitTypeDef SPI_InitStructure;
-  DMA_InitTypeDef  DMA_InitStructure;
-
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1 , ENABLE);
-  SPI_Cmd(SSD1306_SPI, DISABLE);
-
-  //configure spi
-  SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-  SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-  SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-  SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
-  SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
-  SPI_InitStructure.SPI_NSS = SPI_NSS_Hard;
-  SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
-  SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
-  SPI_InitStructure.SPI_CRCPolynomial = 7;
-  SPI_Init(SSD1306_SPI, &SPI_InitStructure);
-  SPI_Cmd(SSD1306_SPI, ENABLE);
-
-  /* Setup DMA */
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-  DMA_StructInit(&DMA_InitStructure);
-  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
-  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-  DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-  DMA_InitStructure.DMA_PeripheralBaseAddr =  (uint32_t)SPI1->DR;
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)buffer;
-  DMA_InitStructure.DMA_BufferSize = 1024;
-  /* write */
-  DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
-  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
-  DMA_Init(DMA1_Channel3, &DMA_InitStructure);
-
-  /* Enable the SPI Tx DMA request */
-  SPI_I2S_DMACmd(SPI1, SPI_I2S_DMAReq_Tx, ENABLE);
+  spiInit(SSD1306_SPI);
 
   // Reset the LCD
   gpioClearPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
@@ -373,17 +336,7 @@ void ssd1306Refresh(void)
 
   gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN);
 
-  DMA1_Channel3->CCR &= ~DMA_CCR_EN; /* Stop DMA1_Channel3 */
-  DMA1->IFCR |= DMA_IFCR_CTCIF3; /* Clear transfer complete flag */
-  DMA1_Channel3->CMAR = (uint32_t)buffer;
-  DMA1_Channel3->CNDTR = 1024;
-
-  /* Start DMA1_Channel3 */
-  DMA1_Channel3->CCR |= DMA_CCR_EN;
-
-  /* Wait for transfer to finish  */
-  while((DMA1->ISR & DMA_ISR_TCIF3) == RESET) nilThdSleepMilliseconds(25);
-  DMA1->IFCR |= DMA_IFCR_CTCIF3; /* Clear transfer complete flag */
+  spiSendS(SSD1306_SPI, buffer, 1024);
 }
 
 /**************************************************************************/
@@ -555,16 +508,6 @@ void SSD1306_TIMER_IRQHandler(void)
 
         gpioSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
 
-        /* Stop and re-initialise DMA1
-         * We don't care if it was running,
-         * we'll restart from the beginning of the buffer
-         */
-        DMA1_Channel3->CCR &= ~DMA_CCR_EN; /* Stop DMA1_Channel3 */
-        DMA1->IFCR |= DMA_IFCR_CTCIF3; /* Clear transfer complete flag */
-        DMA1_Channel3->CMAR = (uint32_t)buffer;
-        DMA1_Channel3->CNDTR = 1024;
-
-        /* Start DMA1_Channel3 */
-        DMA1_Channel3->CCR |= DMA_CCR_EN;
+        spiSendI(SSD1306_SPI, buffer, 1024);
     }
 }

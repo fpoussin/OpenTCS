@@ -96,3 +96,4 @@ src/sensors.c
 src/settings.c
 src/menu.c
 inc/menu.h
+src/communications.c

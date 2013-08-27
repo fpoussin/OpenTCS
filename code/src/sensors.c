@@ -49,17 +49,12 @@ static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2, TIM2CC3CaptureNumber;
 static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2, TIM2CC4CaptureNumber;
 static int32_t spd1 = 0, spd2 = 0;
 
-struct {
-    uint8_t wiper;
-} pot;
-
 /*
  * Function prototypes.
  */
 
 void getStrainGauge(void);
-void setupI2C(void);
-void setupStrainGauge(void);
+uint8_t setPotGain(uint8_t gain);
 void getSpeedSensors(void);
 
 /*
@@ -127,9 +122,8 @@ void startSensors(void) {
     /* TIM enable counter */
     TIM_Cmd(RPM_TIMER, ENABLE);
 
-    setupI2C();
-    pot.wiper = 0;
-    setupStrainGauge();
+    i2cInit(POT_I2C);
+    setPotGain(settings.data.sensor_gain);
     while (true) {
 
         /*
@@ -141,71 +135,27 @@ void startSensors(void) {
     }
 }
 
-void setupI2C(void)
+uint8_t setPotGain(uint8_t gain)
 {
-    I2C_InitTypeDef I2C_InitStructure;
+    uint8_t txdata[2] = {POT_CMD_SET_WIPER | ((gain & 0x80) >> 7), gain & 0x7F};
+    uint8_t rxdata[2];
+    uint8_t pot_val;
 
-    I2C_StructInit(&I2C_InitStructure);
-    I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
-    I2C_InitStructure.I2C_AnalogFilter = I2C_AnalogFilter_Enable;
-    I2C_InitStructure.I2C_DigitalFilter = 0x00;
-    I2C_InitStructure.I2C_OwnAddress1 = 0x00;
-    I2C_InitStructure.I2C_Ack = I2C_Ack_Disable;
-    I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-    I2C_InitStructure.I2C_Timing = 0;
-
-    I2C_Init(POT_I2C, &I2C_InitStructure);
-    // enable I2C1
-    I2C_Cmd(POT_I2C, ENABLE);
-
-}
-
-void setupStrainGauge()
-{
-    uint8_t wiper = pot.wiper;
-    uint8_t txdata[2] = {POT_CMD_SET_WIPER | ((wiper & 0x80) >> 7), wiper & 0x7F};
-    uint8_t rxdata[1];
-    uint8_t i, timeout;
-    uint8_t err = 0;
-    I2C_TransferHandling(I2C1, POT_I2C_ADDR, sizeof(txdata), I2C_AutoEnd_Mode, I2C_Generate_Start_Write);
-
-    for ( i=0 ; i<sizeof(txdata) ; i++)
+    if (i2cSendS(POT_I2C, POT_I2C_ADDR, txdata, sizeof(txdata)) != 0)
     {
-        timeout = 100;
-        POT_I2C->TXDR = txdata[i];
-        while(I2C_GetFlagStatus(I2C1, I2C_ISR_TC) == RESET)
-        {
-            nilThdSleepMicroseconds(50);
-            if (!timeout--)
-            {
-                err = 1;
-                break;
-            }
-        };
+        /* Handle error */
+
     }
 
-    if (err) return;
-
-    I2C_TransferHandling(I2C1, POT_I2C_ADDR, sizeof(rxdata), I2C_AutoEnd_Mode, I2C_Generate_Start_Read);
-
-    for ( i=0 ; i<sizeof(rxdata) ; i++)
+    if (i2cReceiveS(POT_I2C, POT_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
     {
-        timeout = 100;
-        while(I2C_GetFlagStatus(I2C1, I2C_ISR_RXNE) == RESET)
-        {
-            nilThdSleepMicroseconds(50);
-            if (!timeout--)
-            {
-                err = 1;
-                break;
-            }
-        };
-        if (err) return;
-        rxdata[i] = POT_I2C->RXDR;
+        /* Handle error */
+
     }
 
-    /* Save value read from the device */
-    pot.wiper = rxdata[0];
+    pot_val = (rxdata[0] & 0x80) | (rxdata[1] & 0x7F);
+
+    return pot_val;
 }
 
 void getStrainGauge(void)
