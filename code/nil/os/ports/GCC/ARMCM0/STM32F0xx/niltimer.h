@@ -51,12 +51,14 @@
 /*===========================================================================*/
 
 //#define SYSTICK_TIMER              TIM2
-//#define SYSTICK_TIMER_VECTOR       TIM2_IRQHandler
-//#define SYSTICK_TIMER_VECTOR_POS   TIM2_IRQn
+//#define SYSTICK_TIMER_IRQHandler   TIM2_IRQHandler
+//#define SYSTICK_TIMER_IRQn         TIM2_IRQn
+//#define SYSTICK_TIMER_DBG_STOP     DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_TIM2_STOP
 
 #define SYSTICK_TIMER                TIM14
-#define SYSTICK_TIMER_VECTOR         TIM14_IRQHandler
-#define SYSTICK_TIMER_VECTOR_POS     TIM14_IRQn
+#define SYSTICK_TIMER_IRQHandler     TIM14_IRQHandler
+#define SYSTICK_TIMER_IRQn           TIM14_IRQn
+#define SYSTICK_TIMER_DBG_STOP       DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_TIM14_STOP
 
 /*===========================================================================*/
 /* External declarations.                                                    */
@@ -73,6 +75,8 @@
  */
 static inline void port_timer_init(void) {
 
+  SYSTICK_TIMER_DBG_STOP; /* Freeze counter while core is stopped */
+
   SYSTICK_TIMER->ARR     = 0xFFFFFFFF;
   SYSTICK_TIMER->CNT     = 0;
   SYSTICK_TIMER->CCMR1   = 0;
@@ -80,7 +84,7 @@ static inline void port_timer_init(void) {
   SYSTICK_TIMER->DIER    = 0;
   SYSTICK_TIMER->CR2     = 0;
   SYSTICK_TIMER->EGR    |= TIM_EGR_UG;            /* UG, CNT initialized.             */
-  SYSTICK_TIMER->CR1    |= TIM_CR1_CEN;            /* CEN */
+  SYSTICK_TIMER->CR1    |= TIM_CR1_CEN;           /* CEN */
 }
 
 /**

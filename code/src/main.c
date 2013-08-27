@@ -21,6 +21,9 @@ NIL_THREAD(Thread0, arg) {
     is below 126 (and greater than 64) otherwise a reset will be generated */
   WWDG_SetWindowValue(126);
 
+  /* Freeze WWDG while core is stopped */
+  DBGMCU->APB1FZ |= DBGMCU_WWDG_STOP;
+
   /* Enable WWDG and set counter value to 127, WWDG timeout = ~683 us * 64 = 43.7 ms
      In this case the refresh window is: ~683 * (127-126)= 0.683ms < refresh window < ~683 * 64 = 43.7ms
      */

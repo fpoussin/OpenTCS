@@ -49,11 +49,11 @@
 /*===========================================================================*/
 
 /**
- * @brief   TIM14 interrupt handler.
+ * @brief   SysTick interrupt handler.
  *
  * @isr
  */
-NIL_IRQ_HANDLER(SYSTICK_TIMER_VECTOR) {
+NIL_IRQ_HANDLER(SYSTICK_TIMER_IRQHandler) {
 
   NIL_IRQ_PROLOGUE();
 
