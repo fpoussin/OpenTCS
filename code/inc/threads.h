@@ -18,20 +18,19 @@ extern semaphore_t usart1_sem;
 extern semaphore_t spi1_sem;
 extern semaphore_t i2c1_sem;
 
-
 void spiInit(SPI_TypeDef* SPIx);
 uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len);
 uint8_t spiSendI(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len);
 
 void i2cInit(I2C_TypeDef* I2Cx);
-uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len);
-uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len);
+uint8_t i2cSendS(I2C_TypeDef* I2Cx, const uint8_t addr, uint8_t* buffer, uint8_t len);
+uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, const uint8_t addr, uint8_t* buffer, uint8_t len);
 
 void usartInit(USART_TypeDef* USARTx);
-void usartPrintString(USART_TypeDef* USARTx, uint8_t *StringPtr);
-uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len);
-uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len);
-inline void serDbg(uint8_t *StringPtr);
+uint8_t usartSendI(USART_TypeDef* USARTx, const char *buffer, uint16_t len);
+uint8_t usartSendS(USART_TypeDef* USARTx, const char *buffer, uint16_t len);
+inline void usartPrintString(USART_TypeDef* USARTx, const char *str);
+inline void serDbg(const char *str);
 
 /* Last flash page is used to store settings */
 #define SETTINGS_ADDRESS 0x8007C00
@@ -46,7 +45,7 @@ struct __settings {
 
     struct {
         uint8_t functions;
-        uint8_t cut_time;
+        uint16_t cut_time;
         uint8_t cut_type;
         uint16_t sensor_threshold;
         uint16_t slip_threshold;
@@ -89,12 +88,14 @@ extern light_settings_t light_settings;
 #define ADC_STOPPED 0
 #define ADC_STARTED 1
 
+#define ADC_CHANNELS 4
+
 struct __adc_status {
     uint8_t status;
 };
 typedef struct __adc_status adc_status_t;
 extern adc_status_t adc_status;
-extern uint16_t adc_samples[20];
+extern uint16_t adc_samples[40];
 
 void startAdc(void);
 

@@ -2,7 +2,7 @@
 #include "threads.h"
 
 adc_status_t adc_status = { ADC_STOPPED };
-uint16_t adc_samples[20];
+uint16_t adc_samples[40];
 
 void startAdc(void)
 {
@@ -69,6 +69,8 @@ void startAdc(void)
     ADC_StartOfConversion(ADC1);
 
     adc_status.status = ADC_STARTED;
+
+    serDbg("startAdc Complete\n");
 }
 
 void DMA1_Ch1_IRQHandler(void)

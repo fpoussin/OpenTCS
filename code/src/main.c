@@ -112,6 +112,8 @@ int main(void) {
   usartInit(DBG_USART);
   nilSysInit();
 
+  serDbg("Nil Start");
+
   /* This is now the idle thread loop, you may perform here a low priority
      task but you must never try to sleep or wait in this loop.*/
   while (true) {

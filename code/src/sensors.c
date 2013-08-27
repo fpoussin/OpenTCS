@@ -124,6 +124,9 @@ void startSensors(void) {
 
     i2cInit(POT_I2C);
     setPotGain(settings.data.sensor_gain);
+
+    serDbg("startSensors Complete\n");
+
     while (true) {
 
         /*
@@ -161,13 +164,17 @@ uint8_t setPotGain(uint8_t gain)
 void getStrainGauge(void)
 {
     uint32_t strain_gauge = 0;
+    uint8_t nb_samples;
 
-    strain_gauge += adc_samples[0];
-    strain_gauge += adc_samples[4];
-    strain_gauge += adc_samples[8];
-    strain_gauge += adc_samples[12];
-    strain_gauge += adc_samples[16];
-    strain_gauge /= 5;
+    nb_samples = sizeof(adc_samples)/ADC_CHANNELS;
+
+    while (nb_samples)
+    {
+        strain_gauge += adc_samples[ADC_CHANNELS*--nb_samples];
+    }
+
+    strain_gauge /= sizeof(adc_samples)/ADC_CHANNELS;
+
     /* Returns true is strain gauge voltage exceeds threshold. */
     sensors.shifting = (strain_gauge >= settings.data.sensor_threshold);
 }

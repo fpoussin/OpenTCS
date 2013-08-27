@@ -2,7 +2,7 @@
 
 #define IGN_TIMER TIM3
 
-ign_cut_t ign_cut = {IGN_CUT_DISABLED, 0};
+ign_cut_t ign_cut = {IGN_CUT_DISABLED, 2500};
 
 /*
  * Actual functions.
@@ -34,6 +34,8 @@ void startIgnition(void) {
     /* One Pulse Mode selection */
     TIM_SelectOnePulseMode(IGN_TIMER, TIM_OPMode_Single);
 
+    serDbg("startIgnition Complete\n");
+
     while (true) {
 
         nilThdSleepMilliseconds(10);
@@ -49,17 +51,17 @@ void startIgnition(void) {
         {
             if (settings.data.cut_type == SETTINGS_CUT_NORMAL)
             {
-                pulses[0] = settings.data.cut_time*10;
-                pulses[1] = settings.data.cut_time*10;
-                pulses[2] = settings.data.cut_time*10;
-                pulses[3] = settings.data.cut_time*10;
+                pulses[0] = settings.data.cut_time;
+                pulses[1] = settings.data.cut_time;
+                pulses[2] = settings.data.cut_time;
+                pulses[3] = settings.data.cut_time;
             }
             else if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE)
             {
-                pulses[0] = settings.data.cut_time*10;
-                pulses[1] = settings.data.cut_time*10;
-                pulses[2] = settings.data.cut_time*10;
-                pulses[3] = settings.data.cut_time*10;
+                pulses[0] = settings.data.cut_time;
+                pulses[1] = settings.data.cut_time;
+                pulses[2] = settings.data.cut_time;
+                pulses[3] = settings.data.cut_time;
             }
         }
 
@@ -68,17 +70,17 @@ void startIgnition(void) {
         {
             if (settings.data.cut_type == SETTINGS_CUT_NORMAL)
             {
-                pulses[0] = settings.data.cut_time*10;
-                pulses[1] = settings.data.cut_time*10;
-                pulses[2] = settings.data.cut_time*10;
-                pulses[3] = settings.data.cut_time*10;
+                pulses[0] = settings.data.cut_time;
+                pulses[1] = settings.data.cut_time;
+                pulses[2] = settings.data.cut_time;
+                pulses[3] = settings.data.cut_time;
             }
             else if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE)
             {
-                pulses[0] = settings.data.cut_time*10;
-                pulses[1] = settings.data.cut_time*10;
-                pulses[2] = settings.data.cut_time*10;
-                pulses[3] = settings.data.cut_time*10;
+                pulses[0] = settings.data.cut_time;
+                pulses[1] = settings.data.cut_time;
+                pulses[2] = settings.data.cut_time;
+                pulses[3] = settings.data.cut_time;
             }
         }
 

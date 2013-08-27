@@ -33,6 +33,8 @@ void startLight(void)
     TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
     TIM_OC1Init(TIM16, &TIM_OCInitStructure);
 
+    serDbg("startLight Complete\n");
+
     while (true)
     {
         if (settings.data.functions & SETTINGS_FUNCTION_LED)

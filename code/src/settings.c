@@ -1,6 +1,16 @@
 #include "threads.h"
 
 settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0}, 0};
+const settings_t default_settings = {
+    {SETTINGS_FUNCTION_SHIFTER | SETTINGS_FUNCTION_LED,
+     300, /* Cut pulse time 30ms */
+     SETTINGS_CUT_NORMAL, /* Cut type */
+     50, /* Shfifter Sensor threshold  */
+     10, /* TC Slip threshold  */
+     30, /* Sensor gain */
+     30, /* Min Speed */
+     2500}, /* Min RPM */
+    0}; /* CRC */
 
 void settingsInit()
 {
@@ -16,9 +26,11 @@ settings_t readSettings(void) {
 
     tmp_st = *st; /* Copy struct from flash to ram */
 
-    /* If CRC fails to match, assign 0 for fault detection */
-    if (CRCValue != st->CRCValue) tmp_st.CRCValue = 0;
+    /* If CRC fails to match, assign default settings */
+    if (CRCValue != st->CRCValue){
 
+        return default_settings;
+    }
     return tmp_st;
 }
 

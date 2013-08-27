@@ -6,6 +6,9 @@
 #define SPI_TIMEOUT 100 /* ms */
 #define USART_TIMEOUT 100 /* ms */
 
+#define USART_TXBUF_SIZE 64
+#define USART_RXBUF_SIZE 32
+
 #define DMA_REMAP_USART TRUE
 #define DMA_CHANNEL_USART1_TX DMA1_Channel4
 #define DMA_CTCIF_USART1_TX DMA_IFCR_CTCIF4
@@ -27,8 +30,8 @@ semaphore_t usart1_semI, usart1_semS;
 semaphore_t spi1_semI, spi1_semS;
 semaphore_t i2c1_semI, i2c1_semS;
 
-uint8_t usart_txbuf[48];
-uint8_t usart_rxbuf[48];
+char usart_txbuf[USART_TXBUF_SIZE];
+char usart_rxbuf[USART_RXBUF_SIZE];
 
 void i2cInit(I2C_TypeDef* I2Cx)
 {
@@ -50,7 +53,7 @@ void i2cInit(I2C_TypeDef* I2Cx)
     I2C_Cmd(I2Cx, ENABLE);
 }
 
-uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
+uint8_t i2cSendS(I2C_TypeDef* I2Cx, const uint8_t addr, uint8_t* buffer, uint8_t len)
 {
     uint8_t timeout;
 
@@ -78,7 +81,7 @@ uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
     return 0;
 }
 
-uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
+uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, const uint8_t addr, uint8_t *buffer, uint8_t len)
 {
     uint8_t timeout;
 
@@ -156,7 +159,7 @@ void usartInit(USART_TypeDef* USARTx)
     USART_Cmd(USARTx, ENABLE);
 }
 
-uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
+uint8_t usartSendI(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
 {
     uint8_t ret = 1;
     if (USARTx == USART1)
@@ -185,7 +188,7 @@ uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
     return ret;
 }
 
-uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
+uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
 {
     uint8_t ret = 1;
     if (USARTx == USART1)
@@ -209,14 +212,14 @@ uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
     return ret;
 }
 
-void usartPrintString(USART_TypeDef* USARTx, uint8_t* StringPtr)
+void usartPrintString(USART_TypeDef* USARTx, const char* str)
 {
-    usartSendI(USARTx, StringPtr, strlen((char*)StringPtr));
+    usartSendI(USARTx, str, strlen(str));
 }
 
-void serDbg(uint8_t* StringPtr)
+void serDbg(const char* str)
 {
-    usartPrintString(DBG_USART, StringPtr);
+    usartPrintString(DBG_USART, str);
 }
 
 void spiInit(SPI_TypeDef* SPIx)
