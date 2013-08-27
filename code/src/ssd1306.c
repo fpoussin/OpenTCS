@@ -136,13 +136,13 @@ void ssd1306Init(uint8_t vccstate)
   SSD1306_TIMER->CR2 = 0;
   SSD1306_TIMER->PSC = 23999;	         // Set prescaler to 24 000 (PSC + 1) (1KHz)
   SSD1306_TIMER->ARR = 50;	           // Auto reload value
-  SSD1306_TIMER->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
 }
 
 void ssd1306TurnOn(void)
 {
     // Enabled the OLED panel
     CMD(SSD1306_DISPLAYON);
+    SSD1306_TIMER->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
     NVIC_EnableIRQ(SSD1306_TIMER_IRQn); // Enable interrupt from SSD1306_TIMER (NVIC level)
     SSD1306_TIMER->CR1 |= TIM_CR1_CEN;   // Enable timer
 }
@@ -150,6 +150,7 @@ void ssd1306TurnOn(void)
 void ssd1306TurnOff(void)
 {
     SSD1306_TIMER->CR1 &= ~TIM_CR1_CEN;   // Disable timer
+    SSD1306_TIMER->DIER &= ~TIM_DIER_UIE; // Disable update interrupt (timer level)
     NVIC_DisableIRQ(SSD1306_TIMER_IRQn); // Disable interrupt from SSD1306_TIMER (NVIC level)
     // Enabled the OLED panel
     CMD(SSD1306_DISPLAYOFF);

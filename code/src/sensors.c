@@ -3,7 +3,7 @@
 #define SPEED_TIMER TIM2
 #define SPEED_TIMER_IRQn TIM2_IRQn
 #define SPEED_TIMER_IRQHandler TIM2_IRQHandler
-#define SPEED_TIMER_PSC 240
+#define SPEED_TIMER_PSC 120
 
 #define RPM_TIMER TIM1
 #define RPM_TIMER_IRQn TIM1_CC_IRQn
@@ -68,7 +68,7 @@ void startSensors(void) {
 
     /* Time base configuration */
     TIM_TimeBaseStructure.TIM_Period = 65535;
-    TIM_TimeBaseStructure.TIM_Prescaler = SPEED_TIMER_PSC - 1; // 100KHz clock, takes 0.65s to wrap
+    TIM_TimeBaseStructure.TIM_Prescaler = SPEED_TIMER_PSC - 1; // 200KHz clock, takes 0.327s to wrap
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(SPEED_TIMER, &TIM_TimeBaseStructure);
@@ -88,7 +88,7 @@ void startSensors(void) {
     TIM_ITConfig(SPEED_TIMER, TIM_IT_CC4, ENABLE);
 
     /* Enable the TIM2 global Interrupt */
-    NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannel = SPEED_TIMER_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
@@ -114,7 +114,7 @@ void startSensors(void) {
     TIM_ITConfig(RPM_TIMER, TIM_IT_CC1, ENABLE);
 
     /* Enable the TIM1 global Interrupt */
-    NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannel = RPM_TIMER_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
