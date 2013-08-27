@@ -2,6 +2,10 @@
 #include "board.h"
 #include <string.h> // memcpy
 
+#define I2C_TIMEOUT 100 /* ms */
+#define SPI_TIMEOUT 100 /* ms */
+#define USART_TIMEOUT 100 /* ms */
+
 #define DMA_REMAP_USART TRUE
 #define DMA_CHANNEL_USART1_TX DMA1_Channel4
 #define DMA_CTCIF_USART1_TX DMA_IFCR_CTCIF4
@@ -19,16 +23,17 @@
 #define DMA_CTCIF_SPI1_RX DMA_IFCR_CTCIF2
 #define DMA_TCIF_SPI1_RX DMA_ISR_TCIF2
 
-semaphore_t usart1_sem;
-semaphore_t spi1_sem;
-semaphore_t i2c1_sem;
+semaphore_t usart1_semI, usart1_semS;
+semaphore_t spi1_semI, spi1_semS;
+semaphore_t i2c1_semI, i2c1_semS;
 
 uint8_t usart_txbuf[48];
 uint8_t usart_rxbuf[48];
 
 void i2cInit(I2C_TypeDef* I2Cx)
 {
-    nilSemInit(&i2c1_sem, 1);
+    nilSemInit(&i2c1_semI, 1);
+    nilSemInit(&i2c1_semS, 1);
 
     I2C_InitTypeDef I2C_InitStructure;
 
@@ -49,7 +54,7 @@ uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
 {
     uint8_t timeout;
 
-    if (nilSemWaitTimeout(&i2c1_sem, MS2ST(100)) != NIL_MSG_OK)
+    if (nilSemWaitTimeout(&i2c1_semS, MS2ST(I2C_TIMEOUT)) != NIL_MSG_OK)
     {
         return 1;
     }
@@ -64,12 +69,12 @@ uint8_t i2cSendS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t len)
             nilThdSleepMicroseconds(20);
             if (!timeout--)
             {
-                nilSemSignal(&i2c1_sem);
+                nilSemSignal(&i2c1_semS);
                 return 1;
             }
         };
     }
-    nilSemSignal(&i2c1_sem);
+    nilSemSignal(&i2c1_semS);
     return 0;
 }
 
@@ -77,7 +82,7 @@ uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t le
 {
     uint8_t timeout;
 
-    if (nilSemWaitTimeout(&i2c1_sem, MS2ST(100)) != NIL_MSG_OK)
+    if (nilSemWaitTimeout(&i2c1_semS, MS2ST(I2C_TIMEOUT)) != NIL_MSG_OK)
     {
         return 1;
     }
@@ -91,13 +96,13 @@ uint8_t i2cReceiveS(I2C_TypeDef* I2Cx, uint8_t addr, uint8_t* buffer, uint8_t le
             nilThdSleepMicroseconds(50);
             if (!timeout--)
             {
-                nilSemSignal(&i2c1_sem);
+                nilSemSignal(&i2c1_semS);
                 return 1;
             }
         };
         *buffer++ = I2Cx->RXDR;
     }
-    nilSemSignal(&i2c1_sem);
+    nilSemSignal(&i2c1_semS);
     return 0;
 }
 
@@ -108,7 +113,8 @@ void usartInit(USART_TypeDef* USARTx)
     SYSCFG_DMAChannelRemapConfig(SYSCFG_DMARemap_USART1Rx, ENABLE);
 #endif
 
-    nilSemInit(&usart1_sem, 1);
+    nilSemInit(&usart1_semI, 1);
+    nilSemInit(&usart1_semS, 1);
 
     USART_InitTypeDef USART_InitStructure;
     DMA_InitTypeDef  DMA_InitStructure;
@@ -155,7 +161,7 @@ uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
     uint8_t ret = 1;
     if (USARTx == USART1)
     {
-        if (nilSemWaitTimeout(&usart1_sem, MS2ST(100)) != NIL_MSG_OK)
+        if (nilSemWaitTimeout(&usart1_semI, TIME_IMMEDIATE) != NIL_MSG_OK)
         {
             return 1;
         }
@@ -173,7 +179,8 @@ uint8_t usartSendI(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
 
         /* Start DMA1_Channel3 */
         DMA_CHANNEL_USART1_TX->CCR |= DMA_CCR_EN;
-        nilSemSignal(&usart1_sem);
+
+        nilSemSignal(&usart1_semI);
     }
     return ret;
 }
@@ -183,6 +190,11 @@ uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
     uint8_t ret = 1;
     if (USARTx == USART1)
     {
+        if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
+        {
+            return 1;
+        }
+
         /* Wait for transfer to finish  */
         while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) nilThdSleepMilliseconds(10);
         DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
@@ -192,19 +204,14 @@ uint8_t usartSendS(USART_TypeDef* USARTx, uint8_t* buffer, uint16_t len)
         /* Wait for transfer to finish  */
         while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) nilThdSleepMilliseconds(10);
         DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
+        nilSemSignal(&usart1_semS);
     }
     return ret;
 }
 
 void usartPrintString(USART_TypeDef* USARTx, uint8_t* StringPtr)
 {
-    usartSendS(USARTx, StringPtr, strlen((char*)StringPtr));
-//    while(*StringPtr != '\0')
-//    {
-//        while(USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET) {};
-//        USART_SendData(USARTx, *StringPtr);
-//        StringPtr++;
-//    }
+    usartSendI(USARTx, StringPtr, strlen((char*)StringPtr));
 }
 
 void serDbg(uint8_t* StringPtr)
@@ -220,7 +227,8 @@ void spiInit(SPI_TypeDef* SPIx)
 
     if (SPIx == SPI1)
     {
-        nilSemInit(&spi1_sem, 1);
+        nilSemInit(&spi1_semI, 1);
+        nilSemInit(&spi1_semS, 1);
         DMA_Ch = DMA_CHANNEL_SPI1_TX;
     }
     else
@@ -231,11 +239,11 @@ void spiInit(SPI_TypeDef* SPIx)
     SPI_Cmd(SPIx, DISABLE);
 
     //configure spi
-    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    SPI_InitStructure.SPI_Direction = SPI_Direction_1Line_Tx;
     SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
     SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
     SPI_InitStructure.SPI_NSS = SPI_NSS_Hard;
     SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
     SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
@@ -251,7 +259,7 @@ void spiInit(SPI_TypeDef* SPIx)
     DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
     DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
     DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-    DMA_InitStructure.DMA_PeripheralBaseAddr =  (uint32_t)&SPIx->DR;
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&SPIx->DR;
     DMA_InitStructure.DMA_MemoryBaseAddr = 0;
     DMA_InitStructure.DMA_BufferSize = 0;
     /* write */
@@ -267,7 +275,7 @@ uint8_t spiSendI(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
 {
     if (SPIx == SPI1)
     {
-        if (nilSemWaitTimeout(&spi1_sem, MS2ST(100)) != NIL_MSG_OK)
+        if (nilSemWaitTimeout(&spi1_semI, TIME_IMMEDIATE) != NIL_MSG_OK)
         {
             return 1;
         }
@@ -282,7 +290,7 @@ uint8_t spiSendI(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
 
         /* Start DMA1_Channel3 */
         DMA_CHANNEL_SPI1_TX->CCR |= DMA_CCR_EN;
-        nilSemSignal(&spi1_sem);
+        nilSemSignal(&spi1_semI);
 
         return 0;
     }
@@ -297,6 +305,11 @@ uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
     uint8_t ret = 1;
     if (SPIx == SPI1)
     {
+        if (nilSemWaitTimeout(&spi1_semS, MS2ST(SPI_TIMEOUT)) != NIL_MSG_OK)
+        {
+            return 1;
+        }
+
         /* Wait for transfer to finish  */
         while((DMA1->ISR & DMA_TCIF_SPI1_TX) == RESET) nilThdSleepMilliseconds(10);
         DMA1->IFCR |= DMA_CTCIF_SPI1_TX; /* Clear transfer complete flag */
@@ -306,6 +319,7 @@ uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
         /* Wait for transfer to finish  */
         while((DMA1->ISR & DMA_TCIF_SPI1_TX) == RESET) nilThdSleepMilliseconds(10);
         DMA1->IFCR |= DMA_CTCIF_SPI1_TX; /* Clear transfer complete flag */
+        nilSemSignal(&spi1_semS);
     }
     return ret;
 }
