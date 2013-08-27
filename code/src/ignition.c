@@ -34,7 +34,7 @@ void startIgnition(void) {
     /* One Pulse Mode selection */
     TIM_SelectOnePulseMode(IGN_TIMER, TIM_OPMode_Single);
 
-    serDbg("startIgnition Complete\n");
+    serDbg("startIgnition Complete\r\n");
 
     while (true) {
 

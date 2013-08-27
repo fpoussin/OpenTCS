@@ -6,7 +6,7 @@
 #define SPI_TIMEOUT 100 /* ms */
 #define USART_TIMEOUT 100 /* ms */
 
-#define USART_TXBUF_SIZE 64
+#define USART_TXBUF_SIZE 48
 #define USART_RXBUF_SIZE 32
 
 #define DMA_REMAP_USART TRUE
@@ -119,8 +119,11 @@ void usartInit(USART_TypeDef* USARTx)
     nilSemInit(&usart1_semI, 1);
     nilSemInit(&usart1_semS, 1);
 
+    memset(usart_txbuf, 0, sizeof(usart_txbuf));
+    memset(usart_rxbuf, 0, sizeof(usart_rxbuf));
+
     USART_InitTypeDef USART_InitStructure;
-    DMA_InitTypeDef  DMA_InitStructure;
+    DMA_InitTypeDef DMA_InitStructure;
     USART_InitStructure.USART_BaudRate = 115200;
     USART_InitStructure.USART_WordLength = USART_WordLength_8b;
     USART_InitStructure.USART_StopBits = USART_StopBits_1;
@@ -130,12 +133,13 @@ void usartInit(USART_TypeDef* USARTx)
     USART_Init(USARTx, &USART_InitStructure);
 
     /* DMA channel Tx of USART Configuration */
-    DMA_DeInit(DMA_CHANNEL_USART1_TX);
     DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USARTx->TDR;
-    DMA_InitStructure.DMA_BufferSize = (uint16_t)sizeof(usart_txbuf);
+    DMA_InitStructure.DMA_BufferSize = 0;
     DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)usart_txbuf;
     DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
     DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
+    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
     DMA_Init(DMA_CHANNEL_USART1_TX, &DMA_InitStructure);
 
     /* Enable the USART Tx DMA request */
@@ -148,6 +152,8 @@ void usartInit(USART_TypeDef* USARTx)
     DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)usart_rxbuf;
     DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
     DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
+    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
     DMA_Init(DMA_CHANNEL_USART1_RX, &DMA_InitStructure);
 
     /* Enable the USART Rx DMA request */
@@ -175,7 +181,7 @@ uint8_t usartSendI(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
          * We don't care if it was running,
          * we'll restart from the beginning of the buffer
          */
-        DMA_CHANNEL_USART1_TX->CCR &= ~DMA_CCR_EN; /* Stop DMA1_Channel3 */
+        DMA_CHANNEL_USART1_TX->CCR &= ~DMA_CCR_EN; /* Stop DMA1_Channel */
         DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
         DMA_CHANNEL_USART1_TX->CMAR = (uint32_t)usart_txbuf;
         DMA_CHANNEL_USART1_TX->CNDTR = len;
@@ -193,20 +199,32 @@ uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
     uint8_t ret = 1;
     if (USARTx == USART1)
     {
+//        if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
+//        {
+//            nilSemReset(&usart1_semS, 1);
+//            return 1;
+//        }
+
+//        if((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET)
+//        {
+//            DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
+//        }
+
+//        ret = usartSendI(USARTx, buffer, len);
+
+//        /* Wait for transfer to finish  */
+//        while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) nilThdSleepMilliseconds(10);
+//        DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
+//        nilSemSignal(&usart1_semS);
+
         if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
         {
             return 1;
         }
-
-        /* Wait for transfer to finish  */
-        while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) nilThdSleepMilliseconds(10);
-        DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
-
-        ret = usartSendI(USARTx, buffer, len);
-
-        /* Wait for transfer to finish  */
-        while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) nilThdSleepMilliseconds(10);
-        DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
+        while (len--) {
+            USARTx->TDR = (*buffer++ & (uint16_t)0x01FF);
+            while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);
+        }
         nilSemSignal(&usart1_semS);
     }
     return ret;
@@ -214,7 +232,7 @@ uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
 
 void usartPrintString(USART_TypeDef* USARTx, const char* str)
 {
-    usartSendI(USARTx, str, strlen(str));
+    usartSendS(USARTx, str, strlen(str));
 }
 
 void serDbg(const char* str)
@@ -313,10 +331,10 @@ uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len)
             return 1;
         }
 
-        /* Wait for transfer to finish  */
-        while((DMA1->ISR & DMA_TCIF_SPI1_TX) == RESET) nilThdSleepMilliseconds(10);
-        DMA1->IFCR |= DMA_CTCIF_SPI1_TX; /* Clear transfer complete flag */
-
+        if((DMA1->ISR & DMA_TCIF_SPI1_TX) == RESET)
+        {
+            DMA1->IFCR |= DMA_CTCIF_SPI1_TX; /* Clear transfer complete flag */
+        }
         ret = spiSendI(SPIx, buffer, len);
 
         /* Wait for transfer to finish  */

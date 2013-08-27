@@ -510,5 +510,7 @@ void SSD1306_TIMER_IRQHandler(void)
         gpioSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
 
         spiSendI(SSD1306_SPI, buffer, 1024);
+
+        gpioTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
     }
 }

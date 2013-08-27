@@ -110,7 +110,7 @@ static inline systime_t port_timer_get_time(void) {
  */
 static inline void port_timer_start_alarm(systime_t time) {
 
-  nilDbgAssert((SYSTICK_TIMER->DIER & 2) == 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & TIM_DIER_CC1IE) == 0,
                "port_timer_start_alarm(), #1",
                "already started");
 
@@ -126,7 +126,7 @@ static inline void port_timer_start_alarm(systime_t time) {
  */
 static inline void port_timer_stop_alarm(void) {
 
-  nilDbgAssert((SYSTICK_TIMER->DIER & 2) != 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & TIM_DIER_CC1IE) != 0,
                "port_timer_stop_alarm(), #1",
                "not started");
 
@@ -142,7 +142,7 @@ static inline void port_timer_stop_alarm(void) {
  */
 static inline void port_timer_set_alarm(systime_t time) {
 
-  nilDbgAssert((SYSTICK_TIMER->DIER & 2) != 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & TIM_DIER_CC1IE) != 0,
                "port_timer_set_alarm(), #1",
                "not started");
 
@@ -158,7 +158,7 @@ static inline void port_timer_set_alarm(systime_t time) {
  */
 static inline systime_t port_timer_get_alarm(void) {
 
-  nilDbgAssert((SYSTICK_TIMER->DIER & 2) != 0,
+  nilDbgAssert((SYSTICK_TIMER->DIER & TIM_DIER_CC1IE) != 0,
                "port_timer_get_alarm(), #1",
                "not started");
 

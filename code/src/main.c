@@ -27,11 +27,12 @@ NIL_THREAD(Thread0, arg) {
   /* Enable WWDG and set counter value to 127, WWDG timeout = ~683 us * 64 = 43.7 ms
      In this case the refresh window is: ~683 * (127-126)= 0.683ms < refresh window < ~683 * 64 = 43.7ms
      */
-  WWDG_Enable(127);
+//  WWDG_Enable(127);
+  serDbg("WWDG Started\r\n");
   while (true) {
-    nilThdSleepMilliseconds(20);
+    nilThdSleepMilliseconds(25);
     gpioTogglePad(GPIOC, GPIOC_LED3); /* Watchdog heartbeat */
-    WWDG_SetCounter(127);
+//    WWDG_SetCounter(127);
   }
 }
 
@@ -111,8 +112,6 @@ int main(void) {
   settingsInit();
   usartInit(DBG_USART);
   nilSysInit();
-
-  serDbg("Nil Start");
 
   /* This is now the idle thread loop, you may perform here a low priority
      task but you must never try to sleep or wait in this loop.*/

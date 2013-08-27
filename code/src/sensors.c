@@ -123,9 +123,9 @@ void startSensors(void) {
     TIM_Cmd(RPM_TIMER, ENABLE);
 
     i2cInit(POT_I2C);
-    setPotGain(settings.data.sensor_gain);
+//    setPotGain(settings.data.sensor_gain);
 
-    serDbg("startSensors Complete\n");
+    serDbg("startSensors Complete\r\n");
 
     while (true) {
 

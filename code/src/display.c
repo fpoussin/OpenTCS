@@ -27,13 +27,14 @@ void startDisplay(void) {
     gpioSetPad(GPIOC, GPIOC_LED4);
 
     ssd1306DrawString(40, 20, "OpenTCS", Font_System7x8);
-//    nilThdSleepMilliseconds(100); // Fails
+    nilThdSleepMilliseconds(100); // Fails
     gpioClearPad(GPIOC, GPIOC_LED4);
 
-    serDbg("startDisplay Complete\n");
+    serDbg("startDisplay Complete\r\n");
 
     while (true) {
 
+        serDbg("Display OFF\r\n");
         ssd1306TurnOff();
         display.state = DISPLAY_OFF;
 
@@ -42,6 +43,7 @@ void startDisplay(void) {
             gpioTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
             nilThdSleepMilliseconds(250);
         }
+        serDbg("Display ON\r\n");
         ssd1306ClearScreen();
         ssd1306TurnOn();
         display.state = DISPLAY_ON;

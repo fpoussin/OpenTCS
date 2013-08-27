@@ -70,7 +70,7 @@ void startAdc(void)
 
     adc_status.status = ADC_STARTED;
 
-    serDbg("startAdc Complete\n");
+    serDbg("startAdc Complete\r\n");
 }
 
 void DMA1_Ch1_IRQHandler(void)
