@@ -127,6 +127,7 @@ AS   = $(TRGT)gcc -x assembler-with-cpp
 OD   = $(TRGT)objdump
 HEX  = $(CP) -O ihex
 BIN  = $(CP) -O binary
+SIZE = $(TRGT)size
 
 # ARM-specific options here
 AOPT =

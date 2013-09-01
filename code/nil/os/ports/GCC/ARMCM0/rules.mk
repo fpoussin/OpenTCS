@@ -205,6 +205,7 @@ else
 	@echo Creating $@
 	@$(OD) $(ODFLAGS) $< > $@
 	@echo Done
+	@$(SIZE) $<
 endif
 
 clean:

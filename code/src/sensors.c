@@ -43,11 +43,13 @@
  */
 
 
-sensors_t sensors = {0, 0, 0, 0};
+sensors_t sensors = {0, 0, 0, 0, 0};
 static uint16_t TIM1CC1ReadValue1, TIM1CC1ReadValue2, TIM1CC1CaptureNumber;
 static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2, TIM2CC3CaptureNumber;
 static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2, TIM2CC4CaptureNumber;
-static int32_t spd1 = 0, spd2 = 0;
+static int32_t accel1 = 0, accel2 = 0;
+static int32_t spd1arr[2] = {0,0}, spd2arr[2] = {0,0};
+static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
 
 /*
  * Function prototypes.
@@ -181,20 +183,20 @@ void getStrainGauge(void)
 
 void getSpeedSensors(void)
 {
-    spd1 = (STM32_PCLK / RPM_TIMER_PSC) / SPEED_TIMER->CCR3; // Front
-    spd2 = (STM32_PCLK / RPM_TIMER_PSC) / SPEED_TIMER->CCR4; // Rear
+//    spd1 = (STM32_PCLK / RPM_TIMER_PSC) / SPEED_TIMER->CCR3; // Front
+//    spd2 = (STM32_PCLK / RPM_TIMER_PSC) / SPEED_TIMER->CCR4; // Rear
 
-    // Fastest wheel speed in Hertz
-    if (spd1 >= spd2) sensors.spd = spd1;
-    else  sensors.spd = spd2;
+//    // Fastest wheel speed in Hertz
+//    if (spd1 >= spd2) sensors.spd = spd1;
+//    else  sensors.spd = spd2;
 
-    if (sensors.spd <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
-    {
-        sensors.slipping_pct = 0;
-        return;
-    }
+//    if (sensors.spd <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
+//    {
+//        sensors.slipping_pct = 0;
+//        return;
+//    }
 
-    sensors.slipping_pct = ((spd2 - spd1) *100) / spd1;
+//    sensors.slipping_pct = ((spd2 - spd1) *100) / spd1;
 }
 
 
@@ -270,7 +272,9 @@ void SPEED_TIMER_IRQHandler(void)
             }
 
             /* Frequency computation */
-            spd1 = (STM32_PCLK / SPEED_TIMER_PSC) / Capture;
+            spd1arr[spd1arr_pos++] = (STM32_PCLK / SPEED_TIMER_PSC) / Capture;
+
+            if (spd1arr_pos > 1) spd1arr_pos = 0;
 
             TIM2CC3ReadValue1 = TIM2CC3ReadValue2;
             TIM2CC3CaptureNumber = 0;
@@ -305,16 +309,41 @@ void SPEED_TIMER_IRQHandler(void)
             }
 
             /* Frequency computation */
-            spd2 = (STM32_PCLK / SPEED_TIMER_PSC) / Capture;
+            spd2arr[spd2arr_pos++] = (STM32_PCLK / SPEED_TIMER_PSC) / Capture;
+
+            if (spd2arr_pos > 1) spd2arr_pos = 0;
 
             TIM2CC4ReadValue1 = TIM2CC4ReadValue2;
             TIM2CC4CaptureNumber = 0;
         }
     }
 
+    if (spd1arr_pos == 0)
+    {
+        accel1 = (spd1arr[1] - spd1arr[0]);
+    }
+    else
+    {
+        accel1 = (spd1arr[0] - spd1arr[1]);
+    }
+
+    if (spd2arr_pos == 0)
+    {
+        accel2 = (spd2arr[1] - spd2arr[0]);
+    }
+    else
+    {
+        accel2 = (spd2arr[0] - spd2arr[1]);
+    }
+
+
     // Fastest wheel speed in Hertz
-    if (spd1 >= spd2) sensors.spd = spd1;
-    else  sensors.spd = spd2;
+    if (spd1arr[0] >= spd2arr[0]) sensors.spd = spd1arr[0];
+    else  sensors.spd = spd2arr[0];
+
+    // Fastest wheel accel
+    if (accel1 >= accel2) sensors.accel = accel1;
+    else  sensors.accel = accel2;
 
     if (sensors.spd <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
     {
@@ -322,5 +351,5 @@ void SPEED_TIMER_IRQHandler(void)
         return;
     }
 
-    sensors.slipping_pct = ((spd2 - spd1) *100) / spd1;
+    sensors.slipping_pct = ((accel2 - accel1) * 100) / accel1;
 }

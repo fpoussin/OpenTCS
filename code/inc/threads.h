@@ -141,6 +141,7 @@ struct __sensors {
     int8_t slipping_pct;
     uint16_t rpm;
     uint16_t spd;
+    uint16_t accel;
 };
 typedef struct __sensors sensors_t;
 extern sensors_t sensors;
