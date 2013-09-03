@@ -136,6 +136,7 @@ void startSensors(void) {
          */
 
         getStrainGauge();
+        getSpeedSensors();
         nilThdSleepMilliseconds(100);
     }
 }
@@ -183,20 +184,9 @@ void getStrainGauge(void)
 
 void getSpeedSensors(void)
 {
-//    spd1 = (STM32_PCLK / RPM_TIMER_PSC) / SPEED_TIMER->CCR3; // Front
-//    spd2 = (STM32_PCLK / RPM_TIMER_PSC) / SPEED_TIMER->CCR4; // Rear
-
-//    // Fastest wheel speed in Hertz
-//    if (spd1 >= spd2) sensors.spd = spd1;
-//    else  sensors.spd = spd2;
-
-//    if (sensors.spd <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
-//    {
-//        sensors.slipping_pct = 0;
-//        return;
-//    }
-
-//    sensors.slipping_pct = ((spd2 - spd1) *100) / spd1;
+    // Fastest wheel speed in Hertz
+    if (spd1arr[0] >= spd2arr[0]) sensors.spd = spd1arr[0];
+    else sensors.spd = spd2arr[0];
 }
 
 

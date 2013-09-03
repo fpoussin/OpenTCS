@@ -6,7 +6,7 @@ AR=arm-none-eabi-ar
 FW_PATH = STM32F0xx_StdPeriph_Driver/src
 BUILDDIR = build
 
-CFLAGS  = -g -Os -Wall -ffunction-sections -fdata-sections
+CFLAGS  = -ggdb3 -Os -Wall -ffunction-sections -fdata-sections
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m0 -march=armv6s-m
 CFLAGS += -ffreestanding -nostdlib
 CFLAGS += -I. -ICMSIS/Include -ICMSIS/Device/ST/STM32F0xx/Include -ISTM32F0xx_StdPeriph_Driver/inc
