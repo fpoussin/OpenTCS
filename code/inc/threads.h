@@ -14,6 +14,8 @@
  * Misc functions used by threads
  */
 
+void itoa(int n, char s[]);
+
 extern semaphore_t usart1_sem;
 extern semaphore_t spi1_sem;
 extern semaphore_t i2c1_sem;

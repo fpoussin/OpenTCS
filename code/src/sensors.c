@@ -3,12 +3,12 @@
 #define SPEED_TIMER TIM2
 #define SPEED_TIMER_IRQn TIM2_IRQn
 #define SPEED_TIMER_IRQHandler TIM2_IRQHandler
-#define SPEED_TIMER_PSC (STM32_PCLK/200000) // 200KHz clock, takes 0.327s to wrap
+#define SPEED_TIMER_PSC (STM32_PCLK/100000) // 100KHz clock, takes 0.65s to wrap
 
 #define RPM_TIMER TIM1
 #define RPM_TIMER_IRQn TIM1_CC_IRQn
 #define RPM_TIMER_IRQHandler TIM1_CC_IRQHandler
-#define RPM_TIMER_PSC (STM32_PCLK/200000) // 200KHz clock, takes 0.327s to wrap
+#define RPM_TIMER_PSC (STM32_PCLK/100000) // 100KHz clock, takes 0.65s to wrap
 
 #define POT_I2C I2C1
 #define POT_I2C_ADDR 0x2E /* MCP45X1 ‘0101 11’b + A0 */
@@ -44,8 +44,8 @@
 
 
 sensors_t sensors = {0, 0, 0, 0, 0};
-static uint8_t TIM1CC1CaptureNumber, TIM2CC3CaptureNumber, TIM2CC4CaptureNumber;
-static uint16_t TIM1CC1ReadValue1, TIM1CC1ReadValue2;
+static uint8_t TIM1CC4CaptureNumber, TIM2CC3CaptureNumber, TIM2CC4CaptureNumber;
+static uint16_t TIM1CC4ReadValue1, TIM1CC4ReadValue2;
 static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2;
 static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2;
 static int32_t accel1 = 0, accel2 = 0;
@@ -104,7 +104,7 @@ void startSensors(void)
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(RPM_TIMER, &TIM_TimeBaseStructure);
 
-    TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;
+    TIM_ICInitStructure.TIM_Channel = TIM_Channel_4;
     TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Falling;
     TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
     TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
@@ -125,6 +125,7 @@ void startSensors(void)
 
     serDbg("startSensors Complete\r\n");
 
+    char tmpstr[6];
     while (true)
     {
         /*
@@ -134,13 +135,26 @@ void startSensors(void)
         getSpeedSensors();
         getCapture();
         nilThdSleepMilliseconds(100);
+
+//        serDbg("Accel 1/2: ");
+//        itoa(accel1, tmpstr);
+//        serDbg(tmpstr);
+//        serDbg("/");
+//        itoa(accel2, tmpstr);
+//        serDbg(tmpstr);
+//        serDbg("\r\n");
+
+        serDbg("RPM: ");
+        itoa(sensors.rpm, tmpstr);
+        serDbg(tmpstr);
+        serDbg("\r\n");
     }
 }
 
 void getCapture(void)
 {
-    /* Enable the CC1 Interrupt Request */
-    RPM_TIMER->DIER |= TIM_DIER_CC1IE;
+    /* Enable the CC4 Interrupt Request */
+    RPM_TIMER->DIER |= TIM_DIER_CC4IE;
 
     /* Enable the CC3-4 Interrupt Request */
     SPEED_TIMER->DIER |= TIM_DIER_CC3IE;
@@ -201,41 +215,41 @@ void RPM_TIMER_IRQHandler(void)
 {
     uint32_t Capture;
 
-    if (RPM_TIMER->SR & TIM_IT_CC1)
+    if (RPM_TIMER->SR & TIM_IT_CC4)
     {  /* capture timer */
 
         //clear pending bit
-        RPM_TIMER->SR &= ~TIM_FLAG_CC1;
+        RPM_TIMER->SR &= ~TIM_FLAG_CC4;
 
-        if(TIM1CC1CaptureNumber == 0)
+        if(TIM1CC4CaptureNumber == 0)
         {
             /* Get the Input Capture value */
-            TIM1CC1ReadValue1 = RPM_TIMER->CCR1;
-            TIM1CC1CaptureNumber = 1;
+            TIM1CC4ReadValue1 = RPM_TIMER->CCR4;
+            TIM1CC4CaptureNumber = 1;
         }
-        else if(TIM1CC1CaptureNumber == 1)
+        else if(TIM1CC4CaptureNumber == 1)
         {
             /* Get the Input Capture value */
-            TIM1CC1ReadValue2 = RPM_TIMER->CCR1;
+            TIM1CC4ReadValue2 = RPM_TIMER->CCR4;
 
             /* Capture computation */
-            if (TIM1CC1ReadValue2 > TIM1CC1ReadValue1)
+            if (TIM1CC4ReadValue2 > TIM1CC4ReadValue1)
             {
-                Capture = ((uint32_t)TIM1CC1ReadValue2 - (uint32_t)TIM1CC1ReadValue1);
+                Capture = ((uint32_t)TIM1CC4ReadValue2 - (uint32_t)TIM1CC4ReadValue1);
             }
             else
             {
-                Capture = (((uint32_t)TIM1CC1ReadValue2 + 0x10000) - (uint32_t)TIM1CC1ReadValue1);
+                Capture = (((uint32_t)TIM1CC4ReadValue2 + 0x10000) - (uint32_t)TIM1CC4ReadValue1);
             }
 
             /* Frequency computation */
             sensors.rpm = (STM32_PCLK / RPM_TIMER_PSC) / (Capture*60);
 
-            TIM1CC1ReadValue1 = TIM1CC1ReadValue2;
-            TIM1CC1CaptureNumber = 0;
+            TIM1CC4ReadValue1 = TIM1CC4ReadValue2;
+            TIM1CC4CaptureNumber = 0;
 
-            /* Disable CC1 interrupt */
-            RPM_TIMER->DIER &= ~TIM_DIER_CC1IE;
+            /* Disable CC4 interrupt */
+            RPM_TIMER->DIER &= ~TIM_DIER_CC4IE;
         }
     }
 }
