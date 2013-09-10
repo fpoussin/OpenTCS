@@ -33,7 +33,6 @@ inline void usartPrintString(USART_TypeDef* USARTx, const char *str);
 inline void serDbg(const char *str);
 
 /* Last flash page is used to store settings */
-#define SETTINGS_ADDRESS 0x8007C00
 #define SETTINGS_FUNCTION_TC 0x1
 #define SETTINGS_FUNCTION_SHIFTER 0x2
 #define SETTINGS_FUNCTION_LED 0x4
@@ -75,7 +74,7 @@ uint8_t writeSettings(settings_t* st);
 void startLight(void) __attribute__ ((noreturn));
 struct __light_settings {
 
-    uint8_t state;
+    uint8_t state; /* Light state (Blink?) */
     uint16_t duration; /* Duration/interval in ms */
 };
 typedef struct __light_settings light_settings_t;

@@ -1,13 +1,15 @@
 #include "threads.h"
 
+#define LED_TIMER TIM16
+#define LED_TIMER_PSC (STM32_PCLK/1000)  // 1Khz clock
+
 /*
  * Function prototypes.
  */
 
 light_settings_t light_settings = {LIGHT_STATE_OFF, 250};
-void updateLight(light_settings_t s);
+void updateLight(light_settings_t* s);
 
-TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 TIM_OCInitTypeDef  TIM_OCInitStructure;
 
 /*
@@ -17,65 +19,94 @@ TIM_OCInitTypeDef  TIM_OCInitStructure;
 void startLight(void)
 {
 
-    /* Time base configuration */
-    TIM_TimeBaseStructure.TIM_Period = 65535;
-    TIM_TimeBaseStructure.TIM_Prescaler = 24000 - 1; // 1Khz clock
-    TIM_TimeBaseStructure.TIM_ClockDivision = 0;
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    light_settings_t previous_settings = light_settings;
 
-    TIM_TimeBaseInit(TIM16, &TIM_TimeBaseStructure);
-    TIM16->CR1 &= ~TIM_CR1_CEN;
+    LED_TIMER->CR1 = 0;
+    LED_TIMER->CR2 = 0;
+    LED_TIMER->ARR = 0xFFFF;
+    LED_TIMER->PSC = LED_TIMER_PSC - 1;
 
     /* TIM16 OC1 Mode configuration: Channel1 */
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Active;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
     TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
     TIM_OCInitStructure.TIM_Pulse = light_settings.duration; // period in ms
-    TIM_OC1Init(TIM16, &TIM_OCInitStructure);
+    TIM_OC1Init(LED_TIMER, &TIM_OCInitStructure);
 
     serDbg("startLight Complete\r\n");
 
     while (true)
     {
+        nilThdSleepMilliseconds(75);
+
         if (settings.data.functions & SETTINGS_FUNCTION_LED)
         {
-            updateLight(light_settings);
+            /* Skip if updating is not needed */
+            if (light_settings.state == previous_settings.state &&
+                    light_settings.duration == previous_settings.duration)
+                continue;
+
+            previous_settings = light_settings;
+
+            if (sensors.slipping_pct >= settings.data.slip_threshold)
+            {
+                light_settings.state = LIGHT_STATE_STILL;
+            }
+            else if (sensors.shifting)
+            {
+                light_settings.state = LIGHT_STATE_PULSE;
+            }
+            else
+            {
+                light_settings.state = LIGHT_STATE_OFF;
+            }
+
+            updateLight(&light_settings);
         }
-        nilThdSleepMilliseconds(60);
     }
 }
 
-void updateLight(light_settings_t s)
+void updateLight(light_settings_t *s)
 {
-    switch (s.state) {
+
+    /* Disable Timer */
+    LED_TIMER->CR1 &= ~TIM_CR1_CEN;
+
+    /* Disable previous output mode */
+    LED_TIMER->CCMR1 &= ~TIM_CCMR1_OC1M;
+
+    /* Disable one pulse mode */
+    LED_TIMER->CR1 &= ~TIM_CR1_OPM;
+
+    switch (s->state) {
         case LIGHT_STATE_OFF:
-            // Turn light off
-            TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Inactive;
-            TIM_OC1Init(TIM16, &TIM_OCInitStructure);
+            /* Turn light off */
+            LED_TIMER->CCMR1 |= TIM_ForcedAction_InActive;
             break;
 
         case LIGHT_STATE_STILL:
-            // Turn light on
-            TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Active;
-            TIM_OC1Init(TIM16, &TIM_OCInitStructure);
+            /* Turn light on */
+            LED_TIMER->CCMR1 |= TIM_ForcedAction_Active;
             break;
 
         case LIGHT_STATE_BLINK:
-            // Blink light
-            TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
-            TIM_OCInitStructure.TIM_Pulse = s.duration; // period in ms
-            TIM_OC1Init(TIM16, &TIM_OCInitStructure);
+            /* Blink light */
+            LED_TIMER->CCMR1 |= TIM_OCMode_Toggle;
+            LED_TIMER->CCR1 = s->duration; // period in ms
             break;
 
         case LIGHT_STATE_PULSE:
-            // Blink light
-            TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
-            TIM_OCInitStructure.TIM_Pulse = s.duration; // period in ms
-            TIM_OC1Init(TIM16, &TIM_OCInitStructure);
+            /* Blink light */
+            LED_TIMER->CCMR1 |= TIM_OCMode_Toggle;
+            LED_TIMER->CCR1 = s->duration; // period in ms
+            LED_TIMER->CR1 |= TIM_CR1_OPM;
             break;
 
         default:
-            // Turn light off
+            /* Turn light off */
+            LED_TIMER->CCMR1 |= TIM_ForcedAction_InActive;
             break;
     }
+    /* Enable Timer */
+    LED_TIMER->CR1 |= TIM_CR1_CEN;
 }

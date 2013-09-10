@@ -72,7 +72,7 @@ void startSensors(void)
     NVIC_InitTypeDef NVIC_InitStructure;
 
     /* Time base configuration */
-    TIM_TimeBaseStructure.TIM_Period = 65535;
+    TIM_TimeBaseStructure.TIM_Period = 0xFFFF;
     TIM_TimeBaseStructure.TIM_Prescaler = SPEED_TIMER_PSC - 1;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -98,7 +98,7 @@ void startSensors(void)
     TIM_Cmd(SPEED_TIMER, ENABLE);
 
     /* Time base configuration */
-    TIM_TimeBaseStructure.TIM_Period = 65535;
+    TIM_TimeBaseStructure.TIM_Period = 0xFFFF;
     TIM_TimeBaseStructure.TIM_Prescaler = RPM_TIMER_PSC - 1;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;

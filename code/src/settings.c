@@ -1,5 +1,11 @@
 #include "threads.h"
 
+#define FLASH_PAGE_SIZE         (0x00000400)   /* FLASH Page Size */
+#define SETTINGS_PAGE           (15)
+#define SETTINGS_ADDRESS        (FLASH_BASE+(FLASH_PAGE_SIZE*SETTINGS_PAGE)) /* 0x8003C00 */
+#define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS)   /* Start @ of user Flash area */
+#define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE)   /* End @ of user Flash area */
+
 settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0}, 0};
 const settings_t default_settings = {
     {SETTINGS_FUNCTION_SHIFTER | SETTINGS_FUNCTION_LED,
@@ -17,8 +23,8 @@ void settingsInit()
     settings = readSettings();
 }
 
-settings_t readSettings(void) {
-
+settings_t readSettings(void)
+{
     settings_t tmp_st;
     const settings_t* const st = (settings_t*)SETTINGS_ADDRESS;
 
@@ -34,12 +40,8 @@ settings_t readSettings(void) {
     return tmp_st;
 }
 
-uint8_t writeSettings(settings_t *st) {
-
-    #define FLASH_PAGE_SIZE         ((uint32_t)0x00000400)   /* FLASH Page Size */
-    #define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS)   /* Start @ of user Flash area */
-    #define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE)   /* End @ of user Flash area */
-
+uint8_t writeSettings(settings_t *st)
+{
     uint32_t Address = 0x00;
     uint32_t* tmp_data;
     uint8_t i = 0;
