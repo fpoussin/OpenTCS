@@ -243,7 +243,7 @@ void RPM_TIMER_IRQHandler(void)
             }
 
             /* Frequency computation */
-            sensors.rpm = (STM32_PCLK / RPM_TIMER_PSC) / (Capture*60);
+            sensors.rpm = ((STM32_PCLK / RPM_TIMER_PSC) / Capture) * 60;
 
             TIM1CC4ReadValue1 = TIM1CC4ReadValue2;
             TIM1CC4CaptureNumber = 0;
