@@ -3,12 +3,12 @@
 #define SPEED_TIMER TIM2
 #define SPEED_TIMER_IRQn TIM2_IRQn
 #define SPEED_TIMER_IRQHandler TIM2_IRQHandler
-#define SPEED_TIMER_PSC 120
+#define SPEED_TIMER_PSC (STM32_PCLK/200000) // 200KHz clock, takes 0.327s to wrap
 
 #define RPM_TIMER TIM1
 #define RPM_TIMER_IRQn TIM1_CC_IRQn
 #define RPM_TIMER_IRQHandler TIM1_CC_IRQHandler
-#define RPM_TIMER_PSC 60
+#define RPM_TIMER_PSC (STM32_PCLK/200000) // 200KHz clock, takes 0.327s to wrap
 
 #define POT_I2C I2C1
 #define POT_I2C_ADDR 0x2E /* MCP45X1 ‘0101 11’b + A0 */
@@ -44,9 +44,10 @@
 
 
 sensors_t sensors = {0, 0, 0, 0, 0};
-static uint16_t TIM1CC1ReadValue1, TIM1CC1ReadValue2, TIM1CC1CaptureNumber;
-static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2, TIM2CC3CaptureNumber;
-static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2, TIM2CC4CaptureNumber;
+static uint8_t TIM1CC1CaptureNumber, TIM2CC3CaptureNumber, TIM2CC4CaptureNumber;
+static uint16_t TIM1CC1ReadValue1, TIM1CC1ReadValue2;
+static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2;
+static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2;
 static int32_t accel1 = 0, accel2 = 0;
 static int32_t spd1arr[2] = {0,0}, spd2arr[2] = {0,0};
 static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
@@ -55,6 +56,7 @@ static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
  * Function prototypes.
  */
 
+void getCapture(void);
 void getStrainGauge(void);
 uint8_t setPotGain(uint8_t gain);
 void getSpeedSensors(void);
@@ -63,14 +65,15 @@ void getSpeedSensors(void);
  * Actual functions.
  */
 
-void startSensors(void) {
+void startSensors(void)
+{
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
     TIM_ICInitTypeDef  TIM_ICInitStructure;
     NVIC_InitTypeDef NVIC_InitStructure;
 
     /* Time base configuration */
     TIM_TimeBaseStructure.TIM_Period = 65535;
-    TIM_TimeBaseStructure.TIM_Prescaler = SPEED_TIMER_PSC - 1; // 200KHz clock, takes 0.327s to wrap
+    TIM_TimeBaseStructure.TIM_Prescaler = SPEED_TIMER_PSC - 1;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(SPEED_TIMER, &TIM_TimeBaseStructure);
@@ -85,10 +88,6 @@ void startSensors(void) {
     TIM_ICInitStructure.TIM_Channel = TIM_Channel_4;
     TIM_ICInit(SPEED_TIMER, &TIM_ICInitStructure);
 
-    /* Enable the CC3-4 Interrupt Request */
-    TIM_ITConfig(SPEED_TIMER, TIM_IT_CC3, ENABLE);
-    TIM_ITConfig(SPEED_TIMER, TIM_IT_CC4, ENABLE);
-
     /* Enable the TIM2 global Interrupt */
     NVIC_InitStructure.NVIC_IRQChannel = SPEED_TIMER_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
@@ -100,7 +99,7 @@ void startSensors(void) {
 
     /* Time base configuration */
     TIM_TimeBaseStructure.TIM_Period = 65535;
-    TIM_TimeBaseStructure.TIM_Prescaler = RPM_TIMER_PSC - 1; // 400KHz clock, takes 0.163s to wrap
+    TIM_TimeBaseStructure.TIM_Prescaler = RPM_TIMER_PSC - 1;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(RPM_TIMER, &TIM_TimeBaseStructure);
@@ -112,9 +111,6 @@ void startSensors(void) {
     TIM_ICInitStructure.TIM_ICFilter = 0x10;
     TIM_ICInit(RPM_TIMER, &TIM_ICInitStructure);
 
-    /* Enable the CC1 Interrupt Request */
-    TIM_ITConfig(RPM_TIMER, TIM_IT_CC1, ENABLE);
-
     /* Enable the TIM1 global Interrupt */
     NVIC_InitStructure.NVIC_IRQChannel = RPM_TIMER_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
@@ -125,43 +121,54 @@ void startSensors(void) {
     TIM_Cmd(RPM_TIMER, ENABLE);
 
     i2cInit(POT_I2C);
-//    setPotGain(settings.data.sensor_gain);
+    setPotGain(settings.data.sensor_gain);
 
     serDbg("startSensors Complete\r\n");
 
-    while (true) {
-
+    while (true)
+    {
         /*
          * Almost everything happens within IRQ Handlers.
          */
-
         getStrainGauge();
         getSpeedSensors();
+        getCapture();
         nilThdSleepMilliseconds(100);
     }
+}
+
+void getCapture(void)
+{
+    /* Enable the CC1 Interrupt Request */
+    RPM_TIMER->DIER |= TIM_DIER_CC1IE;
+
+    /* Enable the CC3-4 Interrupt Request */
+    SPEED_TIMER->DIER |= TIM_DIER_CC3IE;
+    SPEED_TIMER->DIER |= TIM_DIER_CC4IE;
 }
 
 uint8_t setPotGain(uint8_t gain)
 {
     uint8_t txdata[2] = {POT_CMD_SET_WIPER | ((gain & 0x80) >> 7), gain & 0x7F};
-    uint8_t rxdata[2];
-    uint8_t pot_val;
+//    uint8_t rxdata[2];
+//    uint8_t pot_val;
 
     if (i2cSendS(POT_I2C, POT_I2C_ADDR, txdata, sizeof(txdata)) != 0)
     {
         /* Handle error */
-
+        return 1;
     }
 
-    if (i2cReceiveS(POT_I2C, POT_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
-    {
-        /* Handle error */
+//    if (i2cReceiveS(POT_I2C, POT_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
+//    {
+//        /* Handle error */
+//        return 1;
+//    }
 
-    }
+//    pot_val = (rxdata[0] & 0x80) | (rxdata[1] & 0x7F);
 
-    pot_val = (rxdata[0] & 0x80) | (rxdata[1] & 0x7F);
-
-    return pot_val;
+//    return pot_val;
+    return 0;
 }
 
 void getStrainGauge(void)
@@ -226,6 +233,9 @@ void RPM_TIMER_IRQHandler(void)
 
             TIM1CC1ReadValue1 = TIM1CC1ReadValue2;
             TIM1CC1CaptureNumber = 0;
+
+            /* Disable CC1 interrupt */
+            RPM_TIMER->DIER &= ~TIM_DIER_CC1IE;
         }
     }
 }
@@ -268,10 +278,13 @@ void SPEED_TIMER_IRQHandler(void)
 
             TIM2CC3ReadValue1 = TIM2CC3ReadValue2;
             TIM2CC3CaptureNumber = 0;
+
+            /* Disable CC3 interrupt */
+            SPEED_TIMER->DIER &= ~TIM_DIER_CC3IE;
         }
     }
 
-    else  if (SPEED_TIMER->SR & TIM_IT_CC4)
+    else if (SPEED_TIMER->SR & TIM_IT_CC4)
     {  /* capture timer */
 
         //clear pending bit
@@ -280,13 +293,13 @@ void SPEED_TIMER_IRQHandler(void)
         if(TIM2CC4CaptureNumber == 0)
         {
             /* Get the Input Capture value */
-            TIM2CC4ReadValue1 = SPEED_TIMER->CCR3;
+            TIM2CC4ReadValue1 = SPEED_TIMER->CCR4;
             TIM2CC4CaptureNumber = 1;
         }
         else if(TIM2CC4CaptureNumber == 1)
         {
             /* Get the Input Capture value */
-            TIM2CC4ReadValue2 = SPEED_TIMER->CCR3;
+            TIM2CC4ReadValue2 = SPEED_TIMER->CCR4;
 
             /* Capture computation */
             if (TIM2CC4ReadValue2 > TIM2CC4ReadValue1)
@@ -305,6 +318,9 @@ void SPEED_TIMER_IRQHandler(void)
 
             TIM2CC4ReadValue1 = TIM2CC4ReadValue2;
             TIM2CC4CaptureNumber = 0;
+
+            /* Disable CC4 interrupt */
+            SPEED_TIMER->DIER &= ~TIM_DIER_CC4IE;
         }
     }
 

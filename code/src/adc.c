@@ -2,7 +2,7 @@
 #include "threads.h"
 
 adc_status_t adc_status = { ADC_STOPPED };
-uint16_t adc_samples[40];
+uint16_t adc_samples[32];
 
 void startAdc(void)
 {

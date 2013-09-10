@@ -95,7 +95,7 @@ struct __adc_status {
 };
 typedef struct __adc_status adc_status_t;
 extern adc_status_t adc_status;
-extern uint16_t adc_samples[40];
+extern uint16_t adc_samples[32];
 
 void startAdc(void);
 
