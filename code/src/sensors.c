@@ -43,12 +43,12 @@
  */
 
 
-sensors_t sensors = {0, 0, 0, 0, 0};
+sensors_t sensors = {0, 0, 0, 0, 0, 0};
 static uint8_t TIM1CC4CaptureNumber, TIM2CC3CaptureNumber, TIM2CC4CaptureNumber;
 static uint16_t TIM1CC4ReadValue1, TIM1CC4ReadValue2;
 static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2;
 static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2;
-static int32_t accel1 = 0, accel2 = 0;
+static int16_t accel1 = 0, accel2 = 0;
 static int32_t spd1arr[2] = {0,0}, spd2arr[2] = {0,0};
 static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
 
@@ -59,7 +59,6 @@ static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
 void getCapture(void);
 void getStrainGauge(void);
 uint8_t setPotGain(uint8_t gain);
-void getSpeedSensors(void);
 
 /*
  * Actual functions.
@@ -132,7 +131,6 @@ void startSensors(void)
          * Almost everything happens within IRQ Handlers.
          */
         getStrainGauge();
-        getSpeedSensors();
         getCapture();
         nilThdSleepMilliseconds(100);
 
@@ -146,6 +144,11 @@ void startSensors(void)
 
         serDbg("RPM: ");
         itoa(sensors.rpm, tmpstr);
+        serDbg(tmpstr);
+        serDbg("\r\n");
+
+        serDbg("Strain gauge: ");
+        itoa(sensors.strain_gauge, tmpstr);
         serDbg(tmpstr);
         serDbg("\r\n");
     }
@@ -198,16 +201,10 @@ void getStrainGauge(void)
     }
 
     strain_gauge /= sizeof(adc_samples)/ADC_CHANNELS;
+    sensors.strain_gauge = strain_gauge;
 
     /* Returns true is strain gauge voltage exceeds threshold. */
     sensors.shifting = (strain_gauge >= settings.data.sensor_threshold);
-}
-
-void getSpeedSensors(void)
-{
-    // Fastest wheel speed in Hertz
-    if (spd1arr[0] >= spd2arr[0]) sensors.spd = spd1arr[0];
-    else sensors.spd = spd2arr[0];
 }
 
 
@@ -356,14 +353,25 @@ void SPEED_TIMER_IRQHandler(void)
         accel2 = (spd2arr[0] - spd2arr[1]);
     }
 
-
     // Fastest wheel speed in Hertz
-    if (spd1arr[0] >= spd2arr[0]) sensors.spd = spd1arr[0];
-    else  sensors.spd = spd2arr[0];
+    if (spd1arr[0] >= spd2arr[0])
+    {
+        sensors.spd = spd1arr[0];
+    }
+    else
+    {
+        sensors.spd = spd2arr[0];
+    }
 
     // Fastest wheel accel
-    if (accel1 >= accel2) sensors.accel = accel1;
-    else  sensors.accel = accel2;
+    if (accel1 >= accel2)
+    {
+        sensors.accel = accel1;
+    }
+    else
+    {
+        sensors.accel = accel2;
+    }
 
     if (sensors.spd <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
     {

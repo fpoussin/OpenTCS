@@ -201,7 +201,6 @@ uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
     {
 //        if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
 //        {
-//            nilSemReset(&usart1_semS, 1);
 //            return 1;
 //        }
 

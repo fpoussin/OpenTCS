@@ -143,6 +143,7 @@ struct __sensors {
     uint16_t rpm;
     uint16_t spd;
     uint16_t accel;
+    uint16_t strain_gauge;
 };
 typedef struct __sensors sensors_t;
 extern sensors_t sensors;

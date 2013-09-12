@@ -23,7 +23,6 @@ NIL_THREAD(Thread0, arg)
         RCC->CSR |= RCC_CSR_RMVF;
     }
 
-
     /* WWDG clock counter = (PCLK1 (48MHz)/4096)/8 = 1464Hz (~683 us)  */
     WWDG_SetPrescaler(WWDG_Prescaler_8);
 
