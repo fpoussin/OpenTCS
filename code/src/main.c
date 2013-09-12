@@ -38,7 +38,8 @@ NIL_THREAD(Thread0, arg)
     */
     WWDG_Enable(127);
     serDbg("WWDG Started\r\n");
-    while (true) {
+    while (true)
+    {
         nilThdSleepMilliseconds(25);
         gpioTogglePad(GPIOC, GPIOC_LED3); /* Watchdog heartbeat */
         WWDG_SetCounter(127);
@@ -52,10 +53,7 @@ NIL_WORKING_AREA(waThread1, 128);
 NIL_THREAD(Thread1, arg)
 {
     (void)arg;
-    while (true)
-    {
-        startLight();
-    }
+    startLight();
 }
 
 /*
@@ -65,9 +63,7 @@ NIL_WORKING_AREA(waThread2, 256);
 NIL_THREAD(Thread2, arg)
 {
     (void)arg;
-    while (true) {
-        startDisplay();
-    }
+    startDisplay();
 }
 
 /*
@@ -77,9 +73,7 @@ NIL_WORKING_AREA(waThread3, 128);
 NIL_THREAD(Thread3, arg)
 {
     (void)arg;
-    while (true) {
-        startIgnition();
-    }
+     startIgnition();
 }
 
 /*
@@ -90,11 +84,18 @@ NIL_THREAD(Thread4, arg)
 {
     (void)arg;
     startAdc(); /* ADC runs in continuous mode with DMA */
-    while (true) {
-        startSensors();
-    }
+    startSensors();
 }
 
+///*
+// * Thread 5.
+// */
+//NIL_WORKING_AREA(waThread5, 128);
+//NIL_THREAD(Thread5, arg)
+//{
+//    (void)arg;
+//    startControl();
+//}
 
 /*
  * Threads static table, one entry per thread. The number of entries must
@@ -106,6 +107,7 @@ NIL_THREADS_TABLE_BEGIN()
     NIL_THREADS_TABLE_ENTRY("Display", Thread2, NULL, waThread2, sizeof(waThread2))
     NIL_THREADS_TABLE_ENTRY("Ignition", Thread3, NULL, waThread3, sizeof(waThread3))
     NIL_THREADS_TABLE_ENTRY("Sensors", Thread4, NULL, waThread4, sizeof(waThread4))
+//    NIL_THREADS_TABLE_ENTRY("Control", Thread5, NULL, waThread5, sizeof(waThread5))
 NIL_THREADS_TABLE_END()
 
 /*

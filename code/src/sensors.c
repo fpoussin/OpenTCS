@@ -12,7 +12,6 @@
 
 #define POT_I2C I2C1
 #define POT_I2C_ADDR 0x2E /* MCP45X1 ‘0101 11’b + A0 */
-
 #define POT_CMD_SET_WIPER 0x40
 
 /*  MCP454X Digital pot
@@ -42,8 +41,36 @@
  *
  */
 
+#define LIS331_I2C I2C1
+#define LIS331_I2C_ADDR 25
+#define LIS331_SCALE 8192
+#define LIS331_SHIFT(x) (x>>12)
 
-sensors_t sensors = {0, 0, 0, 0, 0, 0};
+#define LR_CTRL_REG1 0x20
+#define LR_CTRL_REG2 0x21
+#define LR_CTRL_REG3 0x22
+#define LR_CTRL_REG4 0x23
+#define LR_CTRL_REG5 0x24
+#define LR_HP_FILTER_RESET 0x25
+#define LR_REFERENCE 0x26
+#define LR_STATUS_REG 0x27
+#define LR_OUT_X_L 0x28
+#define LR_OUT_X_H 0x29
+#define LR_OUT_Y_L 0x2A
+#define LR_OUT_Y_H 0x2B
+#define LR_OUT_Z_L 0x2C
+#define LR_OUT_Z_H 0x2D
+#define LR_INT1_CFG 0x30
+#define LR_INT1_SOURCE 0x31
+#define LR_INT1_THS 0x32
+#define LR_INT1_DURATION 0x33
+#define LR_INT2_CFG 0x34
+#define LR_INT2_SOURCE 0x35
+#define LR_INT2_THS 0x36
+#define LR_INT2_DURATION 0x37
+
+
+sensors_t sensors = {0, 0, 0};
 static uint8_t TIM1CC4CaptureNumber, TIM2CC3CaptureNumber, TIM2CC4CaptureNumber;
 static uint16_t TIM1CC4ReadValue1, TIM1CC4ReadValue2;
 static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2;
@@ -51,6 +78,11 @@ static uint16_t TIM2CC4ReadValue1, TIM2CC4ReadValue2;
 static int16_t accel1 = 0, accel2 = 0;
 static int32_t spd1arr[2] = {0,0}, spd2arr[2] = {0,0};
 static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
+static struct {
+    int16_t x;
+    int16_t y;
+    int16_t z;
+} lis_data;
 
 /*
  * Function prototypes.
@@ -59,6 +91,8 @@ static int8_t spd1arr_pos = 0, spd2arr_pos = 0;
 void getCapture(void);
 void getStrainGauge(void);
 uint8_t setPotGain(uint8_t gain);
+uint8_t setupLIS331(void);
+uint8_t getLISValues(void);
 
 /*
  * Actual functions.
@@ -203,10 +237,77 @@ void getStrainGauge(void)
     strain_gauge /= sizeof(adc_samples)/ADC_CHANNELS;
     sensors.strain_gauge = strain_gauge;
 
-    /* Returns true is strain gauge voltage exceeds threshold. */
-    sensors.shifting = (strain_gauge >= settings.data.sensor_threshold);
+    /* Returns true if strain gauge voltage exceeds threshold. */
+    status.shifting = (strain_gauge >= settings.data.sensor_threshold);
 }
 
+uint8_t setupLIS331(void)
+{
+    uint8_t txdata[2] = {LR_CTRL_REG1, 0x3F};
+
+    /* Power up, set output rate to 1000Hz, and enable all 3 axis. */
+    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, txdata, 2) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+
+    /* Set default scale to 4g */
+    txdata[0] = LR_CTRL_REG4;
+    txdata[1] = 0x10;
+    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, txdata, 2) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    return 0;
+}
+
+uint8_t getLISValues(void)
+{
+    uint8_t txdata = LR_OUT_X_H;
+    uint8_t rxdata[2];
+
+    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, &txdata, 1) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    if (i2cReceiveS(LIS331_I2C, LIS331_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    lis_data.x = ((int16_t) rxdata[0]<<8)+((int16_t) rxdata[1]);
+
+    txdata = LR_OUT_Y_H;
+    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, &txdata, 1) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    if (i2cReceiveS(LIS331_I2C, LIS331_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    lis_data.y = ((int16_t) rxdata[0]<<8)+((int16_t) rxdata[1]);
+
+    txdata = LR_OUT_Z_H;
+    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, &txdata, 1) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    if (i2cReceiveS(LIS331_I2C, LIS331_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
+    {
+        /* Handle error */
+        return 1;
+    }
+    lis_data.z = ((int16_t) rxdata[0]<<8)+((int16_t) rxdata[1]);
+
+    return 0;
+}
 
 void RPM_TIMER_IRQHandler(void)
 {
@@ -356,28 +457,30 @@ void SPEED_TIMER_IRQHandler(void)
     // Fastest wheel speed in Hertz
     if (spd1arr[0] >= spd2arr[0])
     {
-        sensors.spd = spd1arr[0];
+        sensors.speed = spd1arr[0];
     }
     else
     {
-        sensors.spd = spd2arr[0];
+        sensors.speed = spd2arr[0];
     }
 
     // Fastest wheel accel
     if (accel1 >= accel2)
     {
-        sensors.accel = accel1;
+        status.acceleration = accel1;
     }
     else
     {
-        sensors.accel = accel2;
+        status.acceleration = accel2;
     }
 
-    if (sensors.spd <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
+    if (sensors.speed <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
     {
-        sensors.slipping_pct = 0;
+        status.slipping = 0;
+        status.slipping_pct = 0;
         return;
     }
 
-    sensors.slipping_pct = ((accel2 - accel1) * 100) / accel1;
+    status.slipping = 1;
+    status.slipping_pct = ((accel2 - accel1) * 1000) / accel1;
 }

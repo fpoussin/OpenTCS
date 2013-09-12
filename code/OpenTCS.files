@@ -97,3 +97,4 @@ src/settings.c
 src/menu.c
 inc/menu.h
 src/communications.c
+src/control.c

@@ -48,11 +48,11 @@ void startLight(void)
 
             previous_settings = light_settings;
 
-            if (sensors.slipping_pct >= settings.data.slip_threshold)
+            if (status.slipping_pct >= settings.data.slip_threshold)
             {
                 light_settings.state = LIGHT_STATE_STILL;
             }
-            else if (sensors.shifting)
+            else if (status.shifting)
             {
                 light_settings.state = LIGHT_STATE_PULSE;
             }

@@ -67,6 +67,21 @@ uint8_t writeSettings(settings_t* st);
 
 /* End of misc functions */
 
+
+/* CONTROL */
+
+struct __status {
+    uint8_t shifting:1;
+    uint8_t slipping:1;
+    int16_t slipping_pct;
+    uint8_t acceleration;
+};
+typedef struct __status status_t;
+extern status_t status;
+void startControl(void) __attribute__ ((noreturn));
+
+/* End of CONTROL */
+
 /* Light */
 #define LIGHT_STATE_OFF 0
 #define LIGHT_STATE_STILL 1
@@ -138,11 +153,8 @@ void startDisplay(void) __attribute__ ((noreturn));
 #define SENSORS_ON 1
 
 struct __sensors {
-    uint8_t shifting;
-    int8_t slipping_pct;
     uint16_t rpm;
-    uint16_t spd;
-    uint16_t accel;
+    uint16_t speed;
     uint16_t strain_gauge;
 };
 typedef struct __sensors sensors_t;
