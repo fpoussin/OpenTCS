@@ -174,6 +174,11 @@ uint8_t usartSendI(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
         {
             return 1;
         }
+        if (len > USART_TXBUF_SIZE)
+        {
+            len = USART_TXBUF_SIZE;
+        }
+
         /* Copy data to usart tx buffer */
         memcpy(usart_txbuf, buffer, len);
 
@@ -186,7 +191,7 @@ uint8_t usartSendI(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
         DMA_CHANNEL_USART1_TX->CMAR = (uint32_t)usart_txbuf;
         DMA_CHANNEL_USART1_TX->CNDTR = len;
 
-        /* Start DMA1_Channel3 */
+        /* Start DMA1_Channel4 */
         DMA_CHANNEL_USART1_TX->CCR |= DMA_CCR_EN;
 
         nilSemSignal(&usart1_semI);
@@ -199,11 +204,12 @@ uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
     uint8_t ret = 1;
     if (USARTx == USART1)
     {
-//        if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
-//        {
-//            return 1;
-//        }
+        if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
+        {
+            return 1;
+        }
 
+/* DMA */
 //        if((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET)
 //        {
 //            DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
@@ -212,14 +218,10 @@ uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
 //        ret = usartSendI(USARTx, buffer, len);
 
 //        /* Wait for transfer to finish  */
-//        while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) nilThdSleepMilliseconds(10);
+//        while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) {};
 //        DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
-//        nilSemSignal(&usart1_semS);
+/* Manual */
 
-        if (nilSemWaitTimeout(&usart1_semS, MS2ST(USART_TIMEOUT)) != NIL_MSG_OK)
-        {
-            return 1;
-        }
         while (len--) {
             USARTx->TDR = (*buffer++ & (uint16_t)0x01FF);
             while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);
