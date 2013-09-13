@@ -133,13 +133,17 @@ void usartInit(USART_TypeDef* USARTx)
     USART_Init(USARTx, &USART_InitStructure);
 
     /* DMA channel Tx of USART Configuration */
+    DMA_DeInit(DMA_CHANNEL_USART1_TX);
     DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USARTx->TDR;
     DMA_InitStructure.DMA_BufferSize = 0;
     DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)usart_txbuf;
     DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
-    DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
+    DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
     DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
     DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+    DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
     DMA_Init(DMA_CHANNEL_USART1_TX, &DMA_InitStructure);
 
     /* Enable the USART Tx DMA request */
@@ -151,9 +155,12 @@ void usartInit(USART_TypeDef* USARTx)
     DMA_InitStructure.DMA_BufferSize = (uint16_t)sizeof(usart_rxbuf);
     DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)usart_rxbuf;
     DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-    DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
+    DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
     DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
     DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+    DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
     DMA_Init(DMA_CHANNEL_USART1_RX, &DMA_InitStructure);
 
     /* Enable the USART Rx DMA request */
@@ -220,11 +227,11 @@ uint8_t usartSendS(USART_TypeDef* USARTx, const char* buffer, uint16_t len)
 //        /* Wait for transfer to finish  */
 //        while((DMA1->ISR & DMA_TCIF_USART1_TX) == RESET) {};
 //        DMA1->IFCR |= DMA_CTCIF_USART1_TX; /* Clear transfer complete flag */
-/* Manual */
 
+/* Manual */
         while (len--) {
             USARTx->TDR = (*buffer++ & (uint16_t)0x01FF);
-            while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);
+            while ((USARTx->ISR & USART_ISR_TXE) == RESET);
         }
         nilSemSignal(&usart1_semS);
     }
