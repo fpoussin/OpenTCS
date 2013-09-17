@@ -2,8 +2,10 @@ inc
 lib/CMSIS/Device/ST/STM32F0xx/Include
 lib/CMSIS/Include
 lib/STM32F0xx_StdPeriph_Driver/inc
-nil/os/kernel
-nil/os/ports/common/ARMCMx
-nil/os/ports/common/ARMCMx/CMSIS/include
-nil/os/ports/GCC/ARMCM0
-nil/os/ports/GCC/ARMCM0/STM32F0xx
+os/hal/include
+os/nil/include
+os/kernel
+os/ports/common/ARMCMx
+os/ports/common/ARMCMx/CMSIS/include
+os/ports/GCC/ARMCM0
+os/ports/GCC/ARMCM0/STM32F0xx
