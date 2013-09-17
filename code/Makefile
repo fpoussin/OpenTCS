@@ -85,7 +85,6 @@ LDSCRIPT= $(PORTLD)/STM32F050x4.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       $(TESTSRC) \
        $(HALSRC) \
        $(OSALSRC) \
        $(PLATFORMSRC) \
