@@ -170,7 +170,7 @@ void startSensors(void)
          */
         getAnalogSensors();
         getCapture();
-        nilThdSleepMilliseconds(100);
+        chThdSleepMilliseconds(100);
 
 //        serDbg("Accel 1/2: ");
 //        itoa(accel1, tmpstr);

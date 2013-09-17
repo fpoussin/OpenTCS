@@ -1,20 +1,17 @@
 /*
-    Nil RTOS - Copyright (C) 2012 Giovanni Di Sirio.
+    ChibiOS/NIL - Copyright (C) 2013 Giovanni Di Sirio
 
-    This file is part of Nil RTOS.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-    Nil RTOS is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+        http://www.apache.org/licenses/LICENSE-2.0
 
-    Nil RTOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 */
 
 /**
@@ -31,6 +28,13 @@
 #ifndef _NILCONF_H_
 #define _NILCONF_H_
 
+/*===========================================================================*/
+/**
+ * @name Kernel parameters and options
+ * @{
+ */
+/*===========================================================================*/
+
 /**
  * @brief   Number of user threads in the application.
  * @note    This number is not inclusive of the idle thread which is
@@ -38,10 +42,25 @@
  */
 #define NIL_CFG_NUM_THREADS                 5
 
+/** @} */
+
+/*===========================================================================*/
+/**
+ * @name System timer settings
+ * @{
+ */
+/*===========================================================================*/
+
+/**
+ * @brief   System time counter resolution.
+ * @note    Allowed values are 16 or 32 bits.
+ */
+#define NIL_CFG_ST_RESOLUTION               16
+
 /**
  * @brief   System tick frequency.
  */
-#define NIL_CFG_FREQUENCY                   5000
+#define NIL_CFG_ST_FREQUENCY                5000
 
 /**
  * @brief   Time delta constant for the tick-less mode.
@@ -51,12 +70,52 @@
  *          The value one is not valid, timeouts are rounded up to
  *          this value.
  */
-#define NIL_CFG_TIMEDELTA                   0
+#define NIL_CFG_ST_TIMEDELTA                0
+
+/** @} */
+
+/*===========================================================================*/
+/**
+ * @name Subsystem options
+ * @{
+ */
+/*===========================================================================*/
+
+/**
+ * @brief   Events Flags APIs.
+ * @details If enabled then the event flags APIs are included in the kernel.
+ *
+ * @note    The default is @p TRUE.
+ */
+#define NIL_CFG_USE_EVENTS                  TRUE
+
+/** @} */
+
+/*===========================================================================*/
+/**
+ * @name Debug options
+ * @{
+ */
+/*===========================================================================*/
 
 /**
  * @brief   System assertions.
  */
 #define NIL_CFG_ENABLE_ASSERTS              FALSE
+
+/**
+ * @brief   Stack check.
+ */
+#define NIL_CFG_ENABLE_STACK_CHECK          FALSE
+
+/** @} */
+
+/*===========================================================================*/
+/**
+ * @name Kernel hooks
+ * @{
+ */
+/*===========================================================================*/
 
 /**
  * @brief   Threads descriptor structure extension.
@@ -89,6 +148,8 @@
  */
 #define NIL_CFG_IDLE_LEAVE_HOOK() {                                         \
 }
+
+/** @} */
 
 /*===========================================================================*/
 /* Port-specific settings (override port settings defaulted in nilcore.h).   */

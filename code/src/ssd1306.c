@@ -46,10 +46,10 @@
 
 inline void ssd1306SendByte(uint8_t byte);
 
-#define CMD(c)        do { gpioClearPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
+#define CMD(c)        do { palClearPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
                            ssd1306SendByte( c ); \
                          } while (0);
-#define DATA(c)       do { gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
+#define DATA(c)       do { palSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN); \
                            ssd1306SendByte( c ); \
                          } while (0);
 
@@ -88,10 +88,10 @@ void ssd1306Init(uint8_t vccstate)
   spiInit(SSD1306_SPI);
 
   // Reset the LCD
-  gpioClearPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
-  nilThdSleepMilliseconds(10);
-  gpioSetPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
-  nilThdSleepMilliseconds(10);
+  palClearPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
+  chThdSleepMilliseconds(10);
+  palSetPad(SSD1306_RST_PORT, SSD1306_RST_PIN);
+  chThdSleepMilliseconds(10);
 
   // Initialisation sequence
   CMD(SSD1306_DISPLAYOFF);                    // 0xAE
@@ -335,7 +335,7 @@ void ssd1306Refresh(void)
   CMD(SSD1306_SETHIGHCOLUMN | 0x0);  // hi col = 0
   CMD(SSD1306_SETSTARTLINE | 0x0); // line #0
 
-  gpioSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN);
+  palSetPad( SSD1306_DC_PORT, SSD1306_DC_PIN);
 
   spiSendS(SSD1306_SPI, buffer, 1024);
 }
@@ -507,10 +507,10 @@ void SSD1306_TIMER_IRQHandler(void)
         CMD(SSD1306_SETHIGHCOLUMN | 0x0);  // hi col = 0
         CMD(SSD1306_SETSTARTLINE | 0x0); // line #0
 
-        gpioSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
+        palSetPad(SSD1306_DC_PORT, SSD1306_DC_PIN);
 
         spiSendI(SSD1306_SPI, buffer, 1024);
 
-        gpioTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
+        palTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
     }
 }

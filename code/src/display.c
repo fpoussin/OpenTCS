@@ -24,11 +24,11 @@ void startDisplay(void) {
     ssd1306Init(SSD1306_SWITCHCAPVCC);
     ssd1306TurnOn();
     display.state = DISPLAY_ON;
-    gpioSetPad(GPIOC, GPIOC_LED4);
+    palSetPad(GPIOC, GPIOC_LED4);
 
     ssd1306DrawString(40, 20, "OpenTCS", Font_System7x8);
-    nilThdSleepMilliseconds(100); // Fails
-    gpioClearPad(GPIOC, GPIOC_LED4);
+    chThdSleepMilliseconds(100); // Fails
+    palClearPad(GPIOC, GPIOC_LED4);
 
     serDbg("startDisplay Complete\r\n");
 
@@ -40,8 +40,8 @@ void startDisplay(void) {
 
         while (!BUTTON_SEL) /* Wait until the select button is pressed */
         {
-            gpioTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
-            nilThdSleepMilliseconds(250);
+            palTogglePad(GPIOC, GPIOC_LED4); /* Display heartbeat */
+            chThdSleepMilliseconds(250);
         }
         serDbg("Display ON\r\n");
         ssd1306ClearScreen();

@@ -5,7 +5,7 @@
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -Os -ggdb3 -fomit-frame-pointer
+  USE_OPT = -Os -ggdb -fomit-frame-pointer -falign-functions=16
 endif
 
 # C specific options here (added to USE_OPT).
@@ -23,9 +23,9 @@ ifeq ($(USE_LINK_GC),)
   USE_LINK_GC = yes
 endif
 
-# Enable this if you want to use link time optimisation
+# Enable this if you want link time optimizations (LTO)
 ifeq ($(USE_LTO),)
-  USE_LTO = no
+  USE_LTO = yes
 endif
 
 # If enabled, this option allows to compile the application in THUMB mode.
@@ -46,9 +46,16 @@ endif
 # Architecture or project specific options
 #
 
-# Enable this if you really want to use the STM FWLib.
-ifeq ($(USE_FWLIB),)
-  USE_FWLIB = yes
+# Stack size to be allocated to the Cortex-M process stack. This stack is
+# the stack used by the main() thread.
+ifeq ($(USE_PROCESS_STACKSIZE),)
+  USE_PROCESS_STACKSIZE = 0x100
+endif
+
+# Stack size to the allocated to the Cortex-M main/exceptions stack. This
+# stack is used for processing interrupts and exceptions.
+ifeq ($(USE_EXCEPTIONS_STACKSIZE),)
+  USE_EXCEPTIONS_STACKSIZE = 0x400
 endif
 
 #
@@ -60,12 +67,16 @@ endif
 #
 
 # Define project name here
-PROJECT = opentcs
+PROJECT = OpenTCS
 
 # Imported source files and paths
-NILRTOS = nil
-include $(NILRTOS)/os/ports/GCC/ARMCM0/STM32F0xx/port.mk
-include $(NILRTOS)/os/kernel/kernel.mk
+CHIBIOS = .
+include $(CHIBIOS)/os/hal/hal.mk
+include $(CHIBIOS)/os/hal/ports/STM32F0xx/platform.mk
+include $(CHIBIOS)/os/nil/nil.mk
+include $(CHIBIOS)/os/nil/osal/osal.mk
+include $(CHIBIOS)/os/nil/ports/ARMCMx/compilers/GCC/mk/port_stm32f0xx.mk
+#include $(CHIBIOS)/test/test.mk
 
 # Define linker script file here
 LDSCRIPT= $(PORTLD)/STM32F050x4.ld
@@ -74,11 +85,16 @@ LDSCRIPT= $(PORTLD)/STM32F050x4.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       src/hwinit.c src/main.c \
-       src/light.c src/ignition.c src/adc.c src/display.c \
+       $(TESTSRC) \
+       $(HALSRC) \
+       $(OSALSRC) \
+       $(PLATFORMSRC) \
+       src/main.c src/board.c \
+       src/light.c src/ignition.c src/adc_start.c src/display.c \
        src/ssd1306.c src/smallfonts.c src/sensors.c \
        src/settings.c src/menu.c src/communications.c \
        src/control.c
+
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -107,7 +123,9 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(PORTASM)
 
-INCDIR = $(PORTINC) $(KERNINC) inc lib lib/STM32F0xx_StdPeriph_Driver/inc
+INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
+         $(HALINC) $(OSALINC) $(PLATFORMINC) $(BOARDINC) \
+         $(CHIBIOS)/os/various inc lib/STM32F0xx_StdPeriph_Driver/inc/ lib
 
 #
 # Project, sources and paths
@@ -131,9 +149,9 @@ LD   = $(TRGT)gcc
 CP   = $(TRGT)objcopy
 AS   = $(TRGT)gcc -x assembler-with-cpp
 OD   = $(TRGT)objdump
+SZ   = $(TRGT)size
 HEX  = $(CP) -O ihex
 BIN  = $(CP) -O binary
-SIZE = $(TRGT)size
 
 # ARM-specific options here
 AOPT =
@@ -152,29 +170,6 @@ CPPWARN = -Wall -Wextra
 ##############################################################################
 
 ##############################################################################
-# Start of default section
-#
-
-# List all default C defines here, like -D_DEBUG=1
-DDEFS =
-
-# List all default ASM defines here, like -D_DEBUG=1
-DADEFS =
-
-# List all default directories to look for include files here
-DINCDIR =
-
-# List the default directory to look for the libraries here
-DLIBDIR = lib
-
-# List all default libraries here
-DLIBS = -lstm32f0
-
-#
-# End of default section
-##############################################################################
-
-##############################################################################
 # Start of user section
 #
 
@@ -188,20 +183,14 @@ UADEFS =
 UINCDIR =
 
 # List the user directory to look for the libraries here
-ULIBDIR =
+ULIBDIR = lib
 
 # List all user libraries here
-ULIBS =
+ULIBS = -lstm32f0
 
 #
 # End of user defines
 ##############################################################################
 
-ifeq ($(USE_FWLIB),yes)
-  #include $(NILRTOS)/ext/stm32lib/stm32lib.mk
-  #CSRC += $(STM32SRC)
-  #INCDIR += $(STM32INC)
-  USE_OPT += -DUSE_STDPERIPH_DRIVER
-endif
-
-include $(NILRTOS)/os/ports/GCC/ARMCM0/rules.mk
+RULESPATH = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC
+include $(RULESPATH)/rules.mk

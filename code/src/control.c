@@ -13,6 +13,6 @@ void startControl(void)
 
 
 
-        nilThdSleepMicroseconds(50);
+        chThdSleepMicroseconds(50);
     }
 }

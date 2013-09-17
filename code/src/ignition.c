@@ -42,7 +42,7 @@ void startIgnition(void) {
 
     while (true) {
 
-        nilThdSleepMilliseconds(10);
+        chThdSleepMilliseconds(10);
 
         /* IGN_TIMER disable counter */
         IGN_TIMER->CR1 &= ~TIM_CR1_CEN;

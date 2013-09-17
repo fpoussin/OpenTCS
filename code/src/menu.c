@@ -75,7 +75,7 @@ void openMenu(menuStruct_t *menuToShow)
 {
  int8_t selectedIndex = 0;               //Current selected item
 
- nilThdSleepMilliseconds(50);
+ chThdSleepMilliseconds(50);
  drawMenu(menuToShow, selectedIndex);
 
    do {
@@ -113,7 +113,7 @@ void openMenu(menuStruct_t *menuToShow)
         }
         drawMenu(menuToShow, selectedIndex);
      }
-     nilThdSleepMilliseconds(250);
+     chThdSleepMilliseconds(250);
   } while (true);
 
  return;

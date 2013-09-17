@@ -1,5 +1,7 @@
+#include "hal.h"
 #include "nil.h"
-#include "hwinit.h"
+#include "stm32f0xx_conf.h"
+//#include "hwinit.h"
 #include "threads.h"
 
 /*
@@ -10,8 +12,8 @@
 /*
  * Thread 0.
  */
-NIL_WORKING_AREA(waThread0, 64);
-NIL_THREAD(Thread0, arg)
+THD_WORKING_AREA(waThread0, 64);
+THD_FUNCTION(Thread0, arg)
 {
     (void)arg;
     if (RCC->CSR & RCC_CSR_WWDGRSTF)
@@ -40,8 +42,8 @@ NIL_THREAD(Thread0, arg)
     serDbg("WWDG Started\r\n");
     while (true)
     {
-        nilThdSleepMilliseconds(25);
-        gpioTogglePad(GPIOC, GPIOC_LED3); /* Watchdog heartbeat */
+        chThdSleepMilliseconds(25);
+        palTogglePad(GPIOC, GPIOC_LED3); /* Watchdog heartbeat */
         WWDG_SetCounter(127);
     }
 }
@@ -49,8 +51,8 @@ NIL_THREAD(Thread0, arg)
 /*
  * Thread 1.
  */
-NIL_WORKING_AREA(waThread1, 128);
-NIL_THREAD(Thread1, arg)
+THD_WORKING_AREA(waThread1, 128);
+THD_FUNCTION(Thread1, arg)
 {
     (void)arg;
     startLight();
@@ -59,8 +61,8 @@ NIL_THREAD(Thread1, arg)
 /*
  * Thread 2.
  */
-NIL_WORKING_AREA(waThread2, 256);
-NIL_THREAD(Thread2, arg)
+THD_WORKING_AREA(waThread2, 256);
+THD_FUNCTION(Thread2, arg)
 {
     (void)arg;
     startDisplay();
@@ -69,8 +71,8 @@ NIL_THREAD(Thread2, arg)
 /*
  * Thread 3.
  */
-NIL_WORKING_AREA(waThread3, 128);
-NIL_THREAD(Thread3, arg)
+THD_WORKING_AREA(waThread3, 128);
+THD_FUNCTION(Thread3, arg)
 {
     (void)arg;
      startIgnition();
@@ -79,8 +81,8 @@ NIL_THREAD(Thread3, arg)
 /*
  * Thread 4.
  */
-NIL_WORKING_AREA(waThread4, 128);
-NIL_THREAD(Thread4, arg)
+THD_WORKING_AREA(waThread4, 128);
+THD_FUNCTION(Thread4, arg)
 {
     (void)arg;
     startAdc(); /* ADC runs in continuous mode with DMA */
@@ -91,7 +93,7 @@ NIL_THREAD(Thread4, arg)
 // * Thread 5.
 // */
 //NIL_WORKING_AREA(waThread5, 128);
-//NIL_THREAD(Thread5, arg)
+//THD_FUNCTION(Thread5, arg)
 //{
 //    (void)arg;
 //    startControl();
@@ -101,14 +103,14 @@ NIL_THREAD(Thread4, arg)
  * Threads static table, one entry per thread. The number of entries must
  * match NIL_CFG_NUM_THREADS.
  */
-NIL_THREADS_TABLE_BEGIN()
-    NIL_THREADS_TABLE_ENTRY("Watchdog", Thread0, NULL, waThread0, sizeof(waThread0))
-    NIL_THREADS_TABLE_ENTRY("Light", Thread1, NULL, waThread1, sizeof(waThread1))
-    NIL_THREADS_TABLE_ENTRY("Display", Thread2, NULL, waThread2, sizeof(waThread2))
-    NIL_THREADS_TABLE_ENTRY("Ignition", Thread3, NULL, waThread3, sizeof(waThread3))
-    NIL_THREADS_TABLE_ENTRY("Sensors", Thread4, NULL, waThread4, sizeof(waThread4))
-//    NIL_THREADS_TABLE_ENTRY("Control", Thread5, NULL, waThread5, sizeof(waThread5))
-NIL_THREADS_TABLE_END()
+THD_TABLE_BEGIN
+    THD_TABLE_ENTRY(waThread0, "Watchdog", Thread0, NULL)
+    THD_TABLE_ENTRY(waThread1, "Light", Thread1, NULL)
+    THD_TABLE_ENTRY(waThread2, "Display", Thread2, NULL)
+    THD_TABLE_ENTRY(waThread3, "Ignition", Thread3, NULL)
+    THD_TABLE_ENTRY(waThread4, "Sensors", Thread4, NULL)
+//    THD_TABLE_ENTRY(waThread5, "Control", Thread5, NULL)
+THD_TABLE_END
 
 /*
  * Application entry point.
@@ -120,10 +122,11 @@ int main(void)
     * - HW specific initialization.
     * - Nil RTOS initialization.
     */
-    hwInit();
+//    hwInit();
+    halInit();
     settingsInit();
     usartInit(DBG_USART);
-    nilSysInit();
+    chSysInit();
 
     /* This is now the idle thread loop, you may perform here a low priority
      task but you must never try to sleep or wait in this loop.*/

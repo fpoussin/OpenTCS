@@ -1,8 +1,12 @@
 #ifndef _THREADS_H_
 #define _THREADS_H_
 
+#include "hal.h"
 #include "nil.h"
-#include "hwinit.h"
+//#include "hwinit.h"
+#include "stm32f0xx_conf.h"
+
+#define DBG_USART USART1
 
 /*
  * This file contains all the function prototypes

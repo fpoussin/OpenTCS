@@ -37,7 +37,7 @@ void startLight(void)
 
     while (true)
     {
-        nilThdSleepMilliseconds(75);
+        chThdSleepMilliseconds(75);
 
         if (settings.data.functions & SETTINGS_FUNCTION_LED)
         {

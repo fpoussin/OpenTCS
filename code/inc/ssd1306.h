@@ -37,7 +37,7 @@
 #define __SSD1306_H__
 
 #include "nil.h"
-#include "hwinit.h"
+//#include "hwinit.h"
 #include "smallfonts.h"
 #include "threads.h"
 
