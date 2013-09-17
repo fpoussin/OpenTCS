@@ -69,8 +69,12 @@
 #define LR_INT2_THS 0x36
 #define LR_INT2_DURATION 0x37
 
+#define ADC_CHN_STRAIN 0
+#define ADC_CHN_TC_SW 1
+#define ADC_CHN_VBAT 2
 
-sensors_t sensors = {0, 0, 0};
+
+sensors_t sensors = {0, 0, 0, 0, 0};
 static uint8_t TIM1CC4CaptureNumber, TIM2CC3CaptureNumber, TIM2CC4CaptureNumber;
 static uint16_t TIM1CC4ReadValue1, TIM1CC4ReadValue2;
 static uint16_t TIM2CC3ReadValue1, TIM2CC3ReadValue2;
@@ -89,7 +93,7 @@ static struct {
  */
 
 void getCapture(void);
-void getStrainGauge(void);
+void getAnalogSensors(void);
 uint8_t setPotGain(uint8_t gain);
 uint8_t setupLIS331(void);
 uint8_t getLISValues(void);
@@ -164,7 +168,7 @@ void startSensors(void)
         /*
          * Almost everything happens within IRQ Handlers.
          */
-        getStrainGauge();
+        getAnalogSensors();
         getCapture();
         nilThdSleepMilliseconds(100);
 
@@ -222,22 +226,33 @@ uint8_t setPotGain(uint8_t gain)
     return 0;
 }
 
-void getStrainGauge(void)
+void getAnalogSensors(void)
 {
     uint32_t strain_gauge = 0;
-    uint8_t nb_samples;
+    uint32_t tc_switch = 0;
+    uint32_t vbat = 0;
+    uint8_t i;
 
-    nb_samples = sizeof(adc_samples)/ADC_CHANNELS;
+    const uint8_t nb_samples = sizeof(adc_samples)/ADC_CHANNELS; /* 8 */
+    i = 0;
 
-    while (nb_samples)
+    while (i <= (sizeof(adc_samples)-ADC_CHANNELS))
     {
-        strain_gauge += adc_samples[ADC_CHANNELS*--nb_samples];
+        strain_gauge += adc_samples[ADC_CHN_STRAIN+i];
+        tc_switch    += adc_samples[ADC_CHN_TC_SW+i];
+        vbat         += adc_samples[ADC_CHN_VBAT+i];
+        i            += ADC_CHANNELS; /* +4 */
     }
 
-    strain_gauge /= sizeof(adc_samples)/ADC_CHANNELS;
-    sensors.strain_gauge = strain_gauge;
+    strain_gauge /= nb_samples;
+    tc_switch    /= nb_samples;
+    vbat         /= nb_samples;
 
-    /* Returns true if strain gauge voltage exceeds threshold. */
+    sensors.strain_gauge = strain_gauge;
+    sensors.tc_switch    = tc_switch;
+    sensors.vbat         = vbat;
+
+    /* Sets true if strain gauge value exceeds threshold. */
     status.shifting = (strain_gauge >= settings.data.sensor_threshold);
 }
 
