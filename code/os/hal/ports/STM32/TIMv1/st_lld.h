@@ -88,6 +88,12 @@
 #endif
 #define STM32_ST_TIM                              STM32_TIM5
 
+#elif STM32_ST_USE_TIMER == 14
+#if !STM32_HAS_TIM14
+#error "TIM14 not present"
+#endif
+#define STM32_ST_TIM                              STM32_TIM14
+
 #else
 #error "STM32_ST_USE_TIMER specifies an unsupported timer"
 #endif

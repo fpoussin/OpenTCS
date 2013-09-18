@@ -79,6 +79,16 @@
 #define ST_CLOCK_SRC                        STM32_TIMCLK1
 #define ST_ENABLE_CLOCK()                   rccEnableTIM5(FALSE)
 
+#elif STM32_ST_USE_TIMER == 14
+#if (OSAL_ST_RESOLUTION == 32) && !STM32_TIM14_IS_32BITS
+#error "TIM14 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          STM32_TIM14_HANDLER
+#define ST_NUMBER                           STM32_TIM14_NUMBER
+#define ST_CLOCK_SRC                        STM32_TIMCLK1
+#define ST_ENABLE_CLOCK()                   rccEnableTIM14(FALSE)
+
 #else
 #error "STM32_ST_USE_TIMER specifies an unsupported timer"
 #endif
