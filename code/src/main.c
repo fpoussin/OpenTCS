@@ -120,7 +120,6 @@ int main(void)
     * - HW specific initialization.
     * - Nil RTOS initialization.
     */
-//    hwInit();
     halInit();
     settingsInit();
     usartInit(DBG_USART);

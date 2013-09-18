@@ -70,7 +70,7 @@
  *          The value one is not valid, timeouts are rounded up to
  *          this value.
  */
-#define NIL_CFG_ST_TIMEDELTA                2
+#define NIL_CFG_ST_TIMEDELTA                0
 
 /** @} */
 

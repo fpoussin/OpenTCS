@@ -88,7 +88,7 @@ static struct {
     int16_t x;
     int16_t y;
     int16_t z;
-} lis_data;
+} lis_data = {0,0,0};
 
 /*
  * Function prototypes.
@@ -189,6 +189,11 @@ void startSensors(void)
 
         serDbg("Strain gauge: ");
         itoa(sensors.strain_gauge, tmpstr);
+        serDbg(tmpstr);
+        serDbg("\r\n");
+
+        serDbg("TC Switch: ");
+        itoa(sensors.tc_switch, tmpstr);
         serDbg(tmpstr);
         serDbg("\r\n");
     }
