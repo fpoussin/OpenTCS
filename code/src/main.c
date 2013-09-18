@@ -1,6 +1,5 @@
 #include "hal.h"
 #include "nil.h"
-#include "stm32f0xx_conf.h"
 #include "threads.h"
 
 /*
