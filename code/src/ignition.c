@@ -1,12 +1,16 @@
 #include "threads.h"
 
 #define IGN_TIMER TIM3
-#define IGN_TIMER_PSC 48 /* 500KHz (24Mhz/48) */
+#define IGN_TIMER_IRQn TIM3_IRQn
+#define IGN_TIMER_IRQHandler TIM3_IRQHandler
+#define IGN_TIMER_PSC 48 /* 500KHz (24Mhz/48), max time 131ms */
 #define IGN_TIMER_ARR 0xFFFF
 /* Convert x from ms to us, divide by timer clock period in us */
 #define IGN_TIMER_CONV(x) (IGN_TIMER_ARR-(((uint32_t)x*1000)/(1000000/(STM32_PCLK/IGN_TIMER_PSC))))
 
 ign_cut_t ign_cut = {IGN_CUT_DISABLED, 25};
+uint8_t cutting = false;
+uint8_t cutting_num = 0;
 
 /*
  * Actual functions.
@@ -38,60 +42,47 @@ void startIgnition(void) {
     /* One Pulse Mode selection */
     TIM_SelectOnePulseMode(IGN_TIMER, TIM_OPMode_Single);
 
+    IGN_TIMER->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
+    NVIC_EnableIRQ(IGN_TIMER_IRQn); // Enable interrupt from IGN_TIMER (NVIC level)
+
     serDbg("startIgnition Complete\r\n");
 
     while (true) {
 
-        chThdSleepMilliseconds(10);
+        chThdSleepMilliseconds(20);
 
-        /* IGN_TIMER disable counter */
-        IGN_TIMER->CR1 &= ~TIM_CR1_CEN;
-
-        /* Reset timer counter */
-        IGN_TIMER->CNT = 0;
-
-        /* One Pulse mode (stops after CNT reaches ARR) */
-        IGN_TIMER->CR1 |= TIM_CR1_OPM;
+        if (cutting == true)
+        {
+            continue;
+        }
 
         /* Are we shifting a gear? */
         if (status.shifting && (settings.data.functions & SETTINGS_FUNCTION_SHIFTER))
         {
-            if (settings.data.cut_type == SETTINGS_CUT_NORMAL)
-            {
-                pulses[0] = settings.data.cut_time;
-                pulses[1] = settings.data.cut_time;
-                pulses[2] = settings.data.cut_time;
-                pulses[3] = settings.data.cut_time;
-            }
-            else if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE)
-            {
-                pulses[0] = settings.data.cut_time;
-                pulses[1] = settings.data.cut_time;
-                pulses[2] = settings.data.cut_time;
-                pulses[3] = settings.data.cut_time;
-            }
+            pulses[0] = settings.data.cut_time;
+            pulses[1] = settings.data.cut_time;
+            pulses[2] = settings.data.cut_time;
+            pulses[3] = settings.data.cut_time;
         }
 
         /* Are we slipping? */
         else if ((status.slipping_pct > settings.data.slip_threshold) && (settings.data.functions & SETTINGS_FUNCTION_TC))
         {
-            if (settings.data.cut_type == SETTINGS_CUT_NORMAL)
+            pulses[0] = settings.data.cut_time;
+            pulses[1] = settings.data.cut_time;
+            pulses[2] = settings.data.cut_time;
+            pulses[3] = settings.data.cut_time;
+
+            if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE && cutting_num <= 4)
             {
-                pulses[0] = settings.data.cut_time;
-                pulses[1] = settings.data.cut_time;
-                pulses[2] = settings.data.cut_time;
-                pulses[3] = settings.data.cut_time;
-            }
-            else if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE)
-            {
-                pulses[0] = settings.data.cut_time;
-                pulses[1] = settings.data.cut_time;
-                pulses[2] = settings.data.cut_time;
-                pulses[3] = settings.data.cut_time;
+                cutting_num++;
             }
         }
 
         else continue;
+
+        cutting = true;
+        palSetPad(GPIOB, GPIOB_PIN9);
 
         IGN_TIMER->CCR1 = IGN_TIMER_CONV(pulses[0]);
         IGN_TIMER->CCR2 = IGN_TIMER_CONV(pulses[1]);
@@ -107,4 +98,25 @@ void doCut(uint16_t cut_time)
 {
     (void)cut_time;
 
+}
+
+void IGN_TIMER_IRQHandler(void)
+{
+    if(IGN_TIMER->SR & TIM_SR_UIF) // if UIF flag is set
+    {
+        IGN_TIMER->SR &= ~TIM_SR_UIF; // clear UIF flag
+
+        /* IGN_TIMER disable counter */
+        IGN_TIMER->CR1 &= ~TIM_CR1_CEN;
+
+        /* Reset timer counter */
+        IGN_TIMER->CNT = 0;
+
+        /* One Pulse mode (stops after CNT reaches ARR) */
+        IGN_TIMER->CR1 |= TIM_CR1_OPM;
+
+        cutting = false;
+
+        palClearPad(GPIOB, GPIOB_PIN9);
+    }
 }

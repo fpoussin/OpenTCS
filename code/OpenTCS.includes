@@ -9,3 +9,4 @@ os/ports/common/ARMCMx
 os/ports/common/ARMCMx/CMSIS/include
 os/ports/GCC/ARMCM0
 os/ports/GCC/ARMCM0/STM32F0xx
+os/ext/CMSIS/ST/

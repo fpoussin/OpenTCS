@@ -467,13 +467,15 @@ void SPEED_TIMER_IRQHandler(void)
         status.acceleration = accel2;
     }
 
-    if (sensors.speed <= settings.data.min_speed || sensors.rpm <= settings.data.min_rpm)
+    status.slipping_pct = ((accel2 - accel1) * 1000) / accel1;
+
+    if (sensors.speed <= settings.data.min_speed
+            || sensors.rpm <= settings.data.min_rpm
+            || status.slipping_pct <= settings.data.slip_threshold)
     {
         status.slipping = 0;
-        status.slipping_pct = 0;
         return;
     }
 
     status.slipping = 1;
-    status.slipping_pct = ((accel2 - accel1) * 1000) / accel1;
 }

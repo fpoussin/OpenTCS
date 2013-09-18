@@ -3,6 +3,7 @@
 
 #include "hal.h"
 #include "nil.h"
+#include "stm32f0xx.h"
 
 #define DBG_USART USART1
 
