@@ -3,12 +3,14 @@
 #define SPEED_TIMER TIM2
 #define SPEED_TIMER_IRQn TIM2_IRQn
 #define SPEED_TIMER_IRQHandler TIM2_IRQHandler
-#define SPEED_TIMER_PSC (STM32_PCLK/100000) // 100KHz clock, takes 0.65s to wrap
+#define SPEED_TIMER_CLK 100000 // 100KHz clock, takes 0.65s to wrap
+#define SPEED_TIMER_PSC (STM32_PCLK/SPEED_TIMER_CLK)
 
 #define RPM_TIMER TIM1
 #define RPM_TIMER_IRQn TIM1_CC_IRQn
 #define RPM_TIMER_IRQHandler TIM1_CC_IRQHandler
-#define RPM_TIMER_PSC (STM32_PCLK/100000) // 100KHz clock, takes 0.65s to wrap
+#define RPM_TIMER_CLK 100000 // 100KHz clock, takes 0.65s to wrap
+#define RPM_TIMER_PSC (STM32_PCLK/RPM_TIMER_CLK)
 
 #define POT_I2C I2C1
 #define POT_I2C_ADDR 0x2E /* MCP45X1 ‘0101 11’b + A0 */
