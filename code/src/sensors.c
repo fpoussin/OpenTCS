@@ -282,8 +282,8 @@ uint8_t setupLIS331(void)
 
 uint8_t getLISValues(void)
 {
-    uint8_t txdata = LR_OUT_X_H;
-    uint8_t rxdata[2];
+    uint8_t txdata = LR_OUT_X_L;
+    uint8_t rxdata[6];
 
     if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, &txdata, 1) != 0)
     {
@@ -295,33 +295,9 @@ uint8_t getLISValues(void)
         /* Handle error */
         return 1;
     }
-    lis_data.x = ((int16_t) rxdata[0]<<8)+((int16_t) rxdata[1]);
-
-    txdata = LR_OUT_Y_H;
-    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, &txdata, 1) != 0)
-    {
-        /* Handle error */
-        return 1;
-    }
-    if (i2cReceiveS(LIS331_I2C, LIS331_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
-    {
-        /* Handle error */
-        return 1;
-    }
-    lis_data.y = ((int16_t) rxdata[0]<<8)+((int16_t) rxdata[1]);
-
-    txdata = LR_OUT_Z_H;
-    if (i2cSendS(LIS331_I2C, LIS331_I2C_ADDR, &txdata, 1) != 0)
-    {
-        /* Handle error */
-        return 1;
-    }
-    if (i2cReceiveS(LIS331_I2C, LIS331_I2C_ADDR, rxdata, sizeof(rxdata)) != 0)
-    {
-        /* Handle error */
-        return 1;
-    }
-    lis_data.z = ((int16_t) rxdata[0]<<8)+((int16_t) rxdata[1]);
+    lis_data.x = ((int16_t) rxdata[0])+((int16_t) rxdata[1]<<8);
+    lis_data.y = ((int16_t) rxdata[2])+((int16_t) rxdata[3]<<8);
+    lis_data.z = ((int16_t) rxdata[4])+((int16_t) rxdata[5]<<8);
 
     return 0;
 }
