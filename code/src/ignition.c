@@ -8,9 +8,10 @@
 /* Convert x from ms to us, divide by timer clock period in us */
 #define IGN_TIMER_CONV(x) (IGN_TIMER_ARR-(((uint32_t)x*1000)/(1000000/(STM32_PCLK/IGN_TIMER_PSC))))
 
-ign_cut_t ign_cut = {IGN_CUT_DISABLED, 25};
+#define SLIP_CUT_TIME 100 /* Max: 131ms */
+
 uint8_t cutting = false;
-uint8_t cutting_num = 0;
+uint8_t cutting_count = 0;
 
 /*
  * Actual functions.
@@ -18,8 +19,8 @@ uint8_t cutting_num = 0;
 
 void startIgnition(void) {
 
-    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-    TIM_OCInitTypeDef  TIM_OCInitStructure;
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    TIM_OCInitTypeDef TIM_OCInitStructure;
     uint16_t pulses[4] = {0,0,0,0};
 
     /* Time base configuration */
@@ -34,6 +35,7 @@ void startIgnition(void) {
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
     TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+    TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Set;
     TIM_OC1Init(IGN_TIMER, &TIM_OCInitStructure);
     TIM_OC2Init(IGN_TIMER, &TIM_OCInitStructure);
     TIM_OC3Init(IGN_TIMER, &TIM_OCInitStructure);
@@ -42,7 +44,7 @@ void startIgnition(void) {
     /* One Pulse Mode selection */
     TIM_SelectOnePulseMode(IGN_TIMER, TIM_OPMode_Single);
 
-    IGN_TIMER->DIER = TIM_DIER_UIE; // Enable update interrupt (timer level)
+    IGN_TIMER->DIER |= TIM_DIER_UIE; // Enable update interrupt (timer level)
     NVIC_EnableIRQ(IGN_TIMER_IRQn); // Enable interrupt from IGN_TIMER (NVIC level)
 
     serDbg("startIgnition Complete\r\n");
@@ -51,7 +53,8 @@ void startIgnition(void) {
 
         chThdSleepMilliseconds(20);
 
-        if (cutting == true)
+        /* Are we already cutting the ignition? Is it enabled? */
+        if (cutting == true || settings.data.cut_type == SETTINGS_CUT_DISABLED)
         {
             continue;
         }
@@ -63,27 +66,59 @@ void startIgnition(void) {
             pulses[1] = settings.data.cut_time;
             pulses[2] = settings.data.cut_time;
             pulses[3] = settings.data.cut_time;
+
+            IGN_TIMER->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
         }
 
         /* Are we slipping? */
         else if ((status.slipping_pct > settings.data.slip_threshold) && (settings.data.functions & SETTINGS_FUNCTION_TC))
         {
-            pulses[0] = settings.data.cut_time;
-            pulses[1] = settings.data.cut_time;
-            pulses[2] = settings.data.cut_time;
-            pulses[3] = settings.data.cut_time;
+            pulses[0] = SLIP_CUT_TIME;
+            pulses[1] = SLIP_CUT_TIME;
+            pulses[2] = SLIP_CUT_TIME;
+            pulses[3] = SLIP_CUT_TIME;
 
-            if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE && cutting_num <= 4)
+            IGN_TIMER->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
+
+            /* This mode cuts cylinders one by one up to 4 */
+            if (settings.data.cut_type == SETTINGS_CUT_PROGRESSIVE && cutting_count < 4)
             {
-                cutting_num++;
+                cutting_count++;
+
+                /* Disable all OC outputs */
+                IGN_TIMER->CCER &= ~(TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
+
+                /* Enable OC outputs based on cylinder cut count */
+                switch(cutting_count)
+                {
+                    case 1:
+                        IGN_TIMER->CCER |= TIM_CCER_CC1E;
+                        break;
+                    case 2:
+                        IGN_TIMER->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E);
+                        break;
+                    case 3:
+                        IGN_TIMER->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E);
+                        break;
+                    case 4:
+                        IGN_TIMER->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
-        else continue;
+        else
+        {
+            cutting_count = 0;
+            continue;
+        }
 
         cutting = true;
         palSetPad(GPIOB, GPIOB_PIN9);
 
+        /* Convert cut time to CCR value and assign to register */
         IGN_TIMER->CCR1 = IGN_TIMER_CONV(pulses[0]);
         IGN_TIMER->CCR2 = IGN_TIMER_CONV(pulses[1]);
         IGN_TIMER->CCR3 = IGN_TIMER_CONV(pulses[2]);
@@ -106,14 +141,8 @@ void IGN_TIMER_IRQHandler(void)
     {
         IGN_TIMER->SR &= ~TIM_SR_UIF; // clear UIF flag
 
-        /* IGN_TIMER disable counter */
-        IGN_TIMER->CR1 &= ~TIM_CR1_CEN;
-
-        /* Reset timer counter */
-        IGN_TIMER->CNT = 0;
-
-        /* One Pulse mode (stops after CNT reaches ARR) */
-        IGN_TIMER->CR1 |= TIM_CR1_OPM;
+        /* Disable all OC outputs */
+        IGN_TIMER->CCER &= ~(TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
 
         cutting = false;
 

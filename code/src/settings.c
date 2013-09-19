@@ -10,7 +10,7 @@ settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0}, 0};
 const settings_t default_settings = {
     {SETTINGS_FUNCTION_SHIFTER | SETTINGS_FUNCTION_LED,
      300, /* Cut pulse time 30ms */
-     SETTINGS_CUT_NORMAL, /* Cut type */
+     SETTINGS_CUT_DISABLED, /* Cut type */
      50, /* Shfifter Sensor threshold  */
      10, /* TC Slip threshold  */
      30, /* Sensor gain */

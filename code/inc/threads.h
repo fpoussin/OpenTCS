@@ -78,8 +78,9 @@ inline void serDbg(const char *str);
 #define SETTINGS_FUNCTION_SHIFTER 0x2
 #define SETTINGS_FUNCTION_LED 0x4
 
-#define SETTINGS_CUT_NORMAL 0x0
-#define SETTINGS_CUT_PROGRESSIVE 0x1
+#define SETTINGS_CUT_DISABLED 0x0
+#define SETTINGS_CUT_NORMAL 0x1
+#define SETTINGS_CUT_PROGRESSIVE 0x2
 
 struct __settings {
 
@@ -158,17 +159,7 @@ void startAdc(void);
 
 
 /* Ignition */
-#define IGN_CUT_DISABLED 0
-#define IGN_CUT_NORMAL 1
-#define IGN_CUT_PROGRESSIVE 2
-
 void startIgnition(void) __attribute__ ((noreturn));
-struct __ign_cut {
-    uint8_t type;
-    uint16_t duration;
-};
-typedef struct __ign_cut ign_cut_t;
-extern ign_cut_t ign_cut;
 
 /* End of Ignition */
 
