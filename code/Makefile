@@ -55,7 +55,7 @@ endif
 # Stack size to the allocated to the Cortex-M main/exceptions stack. This
 # stack is used for processing interrupts and exceptions.
 ifeq ($(USE_EXCEPTIONS_STACKSIZE),)
-  USE_EXCEPTIONS_STACKSIZE = 0x400
+  USE_EXCEPTIONS_STACKSIZE = 0x180
 endif
 
 #
@@ -76,7 +76,6 @@ include $(CHIBIOS)/os/hal/ports/STM32F0xx/platform.mk
 include $(CHIBIOS)/os/nil/nil.mk
 include $(CHIBIOS)/os/nil/osal/osal.mk
 include $(CHIBIOS)/os/nil/ports/ARMCMx/compilers/GCC/mk/port_stm32f0xx.mk
-#include $(CHIBIOS)/test/test.mk
 
 # Define linker script file here
 LDSCRIPT= $(PORTLD)/STM32F050x4.ld
