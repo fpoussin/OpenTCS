@@ -6,16 +6,18 @@
 #define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS)   /* Start @ of user Flash area */
 #define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE)   /* End @ of user Flash area */
 
-settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0}, 0};
+settings_t settings = { {0, 0, 0, 0, 0, 0, 0, {0}, {0}}, 0};
 const settings_t default_settings = {
     {SETTINGS_FUNCTION_SHIFTER | SETTINGS_FUNCTION_LED,
-     300, /* Cut pulse time 30ms */
      SETTINGS_CUT_DISABLED, /* Cut type */
      50, /* Shfifter Sensor threshold  */
      10, /* TC Slip threshold  */
      30, /* Sensor gain */
      30, /* Min Speed */
-     2500}, /* Min RPM */
+     3000, /* Min RPM */
+     {0},
+     {1000,600,400,300,300,300} /* cut time by gear in ms x10 */
+    },
     0}; /* CRC */
 
 void settingsInit()

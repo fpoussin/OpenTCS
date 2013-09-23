@@ -99,6 +99,7 @@ void getAnalogSensors(void);
 uint8_t setPotGain(uint8_t gain);
 uint8_t setupLIS331(void);
 uint8_t getLISValues(void);
+uint8_t getCurGearIdx(void);
 
 /*
  * Actual functions.
@@ -164,7 +165,7 @@ void startSensors(void)
 
     serDbg("startSensors Complete\r\n");
 
-    char tmpstr[6];
+    char tmpstr[7];
     while (true)
     {
         /*
@@ -207,6 +208,33 @@ void getCapture(void)
     /* Enable the CC3-4 Interrupt Request */
     SPEED_TIMER->DIER |= TIM_DIER_CC3IE;
     SPEED_TIMER->DIER |= TIM_DIER_CC4IE;
+}
+
+uint8_t getCurGearIdx(void)
+{
+    uint8_t i;
+    uint16_t ratio;
+    uint32_t speed;
+
+    for(i=0; i<6; i++)
+    {
+        speed = sensors.speed*100;
+        ratio = speed / sensors.rpm;
+
+        /* Ration increases with upper gears */
+        if (ratio >= settings.data.gears_ratio[i])
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+
+uint16_t getCurCutTime(void)
+{
+    const uint8_t gear = getCurGearIdx();
+
+    return settings.data.gears_cut_time[gear];
 }
 
 uint8_t setPotGain(uint8_t gain)

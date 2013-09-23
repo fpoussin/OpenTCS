@@ -85,17 +85,17 @@ inline void serDbg(const char *str);
 struct __settings {
 
     struct {
-        uint8_t functions;
-        uint16_t cut_time;
-        uint8_t cut_type;
+        uint8_t  functions;
+        uint8_t  cut_type;
         uint16_t sensor_threshold;
         uint16_t slip_threshold;
-        uint8_t sensor_gain;
+        uint8_t  sensor_gain;
         uint16_t min_speed;
         uint16_t min_rpm;
-
+        uint16_t gears_ratio[6];
+        uint16_t gears_cut_time[6];
     } data;
-    __IO uint32_t CRCValue;
+    uint32_t CRCValue;
 };
 typedef struct __settings settings_t;
 extern settings_t settings;
@@ -193,6 +193,7 @@ typedef struct __sensors sensors_t;
 extern sensors_t sensors;
 
 void startSensors(void) __attribute__ ((noreturn));
+uint16_t getCurCutTime(void);
 
 /* End of Sensors */
 

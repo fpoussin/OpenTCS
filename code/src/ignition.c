@@ -62,10 +62,13 @@ void startIgnition(void) {
         /* Are we shifting a gear? */
         if (status.shifting && (settings.data.functions & SETTINGS_FUNCTION_SHIFTER))
         {
-            pulses[0] = settings.data.cut_time;
-            pulses[1] = settings.data.cut_time;
-            pulses[2] = settings.data.cut_time;
-            pulses[3] = settings.data.cut_time;
+            /* Get cut time based on current gear */
+            const uint16_t cut_time = getCurCutTime();
+
+            pulses[0] = cut_time;
+            pulses[1] = cut_time;
+            pulses[2] = cut_time;
+            pulses[3] = cut_time;
 
             IGN_TIMER->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
         }
