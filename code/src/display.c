@@ -3,18 +3,25 @@
 #include "menu.h"
 
 display_t display = {DISPLAY_OFF};
+const char version[] = VERSION;
 
 void showDiag(void);
-void showAbout(void);
+void showInfo(void);
 void setFunctions(void);
 void setCutMode(void);
 void setShifter(void);
+void setGears(void);
 
-menuItem_t settingsMenuList[] = {{"Functions", &setFunctions, 0}, {"Cut mode", &setCutMode, 0}, {"Shifter setup", &setShifter, 0} };
+menuItem_t settingsMenuList[] = {{"Functions", &setFunctions, NULL},
+                                 {"Cut mode", &setCutMode, NULL},
+                                 {"Shifter setup", &setShifter, 0},
+                                 {"Gears setup", &setGears, NULL} };
 
 menuStruct_t settingsMenu = {"Settings Menu", 2, settingsMenuList};
 
-menuItem_t mainMenuItemList[] = {{"Diagnostics", &showDiag, NULL}, {"Settings", NULL, &settingsMenu}, {"About", &showAbout, NULL}};
+menuItem_t mainMenuItemList[] = {{"Diagnostics", &showDiag, NULL},
+                                 {"Settings", NULL, &settingsMenu},
+                                 {"Info", &showInfo, NULL}};
 
 menuStruct_t mainMenu = {"Main Menu", sizeof(mainMenuItemList)/sizeof(menuItem_t), mainMenuItemList};
 
@@ -54,24 +61,38 @@ void startDisplay(void) {
 void showDiag(void)
 {
 
+    while (!BUTTON_SEL);
 }
 
-void showAbout(void)
+void showInfo(void)
 {
+    ssd1306DrawString(20, 0, "Version:", Font_System5x8);
 
+    ssd1306DrawString(20, 15, version, Font_System5x8);
+
+    while (!BUTTON_SEL);
 }
 
 void setFunctions(void)
 {
 
+    while (!BUTTON_SEL);
 }
 
 void setCutMode(void)
 {
 
+    while (!BUTTON_SEL);
 }
 
 void setShifter(void)
 {
 
+    while (!BUTTON_SEL);
+}
+
+void setGears(void)
+{
+
+    while (!BUTTON_SEL);
 }

@@ -415,7 +415,7 @@ void ssd1306DrawChar(uint8_t x, uint8_t y, uint8_t c, struct FONT_DEF font)
     @endcode
 */
 /**************************************************************************/
-void ssd1306DrawString(uint8_t x, uint8_t y, char* text, struct FONT_DEF font)
+void ssd1306DrawString(uint8_t x, uint8_t y, const char *text, struct FONT_DEF font)
 {
   uint8_t l;
   for (l = 0; l < strlen(text); l++)

@@ -119,5 +119,3 @@ void openMenu(menuStruct_t *menuToShow)
  return;
 }
 
-/* openMenu(&mainMenu); */
-

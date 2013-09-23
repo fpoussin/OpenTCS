@@ -1,3 +1,6 @@
+PGM_VERSION = 0.1
+
+
 ##############################################################################
 # Build global options
 # NOTE: Can be overridden externally.
@@ -10,7 +13,7 @@ endif
 
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
-  USE_COPT = 
+  USE_COPT = -D VERSION=\"$(PGM_VERSION)\"
 endif
 
 # C++ specific options here (added to USE_OPT).
