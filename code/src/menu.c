@@ -105,17 +105,16 @@ void openMenu(menuStruct_t *menuToShow)
         }
         else if (menuToShow->items[selectedIndex].handler != NULL)
         {
-        menuToShow->items[selectedIndex].handler();
+            menuToShow->items[selectedIndex].handler();
         }
         else if (menuToShow->items[selectedIndex].subMenu != NULL)
         {
-        openMenu(menuToShow->items[selectedIndex].subMenu);
+            openMenu(menuToShow->items[selectedIndex].subMenu);
         }
         drawMenu(menuToShow, selectedIndex);
      }
      chThdSleepMilliseconds(250);
   } while (true);
 
- return;
+  return;
 }
-

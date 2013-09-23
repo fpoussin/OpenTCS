@@ -81,7 +81,7 @@ include $(CHIBIOS)/os/nil/osal/osal.mk
 include $(CHIBIOS)/os/nil/ports/ARMCMx/compilers/GCC/mk/port_stm32f0xx.mk
 
 # Define linker script file here
-LDSCRIPT= $(PORTLD)/STM32F050x4.ld
+LDSCRIPT= $(PORTLD)/STM32F050x6.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

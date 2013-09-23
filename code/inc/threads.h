@@ -82,6 +82,9 @@ inline void serDbg(const char *str);
 #define SETTINGS_CUT_NORMAL 0x1
 #define SETTINGS_CUT_PROGRESSIVE 0x2
 
+#define SETTINGS_SENSOR_NORMAL 0
+#define SETTINGS_SENSOR_REVERSE 1
+
 struct __settings {
 
     struct {
@@ -90,6 +93,7 @@ struct __settings {
         uint16_t sensor_threshold;
         uint16_t slip_threshold;
         uint8_t  sensor_gain;
+        uint8_t  sensor_direction;
         uint16_t min_speed;
         uint16_t min_rpm;
         uint16_t gears_ratio[6];

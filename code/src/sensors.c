@@ -287,8 +287,16 @@ void getAnalogSensors(void)
     sensors.tc_switch    = tc_switch;
     sensors.vbat         = vbat;
 
-    /* Sets true if strain gauge value exceeds threshold. */
-    status.shifting = (strain_gauge >= settings.data.sensor_threshold);
+    if (settings.data.sensor_direction == SETTINGS_SENSOR_NORMAL)
+    {
+        /* Sets true if strain gauge value exceeds threshold. */
+        status.shifting = (strain_gauge >= settings.data.sensor_threshold);
+    }
+    else /* SETTINGS_SENSOR_REVERSE */
+    {
+        /* Sets true if strain gauge value does not exceeds threshold. */
+        status.shifting = (strain_gauge <= settings.data.sensor_threshold);
+    }
 }
 
 uint8_t setupLIS331(void)

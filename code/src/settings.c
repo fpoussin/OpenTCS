@@ -1,18 +1,19 @@
 #include "threads.h"
 
-#define FLASH_PAGE_SIZE         (0x00000400)   /* FLASH Page Size */
-#define SETTINGS_PAGE           (15)
+#define FLASH_PAGE_SIZE         (0x00000400) /* FLASH Page Size */
+#define SETTINGS_PAGE           (31) /* Page where the settings are located, starting from 0  */
 #define SETTINGS_ADDRESS        (FLASH_BASE+(FLASH_PAGE_SIZE*SETTINGS_PAGE)) /* 0x8003C00 */
-#define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS)   /* Start @ of user Flash area */
-#define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE)   /* End @ of user Flash area */
+#define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS) /* Start @ of user Flash area */
+#define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE) /* End @ of user Flash area */
 
-settings_t settings = { {0, 0, 0, 0, 0, 0, 0, {0}, {0}}, 0};
+settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0, {0}, {0}}, 0};
 const settings_t default_settings = {
     {SETTINGS_FUNCTION_SHIFTER | SETTINGS_FUNCTION_LED,
      SETTINGS_CUT_DISABLED, /* Cut type */
      50, /* Shfifter Sensor threshold  */
      10, /* TC Slip threshold  */
      30, /* Sensor gain */
+     SETTINGS_SENSOR_NORMAL, /* Sensor direction */
      30, /* Min Speed */
      3000, /* Min RPM */
      {0},
