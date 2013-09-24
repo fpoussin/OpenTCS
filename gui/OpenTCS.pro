@@ -12,9 +12,14 @@ TARGET = OpenTCS
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += src/main.cpp\
+        src/mainwindow.cpp \
+    src/device.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += inc/mainwindow.h \
+    inc/device.h
 
-FORMS    += mainwindow.ui
+FORMS    += ui/mainwindow.ui
+
+INCLUDEPATH += inc
+LIBS += -L/usr/local/lib -lftd2xx
