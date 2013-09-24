@@ -15,3 +15,9 @@ Open source traction control and strain gauge quickshifter for race bikes.
 **lib**	STM32F0 Peripheral library  
 **os**  ChibiOS/Nil RTOS  
 **src**	source files  
+
+### gui
+**inc**	include files  
+**lib**	external libraries  
+**src**	source files  
+**ui**  QT designer files
