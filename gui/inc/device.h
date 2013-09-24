@@ -6,7 +6,7 @@
 
 #include "ftd2xx.h"
 
-#define CBUS2MASK(a, b, c, d) (0xC0|(0x0C&((1&a)|(2&(b<<1))|(4&(c<<2))|(8&(d<<3)))))
+#define CBUS2MASK(a, b, c, d) (0xF0|(0x0F&((1&a)|(2&(b<<1))|(4&(c<<2))|(8&(d<<3)))))
 
 class device : public QObject
 {
