@@ -107,6 +107,9 @@ bool ftdi::setCBUSMux(bool en)
         return true;
     }
 
+    /* Set drive current to 16ma */
+    eepromDATA.ACDriveCurrent |= 48;
+
     /* CBUS0 is BOOT0 - CBUS3 is NRST */
     if (en)
     {
