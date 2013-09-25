@@ -18,6 +18,8 @@ public:
     
 
 private slots:
+    void connect(void);
+    void disconnect(void);
     void update(void);
     void loadConfig(void);
     void saveConfig(void);
