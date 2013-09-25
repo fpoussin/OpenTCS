@@ -15,9 +15,14 @@ public:
     explicit ftdi(QObject *parent = 0);
     bool connect(void);
     bool disconnect(void);
-    bool write(char *buf, unsigned int len);
-    bool read(char * buf, unsigned int len);
-    bool readAll(char * buf, unsigned int max_len);
+    bool write(quint8 * buf, quint32 len = 1);
+    bool read(quint8 * buf, quint32 len = 1);
+    bool readAll(quint8 * buf, quint32 max_len);
+
+    bool setCBUSMux(bool en);
+    bool setCBUS(int mask);
+    bool resetBootloader(void);
+    bool resetNormal(void);
 
     
 signals:
@@ -25,14 +30,12 @@ signals:
 public slots:
 
 private slots:
-    bool setCBUSMux(bool en);
-    bool resetBootloader(void);
-    bool setCBUS(int mask);
+    bool purge(void);
 
 private:
-    int                 iNumDevs;
-    char *              pcBufLD[1];
-    char                cBufLD[64];
+    qint32              iNumDevs;
+    qint8 *             pcBufLD[1];
+    qint8               cBufLD[64];
     FT_STATUS           ftStatus;
     FT_HANDLE           ftHandle;
     FT_EEPROM_HEADER    ftEepromHeader;

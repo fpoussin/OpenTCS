@@ -30,14 +30,14 @@ bool ftdi::connect(void)
         qWarning("Error FT_OpenEx(%d), device %d\n", (int)ftStatus, 0);
         qWarning("Use lsmod to check if ftdi_sio (and usbserial) are present.\n");
         qWarning("If so, unload them using rmmod, as they conflict with ftd2xx.\n");
-        return 1;
+        return true;
     }
 
     FT_SetTimeouts(ftHandle, 3000, 3000);	// 3 second read timeout
 
     if((ftStatus = FT_SetBaudRate(ftHandle, 115200)) != FT_OK) {
         qWarning("Error FT_SetBaudRate(%d), cBufLD[i] = %s\n", (int)ftStatus, cBufLD);
-        return 1;
+        return true;
     }
 
     return this->resetBootloader();
@@ -50,9 +50,9 @@ bool ftdi::disconnect()
     return FT_Close(ftHandle) == FT_OK;
 }
 
-bool ftdi::write(char * buf, unsigned int len)
+bool ftdi::write(quint8 * buf, quint32 len)
 {
-    unsigned int dwBytesWritten;
+    quint32 dwBytesWritten;
     ftStatus = FT_Write(ftHandle, buf, len, &dwBytesWritten);
     if (ftStatus != FT_OK) {
         qWarning("Error FT_Write(%d)\n", (int)ftStatus);
@@ -61,9 +61,9 @@ bool ftdi::write(char * buf, unsigned int len)
     return false;
 }
 
-bool ftdi::read(char * buf, unsigned int len)
+bool ftdi::read(quint8 * buf, quint32 len)
 {
-    unsigned int dwBytesRead;
+    quint32 dwBytesRead;
     ftStatus = FT_Read(ftHandle, buf, len, &dwBytesRead);
     if (ftStatus != FT_OK) {
         qWarning("Error FT_Read(%d)\n", (int)ftStatus);
@@ -72,15 +72,15 @@ bool ftdi::read(char * buf, unsigned int len)
     return false;
 }
 
-bool ftdi::readAll(char *buf, unsigned int max_len)
+bool ftdi::readAll(quint8 * buf, quint32 max_len)
 {
-    unsigned int len = 0;
+    quint32 len = 0;
 
     ftStatus = FT_GetQueueStatus(ftHandle, &len);
 
     if(ftStatus != FT_OK) {
         qWarning("Error FT_GetQueueStatus(%d)\n", (int)ftStatus);
-        return 1;
+        return true;
     }
 
     if (len > max_len)
@@ -89,6 +89,16 @@ bool ftdi::readAll(char *buf, unsigned int max_len)
     }
 
     return this->read(buf, len);
+}
+
+bool ftdi::purge()
+{
+    ftStatus = FT_Purge(ftHandle, FT_PURGE_RX | FT_PURGE_TX); // Purge both Rx and Tx buffers
+    if (ftStatus != FT_OK) {
+        qWarning("Error FT_Purge(%d)\n", (int)ftStatus);
+        return true;
+    }
+    return false;
 }
 
 bool ftdi::setCBUSMux(bool en)
@@ -103,8 +113,23 @@ bool ftdi::setCBUSMux(bool en)
 
     if (ftStatus != FT_OK)
     {
-        printf("EEPROM_Read status not ok %d\n", ftStatus);
+        qWarning("EEPROM_Read status not ok %d\n", ftStatus);
         return true;
+    }
+
+    /* Skip is already setup */
+    if (eepromDATA.Cbus0 == FT_X_SERIES_CBUS_IOMODE
+            && eepromDATA.Cbus3 == FT_X_SERIES_CBUS_IOMODE
+            && en)
+    {
+        return false;
+    }
+
+    if (eepromDATA.Cbus0 == FT_X_SERIES_CBUS_DRIVE_0
+            && eepromDATA.Cbus3 == FT_X_SERIES_CBUS_DRIVE_1
+            && !en)
+    {
+        return false;
     }
 
     /* Set drive current to 16ma */
@@ -127,7 +152,7 @@ bool ftdi::setCBUSMux(bool en)
 
     if (ftStatus != FT_OK)
     {
-        printf("EEPROM_Program status not ok %d\n", ftStatus);
+        qWarning("EEPROM_Program status not ok %d\n", ftStatus);
         return true;
     }
 
@@ -138,12 +163,30 @@ bool ftdi::resetBootloader()
 {
     int res;
 
-    /* Reset low, BOOT0 high */
-    res = setCBUS(CBUS2MASK(0,0,0,1));
+    /* BOOT0 high, Reset low */
+    res = setCBUS(CBUS2MASK(1,0,0,0));
     usleep(200000);
 
-    /* Reset high, BOOT0 high */
+    /* BOOT0 high, Reset high */
     res = setCBUS(CBUS2MASK(1,0,0,1));
+    usleep(200000);
+
+    /* Back to input mode */
+    res = setCBUS(0);
+
+    return res;
+}
+
+bool ftdi::resetNormal()
+{
+    int res;
+
+    /* BOOT0 low, Reset low */
+    res = setCBUS(CBUS2MASK(0,0,0,0));
+    usleep(200000);
+
+    /* BOOT0 low, Reset high */
+    res = setCBUS(CBUS2MASK(0,0,0,1));
     usleep(200000);
 
     /* Back to input mode */
@@ -156,7 +199,7 @@ bool ftdi::setCBUS(int mask)
 {
     if(FT_SetBitMode(ftHandle, mask, FT_BITMODE_CBUS_BITBANG) != FT_OK) {
         qWarning("Failed to set CBUS bit mask: %d\n", mask);
-        return 1;
+        return true;
     }
 
     return false;
