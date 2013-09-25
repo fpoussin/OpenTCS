@@ -21,7 +21,7 @@ void startIgnition(void) {
 
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;
-    uint16_t pulses[4] = {0,0,0,0};
+    uint8_t pulses[4] = {0,0,0,0};
 
     /* Time base configuration */
     TIM_TimeBaseStructure.TIM_Prescaler = IGN_TIMER_PSC - 1;
@@ -63,7 +63,7 @@ void startIgnition(void) {
         if (status.shifting && (settings.data.functions & SETTINGS_FUNCTION_SHIFTER))
         {
             /* Get cut time based on current gear */
-            const uint16_t cut_time = getCurCutTime();
+            const uint8_t cut_time = getCurCutTime();
 
             pulses[0] = cut_time;
             pulses[1] = cut_time;

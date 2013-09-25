@@ -97,7 +97,7 @@ struct __settings {
         uint16_t min_speed;
         uint16_t min_rpm;
         uint16_t gears_ratio[6];
-        uint16_t gears_cut_time[6];
+        uint8_t  gears_cut_time[6];
     } data;
     uint32_t CRCValue;
 };
@@ -197,7 +197,7 @@ typedef struct __sensors sensors_t;
 extern sensors_t sensors;
 
 void startSensors(void) __attribute__ ((noreturn));
-uint16_t getCurCutTime(void);
+uint8_t getCurCutTime(void);
 
 /* End of Sensors */
 

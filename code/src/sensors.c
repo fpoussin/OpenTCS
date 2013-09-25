@@ -230,7 +230,7 @@ uint8_t getCurGearIdx(void)
     return 0;
 }
 
-uint16_t getCurCutTime(void)
+uint8_t getCurCutTime(void)
 {
     const uint8_t gear = getCurGearIdx();
 

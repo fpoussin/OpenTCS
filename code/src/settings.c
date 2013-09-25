@@ -17,7 +17,7 @@ const settings_t default_settings = {
      30, /* Min Speed */
      3000, /* Min RPM */
      {0},
-     {1000,600,400,300,300,300} /* cut time by gear in ms x10 */
+     {120,80,60,50,50,50} /* cut time by gear in ms */
     },
     0}; /* CRC */
 
