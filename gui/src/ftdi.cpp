@@ -1,14 +1,17 @@
-#include "device.h"
+#include "ftdi.h"
 
-device::device(QObject *parent) :
+ftdi::ftdi(QObject *parent) :
     QObject(parent)
 {
-
     iNumDevs = 0;
     pcBufLD[0] = cBufLD;
+
+    ftEepromHeader.deviceType = FT_DEVICE_X_SERIES;
+    eepromDATA.common = ftEepromHeader;
+    eepromDATA.common.deviceType = FT_DEVICE_X_SERIES;
 }
 
-bool device::connect(void)
+bool ftdi::connect(void)
 {
 
     this->ftStatus = FT_ListDevices(pcBufLD, &iNumDevs, FT_LIST_ALL | FT_OPEN_BY_SERIAL_NUMBER);
@@ -40,14 +43,14 @@ bool device::connect(void)
     return this->resetBootloader();
 }
 
-bool device::disconnect()
+bool ftdi::disconnect()
 {
     this->setCBUS(0);
 
     return FT_Close(ftHandle) == FT_OK;
 }
 
-bool device::write(char * buf, unsigned int len)
+bool ftdi::write(char * buf, unsigned int len)
 {
     unsigned int dwBytesWritten;
     ftStatus = FT_Write(ftHandle, buf, len, &dwBytesWritten);
@@ -58,7 +61,7 @@ bool device::write(char * buf, unsigned int len)
     return false;
 }
 
-bool device::read(char * buf, unsigned int len)
+bool ftdi::read(char * buf, unsigned int len)
 {
     unsigned int dwBytesRead;
     ftStatus = FT_Read(ftHandle, buf, len, &dwBytesRead);
@@ -69,7 +72,7 @@ bool device::read(char * buf, unsigned int len)
     return false;
 }
 
-bool device::readAll(char *buf, unsigned int max_len)
+bool ftdi::readAll(char *buf, unsigned int max_len)
 {
     unsigned int len = 0;
 
@@ -88,7 +91,47 @@ bool device::readAll(char *buf, unsigned int max_len)
     return this->read(buf, len);
 }
 
-bool device::resetBootloader()
+bool ftdi::setCBUSMux(bool en)
+{
+    char Manufacturer[64];
+    char ManufacturerId[64];
+    char Description[64];
+    char SerialNumber[64];
+
+    ftStatus = FT_EEPROM_Read(ftHandle, &eepromDATA, sizeof(eepromDATA),
+    Manufacturer, ManufacturerId, Description, SerialNumber);
+
+    if (ftStatus != FT_OK)
+    {
+        printf("EEPROM_Read status not ok %d\n", ftStatus);
+        return true;
+    }
+
+    /* CBUS0 is BOOT0 - CBUS3 is NRST */
+    if (en)
+    {
+        eepromDATA.Cbus0 = FT_X_SERIES_CBUS_IOMODE;
+        eepromDATA.Cbus3 = FT_X_SERIES_CBUS_IOMODE;
+    }
+    else /* Could also use FT_X_SERIES_CBUS_TRISTATE */
+    {
+        eepromDATA.Cbus0 = FT_X_SERIES_CBUS_DRIVE_0; /* BOOT0 to GND */
+        eepromDATA.Cbus3 = FT_X_SERIES_CBUS_DRIVE_1; /* NRST to VDD */
+    }
+
+    ftStatus = FT_EEPROM_Program(ftHandle, &eepromDATA, sizeof(eepromDATA),
+    Manufacturer, ManufacturerId, Description, SerialNumber);
+
+    if (ftStatus != FT_OK)
+    {
+        printf("EEPROM_Program status not ok %d\n", ftStatus);
+        return true;
+    }
+
+    return false;
+}
+
+bool ftdi::resetBootloader()
 {
     int res;
 
@@ -106,9 +149,9 @@ bool device::resetBootloader()
     return res;
 }
 
-bool device::setCBUS(int mask)
+bool ftdi::setCBUS(int mask)
 {
-    if(FT_SetBitMode(ftHandle, mask, 0x20) != FT_OK) {
+    if(FT_SetBitMode(ftHandle, mask, FT_BITMODE_CBUS_BITBANG) != FT_OK) {
         qWarning("Failed to set CBUS bit mask: %d\n", mask);
         return 1;
     }
