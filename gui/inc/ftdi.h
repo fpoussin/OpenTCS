@@ -1,5 +1,5 @@
-#ifndef DEVICE_H
-#define DEVICE_H
+#ifndef FTDI_H
+#define FTDI_H
 
 #include <QObject>
 #include <QDebug>
@@ -42,4 +42,4 @@ private:
     FT_EEPROM_X_SERIES  eepromDATA;
 };
 
-#endif // DEVICE_H
+#endif // FTDI_H

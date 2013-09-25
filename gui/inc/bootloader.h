@@ -1,5 +1,5 @@
-#ifndef STM32_H
-#define STM32_H
+#ifndef BOOTLOADER_H
+#define BOOTLOADER_H
 
 #include <QObject>
 #include <QtEndian>
@@ -14,7 +14,7 @@
 
 #define STM32_FLASH_ADDR 0x80000000
 
-class stm32 : public QObject
+class bootloader : public QObject
 {
 
 struct {
@@ -32,7 +32,7 @@ struct {
 } cmd;
 
 public:
-    stm32();
+    bootloader();
     bool connect(void);
     bool disconnect(void);
     bool writeFile(QFile * file);
@@ -58,4 +58,4 @@ private:
 
 };
 
-#endif // STM32_H
+#endif // BOOTLOADER_H

@@ -1,25 +1,25 @@
-#include "stm32.h"
+#include "bootloader.h"
 
-stm32::stm32()
+bootloader::bootloader()
 {
 
 }
 
-bool stm32::connect()
+bool bootloader::connect()
 {
     this->ftdi_device.connect();
 
     return false;
 }
 
-bool stm32::disconnect()
+bool bootloader::disconnect()
 {
     this->ftdi_device.disconnect();
 
     return false;
 }
 
-bool stm32::writeFile(QFile *file)
+bool bootloader::writeFile(QFile *file)
 {
     bool res;
     file->open(QIODevice::ReadOnly);
@@ -37,7 +37,7 @@ bool stm32::writeFile(QFile *file)
     return res;
 }
 
-bool stm32::init()
+bool bootloader::init()
 {
     quint8 len, dummy, ack;
 
@@ -66,7 +66,7 @@ bool stm32::init()
     return (ack != STM32_ACK);
 }
 
-bool stm32::sendCommand(quint8 cmd)
+bool bootloader::sendCommand(quint8 cmd)
 {
     quint8 cmd_xor = cmd^0xFF;
     quint8 ack;
@@ -78,14 +78,14 @@ bool stm32::sendCommand(quint8 cmd)
     return (ack != STM32_ACK);
 }
 
-bool stm32::unlockFlash()
+bool bootloader::unlockFlash()
 {
     this->sendCommand(cmd.uw);
 
     return this->sendCommand(0x8C);
 }
 
-bool stm32::readMem(quint32 address, quint8 *data, quint32 len)
+bool bootloader::readMem(quint32 address, quint8 *data, quint32 len)
 {
     quint8 checksum, ack, len2;
     quint8 addr[4];
@@ -117,7 +117,7 @@ bool stm32::readMem(quint32 address, quint8 *data, quint32 len)
     return (ack != STM32_ACK);
 }
 
-bool stm32::writeMem(quint32 address, quint8 *data, quint32 len)
+bool bootloader::writeMem(quint32 address, quint8 *data, quint32 len)
 {
     quint8 checksum, ack;
     quint8 addr[4];
@@ -152,7 +152,7 @@ bool stm32::writeMem(quint32 address, quint8 *data, quint32 len)
     return (ack != STM32_ACK);
 }
 
-bool stm32::eraseMem()
+bool bootloader::eraseMem()
 {
     quint8 pages[3] = {0xFF, 0xFF, 0x00};
     quint8 ack;
@@ -165,7 +165,7 @@ bool stm32::eraseMem()
     return (ack != STM32_ACK);
 }
 
-quint8 stm32::calcChecksum(const quint32 val)
+quint8 bootloader::calcChecksum(const quint32 val)
 {
     return  ((val & 0xFF000000) >> 24) ^
             ((val & 0x00FF0000) >> 16) ^

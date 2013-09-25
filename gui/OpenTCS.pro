@@ -15,11 +15,14 @@ TEMPLATE = app
 SOURCES += src/main.cpp\
         src/mainwindow.cpp \
     src/ftdi.cpp \
-    src/stm32.cpp
+    src/tcscom.cpp \
+    src/bootloader.cpp
 
 HEADERS  += inc/mainwindow.h \
     inc/ftdi.h \
-    inc/stm32.h
+    inc/structs.h \
+    inc/tcscom.h \
+    inc/bootloader.h
 
 FORMS    += ui/mainwindow.ui
 

@@ -12,17 +12,18 @@
 #define CMD_SEND_DIAG 0x01
 #define CMD_SEND_INFO 0x02
 #define CMD_SEND_SETTINGS 0x03
+#define CMD_SAVE_SETTINGS 0x04
 
 uint8_t sendToGUI(const char *data, uint16_t len);
 uint8_t processCmd(uint8_t cmd);
 int8_t searchBuffer(void);
 uint8_t doChecksum(const char * buf, uint8_t len);
 
+int8_t cmd_pos;
 uint8_t update = 0;
 
 void startSerialCom(void)
 {
-    int8_t cmd_pos;
     uint8_t cmd, checksum, len;
 
     while (true)
@@ -65,7 +66,7 @@ uint8_t doChecksum(const char * buf, uint8_t len)
 
 int8_t searchBuffer(void)
 {
-    unsigned int i;
+    uint8_t i;
     for (i = 0; i < USART_RXBUF_SIZE-1; i++)
     {
         if (usart_rxbuf[i] == SER_MAGIC1
@@ -91,6 +92,11 @@ void sendSettings(void)
     sendToGUI((const char*)&settings.data, sizeof(settings.data));
 }
 
+void saveSettings(void)
+{
+    writeSettings((settings_t*)&usart_rxbuf[cmd_pos+CMD_OFFSET_LEN+1]);
+}
+
 uint8_t sendToGUI(const char* data, uint16_t len)
 {
     usartSendI(GUI_USART, data, len);
@@ -105,15 +111,15 @@ uint8_t processCmd(uint8_t cmd)
         case CMD_SEND_DIAG:
             sendDiag();
             break;
-
         case CMD_SEND_INFO:
             sendInfo();
             break;
-
         case CMD_SEND_SETTINGS:
             sendSettings();
             break;
-
+        case CMD_SAVE_SETTINGS:
+            saveSettings();
+            break;
         default:
             return 1;
     }
