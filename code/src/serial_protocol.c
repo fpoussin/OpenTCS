@@ -31,17 +31,19 @@ void startSerialCom(void)
 
         if (!update) continue;
 
-        update = 0;
         if ((cmd_pos = searchBuffer()) >= 0)
         {
-            cmd = usart_rxbuf[cmd_pos+CMD_OFFSET_CMD];
-            len = usart_rxbuf[cmd_pos+CMD_OFFSET_LEN];
-            checksum  = usart_rxbuf[cmd_pos+len+2];
+            cmd = usart_rxbuf[cmd_pos+CMD_OFFSET_CMD]; /* Command to process */
+            len = usart_rxbuf[cmd_pos+CMD_OFFSET_LEN]; /* Total length */
+            checksum  = usart_rxbuf[cmd_pos+len]; /* CS is at the end */
 
-            /* Verify checksum and continue if fails
+            /* Verify checksum and restart loop if fails
              * maybe some data is still missing? */
             if (checksum != doChecksum(&usart_rxbuf[cmd_pos], len))
                 continue;
+
+            /* we got the data and it is valid */
+            update = 0;
 
             processCmd(cmd);
 
