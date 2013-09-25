@@ -24,6 +24,9 @@ private slots:
     void loadConfig(void);
     void saveConfig(void);
 
+    void getConfig(void);
+    void applyConfig(void);
+
 private:
     Ui::MainWindow *ui;
 

@@ -94,7 +94,7 @@ CSRC = $(PORTSRC) \
        src/light.c src/ignition.c src/adc_start.c src/display.c \
        src/ssd1306.c src/smallfonts.c src/sensors.c \
        src/settings.c src/menu.c src/communications.c \
-       src/control.c
+       src/control.c src/serial_protocol.c
 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global

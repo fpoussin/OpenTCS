@@ -216,7 +216,7 @@ uint8_t getCurGearIdx(void)
     uint16_t ratio;
     uint32_t speed;
 
-    for(i=0; i<6; i++)
+    for(i=0; i<5; i++)
     {
         speed = sensors.speed*100;
         ratio = speed / sensors.rpm;

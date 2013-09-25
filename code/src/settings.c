@@ -6,7 +6,7 @@
 #define FLASH_USER_START_ADDR   (SETTINGS_ADDRESS) /* Start @ of user Flash area */
 #define FLASH_USER_END_ADDR     (SETTINGS_ADDRESS+FLASH_PAGE_SIZE) /* End @ of user Flash area */
 
-settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0, {0}, {0}}, 0};
+settings_t settings = { {0, 0, 0, 0, 0, 0, 0, 0, {0}, {0}, {0}}, 0};
 const settings_t default_settings = {
     {SETTINGS_FUNCTION_SHIFTER | SETTINGS_FUNCTION_LED,
      SETTINGS_CUT_DISABLED, /* Cut type */
@@ -15,9 +15,10 @@ const settings_t default_settings = {
      30, /* Sensor gain */
      SETTINGS_SENSOR_NORMAL, /* Sensor direction */
      30, /* Min Speed */
-     3000, /* Min RPM */
-     {0},
-     {120,80,60,50,50,50} /* cut time by gear in ms */
+     4000, /* Min RPM for shifter */
+     {0,0,0,0,0,0}, /* Gears ratio */
+     {70,60,60,55,50}, /* Cut time by gear in ms */
+     {120,100,85,70,70} /* TC trim by gear in percent */
     },
     0}; /* CRC */
 

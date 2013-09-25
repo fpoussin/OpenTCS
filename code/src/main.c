@@ -87,15 +87,15 @@ THD_FUNCTION(Thread4, arg)
     startSensors();
 }
 
-///*
-// * Thread 5.
-// */
-//NIL_WORKING_AREA(waThread5, 128);
-//THD_FUNCTION(Thread5, arg)
-//{
-//    (void)arg;
-//    startControl();
-//}
+/*
+ * Thread 5.
+ */
+THD_WORKING_AREA(waThread5, 128);
+THD_FUNCTION(Thread5, arg)
+{
+    (void)arg;
+    startSerialCom();
+}
 
 /*
  * Threads static table, one entry per thread. The number of entries must
@@ -107,7 +107,7 @@ THD_TABLE_BEGIN
     THD_TABLE_ENTRY(waThread2, "Display", Thread2, NULL)
     THD_TABLE_ENTRY(waThread3, "Ignition", Thread3, NULL)
     THD_TABLE_ENTRY(waThread4, "Sensors", Thread4, NULL)
-//    THD_TABLE_ENTRY(waThread5, "Control", Thread5, NULL)
+    THD_TABLE_ENTRY(waThread5, "Serial Com", Thread5, NULL)
 THD_TABLE_END
 
 /*

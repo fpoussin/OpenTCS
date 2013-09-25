@@ -6,9 +6,6 @@
 #define SPI_TIMEOUT 100 /* ms */
 #define USART_TIMEOUT 100 /* ms */
 
-#define USART_TXBUF_SIZE 48
-#define USART_RXBUF_SIZE 32
-
 #define DMA_REMAP_USART TRUE
 #define DMA_CHANNEL_USART1_TX DMA1_Channel4
 #define DMA_CTCIF_USART1_TX DMA_IFCR_CTCIF4
@@ -32,6 +29,8 @@ semaphore_t i2c1_semI, i2c1_semS;
 
 char usart_txbuf[USART_TXBUF_SIZE];
 char usart_rxbuf[USART_RXBUF_SIZE];
+
+char serial_dbg = 1;
 
 void i2cInit(I2C_TypeDef* I2Cx)
 {
@@ -161,10 +160,13 @@ void usartInit(USART_TypeDef* USARTx)
     DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
     DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
     DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
     DMA_Init(DMA_CHANNEL_USART1_RX, &DMA_InitStructure);
 
     /* Enable the USART Rx DMA request */
     USART_DMACmd(USARTx, USART_DMAReq_Rx, ENABLE);
+    DMA_ITConfig(DMA_CHANNEL_USART1_RX, DMA_IT_TC, ENABLE);
+    NVIC_EnableIRQ(DMA1_Channel4_5_IRQn);
 
     /* Enable the DMA channel */
     DMA_Cmd(DMA_CHANNEL_USART1_RX, ENABLE);
@@ -245,7 +247,8 @@ void usartPrintString(USART_TypeDef* USARTx, const char* str)
 
 void serDbg(const char* str)
 {
-    usartPrintString(DBG_USART, str);
+    if (serial_dbg)
+        usartPrintString(DBG_USART, str);
 }
 
 void spiInit(SPI_TypeDef* SPIx)

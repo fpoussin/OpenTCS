@@ -58,6 +58,15 @@ void itoa(int n, char s[]);
 extern semaphore_t usart1_sem;
 extern semaphore_t spi1_sem;
 extern semaphore_t i2c1_sem;
+extern char serial_dbg;
+
+/* Communications */
+
+#define USART_TXBUF_SIZE 64
+#define USART_RXBUF_SIZE 64
+
+extern char usart_txbuf[USART_TXBUF_SIZE];
+extern char usart_rxbuf[USART_RXBUF_SIZE];
 
 void spiInit(SPI_TypeDef* SPIx);
 uint8_t spiSendS(SPI_TypeDef* SPIx, uint8_t* buffer, uint16_t len);
@@ -72,6 +81,8 @@ uint8_t usartSendI(USART_TypeDef* USARTx, const char *buffer, uint16_t len);
 uint8_t usartSendS(USART_TypeDef* USARTx, const char *buffer, uint16_t len);
 inline void usartPrintString(USART_TypeDef* USARTx, const char *str);
 inline void serDbg(const char *str);
+
+/* End of Communications */
 
 /* Last flash page is used to store settings */
 #define SETTINGS_FUNCTION_TC 0x1
@@ -97,7 +108,8 @@ struct __settings {
         uint16_t min_speed;
         uint16_t min_rpm;
         uint16_t gears_ratio[6];
-        uint8_t  gears_cut_time[6];
+        uint8_t  gears_cut_time[5];
+        uint8_t  tc_gear_trim[6];
     } data;
     uint32_t CRCValue;
 };
@@ -200,5 +212,11 @@ void startSensors(void) __attribute__ ((noreturn));
 uint8_t getCurCutTime(void);
 
 /* End of Sensors */
+
+/* Serial protocol */
+
+void startSerialCom(void) __attribute__ ((noreturn));
+
+/* End of Serial protocol */
 
 #endif
