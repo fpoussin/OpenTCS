@@ -16,9 +16,9 @@ const settings_t default_settings = {
      SETTINGS_SENSOR_NORMAL, /* Sensor direction */
      30, /* Min Speed */
      4000, /* Min RPM for shifter */
-     {0,0,0,0,0,0}, /* Gears ratio */
-     {70,60,60,55,50}, /* Cut time by gear in ms */
-     {120,100,85,70,70} /* TC trim by gear in percent */
+     {6,{0,0,0,0,0,0}}, /* Gears ratio */
+     {5,{70,60,60,55,50}}, /* Cut time by gear in ms */
+     {6,{120,100,85,70,70}} /* TC trim by gear in percent */
     },
     0}; /* CRC */
 

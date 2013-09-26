@@ -217,3 +217,8 @@ src/serial_protocol.c
 ../common/inc/pb.h
 ../common/src/pb_encode.c
 ../common/src/pb_decode.c
+../common/inc/pb_encode.h
+../common/inc/nanopb.pb.h
+../common/inc/messages.pb.h
+../common/src/nanopb.pb.c
+../common/src/messages.pb.c

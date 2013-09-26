@@ -1,5 +1,9 @@
 #include "threads.h"
 #include "string.h"
+#include "pb.h"
+#include "pb_encode.h"
+#include "pb_decode.h"
+
 
 #define GUI_USART USART1
 
@@ -15,12 +19,13 @@
 #define CMD_SAVE_SETTINGS 0x04
 
 uint8_t sendToGUI(const char *data, uint16_t len);
-uint8_t processCmd(uint8_t cmd);
+uint8_t processCmd(uint8_t cmd, uint8_t len);
 int8_t searchBuffer(void);
 uint8_t doChecksum(const char * buf, uint8_t len);
 
 int8_t cmd_pos;
 uint8_t update = 0;
+uint8_t pb_buffer[settings_t_size+4]; /* Set to max structure size */
 
 void startSerialCom(void)
 {
@@ -43,10 +48,10 @@ void startSerialCom(void)
             if (checksum != doChecksum(&usart_rxbuf[cmd_pos], len))
                 continue;
 
-            /* we got the data and it is valid */
+            /* We got the data and it is valid */
             update = 0;
 
-            processCmd(cmd);
+            processCmd(cmd, len);
 
             /* Clear buffer */
             memset(usart_rxbuf, 0, USART_RXBUF_SIZE);
@@ -79,22 +84,38 @@ int8_t searchBuffer(void)
 
 void sendDiag(void)
 {
-    sendToGUI((const char*)&sensors, sizeof(sensors));
+    pb_ostream_t stream = pb_ostream_from_buffer(pb_buffer, sizeof(pb_buffer));
+
+    pb_encode(&stream, sensors_t_fields, &sensors);
+
+    sendToGUI((const char*)&pb_buffer, stream.bytes_written);
 }
 
 void sendInfo(void)
 {
-    sendToGUI((const char*)&status, sizeof(status));
+    pb_ostream_t stream = pb_ostream_from_buffer(pb_buffer, sizeof(pb_buffer));
+
+    pb_encode(&stream, status_t_fields, &status);
+
+    sendToGUI((const char*)&pb_buffer, stream.bytes_written);
 }
 
 void sendSettings(void)
 {
-    sendToGUI((const char*)&settings.data, sizeof(settings.data));
+    pb_ostream_t stream = pb_ostream_from_buffer(pb_buffer, sizeof(pb_buffer));
+
+    pb_encode(&stream, settings_t_fields, &settings);
+
+    sendToGUI((const char*)&pb_buffer, stream.bytes_written);
 }
 
-void saveSettings(void)
+void saveSettings(uint8_t len)
 {
-    writeSettings((settings_t*)&usart_rxbuf[cmd_pos+CMD_OFFSET_LEN+1]);
+    pb_istream_t stream = pb_istream_from_buffer((uint8_t*)&usart_rxbuf[cmd_pos+CMD_OFFSET_LEN+1], len-4);
+
+    pb_decode(&stream, settings_t_fields, &settings);
+
+    writeSettings(&settings);
 }
 
 uint8_t sendToGUI(const char* data, uint16_t len)
@@ -104,7 +125,7 @@ uint8_t sendToGUI(const char* data, uint16_t len)
     return 0;
 }
 
-uint8_t processCmd(uint8_t cmd)
+uint8_t processCmd(uint8_t cmd, uint8_t len)
 {
     switch (cmd)
     {
@@ -118,7 +139,7 @@ uint8_t processCmd(uint8_t cmd)
             sendSettings();
             break;
         case CMD_SAVE_SETTINGS:
-            saveSettings();
+            saveSettings(len);
             break;
         default:
             return 1;

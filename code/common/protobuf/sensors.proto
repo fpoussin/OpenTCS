@@ -1,6 +1,0 @@
-
-
-message Sensors {
-    required int32 lucky_number = 1;
-}
-

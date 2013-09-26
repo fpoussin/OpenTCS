@@ -4,6 +4,7 @@
 #include "hal.h"
 #include "nil.h"
 #include "stm32f0xx.h"
+#include "messages.pb.h"
 
 #define DBG_USART USART1
 
@@ -96,26 +97,7 @@ inline void serDbg(const char *str);
 #define SETTINGS_SENSOR_NORMAL 0
 #define SETTINGS_SENSOR_REVERSE 1
 
-struct __settings {
-
-    struct {
-        uint8_t  functions;
-        uint8_t  cut_type;
-        uint16_t sensor_threshold;
-        uint16_t slip_threshold;
-        uint8_t  sensor_gain;
-        uint8_t  sensor_direction;
-        uint16_t min_speed;
-        uint16_t min_rpm;
-        uint16_t gears_ratio[6];
-        uint8_t  gears_cut_time[5];
-        uint8_t  tc_gear_trim[6];
-    } data;
-    uint32_t CRCValue;
-};
-typedef struct __settings settings_t;
 extern settings_t settings;
-
 
 void settingsInit(void);
 settings_t readSettings(void);
@@ -126,13 +108,6 @@ uint8_t writeSettings(settings_t* st);
 
 /* CONTROL */
 
-struct __status {
-    uint8_t shifting:1;
-    uint8_t slipping:1;
-    int16_t slipping_pct;
-    uint8_t acceleration;
-};
-typedef struct __status status_t;
 extern status_t status;
 void startControl(void) __attribute__ ((noreturn));
 
@@ -144,14 +119,8 @@ void startControl(void) __attribute__ ((noreturn));
 #define LIGHT_STATE_BLINK 2
 #define LIGHT_STATE_PULSE 3
 
-void startLight(void) __attribute__ ((noreturn));
-struct __light_settings {
-
-    uint8_t state; /* Light state (Blink?) */
-    uint16_t duration; /* Duration/interval in ms */
-};
-typedef struct __light_settings light_settings_t;
 extern light_settings_t light_settings;
+void startLight(void) __attribute__ ((noreturn));
 
 /* End of Light */
 
@@ -162,11 +131,6 @@ extern light_settings_t light_settings;
 
 #define ADC_CHANNELS 4
 
-struct __adc_status {
-    uint8_t status;
-};
-typedef struct __adc_status adc_status_t;
-extern adc_status_t adc_status;
 extern uint16_t adc_samples[32];
 
 void startAdc(void);
@@ -198,14 +162,6 @@ void startDisplay(void) __attribute__ ((noreturn));
 #define SENSORS_OFF 0
 #define SENSORS_ON 1
 
-struct __sensors {
-    uint16_t rpm;
-    uint16_t speed;
-    uint16_t strain_gauge;
-    uint16_t tc_switch;
-    uint16_t vbat;
-};
-typedef struct __sensors sensors_t;
 extern sensors_t sensors;
 
 void startSensors(void) __attribute__ ((noreturn));

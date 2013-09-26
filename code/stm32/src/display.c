@@ -258,7 +258,7 @@ void setGears(void)
             chThdSleepMilliseconds(100);
         }
 
-        settings.data.gears_ratio[i] = cur_ratio-(cur_ratio/100);
+        settings.data.gears_ratio.bytes[i] = cur_ratio-(cur_ratio/100);
         last_ratio = cur_ratio;
     }
 

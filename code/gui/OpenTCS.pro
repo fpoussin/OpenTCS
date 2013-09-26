@@ -18,16 +18,19 @@ SOURCES += src/main.cpp\
     src/tcscom.cpp \
     src/bootloader.cpp \
     ../common/src/pb_encode.c \
-    ../common/src/pb_decode.c
+    ../common/src/pb_decode.c \
+    ../common/src/nanopb.pb.c \
+    ../common/src/messages.pb.c
 
 HEADERS  += inc/mainwindow.h \
     inc/ftdi.h \
-    inc/structs.h \
     inc/tcscom.h \
     inc/bootloader.h \
     ../common/inc/pb_encode.h \
     ../common/inc/pb_decode.h \
-    ../common/inc/pb.h
+    ../common/inc/pb.h \
+    ../common/inc/nanopb.pb.h \
+    ../common/inc/messages.pb.h
 
 FORMS    += ui/mainwindow.ui
 

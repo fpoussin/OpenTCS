@@ -1,6 +1,0 @@
-
-
-message Status {
-    required int32 lucky_number = 1;
-}
-

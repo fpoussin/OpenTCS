@@ -95,7 +95,8 @@ CSRC = $(PORTSRC) \
        src/ssd1306.c src/smallfonts.c src/sensors.c \
        src/settings.c src/menu.c src/communications.c \
        src/control.c src/serial_protocol.c \
-       ../common/src/pb_decode.c ../common/src/pb_encode.c
+       ../common/src/pb_decode.c ../common/src/pb_encode.c \
+       ../common/src/nanopb.pb.c ../common/src/messages.pb.c
 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
@@ -128,7 +129,7 @@ ASMSRC = $(PORTASM)
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(OSALINC) $(PLATFORMINC) \
          inc lib/STM32F0xx_StdPeriph_Driver/inc/ lib \
-         ../common/inc/
+         ../common/inc
 
 #
 # Project, sources and paths

@@ -1,7 +1,6 @@
 #include "nil.h"
 #include "threads.h"
 
-adc_status_t adc_status = { ADC_STOPPED };
 uint16_t adc_samples[32];
 
 void startAdc(void)
@@ -64,8 +63,6 @@ void startAdc(void)
 
     /* ADC1 regular Software Start Conv */
     ADC_StartOfConversion(ADC1);
-
-    adc_status.status = ADC_STARTED;
 
     serDbg("startAdc Complete\r\n");
 }

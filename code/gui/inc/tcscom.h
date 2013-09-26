@@ -2,8 +2,11 @@
 #define TCSCOM_H
 
 #include <QObject>
-#include "structs.h"
 #include "bootloader.h"
+#include "pb.h"
+#include "pb_decode.h"
+#include "pb_encode.h"
+#include "messages.pb.h"
 
 #define SER_MAGIC1 0xAB
 #define SER_MAGIC2 0xCD
@@ -43,7 +46,10 @@ private:
     status_t status;
     sensors_t sensors;
     light_settings_t light_settings;
-    
+    quint8 pb_obuffer[256];
+    quint8 pb_ibuffer[256];
+    pb_ostream_t pb_ostream;
+    pb_istream_t pb_istream;
 };
 
 #endif // TCSCOM_H

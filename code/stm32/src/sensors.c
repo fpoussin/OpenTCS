@@ -222,7 +222,7 @@ uint8_t getCurGearIdx(void)
         ratio = speed / sensors.rpm;
 
         /* Ration increases with upper gears */
-        if (ratio >= settings.data.gears_ratio[i])
+        if (ratio >= settings.data.gears_ratio.bytes[i])
         {
             return i;
         }
@@ -234,7 +234,7 @@ uint8_t getCurCutTime(void)
 {
     const uint8_t gear = getCurGearIdx();
 
-    return settings.data.gears_cut_time[gear];
+    return settings.data.gears_cut_time.bytes[gear];
 }
 
 uint8_t setPotGain(uint8_t gain)
