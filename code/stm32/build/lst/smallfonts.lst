@@ -1,0 +1,4088 @@
+ARM GAS  /tmp/ccIBqRvA.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"smallfonts.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	au8Font8x8Thin
+  18              		.global	au8Font8x8
+  19              		.global	au8FontSystem7x8
+  20              		.global	au8FontSystem5x8
+  21              		.global	au8FontSystem3x6
+  22              		.global	Font_8x8Thin
+  23              		.global	Font_8x8
+  24              		.global	Font_System7x8
+  25              		.global	Font_System5x8
+  26              		.global	Font_System3x6
+  27              		.section	.rodata.au8FontSystem5x8,"a",%progbits
+  28              		.type	au8FontSystem5x8, %object
+  29              		.size	au8FontSystem5x8, 485
+  30              	au8FontSystem5x8:
+  31 0000 00       		.byte	0
+  32 0001 00       		.byte	0
+  33 0002 00       		.byte	0
+  34 0003 00       		.byte	0
+  35 0004 00       		.byte	0
+  36 0005 00       		.byte	0
+  37 0006 00       		.byte	0
+  38 0007 4F       		.byte	79
+  39 0008 00       		.byte	0
+  40 0009 00       		.byte	0
+  41 000a 00       		.byte	0
+  42 000b 07       		.byte	7
+  43 000c 00       		.byte	0
+  44 000d 07       		.byte	7
+  45 000e 00       		.byte	0
+  46 000f 14       		.byte	20
+  47 0010 7F       		.byte	127
+  48 0011 14       		.byte	20
+  49 0012 7F       		.byte	127
+  50 0013 14       		.byte	20
+  51 0014 24       		.byte	36
+  52 0015 2A       		.byte	42
+  53 0016 7F       		.byte	127
+  54 0017 2A       		.byte	42
+  55 0018 12       		.byte	18
+  56 0019 23       		.byte	35
+  57 001a 13       		.byte	19
+ARM GAS  /tmp/ccIBqRvA.s 			page 2
+
+
+  58 001b 08       		.byte	8
+  59 001c 64       		.byte	100
+  60 001d 62       		.byte	98
+  61 001e 36       		.byte	54
+  62 001f 49       		.byte	73
+  63 0020 55       		.byte	85
+  64 0021 22       		.byte	34
+  65 0022 20       		.byte	32
+  66 0023 00       		.byte	0
+  67 0024 05       		.byte	5
+  68 0025 03       		.byte	3
+  69 0026 00       		.byte	0
+  70 0027 00       		.byte	0
+  71 0028 00       		.byte	0
+  72 0029 1C       		.byte	28
+  73 002a 22       		.byte	34
+  74 002b 41       		.byte	65
+  75 002c 00       		.byte	0
+  76 002d 00       		.byte	0
+  77 002e 41       		.byte	65
+  78 002f 22       		.byte	34
+  79 0030 1C       		.byte	28
+  80 0031 00       		.byte	0
+  81 0032 14       		.byte	20
+  82 0033 08       		.byte	8
+  83 0034 3E       		.byte	62
+  84 0035 08       		.byte	8
+  85 0036 14       		.byte	20
+  86 0037 08       		.byte	8
+  87 0038 08       		.byte	8
+  88 0039 3E       		.byte	62
+  89 003a 08       		.byte	8
+  90 003b 08       		.byte	8
+  91 003c 50       		.byte	80
+  92 003d 30       		.byte	48
+  93 003e 00       		.byte	0
+  94 003f 00       		.byte	0
+  95 0040 00       		.byte	0
+  96 0041 08       		.byte	8
+  97 0042 08       		.byte	8
+  98 0043 08       		.byte	8
+  99 0044 08       		.byte	8
+ 100 0045 08       		.byte	8
+ 101 0046 00       		.byte	0
+ 102 0047 60       		.byte	96
+ 103 0048 60       		.byte	96
+ 104 0049 00       		.byte	0
+ 105 004a 00       		.byte	0
+ 106 004b 20       		.byte	32
+ 107 004c 10       		.byte	16
+ 108 004d 08       		.byte	8
+ 109 004e 04       		.byte	4
+ 110 004f 02       		.byte	2
+ 111 0050 3E       		.byte	62
+ 112 0051 51       		.byte	81
+ 113 0052 49       		.byte	73
+ 114 0053 45       		.byte	69
+ARM GAS  /tmp/ccIBqRvA.s 			page 3
+
+
+ 115 0054 3E       		.byte	62
+ 116 0055 00       		.byte	0
+ 117 0056 42       		.byte	66
+ 118 0057 7F       		.byte	127
+ 119 0058 40       		.byte	64
+ 120 0059 00       		.byte	0
+ 121 005a 42       		.byte	66
+ 122 005b 61       		.byte	97
+ 123 005c 51       		.byte	81
+ 124 005d 49       		.byte	73
+ 125 005e 46       		.byte	70
+ 126 005f 21       		.byte	33
+ 127 0060 41       		.byte	65
+ 128 0061 45       		.byte	69
+ 129 0062 4B       		.byte	75
+ 130 0063 31       		.byte	49
+ 131 0064 18       		.byte	24
+ 132 0065 14       		.byte	20
+ 133 0066 12       		.byte	18
+ 134 0067 7F       		.byte	127
+ 135 0068 10       		.byte	16
+ 136 0069 27       		.byte	39
+ 137 006a 45       		.byte	69
+ 138 006b 45       		.byte	69
+ 139 006c 45       		.byte	69
+ 140 006d 39       		.byte	57
+ 141 006e 3C       		.byte	60
+ 142 006f 4A       		.byte	74
+ 143 0070 49       		.byte	73
+ 144 0071 49       		.byte	73
+ 145 0072 30       		.byte	48
+ 146 0073 01       		.byte	1
+ 147 0074 71       		.byte	113
+ 148 0075 09       		.byte	9
+ 149 0076 05       		.byte	5
+ 150 0077 03       		.byte	3
+ 151 0078 36       		.byte	54
+ 152 0079 49       		.byte	73
+ 153 007a 49       		.byte	73
+ 154 007b 49       		.byte	73
+ 155 007c 36       		.byte	54
+ 156 007d 06       		.byte	6
+ 157 007e 49       		.byte	73
+ 158 007f 49       		.byte	73
+ 159 0080 29       		.byte	41
+ 160 0081 1E       		.byte	30
+ 161 0082 00       		.byte	0
+ 162 0083 36       		.byte	54
+ 163 0084 36       		.byte	54
+ 164 0085 00       		.byte	0
+ 165 0086 00       		.byte	0
+ 166 0087 00       		.byte	0
+ 167 0088 56       		.byte	86
+ 168 0089 36       		.byte	54
+ 169 008a 00       		.byte	0
+ 170 008b 00       		.byte	0
+ 171 008c 08       		.byte	8
+ARM GAS  /tmp/ccIBqRvA.s 			page 4
+
+
+ 172 008d 14       		.byte	20
+ 173 008e 22       		.byte	34
+ 174 008f 41       		.byte	65
+ 175 0090 00       		.byte	0
+ 176 0091 14       		.byte	20
+ 177 0092 14       		.byte	20
+ 178 0093 14       		.byte	20
+ 179 0094 14       		.byte	20
+ 180 0095 14       		.byte	20
+ 181 0096 00       		.byte	0
+ 182 0097 41       		.byte	65
+ 183 0098 22       		.byte	34
+ 184 0099 14       		.byte	20
+ 185 009a 08       		.byte	8
+ 186 009b 02       		.byte	2
+ 187 009c 01       		.byte	1
+ 188 009d 51       		.byte	81
+ 189 009e 09       		.byte	9
+ 190 009f 06       		.byte	6
+ 191 00a0 3E       		.byte	62
+ 192 00a1 41       		.byte	65
+ 193 00a2 5D       		.byte	93
+ 194 00a3 55       		.byte	85
+ 195 00a4 1E       		.byte	30
+ 196 00a5 7E       		.byte	126
+ 197 00a6 11       		.byte	17
+ 198 00a7 11       		.byte	17
+ 199 00a8 11       		.byte	17
+ 200 00a9 7E       		.byte	126
+ 201 00aa 7F       		.byte	127
+ 202 00ab 49       		.byte	73
+ 203 00ac 49       		.byte	73
+ 204 00ad 49       		.byte	73
+ 205 00ae 36       		.byte	54
+ 206 00af 3E       		.byte	62
+ 207 00b0 41       		.byte	65
+ 208 00b1 41       		.byte	65
+ 209 00b2 41       		.byte	65
+ 210 00b3 22       		.byte	34
+ 211 00b4 7F       		.byte	127
+ 212 00b5 41       		.byte	65
+ 213 00b6 41       		.byte	65
+ 214 00b7 22       		.byte	34
+ 215 00b8 1C       		.byte	28
+ 216 00b9 7F       		.byte	127
+ 217 00ba 49       		.byte	73
+ 218 00bb 49       		.byte	73
+ 219 00bc 49       		.byte	73
+ 220 00bd 41       		.byte	65
+ 221 00be 7F       		.byte	127
+ 222 00bf 09       		.byte	9
+ 223 00c0 09       		.byte	9
+ 224 00c1 09       		.byte	9
+ 225 00c2 01       		.byte	1
+ 226 00c3 3E       		.byte	62
+ 227 00c4 41       		.byte	65
+ 228 00c5 49       		.byte	73
+ARM GAS  /tmp/ccIBqRvA.s 			page 5
+
+
+ 229 00c6 49       		.byte	73
+ 230 00c7 7A       		.byte	122
+ 231 00c8 7F       		.byte	127
+ 232 00c9 08       		.byte	8
+ 233 00ca 08       		.byte	8
+ 234 00cb 08       		.byte	8
+ 235 00cc 7F       		.byte	127
+ 236 00cd 00       		.byte	0
+ 237 00ce 41       		.byte	65
+ 238 00cf 7F       		.byte	127
+ 239 00d0 41       		.byte	65
+ 240 00d1 00       		.byte	0
+ 241 00d2 20       		.byte	32
+ 242 00d3 40       		.byte	64
+ 243 00d4 41       		.byte	65
+ 244 00d5 3F       		.byte	63
+ 245 00d6 01       		.byte	1
+ 246 00d7 7F       		.byte	127
+ 247 00d8 08       		.byte	8
+ 248 00d9 14       		.byte	20
+ 249 00da 22       		.byte	34
+ 250 00db 41       		.byte	65
+ 251 00dc 7F       		.byte	127
+ 252 00dd 40       		.byte	64
+ 253 00de 40       		.byte	64
+ 254 00df 40       		.byte	64
+ 255 00e0 40       		.byte	64
+ 256 00e1 7F       		.byte	127
+ 257 00e2 02       		.byte	2
+ 258 00e3 0C       		.byte	12
+ 259 00e4 02       		.byte	2
+ 260 00e5 7F       		.byte	127
+ 261 00e6 7F       		.byte	127
+ 262 00e7 04       		.byte	4
+ 263 00e8 08       		.byte	8
+ 264 00e9 10       		.byte	16
+ 265 00ea 7F       		.byte	127
+ 266 00eb 3E       		.byte	62
+ 267 00ec 41       		.byte	65
+ 268 00ed 41       		.byte	65
+ 269 00ee 41       		.byte	65
+ 270 00ef 3E       		.byte	62
+ 271 00f0 7F       		.byte	127
+ 272 00f1 09       		.byte	9
+ 273 00f2 09       		.byte	9
+ 274 00f3 09       		.byte	9
+ 275 00f4 06       		.byte	6
+ 276 00f5 3E       		.byte	62
+ 277 00f6 41       		.byte	65
+ 278 00f7 51       		.byte	81
+ 279 00f8 21       		.byte	33
+ 280 00f9 5E       		.byte	94
+ 281 00fa 7F       		.byte	127
+ 282 00fb 09       		.byte	9
+ 283 00fc 19       		.byte	25
+ 284 00fd 29       		.byte	41
+ 285 00fe 46       		.byte	70
+ARM GAS  /tmp/ccIBqRvA.s 			page 6
+
+
+ 286 00ff 26       		.byte	38
+ 287 0100 49       		.byte	73
+ 288 0101 49       		.byte	73
+ 289 0102 49       		.byte	73
+ 290 0103 32       		.byte	50
+ 291 0104 01       		.byte	1
+ 292 0105 01       		.byte	1
+ 293 0106 7F       		.byte	127
+ 294 0107 01       		.byte	1
+ 295 0108 01       		.byte	1
+ 296 0109 3F       		.byte	63
+ 297 010a 40       		.byte	64
+ 298 010b 40       		.byte	64
+ 299 010c 40       		.byte	64
+ 300 010d 3F       		.byte	63
+ 301 010e 1F       		.byte	31
+ 302 010f 20       		.byte	32
+ 303 0110 40       		.byte	64
+ 304 0111 20       		.byte	32
+ 305 0112 1F       		.byte	31
+ 306 0113 3F       		.byte	63
+ 307 0114 40       		.byte	64
+ 308 0115 38       		.byte	56
+ 309 0116 40       		.byte	64
+ 310 0117 3F       		.byte	63
+ 311 0118 63       		.byte	99
+ 312 0119 14       		.byte	20
+ 313 011a 08       		.byte	8
+ 314 011b 14       		.byte	20
+ 315 011c 63       		.byte	99
+ 316 011d 07       		.byte	7
+ 317 011e 08       		.byte	8
+ 318 011f 70       		.byte	112
+ 319 0120 08       		.byte	8
+ 320 0121 07       		.byte	7
+ 321 0122 61       		.byte	97
+ 322 0123 51       		.byte	81
+ 323 0124 49       		.byte	73
+ 324 0125 45       		.byte	69
+ 325 0126 43       		.byte	67
+ 326 0127 00       		.byte	0
+ 327 0128 7F       		.byte	127
+ 328 0129 41       		.byte	65
+ 329 012a 41       		.byte	65
+ 330 012b 00       		.byte	0
+ 331 012c 02       		.byte	2
+ 332 012d 04       		.byte	4
+ 333 012e 08       		.byte	8
+ 334 012f 10       		.byte	16
+ 335 0130 20       		.byte	32
+ 336 0131 00       		.byte	0
+ 337 0132 41       		.byte	65
+ 338 0133 41       		.byte	65
+ 339 0134 7F       		.byte	127
+ 340 0135 00       		.byte	0
+ 341 0136 04       		.byte	4
+ 342 0137 02       		.byte	2
+ARM GAS  /tmp/ccIBqRvA.s 			page 7
+
+
+ 343 0138 01       		.byte	1
+ 344 0139 02       		.byte	2
+ 345 013a 04       		.byte	4
+ 346 013b 40       		.byte	64
+ 347 013c 40       		.byte	64
+ 348 013d 40       		.byte	64
+ 349 013e 40       		.byte	64
+ 350 013f 40       		.byte	64
+ 351 0140 00       		.byte	0
+ 352 0141 00       		.byte	0
+ 353 0142 03       		.byte	3
+ 354 0143 05       		.byte	5
+ 355 0144 00       		.byte	0
+ 356 0145 20       		.byte	32
+ 357 0146 54       		.byte	84
+ 358 0147 54       		.byte	84
+ 359 0148 54       		.byte	84
+ 360 0149 78       		.byte	120
+ 361 014a 7F       		.byte	127
+ 362 014b 44       		.byte	68
+ 363 014c 44       		.byte	68
+ 364 014d 44       		.byte	68
+ 365 014e 38       		.byte	56
+ 366 014f 38       		.byte	56
+ 367 0150 44       		.byte	68
+ 368 0151 44       		.byte	68
+ 369 0152 44       		.byte	68
+ 370 0153 44       		.byte	68
+ 371 0154 38       		.byte	56
+ 372 0155 44       		.byte	68
+ 373 0156 44       		.byte	68
+ 374 0157 44       		.byte	68
+ 375 0158 7F       		.byte	127
+ 376 0159 38       		.byte	56
+ 377 015a 54       		.byte	84
+ 378 015b 54       		.byte	84
+ 379 015c 54       		.byte	84
+ 380 015d 18       		.byte	24
+ 381 015e 04       		.byte	4
+ 382 015f 04       		.byte	4
+ 383 0160 7E       		.byte	126
+ 384 0161 05       		.byte	5
+ 385 0162 05       		.byte	5
+ 386 0163 08       		.byte	8
+ 387 0164 54       		.byte	84
+ 388 0165 54       		.byte	84
+ 389 0166 54       		.byte	84
+ 390 0167 3C       		.byte	60
+ 391 0168 7F       		.byte	127
+ 392 0169 08       		.byte	8
+ 393 016a 04       		.byte	4
+ 394 016b 04       		.byte	4
+ 395 016c 78       		.byte	120
+ 396 016d 00       		.byte	0
+ 397 016e 44       		.byte	68
+ 398 016f 7D       		.byte	125
+ 399 0170 40       		.byte	64
+ARM GAS  /tmp/ccIBqRvA.s 			page 8
+
+
+ 400 0171 00       		.byte	0
+ 401 0172 20       		.byte	32
+ 402 0173 40       		.byte	64
+ 403 0174 44       		.byte	68
+ 404 0175 3D       		.byte	61
+ 405 0176 00       		.byte	0
+ 406 0177 7F       		.byte	127
+ 407 0178 10       		.byte	16
+ 408 0179 28       		.byte	40
+ 409 017a 44       		.byte	68
+ 410 017b 00       		.byte	0
+ 411 017c 00       		.byte	0
+ 412 017d 41       		.byte	65
+ 413 017e 7F       		.byte	127
+ 414 017f 40       		.byte	64
+ 415 0180 00       		.byte	0
+ 416 0181 7C       		.byte	124
+ 417 0182 04       		.byte	4
+ 418 0183 7C       		.byte	124
+ 419 0184 04       		.byte	4
+ 420 0185 78       		.byte	120
+ 421 0186 7C       		.byte	124
+ 422 0187 08       		.byte	8
+ 423 0188 04       		.byte	4
+ 424 0189 04       		.byte	4
+ 425 018a 78       		.byte	120
+ 426 018b 38       		.byte	56
+ 427 018c 44       		.byte	68
+ 428 018d 44       		.byte	68
+ 429 018e 44       		.byte	68
+ 430 018f 38       		.byte	56
+ 431 0190 7C       		.byte	124
+ 432 0191 14       		.byte	20
+ 433 0192 14       		.byte	20
+ 434 0193 14       		.byte	20
+ 435 0194 08       		.byte	8
+ 436 0195 08       		.byte	8
+ 437 0196 14       		.byte	20
+ 438 0197 14       		.byte	20
+ 439 0198 14       		.byte	20
+ 440 0199 7C       		.byte	124
+ 441 019a 7C       		.byte	124
+ 442 019b 08       		.byte	8
+ 443 019c 04       		.byte	4
+ 444 019d 04       		.byte	4
+ 445 019e 00       		.byte	0
+ 446 019f 48       		.byte	72
+ 447 01a0 54       		.byte	84
+ 448 01a1 54       		.byte	84
+ 449 01a2 54       		.byte	84
+ 450 01a3 24       		.byte	36
+ 451 01a4 04       		.byte	4
+ 452 01a5 04       		.byte	4
+ 453 01a6 3F       		.byte	63
+ 454 01a7 44       		.byte	68
+ 455 01a8 44       		.byte	68
+ 456 01a9 3C       		.byte	60
+ARM GAS  /tmp/ccIBqRvA.s 			page 9
+
+
+ 457 01aa 40       		.byte	64
+ 458 01ab 40       		.byte	64
+ 459 01ac 20       		.byte	32
+ 460 01ad 7C       		.byte	124
+ 461 01ae 1C       		.byte	28
+ 462 01af 20       		.byte	32
+ 463 01b0 40       		.byte	64
+ 464 01b1 20       		.byte	32
+ 465 01b2 1C       		.byte	28
+ 466 01b3 3C       		.byte	60
+ 467 01b4 40       		.byte	64
+ 468 01b5 30       		.byte	48
+ 469 01b6 40       		.byte	64
+ 470 01b7 3C       		.byte	60
+ 471 01b8 44       		.byte	68
+ 472 01b9 28       		.byte	40
+ 473 01ba 10       		.byte	16
+ 474 01bb 28       		.byte	40
+ 475 01bc 44       		.byte	68
+ 476 01bd 0C       		.byte	12
+ 477 01be 50       		.byte	80
+ 478 01bf 50       		.byte	80
+ 479 01c0 50       		.byte	80
+ 480 01c1 3C       		.byte	60
+ 481 01c2 44       		.byte	68
+ 482 01c3 64       		.byte	100
+ 483 01c4 54       		.byte	84
+ 484 01c5 4C       		.byte	76
+ 485 01c6 44       		.byte	68
+ 486 01c7 08       		.byte	8
+ 487 01c8 36       		.byte	54
+ 488 01c9 41       		.byte	65
+ 489 01ca 41       		.byte	65
+ 490 01cb 00       		.byte	0
+ 491 01cc 00       		.byte	0
+ 492 01cd 00       		.byte	0
+ 493 01ce 77       		.byte	119
+ 494 01cf 00       		.byte	0
+ 495 01d0 00       		.byte	0
+ 496 01d1 00       		.byte	0
+ 497 01d2 41       		.byte	65
+ 498 01d3 41       		.byte	65
+ 499 01d4 36       		.byte	54
+ 500 01d5 08       		.byte	8
+ 501 01d6 08       		.byte	8
+ 502 01d7 08       		.byte	8
+ 503 01d8 2A       		.byte	42
+ 504 01d9 1C       		.byte	28
+ 505 01da 08       		.byte	8
+ 506 01db 08       		.byte	8
+ 507 01dc 1C       		.byte	28
+ 508 01dd 2A       		.byte	42
+ 509 01de 08       		.byte	8
+ 510 01df 08       		.byte	8
+ 511 01e0 FF       		.byte	-1
+ 512 01e1 FF       		.byte	-1
+ 513 01e2 FF       		.byte	-1
+ARM GAS  /tmp/ccIBqRvA.s 			page 10
+
+
+ 514 01e3 FF       		.byte	-1
+ 515 01e4 FF       		.byte	-1
+ 516              		.section	.rodata.Font_8x8Thin,"a",%progbits
+ 517              		.align	2
+ 518              		.type	Font_8x8Thin, %object
+ 519              		.size	Font_8x8Thin, 8
+ 520              	Font_8x8Thin:
+ 521 0000 08       		.byte	8
+ 522 0001 08       		.byte	8
+ 523 0002 20       		.byte	32
+ 524 0003 80       		.byte	-128
+ 525 0004 00000000 		.word	au8Font8x8Thin
+ 526              		.section	.rodata.au8Font8x8,"a",%progbits
+ 527              		.type	au8Font8x8, %object
+ 528              		.size	au8Font8x8, 784
+ 529              	au8Font8x8:
+ 530 0000 00       		.byte	0
+ 531 0001 00       		.byte	0
+ 532 0002 00       		.byte	0
+ 533 0003 00       		.byte	0
+ 534 0004 00       		.byte	0
+ 535 0005 00       		.byte	0
+ 536 0006 00       		.byte	0
+ 537 0007 00       		.byte	0
+ 538 0008 00       		.byte	0
+ 539 0009 00       		.byte	0
+ 540 000a 00       		.byte	0
+ 541 000b 5F       		.byte	95
+ 542 000c 5F       		.byte	95
+ 543 000d 00       		.byte	0
+ 544 000e 00       		.byte	0
+ 545 000f 00       		.byte	0
+ 546 0010 00       		.byte	0
+ 547 0011 00       		.byte	0
+ 548 0012 03       		.byte	3
+ 549 0013 07       		.byte	7
+ 550 0014 00       		.byte	0
+ 551 0015 07       		.byte	7
+ 552 0016 03       		.byte	3
+ 553 0017 00       		.byte	0
+ 554 0018 00       		.byte	0
+ 555 0019 10       		.byte	16
+ 556 001a 74       		.byte	116
+ 557 001b 1C       		.byte	28
+ 558 001c 77       		.byte	119
+ 559 001d 1C       		.byte	28
+ 560 001e 17       		.byte	23
+ 561 001f 04       		.byte	4
+ 562 0020 00       		.byte	0
+ 563 0021 24       		.byte	36
+ 564 0022 2E       		.byte	46
+ 565 0023 2A       		.byte	42
+ 566 0024 7F       		.byte	127
+ 567 0025 2A       		.byte	42
+ 568 0026 3A       		.byte	58
+ 569 0027 10       		.byte	16
+ 570 0028 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 11
+
+
+ 571 0029 4C       		.byte	76
+ 572 002a 6A       		.byte	106
+ 573 002b 76       		.byte	118
+ 574 002c 1A       		.byte	26
+ 575 002d 6A       		.byte	106
+ 576 002e 56       		.byte	86
+ 577 002f 33       		.byte	51
+ 578 0030 00       		.byte	0
+ 579 0031 30       		.byte	48
+ 580 0032 7A       		.byte	122
+ 581 0033 4F       		.byte	79
+ 582 0034 5D       		.byte	93
+ 583 0035 37       		.byte	55
+ 584 0036 7A       		.byte	122
+ 585 0037 48       		.byte	72
+ 586 0038 00       		.byte	0
+ 587 0039 00       		.byte	0
+ 588 003a 04       		.byte	4
+ 589 003b 07       		.byte	7
+ 590 003c 03       		.byte	3
+ 591 003d 00       		.byte	0
+ 592 003e 00       		.byte	0
+ 593 003f 00       		.byte	0
+ 594 0040 00       		.byte	0
+ 595 0041 00       		.byte	0
+ 596 0042 00       		.byte	0
+ 597 0043 1C       		.byte	28
+ 598 0044 3E       		.byte	62
+ 599 0045 63       		.byte	99
+ 600 0046 41       		.byte	65
+ 601 0047 00       		.byte	0
+ 602 0048 00       		.byte	0
+ 603 0049 00       		.byte	0
+ 604 004a 41       		.byte	65
+ 605 004b 63       		.byte	99
+ 606 004c 3E       		.byte	62
+ 607 004d 1C       		.byte	28
+ 608 004e 00       		.byte	0
+ 609 004f 00       		.byte	0
+ 610 0050 00       		.byte	0
+ 611 0051 08       		.byte	8
+ 612 0052 2A       		.byte	42
+ 613 0053 3E       		.byte	62
+ 614 0054 1C       		.byte	28
+ 615 0055 3E       		.byte	62
+ 616 0056 2A       		.byte	42
+ 617 0057 08       		.byte	8
+ 618 0058 00       		.byte	0
+ 619 0059 08       		.byte	8
+ 620 005a 08       		.byte	8
+ 621 005b 3E       		.byte	62
+ 622 005c 3E       		.byte	62
+ 623 005d 08       		.byte	8
+ 624 005e 08       		.byte	8
+ 625 005f 00       		.byte	0
+ 626 0060 00       		.byte	0
+ 627 0061 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 12
+
+
+ 628 0062 00       		.byte	0
+ 629 0063 60       		.byte	96
+ 630 0064 60       		.byte	96
+ 631 0065 00       		.byte	0
+ 632 0066 00       		.byte	0
+ 633 0067 00       		.byte	0
+ 634 0068 00       		.byte	0
+ 635 0069 08       		.byte	8
+ 636 006a 08       		.byte	8
+ 637 006b 08       		.byte	8
+ 638 006c 08       		.byte	8
+ 639 006d 08       		.byte	8
+ 640 006e 08       		.byte	8
+ 641 006f 00       		.byte	0
+ 642 0070 00       		.byte	0
+ 643 0071 00       		.byte	0
+ 644 0072 00       		.byte	0
+ 645 0073 60       		.byte	96
+ 646 0074 60       		.byte	96
+ 647 0075 00       		.byte	0
+ 648 0076 00       		.byte	0
+ 649 0077 00       		.byte	0
+ 650 0078 00       		.byte	0
+ 651 0079 60       		.byte	96
+ 652 007a 30       		.byte	48
+ 653 007b 18       		.byte	24
+ 654 007c 0C       		.byte	12
+ 655 007d 06       		.byte	6
+ 656 007e 03       		.byte	3
+ 657 007f 01       		.byte	1
+ 658 0080 00       		.byte	0
+ 659 0081 1C       		.byte	28
+ 660 0082 3E       		.byte	62
+ 661 0083 61       		.byte	97
+ 662 0084 43       		.byte	67
+ 663 0085 3E       		.byte	62
+ 664 0086 1C       		.byte	28
+ 665 0087 00       		.byte	0
+ 666 0088 00       		.byte	0
+ 667 0089 00       		.byte	0
+ 668 008a 44       		.byte	68
+ 669 008b 7F       		.byte	127
+ 670 008c 7F       		.byte	127
+ 671 008d 40       		.byte	64
+ 672 008e 00       		.byte	0
+ 673 008f 00       		.byte	0
+ 674 0090 00       		.byte	0
+ 675 0091 46       		.byte	70
+ 676 0092 67       		.byte	103
+ 677 0093 71       		.byte	113
+ 678 0094 59       		.byte	89
+ 679 0095 4F       		.byte	79
+ 680 0096 66       		.byte	102
+ 681 0097 00       		.byte	0
+ 682 0098 00       		.byte	0
+ 683 0099 22       		.byte	34
+ 684 009a 63       		.byte	99
+ARM GAS  /tmp/ccIBqRvA.s 			page 13
+
+
+ 685 009b 49       		.byte	73
+ 686 009c 4D       		.byte	77
+ 687 009d 7F       		.byte	127
+ 688 009e 32       		.byte	50
+ 689 009f 00       		.byte	0
+ 690 00a0 00       		.byte	0
+ 691 00a1 18       		.byte	24
+ 692 00a2 1C       		.byte	28
+ 693 00a3 52       		.byte	82
+ 694 00a4 7F       		.byte	127
+ 695 00a5 7F       		.byte	127
+ 696 00a6 50       		.byte	80
+ 697 00a7 00       		.byte	0
+ 698 00a8 00       		.byte	0
+ 699 00a9 2F       		.byte	47
+ 700 00aa 6F       		.byte	111
+ 701 00ab 45       		.byte	69
+ 702 00ac 45       		.byte	69
+ 703 00ad 7D       		.byte	125
+ 704 00ae 39       		.byte	57
+ 705 00af 00       		.byte	0
+ 706 00b0 00       		.byte	0
+ 707 00b1 3C       		.byte	60
+ 708 00b2 7E       		.byte	126
+ 709 00b3 4B       		.byte	75
+ 710 00b4 49       		.byte	73
+ 711 00b5 79       		.byte	121
+ 712 00b6 30       		.byte	48
+ 713 00b7 00       		.byte	0
+ 714 00b8 00       		.byte	0
+ 715 00b9 07       		.byte	7
+ 716 00ba 43       		.byte	67
+ 717 00bb 71       		.byte	113
+ 718 00bc 7D       		.byte	125
+ 719 00bd 0F       		.byte	15
+ 720 00be 03       		.byte	3
+ 721 00bf 00       		.byte	0
+ 722 00c0 00       		.byte	0
+ 723 00c1 36       		.byte	54
+ 724 00c2 7F       		.byte	127
+ 725 00c3 4D       		.byte	77
+ 726 00c4 59       		.byte	89
+ 727 00c5 7F       		.byte	127
+ 728 00c6 36       		.byte	54
+ 729 00c7 00       		.byte	0
+ 730 00c8 00       		.byte	0
+ 731 00c9 06       		.byte	6
+ 732 00ca 4F       		.byte	79
+ 733 00cb 49       		.byte	73
+ 734 00cc 69       		.byte	105
+ 735 00cd 3F       		.byte	63
+ 736 00ce 1E       		.byte	30
+ 737 00cf 00       		.byte	0
+ 738 00d0 00       		.byte	0
+ 739 00d1 00       		.byte	0
+ 740 00d2 00       		.byte	0
+ 741 00d3 66       		.byte	102
+ARM GAS  /tmp/ccIBqRvA.s 			page 14
+
+
+ 742 00d4 66       		.byte	102
+ 743 00d5 00       		.byte	0
+ 744 00d6 00       		.byte	0
+ 745 00d7 00       		.byte	0
+ 746 00d8 00       		.byte	0
+ 747 00d9 00       		.byte	0
+ 748 00da 00       		.byte	0
+ 749 00db 66       		.byte	102
+ 750 00dc 66       		.byte	102
+ 751 00dd 00       		.byte	0
+ 752 00de 00       		.byte	0
+ 753 00df 00       		.byte	0
+ 754 00e0 00       		.byte	0
+ 755 00e1 00       		.byte	0
+ 756 00e2 08       		.byte	8
+ 757 00e3 1C       		.byte	28
+ 758 00e4 36       		.byte	54
+ 759 00e5 63       		.byte	99
+ 760 00e6 41       		.byte	65
+ 761 00e7 00       		.byte	0
+ 762 00e8 00       		.byte	0
+ 763 00e9 14       		.byte	20
+ 764 00ea 14       		.byte	20
+ 765 00eb 14       		.byte	20
+ 766 00ec 14       		.byte	20
+ 767 00ed 14       		.byte	20
+ 768 00ee 14       		.byte	20
+ 769 00ef 00       		.byte	0
+ 770 00f0 00       		.byte	0
+ 771 00f1 00       		.byte	0
+ 772 00f2 41       		.byte	65
+ 773 00f3 63       		.byte	99
+ 774 00f4 36       		.byte	54
+ 775 00f5 1C       		.byte	28
+ 776 00f6 08       		.byte	8
+ 777 00f7 00       		.byte	0
+ 778 00f8 00       		.byte	0
+ 779 00f9 02       		.byte	2
+ 780 00fa 07       		.byte	7
+ 781 00fb 51       		.byte	81
+ 782 00fc 59       		.byte	89
+ 783 00fd 0F       		.byte	15
+ 784 00fe 06       		.byte	6
+ 785 00ff 00       		.byte	0
+ 786 0100 00       		.byte	0
+ 787 0101 3E       		.byte	62
+ 788 0102 41       		.byte	65
+ 789 0103 5D       		.byte	93
+ 790 0104 55       		.byte	85
+ 791 0105 5D       		.byte	93
+ 792 0106 51       		.byte	81
+ 793 0107 1E       		.byte	30
+ 794 0108 00       		.byte	0
+ 795 0109 40       		.byte	64
+ 796 010a 70       		.byte	112
+ 797 010b 1D       		.byte	29
+ 798 010c 17       		.byte	23
+ARM GAS  /tmp/ccIBqRvA.s 			page 15
+
+
+ 799 010d 1F       		.byte	31
+ 800 010e 78       		.byte	120
+ 801 010f 60       		.byte	96
+ 802 0110 00       		.byte	0
+ 803 0111 41       		.byte	65
+ 804 0112 7F       		.byte	127
+ 805 0113 7F       		.byte	127
+ 806 0114 49       		.byte	73
+ 807 0115 4F       		.byte	79
+ 808 0116 7E       		.byte	126
+ 809 0117 30       		.byte	48
+ 810 0118 00       		.byte	0
+ 811 0119 1C       		.byte	28
+ 812 011a 3E       		.byte	62
+ 813 011b 63       		.byte	99
+ 814 011c 41       		.byte	65
+ 815 011d 41       		.byte	65
+ 816 011e 42       		.byte	66
+ 817 011f 27       		.byte	39
+ 818 0120 00       		.byte	0
+ 819 0121 41       		.byte	65
+ 820 0122 7F       		.byte	127
+ 821 0123 7F       		.byte	127
+ 822 0124 41       		.byte	65
+ 823 0125 63       		.byte	99
+ 824 0126 3E       		.byte	62
+ 825 0127 1C       		.byte	28
+ 826 0128 00       		.byte	0
+ 827 0129 41       		.byte	65
+ 828 012a 7F       		.byte	127
+ 829 012b 7F       		.byte	127
+ 830 012c 49       		.byte	73
+ 831 012d 5D       		.byte	93
+ 832 012e 41       		.byte	65
+ 833 012f 63       		.byte	99
+ 834 0130 00       		.byte	0
+ 835 0131 41       		.byte	65
+ 836 0132 7F       		.byte	127
+ 837 0133 7F       		.byte	127
+ 838 0134 49       		.byte	73
+ 839 0135 1D       		.byte	29
+ 840 0136 01       		.byte	1
+ 841 0137 03       		.byte	3
+ 842 0138 00       		.byte	0
+ 843 0139 1C       		.byte	28
+ 844 013a 3E       		.byte	62
+ 845 013b 63       		.byte	99
+ 846 013c 41       		.byte	65
+ 847 013d 51       		.byte	81
+ 848 013e 72       		.byte	114
+ 849 013f 77       		.byte	119
+ 850 0140 00       		.byte	0
+ 851 0141 7F       		.byte	127
+ 852 0142 7F       		.byte	127
+ 853 0143 08       		.byte	8
+ 854 0144 08       		.byte	8
+ 855 0145 7F       		.byte	127
+ARM GAS  /tmp/ccIBqRvA.s 			page 16
+
+
+ 856 0146 7F       		.byte	127
+ 857 0147 00       		.byte	0
+ 858 0148 00       		.byte	0
+ 859 0149 00       		.byte	0
+ 860 014a 41       		.byte	65
+ 861 014b 7F       		.byte	127
+ 862 014c 7F       		.byte	127
+ 863 014d 41       		.byte	65
+ 864 014e 00       		.byte	0
+ 865 014f 00       		.byte	0
+ 866 0150 00       		.byte	0
+ 867 0151 30       		.byte	48
+ 868 0152 70       		.byte	112
+ 869 0153 41       		.byte	65
+ 870 0154 41       		.byte	65
+ 871 0155 7F       		.byte	127
+ 872 0156 3F       		.byte	63
+ 873 0157 01       		.byte	1
+ 874 0158 00       		.byte	0
+ 875 0159 7F       		.byte	127
+ 876 015a 7F       		.byte	127
+ 877 015b 08       		.byte	8
+ 878 015c 1C       		.byte	28
+ 879 015d 77       		.byte	119
+ 880 015e 63       		.byte	99
+ 881 015f 41       		.byte	65
+ 882 0160 00       		.byte	0
+ 883 0161 41       		.byte	65
+ 884 0162 7F       		.byte	127
+ 885 0163 7F       		.byte	127
+ 886 0164 41       		.byte	65
+ 887 0165 40       		.byte	64
+ 888 0166 60       		.byte	96
+ 889 0167 70       		.byte	112
+ 890 0168 00       		.byte	0
+ 891 0169 7F       		.byte	127
+ 892 016a 7E       		.byte	126
+ 893 016b 0C       		.byte	12
+ 894 016c 18       		.byte	24
+ 895 016d 0C       		.byte	12
+ 896 016e 7E       		.byte	126
+ 897 016f 7F       		.byte	127
+ 898 0170 00       		.byte	0
+ 899 0171 7F       		.byte	127
+ 900 0172 7E       		.byte	126
+ 901 0173 0C       		.byte	12
+ 902 0174 18       		.byte	24
+ 903 0175 30       		.byte	48
+ 904 0176 7F       		.byte	127
+ 905 0177 7F       		.byte	127
+ 906 0178 00       		.byte	0
+ 907 0179 1C       		.byte	28
+ 908 017a 3E       		.byte	62
+ 909 017b 63       		.byte	99
+ 910 017c 41       		.byte	65
+ 911 017d 63       		.byte	99
+ 912 017e 3E       		.byte	62
+ARM GAS  /tmp/ccIBqRvA.s 			page 17
+
+
+ 913 017f 1C       		.byte	28
+ 914 0180 00       		.byte	0
+ 915 0181 41       		.byte	65
+ 916 0182 7F       		.byte	127
+ 917 0183 7F       		.byte	127
+ 918 0184 49       		.byte	73
+ 919 0185 09       		.byte	9
+ 920 0186 0F       		.byte	15
+ 921 0187 06       		.byte	6
+ 922 0188 00       		.byte	0
+ 923 0189 1C       		.byte	28
+ 924 018a 3E       		.byte	62
+ 925 018b 63       		.byte	99
+ 926 018c 51       		.byte	81
+ 927 018d 63       		.byte	99
+ 928 018e 3E       		.byte	62
+ 929 018f 1C       		.byte	28
+ 930 0190 00       		.byte	0
+ 931 0191 7F       		.byte	127
+ 932 0192 7F       		.byte	127
+ 933 0193 09       		.byte	9
+ 934 0194 19       		.byte	25
+ 935 0195 7F       		.byte	127
+ 936 0196 66       		.byte	102
+ 937 0197 40       		.byte	64
+ 938 0198 00       		.byte	0
+ 939 0199 66       		.byte	102
+ 940 019a 6F       		.byte	111
+ 941 019b 4D       		.byte	77
+ 942 019c 59       		.byte	89
+ 943 019d 7B       		.byte	123
+ 944 019e 33       		.byte	51
+ 945 019f 00       		.byte	0
+ 946 01a0 00       		.byte	0
+ 947 01a1 03       		.byte	3
+ 948 01a2 41       		.byte	65
+ 949 01a3 7F       		.byte	127
+ 950 01a4 7F       		.byte	127
+ 951 01a5 41       		.byte	65
+ 952 01a6 03       		.byte	3
+ 953 01a7 00       		.byte	0
+ 954 01a8 00       		.byte	0
+ 955 01a9 3F       		.byte	63
+ 956 01aa 7F       		.byte	127
+ 957 01ab 40       		.byte	64
+ 958 01ac 40       		.byte	64
+ 959 01ad 40       		.byte	64
+ 960 01ae 7F       		.byte	127
+ 961 01af 3F       		.byte	63
+ 962 01b0 00       		.byte	0
+ 963 01b1 03       		.byte	3
+ 964 01b2 0F       		.byte	15
+ 965 01b3 3D       		.byte	61
+ 966 01b4 70       		.byte	112
+ 967 01b5 1D       		.byte	29
+ 968 01b6 07       		.byte	7
+ 969 01b7 01       		.byte	1
+ARM GAS  /tmp/ccIBqRvA.s 			page 18
+
+
+ 970 01b8 00       		.byte	0
+ 971 01b9 0F       		.byte	15
+ 972 01ba 7F       		.byte	127
+ 973 01bb 30       		.byte	48
+ 974 01bc 1C       		.byte	28
+ 975 01bd 30       		.byte	48
+ 976 01be 7F       		.byte	127
+ 977 01bf 0F       		.byte	15
+ 978 01c0 00       		.byte	0
+ 979 01c1 63       		.byte	99
+ 980 01c2 77       		.byte	119
+ 981 01c3 1C       		.byte	28
+ 982 01c4 1C       		.byte	28
+ 983 01c5 77       		.byte	119
+ 984 01c6 63       		.byte	99
+ 985 01c7 00       		.byte	0
+ 986 01c8 01       		.byte	1
+ 987 01c9 03       		.byte	3
+ 988 01ca 47       		.byte	71
+ 989 01cb 7C       		.byte	124
+ 990 01cc 78       		.byte	120
+ 991 01cd 47       		.byte	71
+ 992 01ce 03       		.byte	3
+ 993 01cf 01       		.byte	1
+ 994 01d0 00       		.byte	0
+ 995 01d1 67       		.byte	103
+ 996 01d2 73       		.byte	115
+ 997 01d3 59       		.byte	89
+ 998 01d4 4D       		.byte	77
+ 999 01d5 67       		.byte	103
+ 1000 01d6 73       		.byte	115
+ 1001 01d7 00       		.byte	0
+ 1002 01d8 00       		.byte	0
+ 1003 01d9 00       		.byte	0
+ 1004 01da 00       		.byte	0
+ 1005 01db 7F       		.byte	127
+ 1006 01dc 7F       		.byte	127
+ 1007 01dd 41       		.byte	65
+ 1008 01de 41       		.byte	65
+ 1009 01df 00       		.byte	0
+ 1010 01e0 00       		.byte	0
+ 1011 01e1 01       		.byte	1
+ 1012 01e2 03       		.byte	3
+ 1013 01e3 06       		.byte	6
+ 1014 01e4 0C       		.byte	12
+ 1015 01e5 18       		.byte	24
+ 1016 01e6 30       		.byte	48
+ 1017 01e7 60       		.byte	96
+ 1018 01e8 00       		.byte	0
+ 1019 01e9 00       		.byte	0
+ 1020 01ea 41       		.byte	65
+ 1021 01eb 41       		.byte	65
+ 1022 01ec 7F       		.byte	127
+ 1023 01ed 7F       		.byte	127
+ 1024 01ee 00       		.byte	0
+ 1025 01ef 00       		.byte	0
+ 1026 01f0 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 19
+
+
+ 1027 01f1 00       		.byte	0
+ 1028 01f2 04       		.byte	4
+ 1029 01f3 06       		.byte	6
+ 1030 01f4 03       		.byte	3
+ 1031 01f5 06       		.byte	6
+ 1032 01f6 04       		.byte	4
+ 1033 01f7 00       		.byte	0
+ 1034 01f8 00       		.byte	0
+ 1035 01f9 00       		.byte	0
+ 1036 01fa 00       		.byte	0
+ 1037 01fb 00       		.byte	0
+ 1038 01fc 00       		.byte	0
+ 1039 01fd 00       		.byte	0
+ 1040 01fe 00       		.byte	0
+ 1041 01ff 00       		.byte	0
+ 1042 0200 00       		.byte	0
+ 1043 0201 00       		.byte	0
+ 1044 0202 01       		.byte	1
+ 1045 0203 03       		.byte	3
+ 1046 0204 06       		.byte	6
+ 1047 0205 04       		.byte	4
+ 1048 0206 00       		.byte	0
+ 1049 0207 00       		.byte	0
+ 1050 0208 00       		.byte	0
+ 1051 0209 68       		.byte	104
+ 1052 020a 6C       		.byte	108
+ 1053 020b 54       		.byte	84
+ 1054 020c 54       		.byte	84
+ 1055 020d 3C       		.byte	60
+ 1056 020e 78       		.byte	120
+ 1057 020f 40       		.byte	64
+ 1058 0210 00       		.byte	0
+ 1059 0211 41       		.byte	65
+ 1060 0212 7F       		.byte	127
+ 1061 0213 3F       		.byte	63
+ 1062 0214 6C       		.byte	108
+ 1063 0215 44       		.byte	68
+ 1064 0216 7C       		.byte	124
+ 1065 0217 38       		.byte	56
+ 1066 0218 00       		.byte	0
+ 1067 0219 38       		.byte	56
+ 1068 021a 7C       		.byte	124
+ 1069 021b 44       		.byte	68
+ 1070 021c 44       		.byte	68
+ 1071 021d 6C       		.byte	108
+ 1072 021e 2C       		.byte	44
+ 1073 021f 00       		.byte	0
+ 1074 0220 00       		.byte	0
+ 1075 0221 38       		.byte	56
+ 1076 0222 7C       		.byte	124
+ 1077 0223 44       		.byte	68
+ 1078 0224 49       		.byte	73
+ 1079 0225 3F       		.byte	63
+ 1080 0226 7F       		.byte	127
+ 1081 0227 40       		.byte	64
+ 1082 0228 00       		.byte	0
+ 1083 0229 38       		.byte	56
+ARM GAS  /tmp/ccIBqRvA.s 			page 20
+
+
+ 1084 022a 7C       		.byte	124
+ 1085 022b 54       		.byte	84
+ 1086 022c 54       		.byte	84
+ 1087 022d 5C       		.byte	92
+ 1088 022e 58       		.byte	88
+ 1089 022f 00       		.byte	0
+ 1090 0230 00       		.byte	0
+ 1091 0231 00       		.byte	0
+ 1092 0232 48       		.byte	72
+ 1093 0233 7E       		.byte	126
+ 1094 0234 7F       		.byte	127
+ 1095 0235 49       		.byte	73
+ 1096 0236 0B       		.byte	11
+ 1097 0237 02       		.byte	2
+ 1098 0238 00       		.byte	0
+ 1099 0239 48       		.byte	72
+ 1100 023a 7C       		.byte	124
+ 1101 023b 34       		.byte	52
+ 1102 023c 34       		.byte	52
+ 1103 023d 2C       		.byte	44
+ 1104 023e 68       		.byte	104
+ 1105 023f 44       		.byte	68
+ 1106 0240 00       		.byte	0
+ 1107 0241 41       		.byte	65
+ 1108 0242 7F       		.byte	127
+ 1109 0243 7F       		.byte	127
+ 1110 0244 08       		.byte	8
+ 1111 0245 04       		.byte	4
+ 1112 0246 7C       		.byte	124
+ 1113 0247 78       		.byte	120
+ 1114 0248 00       		.byte	0
+ 1115 0249 00       		.byte	0
+ 1116 024a 44       		.byte	68
+ 1117 024b 7D       		.byte	125
+ 1118 024c 7D       		.byte	125
+ 1119 024d 40       		.byte	64
+ 1120 024e 00       		.byte	0
+ 1121 024f 00       		.byte	0
+ 1122 0250 00       		.byte	0
+ 1123 0251 60       		.byte	96
+ 1124 0252 60       		.byte	96
+ 1125 0253 04       		.byte	4
+ 1126 0254 7D       		.byte	125
+ 1127 0255 7D       		.byte	125
+ 1128 0256 00       		.byte	0
+ 1129 0257 00       		.byte	0
+ 1130 0258 00       		.byte	0
+ 1131 0259 41       		.byte	65
+ 1132 025a 7F       		.byte	127
+ 1133 025b 7F       		.byte	127
+ 1134 025c 10       		.byte	16
+ 1135 025d 78       		.byte	120
+ 1136 025e 6C       		.byte	108
+ 1137 025f 44       		.byte	68
+ 1138 0260 00       		.byte	0
+ 1139 0261 00       		.byte	0
+ 1140 0262 41       		.byte	65
+ARM GAS  /tmp/ccIBqRvA.s 			page 21
+
+
+ 1141 0263 7F       		.byte	127
+ 1142 0264 7F       		.byte	127
+ 1143 0265 40       		.byte	64
+ 1144 0266 00       		.byte	0
+ 1145 0267 00       		.byte	0
+ 1146 0268 00       		.byte	0
+ 1147 0269 7C       		.byte	124
+ 1148 026a 7C       		.byte	124
+ 1149 026b 0C       		.byte	12
+ 1150 026c 78       		.byte	120
+ 1151 026d 0C       		.byte	12
+ 1152 026e 7C       		.byte	124
+ 1153 026f 78       		.byte	120
+ 1154 0270 00       		.byte	0
+ 1155 0271 44       		.byte	68
+ 1156 0272 7C       		.byte	124
+ 1157 0273 7C       		.byte	124
+ 1158 0274 08       		.byte	8
+ 1159 0275 04       		.byte	4
+ 1160 0276 7C       		.byte	124
+ 1161 0277 78       		.byte	120
+ 1162 0278 00       		.byte	0
+ 1163 0279 38       		.byte	56
+ 1164 027a 7C       		.byte	124
+ 1165 027b 44       		.byte	68
+ 1166 027c 44       		.byte	68
+ 1167 027d 7C       		.byte	124
+ 1168 027e 38       		.byte	56
+ 1169 027f 00       		.byte	0
+ 1170 0280 00       		.byte	0
+ 1171 0281 04       		.byte	4
+ 1172 0282 7C       		.byte	124
+ 1173 0283 78       		.byte	120
+ 1174 0284 24       		.byte	36
+ 1175 0285 24       		.byte	36
+ 1176 0286 3C       		.byte	60
+ 1177 0287 18       		.byte	24
+ 1178 0288 00       		.byte	0
+ 1179 0289 18       		.byte	24
+ 1180 028a 3C       		.byte	60
+ 1181 028b 24       		.byte	36
+ 1182 028c 24       		.byte	36
+ 1183 028d 78       		.byte	120
+ 1184 028e 7C       		.byte	124
+ 1185 028f 00       		.byte	0
+ 1186 0290 00       		.byte	0
+ 1187 0291 44       		.byte	68
+ 1188 0292 7C       		.byte	124
+ 1189 0293 78       		.byte	120
+ 1190 0294 4C       		.byte	76
+ 1191 0295 04       		.byte	4
+ 1192 0296 1C       		.byte	28
+ 1193 0297 18       		.byte	24
+ 1194 0298 00       		.byte	0
+ 1195 0299 48       		.byte	72
+ 1196 029a 5C       		.byte	92
+ 1197 029b 5C       		.byte	92
+ARM GAS  /tmp/ccIBqRvA.s 			page 22
+
+
+ 1198 029c 74       		.byte	116
+ 1199 029d 74       		.byte	116
+ 1200 029e 24       		.byte	36
+ 1201 029f 00       		.byte	0
+ 1202 02a0 00       		.byte	0
+ 1203 02a1 00       		.byte	0
+ 1204 02a2 04       		.byte	4
+ 1205 02a3 3E       		.byte	62
+ 1206 02a4 7F       		.byte	127
+ 1207 02a5 44       		.byte	68
+ 1208 02a6 24       		.byte	36
+ 1209 02a7 00       		.byte	0
+ 1210 02a8 00       		.byte	0
+ 1211 02a9 3C       		.byte	60
+ 1212 02aa 7C       		.byte	124
+ 1213 02ab 40       		.byte	64
+ 1214 02ac 40       		.byte	64
+ 1215 02ad 3C       		.byte	60
+ 1216 02ae 7C       		.byte	124
+ 1217 02af 40       		.byte	64
+ 1218 02b0 00       		.byte	0
+ 1219 02b1 04       		.byte	4
+ 1220 02b2 1C       		.byte	28
+ 1221 02b3 3C       		.byte	60
+ 1222 02b4 60       		.byte	96
+ 1223 02b5 30       		.byte	48
+ 1224 02b6 1C       		.byte	28
+ 1225 02b7 04       		.byte	4
+ 1226 02b8 00       		.byte	0
+ 1227 02b9 1C       		.byte	28
+ 1228 02ba 7C       		.byte	124
+ 1229 02bb 30       		.byte	48
+ 1230 02bc 1C       		.byte	28
+ 1231 02bd 30       		.byte	48
+ 1232 02be 7C       		.byte	124
+ 1233 02bf 1C       		.byte	28
+ 1234 02c0 00       		.byte	0
+ 1235 02c1 44       		.byte	68
+ 1236 02c2 6C       		.byte	108
+ 1237 02c3 3C       		.byte	60
+ 1238 02c4 10       		.byte	16
+ 1239 02c5 78       		.byte	120
+ 1240 02c6 6C       		.byte	108
+ 1241 02c7 44       		.byte	68
+ 1242 02c8 00       		.byte	0
+ 1243 02c9 44       		.byte	68
+ 1244 02ca 4C       		.byte	76
+ 1245 02cb 1C       		.byte	28
+ 1246 02cc 70       		.byte	112
+ 1247 02cd 64       		.byte	100
+ 1248 02ce 1C       		.byte	28
+ 1249 02cf 0C       		.byte	12
+ 1250 02d0 00       		.byte	0
+ 1251 02d1 4C       		.byte	76
+ 1252 02d2 64       		.byte	100
+ 1253 02d3 74       		.byte	116
+ 1254 02d4 5C       		.byte	92
+ARM GAS  /tmp/ccIBqRvA.s 			page 23
+
+
+ 1255 02d5 4C       		.byte	76
+ 1256 02d6 64       		.byte	100
+ 1257 02d7 00       		.byte	0
+ 1258 02d8 00       		.byte	0
+ 1259 02d9 08       		.byte	8
+ 1260 02da 08       		.byte	8
+ 1261 02db 3E       		.byte	62
+ 1262 02dc 77       		.byte	119
+ 1263 02dd 41       		.byte	65
+ 1264 02de 41       		.byte	65
+ 1265 02df 00       		.byte	0
+ 1266 02e0 00       		.byte	0
+ 1267 02e1 00       		.byte	0
+ 1268 02e2 00       		.byte	0
+ 1269 02e3 7F       		.byte	127
+ 1270 02e4 7F       		.byte	127
+ 1271 02e5 00       		.byte	0
+ 1272 02e6 00       		.byte	0
+ 1273 02e7 00       		.byte	0
+ 1274 02e8 00       		.byte	0
+ 1275 02e9 41       		.byte	65
+ 1276 02ea 41       		.byte	65
+ 1277 02eb 77       		.byte	119
+ 1278 02ec 3E       		.byte	62
+ 1279 02ed 08       		.byte	8
+ 1280 02ee 08       		.byte	8
+ 1281 02ef 00       		.byte	0
+ 1282 02f0 00       		.byte	0
+ 1283 02f1 02       		.byte	2
+ 1284 02f2 01       		.byte	1
+ 1285 02f3 01       		.byte	1
+ 1286 02f4 03       		.byte	3
+ 1287 02f5 02       		.byte	2
+ 1288 02f6 02       		.byte	2
+ 1289 02f7 01       		.byte	1
+ 1290 02f8 00       		.byte	0
+ 1291 02f9 60       		.byte	96
+ 1292 02fa 78       		.byte	120
+ 1293 02fb 4E       		.byte	78
+ 1294 02fc 47       		.byte	71
+ 1295 02fd 5E       		.byte	94
+ 1296 02fe 78       		.byte	120
+ 1297 02ff 60       		.byte	96
+ 1298 0300 00       		.byte	0
+ 1299 0301 1C       		.byte	28
+ 1300 0302 3E       		.byte	62
+ 1301 0303 23       		.byte	35
+ 1302 0304 41       		.byte	65
+ 1303 0305 41       		.byte	65
+ 1304 0306 42       		.byte	66
+ 1305 0307 27       		.byte	39
+ 1306 0308 00       		.byte	0
+ 1307 0309 3D       		.byte	61
+ 1308 030a 7D       		.byte	125
+ 1309 030b 40       		.byte	64
+ 1310 030c 41       		.byte	65
+ 1311 030d 3D       		.byte	61
+ARM GAS  /tmp/ccIBqRvA.s 			page 24
+
+
+ 1312 030e 7C       		.byte	124
+ 1313 030f 40       		.byte	64
+ 1314              		.section	.rodata.au8FontSystem3x6,"a",%progbits
+ 1315              		.type	au8FontSystem3x6, %object
+ 1316              		.size	au8FontSystem3x6, 195
+ 1317              	au8FontSystem3x6:
+ 1318 0000 00       		.byte	0
+ 1319 0001 00       		.byte	0
+ 1320 0002 00       		.byte	0
+ 1321 0003 00       		.byte	0
+ 1322 0004 5C       		.byte	92
+ 1323 0005 00       		.byte	0
+ 1324 0006 0C       		.byte	12
+ 1325 0007 00       		.byte	0
+ 1326 0008 0C       		.byte	12
+ 1327 0009 7C       		.byte	124
+ 1328 000a 28       		.byte	40
+ 1329 000b 7C       		.byte	124
+ 1330 000c 7C       		.byte	124
+ 1331 000d 44       		.byte	68
+ 1332 000e 7C       		.byte	124
+ 1333 000f 24       		.byte	36
+ 1334 0010 10       		.byte	16
+ 1335 0011 48       		.byte	72
+ 1336 0012 28       		.byte	40
+ 1337 0013 54       		.byte	84
+ 1338 0014 08       		.byte	8
+ 1339 0015 00       		.byte	0
+ 1340 0016 0C       		.byte	12
+ 1341 0017 00       		.byte	0
+ 1342 0018 38       		.byte	56
+ 1343 0019 44       		.byte	68
+ 1344 001a 00       		.byte	0
+ 1345 001b 44       		.byte	68
+ 1346 001c 38       		.byte	56
+ 1347 001d 00       		.byte	0
+ 1348 001e 20       		.byte	32
+ 1349 001f 10       		.byte	16
+ 1350 0020 08       		.byte	8
+ 1351 0021 10       		.byte	16
+ 1352 0022 38       		.byte	56
+ 1353 0023 10       		.byte	16
+ 1354 0024 80       		.byte	-128
+ 1355 0025 40       		.byte	64
+ 1356 0026 00       		.byte	0
+ 1357 0027 10       		.byte	16
+ 1358 0028 10       		.byte	16
+ 1359 0029 10       		.byte	16
+ 1360 002a 00       		.byte	0
+ 1361 002b 40       		.byte	64
+ 1362 002c 00       		.byte	0
+ 1363 002d 20       		.byte	32
+ 1364 002e 10       		.byte	16
+ 1365 002f 08       		.byte	8
+ 1366 0030 38       		.byte	56
+ 1367 0031 44       		.byte	68
+ 1368 0032 38       		.byte	56
+ARM GAS  /tmp/ccIBqRvA.s 			page 25
+
+
+ 1369 0033 00       		.byte	0
+ 1370 0034 7C       		.byte	124
+ 1371 0035 00       		.byte	0
+ 1372 0036 64       		.byte	100
+ 1373 0037 54       		.byte	84
+ 1374 0038 48       		.byte	72
+ 1375 0039 44       		.byte	68
+ 1376 003a 54       		.byte	84
+ 1377 003b 28       		.byte	40
+ 1378 003c 1C       		.byte	28
+ 1379 003d 10       		.byte	16
+ 1380 003e 7C       		.byte	124
+ 1381 003f 4C       		.byte	76
+ 1382 0040 54       		.byte	84
+ 1383 0041 24       		.byte	36
+ 1384 0042 38       		.byte	56
+ 1385 0043 54       		.byte	84
+ 1386 0044 20       		.byte	32
+ 1387 0045 04       		.byte	4
+ 1388 0046 74       		.byte	116
+ 1389 0047 0C       		.byte	12
+ 1390 0048 28       		.byte	40
+ 1391 0049 54       		.byte	84
+ 1392 004a 28       		.byte	40
+ 1393 004b 08       		.byte	8
+ 1394 004c 54       		.byte	84
+ 1395 004d 38       		.byte	56
+ 1396 004e 00       		.byte	0
+ 1397 004f 50       		.byte	80
+ 1398 0050 00       		.byte	0
+ 1399 0051 80       		.byte	-128
+ 1400 0052 50       		.byte	80
+ 1401 0053 00       		.byte	0
+ 1402 0054 10       		.byte	16
+ 1403 0055 28       		.byte	40
+ 1404 0056 44       		.byte	68
+ 1405 0057 28       		.byte	40
+ 1406 0058 28       		.byte	40
+ 1407 0059 28       		.byte	40
+ 1408 005a 44       		.byte	68
+ 1409 005b 28       		.byte	40
+ 1410 005c 10       		.byte	16
+ 1411 005d 04       		.byte	4
+ 1412 005e 54       		.byte	84
+ 1413 005f 08       		.byte	8
+ 1414 0060 38       		.byte	56
+ 1415 0061 4C       		.byte	76
+ 1416 0062 5C       		.byte	92
+ 1417 0063 78       		.byte	120
+ 1418 0064 14       		.byte	20
+ 1419 0065 78       		.byte	120
+ 1420 0066 7C       		.byte	124
+ 1421 0067 54       		.byte	84
+ 1422 0068 28       		.byte	40
+ 1423 0069 38       		.byte	56
+ 1424 006a 44       		.byte	68
+ 1425 006b 44       		.byte	68
+ARM GAS  /tmp/ccIBqRvA.s 			page 26
+
+
+ 1426 006c 7C       		.byte	124
+ 1427 006d 44       		.byte	68
+ 1428 006e 38       		.byte	56
+ 1429 006f 7C       		.byte	124
+ 1430 0070 54       		.byte	84
+ 1431 0071 44       		.byte	68
+ 1432 0072 7C       		.byte	124
+ 1433 0073 14       		.byte	20
+ 1434 0074 04       		.byte	4
+ 1435 0075 38       		.byte	56
+ 1436 0076 44       		.byte	68
+ 1437 0077 34       		.byte	52
+ 1438 0078 7C       		.byte	124
+ 1439 0079 10       		.byte	16
+ 1440 007a 7C       		.byte	124
+ 1441 007b 00       		.byte	0
+ 1442 007c 7C       		.byte	124
+ 1443 007d 00       		.byte	0
+ 1444 007e 20       		.byte	32
+ 1445 007f 40       		.byte	64
+ 1446 0080 3C       		.byte	60
+ 1447 0081 7C       		.byte	124
+ 1448 0082 10       		.byte	16
+ 1449 0083 6C       		.byte	108
+ 1450 0084 7C       		.byte	124
+ 1451 0085 40       		.byte	64
+ 1452 0086 40       		.byte	64
+ 1453 0087 7C       		.byte	124
+ 1454 0088 08       		.byte	8
+ 1455 0089 7C       		.byte	124
+ 1456 008a 7C       		.byte	124
+ 1457 008b 04       		.byte	4
+ 1458 008c 7C       		.byte	124
+ 1459 008d 7C       		.byte	124
+ 1460 008e 44       		.byte	68
+ 1461 008f 7C       		.byte	124
+ 1462 0090 7C       		.byte	124
+ 1463 0091 14       		.byte	20
+ 1464 0092 08       		.byte	8
+ 1465 0093 38       		.byte	56
+ 1466 0094 44       		.byte	68
+ 1467 0095 78       		.byte	120
+ 1468 0096 7C       		.byte	124
+ 1469 0097 14       		.byte	20
+ 1470 0098 68       		.byte	104
+ 1471 0099 48       		.byte	72
+ 1472 009a 54       		.byte	84
+ 1473 009b 24       		.byte	36
+ 1474 009c 04       		.byte	4
+ 1475 009d 7C       		.byte	124
+ 1476 009e 04       		.byte	4
+ 1477 009f 7C       		.byte	124
+ 1478 00a0 40       		.byte	64
+ 1479 00a1 7C       		.byte	124
+ 1480 00a2 3C       		.byte	60
+ 1481 00a3 40       		.byte	64
+ 1482 00a4 3C       		.byte	60
+ARM GAS  /tmp/ccIBqRvA.s 			page 27
+
+
+ 1483 00a5 7C       		.byte	124
+ 1484 00a6 20       		.byte	32
+ 1485 00a7 7C       		.byte	124
+ 1486 00a8 6C       		.byte	108
+ 1487 00a9 10       		.byte	16
+ 1488 00aa 6C       		.byte	108
+ 1489 00ab 1C       		.byte	28
+ 1490 00ac 60       		.byte	96
+ 1491 00ad 1C       		.byte	28
+ 1492 00ae 64       		.byte	100
+ 1493 00af 54       		.byte	84
+ 1494 00b0 4C       		.byte	76
+ 1495 00b1 7C       		.byte	124
+ 1496 00b2 44       		.byte	68
+ 1497 00b3 00       		.byte	0
+ 1498 00b4 08       		.byte	8
+ 1499 00b5 10       		.byte	16
+ 1500 00b6 20       		.byte	32
+ 1501 00b7 44       		.byte	68
+ 1502 00b8 7C       		.byte	124
+ 1503 00b9 00       		.byte	0
+ 1504 00ba 08       		.byte	8
+ 1505 00bb 04       		.byte	4
+ 1506 00bc 08       		.byte	8
+ 1507 00bd 80       		.byte	-128
+ 1508 00be 80       		.byte	-128
+ 1509 00bf 80       		.byte	-128
+ 1510 00c0 04       		.byte	4
+ 1511 00c1 08       		.byte	8
+ 1512 00c2 00       		.byte	0
+ 1513              		.section	.rodata.au8Font8x8Thin,"a",%progbits
+ 1514              		.type	au8Font8x8Thin, %object
+ 1515              		.size	au8Font8x8Thin, 1032
+ 1516              	au8Font8x8Thin:
+ 1517 0000 00       		.byte	0
+ 1518 0001 00       		.byte	0
+ 1519 0002 00       		.byte	0
+ 1520 0003 00       		.byte	0
+ 1521 0004 00       		.byte	0
+ 1522 0005 00       		.byte	0
+ 1523 0006 00       		.byte	0
+ 1524 0007 00       		.byte	0
+ 1525 0008 00       		.byte	0
+ 1526 0009 00       		.byte	0
+ 1527 000a 00       		.byte	0
+ 1528 000b 5F       		.byte	95
+ 1529 000c 00       		.byte	0
+ 1530 000d 00       		.byte	0
+ 1531 000e 00       		.byte	0
+ 1532 000f 00       		.byte	0
+ 1533 0010 00       		.byte	0
+ 1534 0011 00       		.byte	0
+ 1535 0012 07       		.byte	7
+ 1536 0013 00       		.byte	0
+ 1537 0014 00       		.byte	0
+ 1538 0015 07       		.byte	7
+ 1539 0016 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 28
+
+
+ 1540 0017 00       		.byte	0
+ 1541 0018 00       		.byte	0
+ 1542 0019 14       		.byte	20
+ 1543 001a 7F       		.byte	127
+ 1544 001b 14       		.byte	20
+ 1545 001c 14       		.byte	20
+ 1546 001d 7F       		.byte	127
+ 1547 001e 14       		.byte	20
+ 1548 001f 00       		.byte	0
+ 1549 0020 00       		.byte	0
+ 1550 0021 24       		.byte	36
+ 1551 0022 2A       		.byte	42
+ 1552 0023 6B       		.byte	107
+ 1553 0024 6B       		.byte	107
+ 1554 0025 2A       		.byte	42
+ 1555 0026 12       		.byte	18
+ 1556 0027 00       		.byte	0
+ 1557 0028 00       		.byte	0
+ 1558 0029 46       		.byte	70
+ 1559 002a 26       		.byte	38
+ 1560 002b 10       		.byte	16
+ 1561 002c 08       		.byte	8
+ 1562 002d 64       		.byte	100
+ 1563 002e 62       		.byte	98
+ 1564 002f 00       		.byte	0
+ 1565 0030 30       		.byte	48
+ 1566 0031 4A       		.byte	74
+ 1567 0032 45       		.byte	69
+ 1568 0033 4D       		.byte	77
+ 1569 0034 32       		.byte	50
+ 1570 0035 48       		.byte	72
+ 1571 0036 48       		.byte	72
+ 1572 0037 00       		.byte	0
+ 1573 0038 00       		.byte	0
+ 1574 0039 00       		.byte	0
+ 1575 003a 04       		.byte	4
+ 1576 003b 03       		.byte	3
+ 1577 003c 00       		.byte	0
+ 1578 003d 00       		.byte	0
+ 1579 003e 00       		.byte	0
+ 1580 003f 00       		.byte	0
+ 1581 0040 00       		.byte	0
+ 1582 0041 1C       		.byte	28
+ 1583 0042 22       		.byte	34
+ 1584 0043 41       		.byte	65
+ 1585 0044 00       		.byte	0
+ 1586 0045 00       		.byte	0
+ 1587 0046 00       		.byte	0
+ 1588 0047 00       		.byte	0
+ 1589 0048 00       		.byte	0
+ 1590 0049 00       		.byte	0
+ 1591 004a 41       		.byte	65
+ 1592 004b 22       		.byte	34
+ 1593 004c 1C       		.byte	28
+ 1594 004d 00       		.byte	0
+ 1595 004e 00       		.byte	0
+ 1596 004f 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 29
+
+
+ 1597 0050 08       		.byte	8
+ 1598 0051 2A       		.byte	42
+ 1599 0052 1C       		.byte	28
+ 1600 0053 1C       		.byte	28
+ 1601 0054 1C       		.byte	28
+ 1602 0055 2A       		.byte	42
+ 1603 0056 08       		.byte	8
+ 1604 0057 00       		.byte	0
+ 1605 0058 00       		.byte	0
+ 1606 0059 08       		.byte	8
+ 1607 005a 08       		.byte	8
+ 1608 005b 3E       		.byte	62
+ 1609 005c 08       		.byte	8
+ 1610 005d 08       		.byte	8
+ 1611 005e 00       		.byte	0
+ 1612 005f 00       		.byte	0
+ 1613 0060 00       		.byte	0
+ 1614 0061 00       		.byte	0
+ 1615 0062 80       		.byte	-128
+ 1616 0063 60       		.byte	96
+ 1617 0064 00       		.byte	0
+ 1618 0065 00       		.byte	0
+ 1619 0066 00       		.byte	0
+ 1620 0067 00       		.byte	0
+ 1621 0068 00       		.byte	0
+ 1622 0069 08       		.byte	8
+ 1623 006a 08       		.byte	8
+ 1624 006b 08       		.byte	8
+ 1625 006c 08       		.byte	8
+ 1626 006d 08       		.byte	8
+ 1627 006e 08       		.byte	8
+ 1628 006f 00       		.byte	0
+ 1629 0070 00       		.byte	0
+ 1630 0071 00       		.byte	0
+ 1631 0072 00       		.byte	0
+ 1632 0073 60       		.byte	96
+ 1633 0074 00       		.byte	0
+ 1634 0075 00       		.byte	0
+ 1635 0076 00       		.byte	0
+ 1636 0077 00       		.byte	0
+ 1637 0078 00       		.byte	0
+ 1638 0079 40       		.byte	64
+ 1639 007a 20       		.byte	32
+ 1640 007b 10       		.byte	16
+ 1641 007c 08       		.byte	8
+ 1642 007d 04       		.byte	4
+ 1643 007e 02       		.byte	2
+ 1644 007f 00       		.byte	0
+ 1645 0080 00       		.byte	0
+ 1646 0081 3E       		.byte	62
+ 1647 0082 61       		.byte	97
+ 1648 0083 51       		.byte	81
+ 1649 0084 49       		.byte	73
+ 1650 0085 45       		.byte	69
+ 1651 0086 3E       		.byte	62
+ 1652 0087 00       		.byte	0
+ 1653 0088 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 30
+
+
+ 1654 0089 44       		.byte	68
+ 1655 008a 42       		.byte	66
+ 1656 008b 7F       		.byte	127
+ 1657 008c 40       		.byte	64
+ 1658 008d 40       		.byte	64
+ 1659 008e 00       		.byte	0
+ 1660 008f 00       		.byte	0
+ 1661 0090 00       		.byte	0
+ 1662 0091 62       		.byte	98
+ 1663 0092 51       		.byte	81
+ 1664 0093 51       		.byte	81
+ 1665 0094 49       		.byte	73
+ 1666 0095 49       		.byte	73
+ 1667 0096 66       		.byte	102
+ 1668 0097 00       		.byte	0
+ 1669 0098 00       		.byte	0
+ 1670 0099 22       		.byte	34
+ 1671 009a 41       		.byte	65
+ 1672 009b 49       		.byte	73
+ 1673 009c 49       		.byte	73
+ 1674 009d 49       		.byte	73
+ 1675 009e 36       		.byte	54
+ 1676 009f 00       		.byte	0
+ 1677 00a0 10       		.byte	16
+ 1678 00a1 18       		.byte	24
+ 1679 00a2 14       		.byte	20
+ 1680 00a3 52       		.byte	82
+ 1681 00a4 7F       		.byte	127
+ 1682 00a5 50       		.byte	80
+ 1683 00a6 10       		.byte	16
+ 1684 00a7 00       		.byte	0
+ 1685 00a8 00       		.byte	0
+ 1686 00a9 27       		.byte	39
+ 1687 00aa 45       		.byte	69
+ 1688 00ab 45       		.byte	69
+ 1689 00ac 45       		.byte	69
+ 1690 00ad 45       		.byte	69
+ 1691 00ae 39       		.byte	57
+ 1692 00af 00       		.byte	0
+ 1693 00b0 00       		.byte	0
+ 1694 00b1 3C       		.byte	60
+ 1695 00b2 4A       		.byte	74
+ 1696 00b3 49       		.byte	73
+ 1697 00b4 49       		.byte	73
+ 1698 00b5 49       		.byte	73
+ 1699 00b6 30       		.byte	48
+ 1700 00b7 00       		.byte	0
+ 1701 00b8 00       		.byte	0
+ 1702 00b9 03       		.byte	3
+ 1703 00ba 01       		.byte	1
+ 1704 00bb 71       		.byte	113
+ 1705 00bc 09       		.byte	9
+ 1706 00bd 05       		.byte	5
+ 1707 00be 03       		.byte	3
+ 1708 00bf 00       		.byte	0
+ 1709 00c0 00       		.byte	0
+ 1710 00c1 36       		.byte	54
+ARM GAS  /tmp/ccIBqRvA.s 			page 31
+
+
+ 1711 00c2 49       		.byte	73
+ 1712 00c3 49       		.byte	73
+ 1713 00c4 49       		.byte	73
+ 1714 00c5 49       		.byte	73
+ 1715 00c6 36       		.byte	54
+ 1716 00c7 00       		.byte	0
+ 1717 00c8 00       		.byte	0
+ 1718 00c9 06       		.byte	6
+ 1719 00ca 49       		.byte	73
+ 1720 00cb 49       		.byte	73
+ 1721 00cc 49       		.byte	73
+ 1722 00cd 29       		.byte	41
+ 1723 00ce 1E       		.byte	30
+ 1724 00cf 00       		.byte	0
+ 1725 00d0 00       		.byte	0
+ 1726 00d1 00       		.byte	0
+ 1727 00d2 00       		.byte	0
+ 1728 00d3 66       		.byte	102
+ 1729 00d4 00       		.byte	0
+ 1730 00d5 00       		.byte	0
+ 1731 00d6 00       		.byte	0
+ 1732 00d7 00       		.byte	0
+ 1733 00d8 00       		.byte	0
+ 1734 00d9 00       		.byte	0
+ 1735 00da 80       		.byte	-128
+ 1736 00db 66       		.byte	102
+ 1737 00dc 00       		.byte	0
+ 1738 00dd 00       		.byte	0
+ 1739 00de 00       		.byte	0
+ 1740 00df 00       		.byte	0
+ 1741 00e0 00       		.byte	0
+ 1742 00e1 08       		.byte	8
+ 1743 00e2 14       		.byte	20
+ 1744 00e3 22       		.byte	34
+ 1745 00e4 41       		.byte	65
+ 1746 00e5 00       		.byte	0
+ 1747 00e6 00       		.byte	0
+ 1748 00e7 00       		.byte	0
+ 1749 00e8 00       		.byte	0
+ 1750 00e9 24       		.byte	36
+ 1751 00ea 24       		.byte	36
+ 1752 00eb 24       		.byte	36
+ 1753 00ec 24       		.byte	36
+ 1754 00ed 24       		.byte	36
+ 1755 00ee 24       		.byte	36
+ 1756 00ef 00       		.byte	0
+ 1757 00f0 00       		.byte	0
+ 1758 00f1 00       		.byte	0
+ 1759 00f2 00       		.byte	0
+ 1760 00f3 41       		.byte	65
+ 1761 00f4 22       		.byte	34
+ 1762 00f5 14       		.byte	20
+ 1763 00f6 08       		.byte	8
+ 1764 00f7 00       		.byte	0
+ 1765 00f8 00       		.byte	0
+ 1766 00f9 02       		.byte	2
+ 1767 00fa 01       		.byte	1
+ARM GAS  /tmp/ccIBqRvA.s 			page 32
+
+
+ 1768 00fb 01       		.byte	1
+ 1769 00fc 51       		.byte	81
+ 1770 00fd 09       		.byte	9
+ 1771 00fe 06       		.byte	6
+ 1772 00ff 00       		.byte	0
+ 1773 0100 00       		.byte	0
+ 1774 0101 3E       		.byte	62
+ 1775 0102 41       		.byte	65
+ 1776 0103 5D       		.byte	93
+ 1777 0104 55       		.byte	85
+ 1778 0105 55       		.byte	85
+ 1779 0106 1E       		.byte	30
+ 1780 0107 00       		.byte	0
+ 1781 0108 00       		.byte	0
+ 1782 0109 7C       		.byte	124
+ 1783 010a 12       		.byte	18
+ 1784 010b 11       		.byte	17
+ 1785 010c 11       		.byte	17
+ 1786 010d 12       		.byte	18
+ 1787 010e 7C       		.byte	124
+ 1788 010f 00       		.byte	0
+ 1789 0110 00       		.byte	0
+ 1790 0111 41       		.byte	65
+ 1791 0112 7F       		.byte	127
+ 1792 0113 49       		.byte	73
+ 1793 0114 49       		.byte	73
+ 1794 0115 49       		.byte	73
+ 1795 0116 36       		.byte	54
+ 1796 0117 00       		.byte	0
+ 1797 0118 00       		.byte	0
+ 1798 0119 1C       		.byte	28
+ 1799 011a 22       		.byte	34
+ 1800 011b 41       		.byte	65
+ 1801 011c 41       		.byte	65
+ 1802 011d 41       		.byte	65
+ 1803 011e 22       		.byte	34
+ 1804 011f 00       		.byte	0
+ 1805 0120 00       		.byte	0
+ 1806 0121 41       		.byte	65
+ 1807 0122 7F       		.byte	127
+ 1808 0123 41       		.byte	65
+ 1809 0124 41       		.byte	65
+ 1810 0125 22       		.byte	34
+ 1811 0126 1C       		.byte	28
+ 1812 0127 00       		.byte	0
+ 1813 0128 00       		.byte	0
+ 1814 0129 41       		.byte	65
+ 1815 012a 7F       		.byte	127
+ 1816 012b 49       		.byte	73
+ 1817 012c 5D       		.byte	93
+ 1818 012d 41       		.byte	65
+ 1819 012e 63       		.byte	99
+ 1820 012f 00       		.byte	0
+ 1821 0130 00       		.byte	0
+ 1822 0131 41       		.byte	65
+ 1823 0132 7F       		.byte	127
+ 1824 0133 49       		.byte	73
+ARM GAS  /tmp/ccIBqRvA.s 			page 33
+
+
+ 1825 0134 1D       		.byte	29
+ 1826 0135 01       		.byte	1
+ 1827 0136 03       		.byte	3
+ 1828 0137 00       		.byte	0
+ 1829 0138 00       		.byte	0
+ 1830 0139 1C       		.byte	28
+ 1831 013a 22       		.byte	34
+ 1832 013b 41       		.byte	65
+ 1833 013c 51       		.byte	81
+ 1834 013d 51       		.byte	81
+ 1835 013e 72       		.byte	114
+ 1836 013f 00       		.byte	0
+ 1837 0140 00       		.byte	0
+ 1838 0141 7F       		.byte	127
+ 1839 0142 08       		.byte	8
+ 1840 0143 08       		.byte	8
+ 1841 0144 08       		.byte	8
+ 1842 0145 08       		.byte	8
+ 1843 0146 7F       		.byte	127
+ 1844 0147 00       		.byte	0
+ 1845 0148 00       		.byte	0
+ 1846 0149 00       		.byte	0
+ 1847 014a 41       		.byte	65
+ 1848 014b 7F       		.byte	127
+ 1849 014c 41       		.byte	65
+ 1850 014d 00       		.byte	0
+ 1851 014e 00       		.byte	0
+ 1852 014f 00       		.byte	0
+ 1853 0150 00       		.byte	0
+ 1854 0151 30       		.byte	48
+ 1855 0152 40       		.byte	64
+ 1856 0153 40       		.byte	64
+ 1857 0154 41       		.byte	65
+ 1858 0155 3F       		.byte	63
+ 1859 0156 01       		.byte	1
+ 1860 0157 00       		.byte	0
+ 1861 0158 00       		.byte	0
+ 1862 0159 41       		.byte	65
+ 1863 015a 7F       		.byte	127
+ 1864 015b 08       		.byte	8
+ 1865 015c 14       		.byte	20
+ 1866 015d 22       		.byte	34
+ 1867 015e 41       		.byte	65
+ 1868 015f 40       		.byte	64
+ 1869 0160 00       		.byte	0
+ 1870 0161 41       		.byte	65
+ 1871 0162 7F       		.byte	127
+ 1872 0163 41       		.byte	65
+ 1873 0164 40       		.byte	64
+ 1874 0165 40       		.byte	64
+ 1875 0166 60       		.byte	96
+ 1876 0167 00       		.byte	0
+ 1877 0168 00       		.byte	0
+ 1878 0169 7F       		.byte	127
+ 1879 016a 01       		.byte	1
+ 1880 016b 02       		.byte	2
+ 1881 016c 04       		.byte	4
+ARM GAS  /tmp/ccIBqRvA.s 			page 34
+
+
+ 1882 016d 02       		.byte	2
+ 1883 016e 01       		.byte	1
+ 1884 016f 7F       		.byte	127
+ 1885 0170 00       		.byte	0
+ 1886 0171 7F       		.byte	127
+ 1887 0172 01       		.byte	1
+ 1888 0173 02       		.byte	2
+ 1889 0174 04       		.byte	4
+ 1890 0175 08       		.byte	8
+ 1891 0176 7F       		.byte	127
+ 1892 0177 00       		.byte	0
+ 1893 0178 00       		.byte	0
+ 1894 0179 3E       		.byte	62
+ 1895 017a 41       		.byte	65
+ 1896 017b 41       		.byte	65
+ 1897 017c 41       		.byte	65
+ 1898 017d 41       		.byte	65
+ 1899 017e 3E       		.byte	62
+ 1900 017f 00       		.byte	0
+ 1901 0180 00       		.byte	0
+ 1902 0181 41       		.byte	65
+ 1903 0182 7F       		.byte	127
+ 1904 0183 49       		.byte	73
+ 1905 0184 09       		.byte	9
+ 1906 0185 09       		.byte	9
+ 1907 0186 06       		.byte	6
+ 1908 0187 00       		.byte	0
+ 1909 0188 00       		.byte	0
+ 1910 0189 1E       		.byte	30
+ 1911 018a 21       		.byte	33
+ 1912 018b 21       		.byte	33
+ 1913 018c 31       		.byte	49
+ 1914 018d 21       		.byte	33
+ 1915 018e 5E       		.byte	94
+ 1916 018f 40       		.byte	64
+ 1917 0190 00       		.byte	0
+ 1918 0191 41       		.byte	65
+ 1919 0192 7F       		.byte	127
+ 1920 0193 49       		.byte	73
+ 1921 0194 19       		.byte	25
+ 1922 0195 29       		.byte	41
+ 1923 0196 46       		.byte	70
+ 1924 0197 00       		.byte	0
+ 1925 0198 00       		.byte	0
+ 1926 0199 26       		.byte	38
+ 1927 019a 49       		.byte	73
+ 1928 019b 49       		.byte	73
+ 1929 019c 49       		.byte	73
+ 1930 019d 49       		.byte	73
+ 1931 019e 32       		.byte	50
+ 1932 019f 00       		.byte	0
+ 1933 01a0 00       		.byte	0
+ 1934 01a1 03       		.byte	3
+ 1935 01a2 01       		.byte	1
+ 1936 01a3 41       		.byte	65
+ 1937 01a4 7F       		.byte	127
+ 1938 01a5 41       		.byte	65
+ARM GAS  /tmp/ccIBqRvA.s 			page 35
+
+
+ 1939 01a6 01       		.byte	1
+ 1940 01a7 03       		.byte	3
+ 1941 01a8 00       		.byte	0
+ 1942 01a9 3F       		.byte	63
+ 1943 01aa 40       		.byte	64
+ 1944 01ab 40       		.byte	64
+ 1945 01ac 40       		.byte	64
+ 1946 01ad 40       		.byte	64
+ 1947 01ae 3F       		.byte	63
+ 1948 01af 00       		.byte	0
+ 1949 01b0 00       		.byte	0
+ 1950 01b1 0F       		.byte	15
+ 1951 01b2 10       		.byte	16
+ 1952 01b3 20       		.byte	32
+ 1953 01b4 40       		.byte	64
+ 1954 01b5 20       		.byte	32
+ 1955 01b6 10       		.byte	16
+ 1956 01b7 0F       		.byte	15
+ 1957 01b8 00       		.byte	0
+ 1958 01b9 3F       		.byte	63
+ 1959 01ba 40       		.byte	64
+ 1960 01bb 40       		.byte	64
+ 1961 01bc 38       		.byte	56
+ 1962 01bd 40       		.byte	64
+ 1963 01be 40       		.byte	64
+ 1964 01bf 3F       		.byte	63
+ 1965 01c0 00       		.byte	0
+ 1966 01c1 41       		.byte	65
+ 1967 01c2 22       		.byte	34
+ 1968 01c3 14       		.byte	20
+ 1969 01c4 08       		.byte	8
+ 1970 01c5 14       		.byte	20
+ 1971 01c6 22       		.byte	34
+ 1972 01c7 41       		.byte	65
+ 1973 01c8 00       		.byte	0
+ 1974 01c9 01       		.byte	1
+ 1975 01ca 02       		.byte	2
+ 1976 01cb 44       		.byte	68
+ 1977 01cc 78       		.byte	120
+ 1978 01cd 44       		.byte	68
+ 1979 01ce 02       		.byte	2
+ 1980 01cf 01       		.byte	1
+ 1981 01d0 00       		.byte	0
+ 1982 01d1 43       		.byte	67
+ 1983 01d2 61       		.byte	97
+ 1984 01d3 51       		.byte	81
+ 1985 01d4 49       		.byte	73
+ 1986 01d5 45       		.byte	69
+ 1987 01d6 43       		.byte	67
+ 1988 01d7 61       		.byte	97
+ 1989 01d8 00       		.byte	0
+ 1990 01d9 7F       		.byte	127
+ 1991 01da 41       		.byte	65
+ 1992 01db 41       		.byte	65
+ 1993 01dc 41       		.byte	65
+ 1994 01dd 00       		.byte	0
+ 1995 01de 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 36
+
+
+ 1996 01df 00       		.byte	0
+ 1997 01e0 01       		.byte	1
+ 1998 01e1 02       		.byte	2
+ 1999 01e2 04       		.byte	4
+ 2000 01e3 08       		.byte	8
+ 2001 01e4 10       		.byte	16
+ 2002 01e5 20       		.byte	32
+ 2003 01e6 40       		.byte	64
+ 2004 01e7 00       		.byte	0
+ 2005 01e8 00       		.byte	0
+ 2006 01e9 41       		.byte	65
+ 2007 01ea 41       		.byte	65
+ 2008 01eb 41       		.byte	65
+ 2009 01ec 7F       		.byte	127
+ 2010 01ed 00       		.byte	0
+ 2011 01ee 00       		.byte	0
+ 2012 01ef 00       		.byte	0
+ 2013 01f0 08       		.byte	8
+ 2014 01f1 04       		.byte	4
+ 2015 01f2 02       		.byte	2
+ 2016 01f3 01       		.byte	1
+ 2017 01f4 02       		.byte	2
+ 2018 01f5 04       		.byte	4
+ 2019 01f6 08       		.byte	8
+ 2020 01f7 00       		.byte	0
+ 2021 01f8 80       		.byte	-128
+ 2022 01f9 80       		.byte	-128
+ 2023 01fa 80       		.byte	-128
+ 2024 01fb 80       		.byte	-128
+ 2025 01fc 80       		.byte	-128
+ 2026 01fd 80       		.byte	-128
+ 2027 01fe 80       		.byte	-128
+ 2028 01ff 80       		.byte	-128
+ 2029 0200 00       		.byte	0
+ 2030 0201 00       		.byte	0
+ 2031 0202 00       		.byte	0
+ 2032 0203 03       		.byte	3
+ 2033 0204 04       		.byte	4
+ 2034 0205 00       		.byte	0
+ 2035 0206 00       		.byte	0
+ 2036 0207 00       		.byte	0
+ 2037 0208 00       		.byte	0
+ 2038 0209 20       		.byte	32
+ 2039 020a 54       		.byte	84
+ 2040 020b 54       		.byte	84
+ 2041 020c 54       		.byte	84
+ 2042 020d 54       		.byte	84
+ 2043 020e 78       		.byte	120
+ 2044 020f 40       		.byte	64
+ 2045 0210 00       		.byte	0
+ 2046 0211 01       		.byte	1
+ 2047 0212 7F       		.byte	127
+ 2048 0213 30       		.byte	48
+ 2049 0214 48       		.byte	72
+ 2050 0215 48       		.byte	72
+ 2051 0216 48       		.byte	72
+ 2052 0217 30       		.byte	48
+ARM GAS  /tmp/ccIBqRvA.s 			page 37
+
+
+ 2053 0218 00       		.byte	0
+ 2054 0219 38       		.byte	56
+ 2055 021a 44       		.byte	68
+ 2056 021b 44       		.byte	68
+ 2057 021c 44       		.byte	68
+ 2058 021d 44       		.byte	68
+ 2059 021e 28       		.byte	40
+ 2060 021f 00       		.byte	0
+ 2061 0220 00       		.byte	0
+ 2062 0221 30       		.byte	48
+ 2063 0222 48       		.byte	72
+ 2064 0223 48       		.byte	72
+ 2065 0224 48       		.byte	72
+ 2066 0225 31       		.byte	49
+ 2067 0226 7F       		.byte	127
+ 2068 0227 40       		.byte	64
+ 2069 0228 00       		.byte	0
+ 2070 0229 38       		.byte	56
+ 2071 022a 54       		.byte	84
+ 2072 022b 54       		.byte	84
+ 2073 022c 54       		.byte	84
+ 2074 022d 54       		.byte	84
+ 2075 022e 18       		.byte	24
+ 2076 022f 00       		.byte	0
+ 2077 0230 00       		.byte	0
+ 2078 0231 00       		.byte	0
+ 2079 0232 48       		.byte	72
+ 2080 0233 7E       		.byte	126
+ 2081 0234 49       		.byte	73
+ 2082 0235 01       		.byte	1
+ 2083 0236 02       		.byte	2
+ 2084 0237 00       		.byte	0
+ 2085 0238 00       		.byte	0
+ 2086 0239 98       		.byte	-104
+ 2087 023a A4       		.byte	-92
+ 2088 023b A4       		.byte	-92
+ 2089 023c A4       		.byte	-92
+ 2090 023d A4       		.byte	-92
+ 2091 023e 78       		.byte	120
+ 2092 023f 04       		.byte	4
+ 2093 0240 00       		.byte	0
+ 2094 0241 41       		.byte	65
+ 2095 0242 7F       		.byte	127
+ 2096 0243 08       		.byte	8
+ 2097 0244 04       		.byte	4
+ 2098 0245 04       		.byte	4
+ 2099 0246 78       		.byte	120
+ 2100 0247 00       		.byte	0
+ 2101 0248 00       		.byte	0
+ 2102 0249 00       		.byte	0
+ 2103 024a 44       		.byte	68
+ 2104 024b 7D       		.byte	125
+ 2105 024c 40       		.byte	64
+ 2106 024d 00       		.byte	0
+ 2107 024e 00       		.byte	0
+ 2108 024f 00       		.byte	0
+ 2109 0250 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 38
+
+
+ 2110 0251 60       		.byte	96
+ 2111 0252 80       		.byte	-128
+ 2112 0253 80       		.byte	-128
+ 2113 0254 80       		.byte	-128
+ 2114 0255 84       		.byte	-124
+ 2115 0256 7D       		.byte	125
+ 2116 0257 00       		.byte	0
+ 2117 0258 00       		.byte	0
+ 2118 0259 01       		.byte	1
+ 2119 025a 7F       		.byte	127
+ 2120 025b 10       		.byte	16
+ 2121 025c 28       		.byte	40
+ 2122 025d 44       		.byte	68
+ 2123 025e 40       		.byte	64
+ 2124 025f 00       		.byte	0
+ 2125 0260 00       		.byte	0
+ 2126 0261 00       		.byte	0
+ 2127 0262 41       		.byte	65
+ 2128 0263 7F       		.byte	127
+ 2129 0264 40       		.byte	64
+ 2130 0265 00       		.byte	0
+ 2131 0266 00       		.byte	0
+ 2132 0267 00       		.byte	0
+ 2133 0268 00       		.byte	0
+ 2134 0269 7C       		.byte	124
+ 2135 026a 04       		.byte	4
+ 2136 026b 04       		.byte	4
+ 2137 026c 78       		.byte	120
+ 2138 026d 04       		.byte	4
+ 2139 026e 04       		.byte	4
+ 2140 026f 78       		.byte	120
+ 2141 0270 00       		.byte	0
+ 2142 0271 7C       		.byte	124
+ 2143 0272 08       		.byte	8
+ 2144 0273 04       		.byte	4
+ 2145 0274 04       		.byte	4
+ 2146 0275 04       		.byte	4
+ 2147 0276 78       		.byte	120
+ 2148 0277 00       		.byte	0
+ 2149 0278 00       		.byte	0
+ 2150 0279 38       		.byte	56
+ 2151 027a 44       		.byte	68
+ 2152 027b 44       		.byte	68
+ 2153 027c 44       		.byte	68
+ 2154 027d 44       		.byte	68
+ 2155 027e 38       		.byte	56
+ 2156 027f 00       		.byte	0
+ 2157 0280 00       		.byte	0
+ 2158 0281 84       		.byte	-124
+ 2159 0282 FC       		.byte	-4
+ 2160 0283 98       		.byte	-104
+ 2161 0284 24       		.byte	36
+ 2162 0285 24       		.byte	36
+ 2163 0286 18       		.byte	24
+ 2164 0287 00       		.byte	0
+ 2165 0288 00       		.byte	0
+ 2166 0289 18       		.byte	24
+ARM GAS  /tmp/ccIBqRvA.s 			page 39
+
+
+ 2167 028a 24       		.byte	36
+ 2168 028b 24       		.byte	36
+ 2169 028c 98       		.byte	-104
+ 2170 028d FC       		.byte	-4
+ 2171 028e 84       		.byte	-124
+ 2172 028f 00       		.byte	0
+ 2173 0290 00       		.byte	0
+ 2174 0291 44       		.byte	68
+ 2175 0292 7C       		.byte	124
+ 2176 0293 48       		.byte	72
+ 2177 0294 04       		.byte	4
+ 2178 0295 04       		.byte	4
+ 2179 0296 18       		.byte	24
+ 2180 0297 00       		.byte	0
+ 2181 0298 00       		.byte	0
+ 2182 0299 48       		.byte	72
+ 2183 029a 54       		.byte	84
+ 2184 029b 54       		.byte	84
+ 2185 029c 54       		.byte	84
+ 2186 029d 54       		.byte	84
+ 2187 029e 24       		.byte	36
+ 2188 029f 00       		.byte	0
+ 2189 02a0 00       		.byte	0
+ 2190 02a1 04       		.byte	4
+ 2191 02a2 04       		.byte	4
+ 2192 02a3 3F       		.byte	63
+ 2193 02a4 44       		.byte	68
+ 2194 02a5 44       		.byte	68
+ 2195 02a6 20       		.byte	32
+ 2196 02a7 00       		.byte	0
+ 2197 02a8 00       		.byte	0
+ 2198 02a9 3C       		.byte	60
+ 2199 02aa 40       		.byte	64
+ 2200 02ab 40       		.byte	64
+ 2201 02ac 40       		.byte	64
+ 2202 02ad 20       		.byte	32
+ 2203 02ae 7C       		.byte	124
+ 2204 02af 00       		.byte	0
+ 2205 02b0 00       		.byte	0
+ 2206 02b1 0C       		.byte	12
+ 2207 02b2 10       		.byte	16
+ 2208 02b3 20       		.byte	32
+ 2209 02b4 40       		.byte	64
+ 2210 02b5 20       		.byte	32
+ 2211 02b6 10       		.byte	16
+ 2212 02b7 0C       		.byte	12
+ 2213 02b8 00       		.byte	0
+ 2214 02b9 3C       		.byte	60
+ 2215 02ba 40       		.byte	64
+ 2216 02bb 40       		.byte	64
+ 2217 02bc 38       		.byte	56
+ 2218 02bd 40       		.byte	64
+ 2219 02be 40       		.byte	64
+ 2220 02bf 3C       		.byte	60
+ 2221 02c0 00       		.byte	0
+ 2222 02c1 44       		.byte	68
+ 2223 02c2 28       		.byte	40
+ARM GAS  /tmp/ccIBqRvA.s 			page 40
+
+
+ 2224 02c3 10       		.byte	16
+ 2225 02c4 28       		.byte	40
+ 2226 02c5 44       		.byte	68
+ 2227 02c6 00       		.byte	0
+ 2228 02c7 00       		.byte	0
+ 2229 02c8 00       		.byte	0
+ 2230 02c9 9C       		.byte	-100
+ 2231 02ca A0       		.byte	-96
+ 2232 02cb A0       		.byte	-96
+ 2233 02cc A0       		.byte	-96
+ 2234 02cd A0       		.byte	-96
+ 2235 02ce 7C       		.byte	124
+ 2236 02cf 00       		.byte	0
+ 2237 02d0 00       		.byte	0
+ 2238 02d1 44       		.byte	68
+ 2239 02d2 64       		.byte	100
+ 2240 02d3 54       		.byte	84
+ 2241 02d4 4C       		.byte	76
+ 2242 02d5 44       		.byte	68
+ 2243 02d6 00       		.byte	0
+ 2244 02d7 00       		.byte	0
+ 2245 02d8 00       		.byte	0
+ 2246 02d9 08       		.byte	8
+ 2247 02da 08       		.byte	8
+ 2248 02db 36       		.byte	54
+ 2249 02dc 41       		.byte	65
+ 2250 02dd 41       		.byte	65
+ 2251 02de 00       		.byte	0
+ 2252 02df 00       		.byte	0
+ 2253 02e0 00       		.byte	0
+ 2254 02e1 00       		.byte	0
+ 2255 02e2 00       		.byte	0
+ 2256 02e3 77       		.byte	119
+ 2257 02e4 00       		.byte	0
+ 2258 02e5 00       		.byte	0
+ 2259 02e6 00       		.byte	0
+ 2260 02e7 00       		.byte	0
+ 2261 02e8 00       		.byte	0
+ 2262 02e9 00       		.byte	0
+ 2263 02ea 41       		.byte	65
+ 2264 02eb 41       		.byte	65
+ 2265 02ec 36       		.byte	54
+ 2266 02ed 08       		.byte	8
+ 2267 02ee 08       		.byte	8
+ 2268 02ef 00       		.byte	0
+ 2269 02f0 00       		.byte	0
+ 2270 02f1 02       		.byte	2
+ 2271 02f2 01       		.byte	1
+ 2272 02f3 01       		.byte	1
+ 2273 02f4 02       		.byte	2
+ 2274 02f5 02       		.byte	2
+ 2275 02f6 01       		.byte	1
+ 2276 02f7 00       		.byte	0
+ 2277 02f8 00       		.byte	0
+ 2278 02f9 70       		.byte	112
+ 2279 02fa 48       		.byte	72
+ 2280 02fb 44       		.byte	68
+ARM GAS  /tmp/ccIBqRvA.s 			page 41
+
+
+ 2281 02fc 42       		.byte	66
+ 2282 02fd 44       		.byte	68
+ 2283 02fe 48       		.byte	72
+ 2284 02ff 70       		.byte	112
+ 2285 0300 00       		.byte	0
+ 2286 0301 0E       		.byte	14
+ 2287 0302 91       		.byte	-111
+ 2288 0303 91       		.byte	-111
+ 2289 0304 B1       		.byte	-79
+ 2290 0305 B1       		.byte	-79
+ 2291 0306 4A       		.byte	74
+ 2292 0307 00       		.byte	0
+ 2293 0308 00       		.byte	0
+ 2294 0309 3A       		.byte	58
+ 2295 030a 40       		.byte	64
+ 2296 030b 40       		.byte	64
+ 2297 030c 40       		.byte	64
+ 2298 030d 7A       		.byte	122
+ 2299 030e 40       		.byte	64
+ 2300 030f 00       		.byte	0
+ 2301 0310 00       		.byte	0
+ 2302 0311 38       		.byte	56
+ 2303 0312 54       		.byte	84
+ 2304 0313 54       		.byte	84
+ 2305 0314 55       		.byte	85
+ 2306 0315 55       		.byte	85
+ 2307 0316 18       		.byte	24
+ 2308 0317 00       		.byte	0
+ 2309 0318 00       		.byte	0
+ 2310 0319 22       		.byte	34
+ 2311 031a 55       		.byte	85
+ 2312 031b 55       		.byte	85
+ 2313 031c 55       		.byte	85
+ 2314 031d 79       		.byte	121
+ 2315 031e 42       		.byte	66
+ 2316 031f 00       		.byte	0
+ 2317 0320 00       		.byte	0
+ 2318 0321 21       		.byte	33
+ 2319 0322 54       		.byte	84
+ 2320 0323 54       		.byte	84
+ 2321 0324 54       		.byte	84
+ 2322 0325 78       		.byte	120
+ 2323 0326 41       		.byte	65
+ 2324 0327 00       		.byte	0
+ 2325 0328 00       		.byte	0
+ 2326 0329 20       		.byte	32
+ 2327 032a 55       		.byte	85
+ 2328 032b 55       		.byte	85
+ 2329 032c 54       		.byte	84
+ 2330 032d 78       		.byte	120
+ 2331 032e 40       		.byte	64
+ 2332 032f 00       		.byte	0
+ 2333 0330 00       		.byte	0
+ 2334 0331 20       		.byte	32
+ 2335 0332 54       		.byte	84
+ 2336 0333 55       		.byte	85
+ 2337 0334 54       		.byte	84
+ARM GAS  /tmp/ccIBqRvA.s 			page 42
+
+
+ 2338 0335 78       		.byte	120
+ 2339 0336 40       		.byte	64
+ 2340 0337 00       		.byte	0
+ 2341 0338 00       		.byte	0
+ 2342 0339 18       		.byte	24
+ 2343 033a 24       		.byte	36
+ 2344 033b A4       		.byte	-92
+ 2345 033c A4       		.byte	-92
+ 2346 033d E4       		.byte	-28
+ 2347 033e 40       		.byte	64
+ 2348 033f 00       		.byte	0
+ 2349 0340 00       		.byte	0
+ 2350 0341 3A       		.byte	58
+ 2351 0342 55       		.byte	85
+ 2352 0343 55       		.byte	85
+ 2353 0344 55       		.byte	85
+ 2354 0345 55       		.byte	85
+ 2355 0346 1A       		.byte	26
+ 2356 0347 00       		.byte	0
+ 2357 0348 00       		.byte	0
+ 2358 0349 39       		.byte	57
+ 2359 034a 54       		.byte	84
+ 2360 034b 54       		.byte	84
+ 2361 034c 54       		.byte	84
+ 2362 034d 54       		.byte	84
+ 2363 034e 19       		.byte	25
+ 2364 034f 00       		.byte	0
+ 2365 0350 00       		.byte	0
+ 2366 0351 38       		.byte	56
+ 2367 0352 55       		.byte	85
+ 2368 0353 55       		.byte	85
+ 2369 0354 54       		.byte	84
+ 2370 0355 54       		.byte	84
+ 2371 0356 18       		.byte	24
+ 2372 0357 00       		.byte	0
+ 2373 0358 00       		.byte	0
+ 2374 0359 00       		.byte	0
+ 2375 035a 01       		.byte	1
+ 2376 035b 44       		.byte	68
+ 2377 035c 7C       		.byte	124
+ 2378 035d 41       		.byte	65
+ 2379 035e 00       		.byte	0
+ 2380 035f 00       		.byte	0
+ 2381 0360 02       		.byte	2
+ 2382 0361 01       		.byte	1
+ 2383 0362 45       		.byte	69
+ 2384 0363 7D       		.byte	125
+ 2385 0364 41       		.byte	65
+ 2386 0365 01       		.byte	1
+ 2387 0366 02       		.byte	2
+ 2388 0367 00       		.byte	0
+ 2389 0368 00       		.byte	0
+ 2390 0369 00       		.byte	0
+ 2391 036a 01       		.byte	1
+ 2392 036b 45       		.byte	69
+ 2393 036c 7C       		.byte	124
+ 2394 036d 40       		.byte	64
+ARM GAS  /tmp/ccIBqRvA.s 			page 43
+
+
+ 2395 036e 00       		.byte	0
+ 2396 036f 00       		.byte	0
+ 2397 0370 00       		.byte	0
+ 2398 0371 79       		.byte	121
+ 2399 0372 14       		.byte	20
+ 2400 0373 12       		.byte	18
+ 2401 0374 12       		.byte	18
+ 2402 0375 14       		.byte	20
+ 2403 0376 79       		.byte	121
+ 2404 0377 00       		.byte	0
+ 2405 0378 00       		.byte	0
+ 2406 0379 70       		.byte	112
+ 2407 037a 28       		.byte	40
+ 2408 037b 2B       		.byte	43
+ 2409 037c 2B       		.byte	43
+ 2410 037d 28       		.byte	40
+ 2411 037e 70       		.byte	112
+ 2412 037f 00       		.byte	0
+ 2413 0380 00       		.byte	0
+ 2414 0381 44       		.byte	68
+ 2415 0382 7C       		.byte	124
+ 2416 0383 54       		.byte	84
+ 2417 0384 55       		.byte	85
+ 2418 0385 45       		.byte	69
+ 2419 0386 00       		.byte	0
+ 2420 0387 00       		.byte	0
+ 2421 0388 00       		.byte	0
+ 2422 0389 20       		.byte	32
+ 2423 038a 54       		.byte	84
+ 2424 038b 54       		.byte	84
+ 2425 038c 58       		.byte	88
+ 2426 038d 38       		.byte	56
+ 2427 038e 54       		.byte	84
+ 2428 038f 54       		.byte	84
+ 2429 0390 00       		.byte	0
+ 2430 0391 7C       		.byte	124
+ 2431 0392 0A       		.byte	10
+ 2432 0393 09       		.byte	9
+ 2433 0394 09       		.byte	9
+ 2434 0395 7F       		.byte	127
+ 2435 0396 49       		.byte	73
+ 2436 0397 49       		.byte	73
+ 2437 0398 00       		.byte	0
+ 2438 0399 30       		.byte	48
+ 2439 039a 4A       		.byte	74
+ 2440 039b 49       		.byte	73
+ 2441 039c 49       		.byte	73
+ 2442 039d 4A       		.byte	74
+ 2443 039e 30       		.byte	48
+ 2444 039f 00       		.byte	0
+ 2445 03a0 00       		.byte	0
+ 2446 03a1 32       		.byte	50
+ 2447 03a2 48       		.byte	72
+ 2448 03a3 48       		.byte	72
+ 2449 03a4 48       		.byte	72
+ 2450 03a5 48       		.byte	72
+ 2451 03a6 32       		.byte	50
+ARM GAS  /tmp/ccIBqRvA.s 			page 44
+
+
+ 2452 03a7 00       		.byte	0
+ 2453 03a8 00       		.byte	0
+ 2454 03a9 30       		.byte	48
+ 2455 03aa 49       		.byte	73
+ 2456 03ab 4A       		.byte	74
+ 2457 03ac 48       		.byte	72
+ 2458 03ad 48       		.byte	72
+ 2459 03ae 30       		.byte	48
+ 2460 03af 00       		.byte	0
+ 2461 03b0 00       		.byte	0
+ 2462 03b1 38       		.byte	56
+ 2463 03b2 42       		.byte	66
+ 2464 03b3 41       		.byte	65
+ 2465 03b4 41       		.byte	65
+ 2466 03b5 42       		.byte	66
+ 2467 03b6 38       		.byte	56
+ 2468 03b7 00       		.byte	0
+ 2469 03b8 00       		.byte	0
+ 2470 03b9 38       		.byte	56
+ 2471 03ba 41       		.byte	65
+ 2472 03bb 42       		.byte	66
+ 2473 03bc 40       		.byte	64
+ 2474 03bd 40       		.byte	64
+ 2475 03be 38       		.byte	56
+ 2476 03bf 00       		.byte	0
+ 2477 03c0 00       		.byte	0
+ 2478 03c1 1A       		.byte	26
+ 2479 03c2 A0       		.byte	-96
+ 2480 03c3 A0       		.byte	-96
+ 2481 03c4 A0       		.byte	-96
+ 2482 03c5 A0       		.byte	-96
+ 2483 03c6 7A       		.byte	122
+ 2484 03c7 00       		.byte	0
+ 2485 03c8 00       		.byte	0
+ 2486 03c9 19       		.byte	25
+ 2487 03ca 24       		.byte	36
+ 2488 03cb 42       		.byte	66
+ 2489 03cc 42       		.byte	66
+ 2490 03cd 24       		.byte	36
+ 2491 03ce 19       		.byte	25
+ 2492 03cf 00       		.byte	0
+ 2493 03d0 00       		.byte	0
+ 2494 03d1 3D       		.byte	61
+ 2495 03d2 40       		.byte	64
+ 2496 03d3 40       		.byte	64
+ 2497 03d4 40       		.byte	64
+ 2498 03d5 40       		.byte	64
+ 2499 03d6 3D       		.byte	61
+ 2500 03d7 00       		.byte	0
+ 2501 03d8 00       		.byte	0
+ 2502 03d9 18       		.byte	24
+ 2503 03da 24       		.byte	36
+ 2504 03db 24       		.byte	36
+ 2505 03dc E7       		.byte	-25
+ 2506 03dd 24       		.byte	36
+ 2507 03de 24       		.byte	36
+ 2508 03df 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 45
+
+
+ 2509 03e0 00       		.byte	0
+ 2510 03e1 68       		.byte	104
+ 2511 03e2 5E       		.byte	94
+ 2512 03e3 49       		.byte	73
+ 2513 03e4 41       		.byte	65
+ 2514 03e5 42       		.byte	66
+ 2515 03e6 20       		.byte	32
+ 2516 03e7 00       		.byte	0
+ 2517 03e8 00       		.byte	0
+ 2518 03e9 15       		.byte	21
+ 2519 03ea 16       		.byte	22
+ 2520 03eb 7C       		.byte	124
+ 2521 03ec 16       		.byte	22
+ 2522 03ed 15       		.byte	21
+ 2523 03ee 00       		.byte	0
+ 2524 03ef 00       		.byte	0
+ 2525 03f0 81       		.byte	-127
+ 2526 03f1 FF       		.byte	-1
+ 2527 03f2 85       		.byte	-123
+ 2528 03f3 05       		.byte	5
+ 2529 03f4 17       		.byte	23
+ 2530 03f5 FA       		.byte	-6
+ 2531 03f6 90       		.byte	-112
+ 2532 03f7 50       		.byte	80
+ 2533 03f8 40       		.byte	64
+ 2534 03f9 88       		.byte	-120
+ 2535 03fa 88       		.byte	-120
+ 2536 03fb 7F       		.byte	127
+ 2537 03fc 09       		.byte	9
+ 2538 03fd 09       		.byte	9
+ 2539 03fe 02       		.byte	2
+ 2540 03ff 00       		.byte	0
+ 2541 0400 00       		.byte	0
+ 2542 0401 20       		.byte	32
+ 2543 0402 54       		.byte	84
+ 2544 0403 54       		.byte	84
+ 2545 0404 55       		.byte	85
+ 2546 0405 79       		.byte	121
+ 2547 0406 40       		.byte	64
+ 2548 0407 00       		.byte	0
+ 2549              		.section	.rodata.Font_System5x8,"a",%progbits
+ 2550              		.align	2
+ 2551              		.type	Font_System5x8, %object
+ 2552              		.size	Font_System5x8, 8
+ 2553              	Font_System5x8:
+ 2554 0000 05       		.byte	5
+ 2555 0001 08       		.byte	8
+ 2556 0002 20       		.byte	32
+ 2557 0003 80       		.byte	-128
+ 2558 0004 00000000 		.word	au8FontSystem5x8
+ 2559              		.section	.rodata.au8FontSystem7x8,"a",%progbits
+ 2560              		.type	au8FontSystem7x8, %object
+ 2561              		.size	au8FontSystem7x8, 679
+ 2562              	au8FontSystem7x8:
+ 2563 0000 00       		.byte	0
+ 2564 0001 00       		.byte	0
+ 2565 0002 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 46
+
+
+ 2566 0003 00       		.byte	0
+ 2567 0004 00       		.byte	0
+ 2568 0005 00       		.byte	0
+ 2569 0006 00       		.byte	0
+ 2570 0007 00       		.byte	0
+ 2571 0008 06       		.byte	6
+ 2572 0009 5F       		.byte	95
+ 2573 000a 5F       		.byte	95
+ 2574 000b 06       		.byte	6
+ 2575 000c 00       		.byte	0
+ 2576 000d 00       		.byte	0
+ 2577 000e 00       		.byte	0
+ 2578 000f 07       		.byte	7
+ 2579 0010 07       		.byte	7
+ 2580 0011 00       		.byte	0
+ 2581 0012 07       		.byte	7
+ 2582 0013 07       		.byte	7
+ 2583 0014 00       		.byte	0
+ 2584 0015 14       		.byte	20
+ 2585 0016 7F       		.byte	127
+ 2586 0017 7F       		.byte	127
+ 2587 0018 14       		.byte	20
+ 2588 0019 7F       		.byte	127
+ 2589 001a 7F       		.byte	127
+ 2590 001b 14       		.byte	20
+ 2591 001c 24       		.byte	36
+ 2592 001d 2E       		.byte	46
+ 2593 001e 6B       		.byte	107
+ 2594 001f 6B       		.byte	107
+ 2595 0020 3A       		.byte	58
+ 2596 0021 12       		.byte	18
+ 2597 0022 00       		.byte	0
+ 2598 0023 46       		.byte	70
+ 2599 0024 66       		.byte	102
+ 2600 0025 30       		.byte	48
+ 2601 0026 18       		.byte	24
+ 2602 0027 0C       		.byte	12
+ 2603 0028 66       		.byte	102
+ 2604 0029 62       		.byte	98
+ 2605 002a 30       		.byte	48
+ 2606 002b 7A       		.byte	122
+ 2607 002c 4F       		.byte	79
+ 2608 002d 5D       		.byte	93
+ 2609 002e 37       		.byte	55
+ 2610 002f 7A       		.byte	122
+ 2611 0030 48       		.byte	72
+ 2612 0031 04       		.byte	4
+ 2613 0032 07       		.byte	7
+ 2614 0033 03       		.byte	3
+ 2615 0034 00       		.byte	0
+ 2616 0035 00       		.byte	0
+ 2617 0036 00       		.byte	0
+ 2618 0037 00       		.byte	0
+ 2619 0038 00       		.byte	0
+ 2620 0039 1C       		.byte	28
+ 2621 003a 3E       		.byte	62
+ 2622 003b 63       		.byte	99
+ARM GAS  /tmp/ccIBqRvA.s 			page 47
+
+
+ 2623 003c 41       		.byte	65
+ 2624 003d 00       		.byte	0
+ 2625 003e 00       		.byte	0
+ 2626 003f 00       		.byte	0
+ 2627 0040 41       		.byte	65
+ 2628 0041 63       		.byte	99
+ 2629 0042 3E       		.byte	62
+ 2630 0043 1C       		.byte	28
+ 2631 0044 00       		.byte	0
+ 2632 0045 00       		.byte	0
+ 2633 0046 08       		.byte	8
+ 2634 0047 2A       		.byte	42
+ 2635 0048 3E       		.byte	62
+ 2636 0049 1C       		.byte	28
+ 2637 004a 1C       		.byte	28
+ 2638 004b 3E       		.byte	62
+ 2639 004c 2A       		.byte	42
+ 2640 004d 08       		.byte	8
+ 2641 004e 08       		.byte	8
+ 2642 004f 3E       		.byte	62
+ 2643 0050 3E       		.byte	62
+ 2644 0051 08       		.byte	8
+ 2645 0052 08       		.byte	8
+ 2646 0053 00       		.byte	0
+ 2647 0054 00       		.byte	0
+ 2648 0055 80       		.byte	-128
+ 2649 0056 E0       		.byte	-32
+ 2650 0057 60       		.byte	96
+ 2651 0058 00       		.byte	0
+ 2652 0059 00       		.byte	0
+ 2653 005a 00       		.byte	0
+ 2654 005b 08       		.byte	8
+ 2655 005c 08       		.byte	8
+ 2656 005d 08       		.byte	8
+ 2657 005e 08       		.byte	8
+ 2658 005f 08       		.byte	8
+ 2659 0060 08       		.byte	8
+ 2660 0061 00       		.byte	0
+ 2661 0062 00       		.byte	0
+ 2662 0063 00       		.byte	0
+ 2663 0064 60       		.byte	96
+ 2664 0065 60       		.byte	96
+ 2665 0066 00       		.byte	0
+ 2666 0067 00       		.byte	0
+ 2667 0068 00       		.byte	0
+ 2668 0069 60       		.byte	96
+ 2669 006a 30       		.byte	48
+ 2670 006b 18       		.byte	24
+ 2671 006c 0C       		.byte	12
+ 2672 006d 06       		.byte	6
+ 2673 006e 03       		.byte	3
+ 2674 006f 01       		.byte	1
+ 2675 0070 3E       		.byte	62
+ 2676 0071 7F       		.byte	127
+ 2677 0072 71       		.byte	113
+ 2678 0073 59       		.byte	89
+ 2679 0074 4D       		.byte	77
+ARM GAS  /tmp/ccIBqRvA.s 			page 48
+
+
+ 2680 0075 7F       		.byte	127
+ 2681 0076 3E       		.byte	62
+ 2682 0077 40       		.byte	64
+ 2683 0078 42       		.byte	66
+ 2684 0079 7F       		.byte	127
+ 2685 007a 7F       		.byte	127
+ 2686 007b 40       		.byte	64
+ 2687 007c 40       		.byte	64
+ 2688 007d 00       		.byte	0
+ 2689 007e 62       		.byte	98
+ 2690 007f 73       		.byte	115
+ 2691 0080 59       		.byte	89
+ 2692 0081 49       		.byte	73
+ 2693 0082 6F       		.byte	111
+ 2694 0083 66       		.byte	102
+ 2695 0084 00       		.byte	0
+ 2696 0085 22       		.byte	34
+ 2697 0086 63       		.byte	99
+ 2698 0087 49       		.byte	73
+ 2699 0088 49       		.byte	73
+ 2700 0089 7F       		.byte	127
+ 2701 008a 36       		.byte	54
+ 2702 008b 00       		.byte	0
+ 2703 008c 18       		.byte	24
+ 2704 008d 1C       		.byte	28
+ 2705 008e 16       		.byte	22
+ 2706 008f 53       		.byte	83
+ 2707 0090 7F       		.byte	127
+ 2708 0091 7F       		.byte	127
+ 2709 0092 50       		.byte	80
+ 2710 0093 27       		.byte	39
+ 2711 0094 67       		.byte	103
+ 2712 0095 45       		.byte	69
+ 2713 0096 45       		.byte	69
+ 2714 0097 7D       		.byte	125
+ 2715 0098 39       		.byte	57
+ 2716 0099 00       		.byte	0
+ 2717 009a 3C       		.byte	60
+ 2718 009b 7E       		.byte	126
+ 2719 009c 4B       		.byte	75
+ 2720 009d 49       		.byte	73
+ 2721 009e 79       		.byte	121
+ 2722 009f 30       		.byte	48
+ 2723 00a0 00       		.byte	0
+ 2724 00a1 03       		.byte	3
+ 2725 00a2 03       		.byte	3
+ 2726 00a3 71       		.byte	113
+ 2727 00a4 79       		.byte	121
+ 2728 00a5 0F       		.byte	15
+ 2729 00a6 07       		.byte	7
+ 2730 00a7 00       		.byte	0
+ 2731 00a8 36       		.byte	54
+ 2732 00a9 7F       		.byte	127
+ 2733 00aa 49       		.byte	73
+ 2734 00ab 49       		.byte	73
+ 2735 00ac 7F       		.byte	127
+ 2736 00ad 36       		.byte	54
+ARM GAS  /tmp/ccIBqRvA.s 			page 49
+
+
+ 2737 00ae 00       		.byte	0
+ 2738 00af 06       		.byte	6
+ 2739 00b0 4F       		.byte	79
+ 2740 00b1 49       		.byte	73
+ 2741 00b2 69       		.byte	105
+ 2742 00b3 3F       		.byte	63
+ 2743 00b4 1E       		.byte	30
+ 2744 00b5 00       		.byte	0
+ 2745 00b6 00       		.byte	0
+ 2746 00b7 00       		.byte	0
+ 2747 00b8 66       		.byte	102
+ 2748 00b9 66       		.byte	102
+ 2749 00ba 00       		.byte	0
+ 2750 00bb 00       		.byte	0
+ 2751 00bc 00       		.byte	0
+ 2752 00bd 00       		.byte	0
+ 2753 00be 80       		.byte	-128
+ 2754 00bf E6       		.byte	-26
+ 2755 00c0 66       		.byte	102
+ 2756 00c1 00       		.byte	0
+ 2757 00c2 00       		.byte	0
+ 2758 00c3 00       		.byte	0
+ 2759 00c4 08       		.byte	8
+ 2760 00c5 1C       		.byte	28
+ 2761 00c6 36       		.byte	54
+ 2762 00c7 63       		.byte	99
+ 2763 00c8 41       		.byte	65
+ 2764 00c9 00       		.byte	0
+ 2765 00ca 00       		.byte	0
+ 2766 00cb 24       		.byte	36
+ 2767 00cc 24       		.byte	36
+ 2768 00cd 24       		.byte	36
+ 2769 00ce 24       		.byte	36
+ 2770 00cf 24       		.byte	36
+ 2771 00d0 24       		.byte	36
+ 2772 00d1 00       		.byte	0
+ 2773 00d2 00       		.byte	0
+ 2774 00d3 41       		.byte	65
+ 2775 00d4 63       		.byte	99
+ 2776 00d5 36       		.byte	54
+ 2777 00d6 1C       		.byte	28
+ 2778 00d7 08       		.byte	8
+ 2779 00d8 00       		.byte	0
+ 2780 00d9 02       		.byte	2
+ 2781 00da 03       		.byte	3
+ 2782 00db 51       		.byte	81
+ 2783 00dc 59       		.byte	89
+ 2784 00dd 0F       		.byte	15
+ 2785 00de 06       		.byte	6
+ 2786 00df 00       		.byte	0
+ 2787 00e0 3E       		.byte	62
+ 2788 00e1 7F       		.byte	127
+ 2789 00e2 41       		.byte	65
+ 2790 00e3 5D       		.byte	93
+ 2791 00e4 5D       		.byte	93
+ 2792 00e5 1F       		.byte	31
+ 2793 00e6 1E       		.byte	30
+ARM GAS  /tmp/ccIBqRvA.s 			page 50
+
+
+ 2794 00e7 7C       		.byte	124
+ 2795 00e8 7E       		.byte	126
+ 2796 00e9 13       		.byte	19
+ 2797 00ea 13       		.byte	19
+ 2798 00eb 7E       		.byte	126
+ 2799 00ec 7C       		.byte	124
+ 2800 00ed 00       		.byte	0
+ 2801 00ee 41       		.byte	65
+ 2802 00ef 7F       		.byte	127
+ 2803 00f0 7F       		.byte	127
+ 2804 00f1 49       		.byte	73
+ 2805 00f2 49       		.byte	73
+ 2806 00f3 7F       		.byte	127
+ 2807 00f4 36       		.byte	54
+ 2808 00f5 1C       		.byte	28
+ 2809 00f6 3E       		.byte	62
+ 2810 00f7 63       		.byte	99
+ 2811 00f8 41       		.byte	65
+ 2812 00f9 41       		.byte	65
+ 2813 00fa 63       		.byte	99
+ 2814 00fb 22       		.byte	34
+ 2815 00fc 41       		.byte	65
+ 2816 00fd 7F       		.byte	127
+ 2817 00fe 7F       		.byte	127
+ 2818 00ff 41       		.byte	65
+ 2819 0100 63       		.byte	99
+ 2820 0101 3E       		.byte	62
+ 2821 0102 1C       		.byte	28
+ 2822 0103 41       		.byte	65
+ 2823 0104 7F       		.byte	127
+ 2824 0105 7F       		.byte	127
+ 2825 0106 49       		.byte	73
+ 2826 0107 5D       		.byte	93
+ 2827 0108 41       		.byte	65
+ 2828 0109 63       		.byte	99
+ 2829 010a 41       		.byte	65
+ 2830 010b 7F       		.byte	127
+ 2831 010c 7F       		.byte	127
+ 2832 010d 49       		.byte	73
+ 2833 010e 1D       		.byte	29
+ 2834 010f 01       		.byte	1
+ 2835 0110 03       		.byte	3
+ 2836 0111 1C       		.byte	28
+ 2837 0112 3E       		.byte	62
+ 2838 0113 63       		.byte	99
+ 2839 0114 41       		.byte	65
+ 2840 0115 51       		.byte	81
+ 2841 0116 73       		.byte	115
+ 2842 0117 72       		.byte	114
+ 2843 0118 7F       		.byte	127
+ 2844 0119 7F       		.byte	127
+ 2845 011a 08       		.byte	8
+ 2846 011b 08       		.byte	8
+ 2847 011c 7F       		.byte	127
+ 2848 011d 7F       		.byte	127
+ 2849 011e 00       		.byte	0
+ 2850 011f 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 51
+
+
+ 2851 0120 41       		.byte	65
+ 2852 0121 7F       		.byte	127
+ 2853 0122 7F       		.byte	127
+ 2854 0123 41       		.byte	65
+ 2855 0124 00       		.byte	0
+ 2856 0125 00       		.byte	0
+ 2857 0126 30       		.byte	48
+ 2858 0127 70       		.byte	112
+ 2859 0128 40       		.byte	64
+ 2860 0129 41       		.byte	65
+ 2861 012a 7F       		.byte	127
+ 2862 012b 3F       		.byte	63
+ 2863 012c 01       		.byte	1
+ 2864 012d 41       		.byte	65
+ 2865 012e 7F       		.byte	127
+ 2866 012f 7F       		.byte	127
+ 2867 0130 08       		.byte	8
+ 2868 0131 1C       		.byte	28
+ 2869 0132 77       		.byte	119
+ 2870 0133 63       		.byte	99
+ 2871 0134 41       		.byte	65
+ 2872 0135 7F       		.byte	127
+ 2873 0136 7F       		.byte	127
+ 2874 0137 41       		.byte	65
+ 2875 0138 40       		.byte	64
+ 2876 0139 60       		.byte	96
+ 2877 013a 70       		.byte	112
+ 2878 013b 7F       		.byte	127
+ 2879 013c 7F       		.byte	127
+ 2880 013d 0E       		.byte	14
+ 2881 013e 1C       		.byte	28
+ 2882 013f 0E       		.byte	14
+ 2883 0140 7F       		.byte	127
+ 2884 0141 7F       		.byte	127
+ 2885 0142 7F       		.byte	127
+ 2886 0143 7F       		.byte	127
+ 2887 0144 06       		.byte	6
+ 2888 0145 0C       		.byte	12
+ 2889 0146 18       		.byte	24
+ 2890 0147 7F       		.byte	127
+ 2891 0148 7F       		.byte	127
+ 2892 0149 1C       		.byte	28
+ 2893 014a 3E       		.byte	62
+ 2894 014b 63       		.byte	99
+ 2895 014c 41       		.byte	65
+ 2896 014d 63       		.byte	99
+ 2897 014e 3E       		.byte	62
+ 2898 014f 1C       		.byte	28
+ 2899 0150 41       		.byte	65
+ 2900 0151 7F       		.byte	127
+ 2901 0152 7F       		.byte	127
+ 2902 0153 49       		.byte	73
+ 2903 0154 09       		.byte	9
+ 2904 0155 0F       		.byte	15
+ 2905 0156 06       		.byte	6
+ 2906 0157 1E       		.byte	30
+ 2907 0158 3F       		.byte	63
+ARM GAS  /tmp/ccIBqRvA.s 			page 52
+
+
+ 2908 0159 21       		.byte	33
+ 2909 015a 71       		.byte	113
+ 2910 015b 7F       		.byte	127
+ 2911 015c 5E       		.byte	94
+ 2912 015d 00       		.byte	0
+ 2913 015e 41       		.byte	65
+ 2914 015f 7F       		.byte	127
+ 2915 0160 7F       		.byte	127
+ 2916 0161 09       		.byte	9
+ 2917 0162 19       		.byte	25
+ 2918 0163 7F       		.byte	127
+ 2919 0164 66       		.byte	102
+ 2920 0165 26       		.byte	38
+ 2921 0166 6F       		.byte	111
+ 2922 0167 4D       		.byte	77
+ 2923 0168 59       		.byte	89
+ 2924 0169 73       		.byte	115
+ 2925 016a 32       		.byte	50
+ 2926 016b 00       		.byte	0
+ 2927 016c 03       		.byte	3
+ 2928 016d 41       		.byte	65
+ 2929 016e 7F       		.byte	127
+ 2930 016f 7F       		.byte	127
+ 2931 0170 41       		.byte	65
+ 2932 0171 03       		.byte	3
+ 2933 0172 00       		.byte	0
+ 2934 0173 7F       		.byte	127
+ 2935 0174 7F       		.byte	127
+ 2936 0175 40       		.byte	64
+ 2937 0176 40       		.byte	64
+ 2938 0177 7F       		.byte	127
+ 2939 0178 7F       		.byte	127
+ 2940 0179 00       		.byte	0
+ 2941 017a 1F       		.byte	31
+ 2942 017b 3F       		.byte	63
+ 2943 017c 60       		.byte	96
+ 2944 017d 60       		.byte	96
+ 2945 017e 3F       		.byte	63
+ 2946 017f 1F       		.byte	31
+ 2947 0180 00       		.byte	0
+ 2948 0181 7F       		.byte	127
+ 2949 0182 7F       		.byte	127
+ 2950 0183 30       		.byte	48
+ 2951 0184 18       		.byte	24
+ 2952 0185 30       		.byte	48
+ 2953 0186 7F       		.byte	127
+ 2954 0187 7F       		.byte	127
+ 2955 0188 43       		.byte	67
+ 2956 0189 67       		.byte	103
+ 2957 018a 3C       		.byte	60
+ 2958 018b 18       		.byte	24
+ 2959 018c 3C       		.byte	60
+ 2960 018d 67       		.byte	103
+ 2961 018e 43       		.byte	67
+ 2962 018f 07       		.byte	7
+ 2963 0190 4F       		.byte	79
+ 2964 0191 78       		.byte	120
+ARM GAS  /tmp/ccIBqRvA.s 			page 53
+
+
+ 2965 0192 78       		.byte	120
+ 2966 0193 4F       		.byte	79
+ 2967 0194 07       		.byte	7
+ 2968 0195 00       		.byte	0
+ 2969 0196 47       		.byte	71
+ 2970 0197 63       		.byte	99
+ 2971 0198 71       		.byte	113
+ 2972 0199 59       		.byte	89
+ 2973 019a 4D       		.byte	77
+ 2974 019b 67       		.byte	103
+ 2975 019c 73       		.byte	115
+ 2976 019d 00       		.byte	0
+ 2977 019e 7F       		.byte	127
+ 2978 019f 7F       		.byte	127
+ 2979 01a0 41       		.byte	65
+ 2980 01a1 41       		.byte	65
+ 2981 01a2 00       		.byte	0
+ 2982 01a3 00       		.byte	0
+ 2983 01a4 01       		.byte	1
+ 2984 01a5 03       		.byte	3
+ 2985 01a6 06       		.byte	6
+ 2986 01a7 0C       		.byte	12
+ 2987 01a8 18       		.byte	24
+ 2988 01a9 30       		.byte	48
+ 2989 01aa 60       		.byte	96
+ 2990 01ab 00       		.byte	0
+ 2991 01ac 41       		.byte	65
+ 2992 01ad 41       		.byte	65
+ 2993 01ae 7F       		.byte	127
+ 2994 01af 7F       		.byte	127
+ 2995 01b0 00       		.byte	0
+ 2996 01b1 00       		.byte	0
+ 2997 01b2 08       		.byte	8
+ 2998 01b3 0C       		.byte	12
+ 2999 01b4 06       		.byte	6
+ 3000 01b5 03       		.byte	3
+ 3001 01b6 06       		.byte	6
+ 3002 01b7 0C       		.byte	12
+ 3003 01b8 08       		.byte	8
+ 3004 01b9 80       		.byte	-128
+ 3005 01ba 80       		.byte	-128
+ 3006 01bb 80       		.byte	-128
+ 3007 01bc 80       		.byte	-128
+ 3008 01bd 80       		.byte	-128
+ 3009 01be 80       		.byte	-128
+ 3010 01bf 80       		.byte	-128
+ 3011 01c0 00       		.byte	0
+ 3012 01c1 00       		.byte	0
+ 3013 01c2 03       		.byte	3
+ 3014 01c3 07       		.byte	7
+ 3015 01c4 04       		.byte	4
+ 3016 01c5 00       		.byte	0
+ 3017 01c6 00       		.byte	0
+ 3018 01c7 20       		.byte	32
+ 3019 01c8 74       		.byte	116
+ 3020 01c9 54       		.byte	84
+ 3021 01ca 54       		.byte	84
+ARM GAS  /tmp/ccIBqRvA.s 			page 54
+
+
+ 3022 01cb 3C       		.byte	60
+ 3023 01cc 78       		.byte	120
+ 3024 01cd 40       		.byte	64
+ 3025 01ce 41       		.byte	65
+ 3026 01cf 7F       		.byte	127
+ 3027 01d0 3F       		.byte	63
+ 3028 01d1 48       		.byte	72
+ 3029 01d2 48       		.byte	72
+ 3030 01d3 78       		.byte	120
+ 3031 01d4 30       		.byte	48
+ 3032 01d5 38       		.byte	56
+ 3033 01d6 7C       		.byte	124
+ 3034 01d7 44       		.byte	68
+ 3035 01d8 44       		.byte	68
+ 3036 01d9 6C       		.byte	108
+ 3037 01da 28       		.byte	40
+ 3038 01db 00       		.byte	0
+ 3039 01dc 30       		.byte	48
+ 3040 01dd 78       		.byte	120
+ 3041 01de 48       		.byte	72
+ 3042 01df 49       		.byte	73
+ 3043 01e0 3F       		.byte	63
+ 3044 01e1 7F       		.byte	127
+ 3045 01e2 40       		.byte	64
+ 3046 01e3 38       		.byte	56
+ 3047 01e4 7C       		.byte	124
+ 3048 01e5 54       		.byte	84
+ 3049 01e6 54       		.byte	84
+ 3050 01e7 5C       		.byte	92
+ 3051 01e8 18       		.byte	24
+ 3052 01e9 00       		.byte	0
+ 3053 01ea 48       		.byte	72
+ 3054 01eb 7E       		.byte	126
+ 3055 01ec 7F       		.byte	127
+ 3056 01ed 49       		.byte	73
+ 3057 01ee 03       		.byte	3
+ 3058 01ef 02       		.byte	2
+ 3059 01f0 00       		.byte	0
+ 3060 01f1 38       		.byte	56
+ 3061 01f2 BC       		.byte	-68
+ 3062 01f3 A4       		.byte	-92
+ 3063 01f4 A4       		.byte	-92
+ 3064 01f5 FC       		.byte	-4
+ 3065 01f6 78       		.byte	120
+ 3066 01f7 00       		.byte	0
+ 3067 01f8 41       		.byte	65
+ 3068 01f9 7F       		.byte	127
+ 3069 01fa 7F       		.byte	127
+ 3070 01fb 08       		.byte	8
+ 3071 01fc 04       		.byte	4
+ 3072 01fd 7C       		.byte	124
+ 3073 01fe 78       		.byte	120
+ 3074 01ff 00       		.byte	0
+ 3075 0200 44       		.byte	68
+ 3076 0201 7D       		.byte	125
+ 3077 0202 7D       		.byte	125
+ 3078 0203 40       		.byte	64
+ARM GAS  /tmp/ccIBqRvA.s 			page 55
+
+
+ 3079 0204 00       		.byte	0
+ 3080 0205 00       		.byte	0
+ 3081 0206 60       		.byte	96
+ 3082 0207 E0       		.byte	-32
+ 3083 0208 80       		.byte	-128
+ 3084 0209 80       		.byte	-128
+ 3085 020a FD       		.byte	-3
+ 3086 020b 7D       		.byte	125
+ 3087 020c 00       		.byte	0
+ 3088 020d 41       		.byte	65
+ 3089 020e 7F       		.byte	127
+ 3090 020f 7F       		.byte	127
+ 3091 0210 10       		.byte	16
+ 3092 0211 38       		.byte	56
+ 3093 0212 6C       		.byte	108
+ 3094 0213 44       		.byte	68
+ 3095 0214 00       		.byte	0
+ 3096 0215 41       		.byte	65
+ 3097 0216 7F       		.byte	127
+ 3098 0217 7F       		.byte	127
+ 3099 0218 40       		.byte	64
+ 3100 0219 00       		.byte	0
+ 3101 021a 00       		.byte	0
+ 3102 021b 78       		.byte	120
+ 3103 021c 7C       		.byte	124
+ 3104 021d 1C       		.byte	28
+ 3105 021e 38       		.byte	56
+ 3106 021f 1C       		.byte	28
+ 3107 0220 7C       		.byte	124
+ 3108 0221 78       		.byte	120
+ 3109 0222 7C       		.byte	124
+ 3110 0223 7C       		.byte	124
+ 3111 0224 04       		.byte	4
+ 3112 0225 04       		.byte	4
+ 3113 0226 7C       		.byte	124
+ 3114 0227 78       		.byte	120
+ 3115 0228 00       		.byte	0
+ 3116 0229 38       		.byte	56
+ 3117 022a 7C       		.byte	124
+ 3118 022b 44       		.byte	68
+ 3119 022c 44       		.byte	68
+ 3120 022d 7C       		.byte	124
+ 3121 022e 38       		.byte	56
+ 3122 022f 00       		.byte	0
+ 3123 0230 00       		.byte	0
+ 3124 0231 FC       		.byte	-4
+ 3125 0232 FC       		.byte	-4
+ 3126 0233 A4       		.byte	-92
+ 3127 0234 24       		.byte	36
+ 3128 0235 3C       		.byte	60
+ 3129 0236 18       		.byte	24
+ 3130 0237 18       		.byte	24
+ 3131 0238 3C       		.byte	60
+ 3132 0239 24       		.byte	36
+ 3133 023a A4       		.byte	-92
+ 3134 023b F8       		.byte	-8
+ 3135 023c FC       		.byte	-4
+ARM GAS  /tmp/ccIBqRvA.s 			page 56
+
+
+ 3136 023d 84       		.byte	-124
+ 3137 023e 44       		.byte	68
+ 3138 023f 7C       		.byte	124
+ 3139 0240 78       		.byte	120
+ 3140 0241 4C       		.byte	76
+ 3141 0242 04       		.byte	4
+ 3142 0243 1C       		.byte	28
+ 3143 0244 18       		.byte	24
+ 3144 0245 48       		.byte	72
+ 3145 0246 5C       		.byte	92
+ 3146 0247 54       		.byte	84
+ 3147 0248 54       		.byte	84
+ 3148 0249 74       		.byte	116
+ 3149 024a 24       		.byte	36
+ 3150 024b 00       		.byte	0
+ 3151 024c 00       		.byte	0
+ 3152 024d 04       		.byte	4
+ 3153 024e 3E       		.byte	62
+ 3154 024f 7F       		.byte	127
+ 3155 0250 44       		.byte	68
+ 3156 0251 24       		.byte	36
+ 3157 0252 00       		.byte	0
+ 3158 0253 3C       		.byte	60
+ 3159 0254 7C       		.byte	124
+ 3160 0255 40       		.byte	64
+ 3161 0256 40       		.byte	64
+ 3162 0257 3C       		.byte	60
+ 3163 0258 7C       		.byte	124
+ 3164 0259 40       		.byte	64
+ 3165 025a 1C       		.byte	28
+ 3166 025b 3C       		.byte	60
+ 3167 025c 60       		.byte	96
+ 3168 025d 60       		.byte	96
+ 3169 025e 3C       		.byte	60
+ 3170 025f 1C       		.byte	28
+ 3171 0260 00       		.byte	0
+ 3172 0261 3C       		.byte	60
+ 3173 0262 7C       		.byte	124
+ 3174 0263 70       		.byte	112
+ 3175 0264 38       		.byte	56
+ 3176 0265 70       		.byte	112
+ 3177 0266 7C       		.byte	124
+ 3178 0267 3C       		.byte	60
+ 3179 0268 44       		.byte	68
+ 3180 0269 6C       		.byte	108
+ 3181 026a 38       		.byte	56
+ 3182 026b 10       		.byte	16
+ 3183 026c 38       		.byte	56
+ 3184 026d 6C       		.byte	108
+ 3185 026e 44       		.byte	68
+ 3186 026f 3C       		.byte	60
+ 3187 0270 BC       		.byte	-68
+ 3188 0271 A0       		.byte	-96
+ 3189 0272 A0       		.byte	-96
+ 3190 0273 FC       		.byte	-4
+ 3191 0274 7C       		.byte	124
+ 3192 0275 00       		.byte	0
+ARM GAS  /tmp/ccIBqRvA.s 			page 57
+
+
+ 3193 0276 4C       		.byte	76
+ 3194 0277 64       		.byte	100
+ 3195 0278 74       		.byte	116
+ 3196 0279 5C       		.byte	92
+ 3197 027a 4C       		.byte	76
+ 3198 027b 64       		.byte	100
+ 3199 027c 00       		.byte	0
+ 3200 027d 08       		.byte	8
+ 3201 027e 08       		.byte	8
+ 3202 027f 3E       		.byte	62
+ 3203 0280 77       		.byte	119
+ 3204 0281 41       		.byte	65
+ 3205 0282 41       		.byte	65
+ 3206 0283 00       		.byte	0
+ 3207 0284 00       		.byte	0
+ 3208 0285 00       		.byte	0
+ 3209 0286 00       		.byte	0
+ 3210 0287 77       		.byte	119
+ 3211 0288 77       		.byte	119
+ 3212 0289 00       		.byte	0
+ 3213 028a 00       		.byte	0
+ 3214 028b 41       		.byte	65
+ 3215 028c 41       		.byte	65
+ 3216 028d 77       		.byte	119
+ 3217 028e 3E       		.byte	62
+ 3218 028f 08       		.byte	8
+ 3219 0290 08       		.byte	8
+ 3220 0291 00       		.byte	0
+ 3221 0292 02       		.byte	2
+ 3222 0293 03       		.byte	3
+ 3223 0294 01       		.byte	1
+ 3224 0295 03       		.byte	3
+ 3225 0296 02       		.byte	2
+ 3226 0297 03       		.byte	3
+ 3227 0298 01       		.byte	1
+ 3228 0299 FF       		.byte	-1
+ 3229 029a 81       		.byte	-127
+ 3230 029b 81       		.byte	-127
+ 3231 029c 81       		.byte	-127
+ 3232 029d 81       		.byte	-127
+ 3233 029e 81       		.byte	-127
+ 3234 029f FF       		.byte	-1
+ 3235 02a0 0E       		.byte	14
+ 3236 02a1 9F       		.byte	-97
+ 3237 02a2 91       		.byte	-111
+ 3238 02a3 B1       		.byte	-79
+ 3239 02a4 FB       		.byte	-5
+ 3240 02a5 4A       		.byte	74
+ 3241 02a6 00       		.byte	0
+ 3242              		.section	.rodata.Font_System7x8,"a",%progbits
+ 3243              		.align	2
+ 3244              		.type	Font_System7x8, %object
+ 3245              		.size	Font_System7x8, 8
+ 3246              	Font_System7x8:
+ 3247 0000 07       		.byte	7
+ 3248 0001 08       		.byte	8
+ 3249 0002 20       		.byte	32
+ARM GAS  /tmp/ccIBqRvA.s 			page 58
+
+
+ 3250 0003 80       		.byte	-128
+ 3251 0004 00000000 		.word	au8FontSystem7x8
+ 3252              		.section	.rodata.Font_8x8,"a",%progbits
+ 3253              		.align	2
+ 3254              		.type	Font_8x8, %object
+ 3255              		.size	Font_8x8, 8
+ 3256              	Font_8x8:
+ 3257 0000 08       		.byte	8
+ 3258 0001 08       		.byte	8
+ 3259 0002 20       		.byte	32
+ 3260 0003 80       		.byte	-128
+ 3261 0004 00000000 		.word	au8Font8x8
+ 3262              		.section	.rodata.Font_System3x6,"a",%progbits
+ 3263              		.align	2
+ 3264              		.type	Font_System3x6, %object
+ 3265              		.size	Font_System3x6, 8
+ 3266              	Font_System3x6:
+ 3267 0000 03       		.byte	3
+ 3268 0001 06       		.byte	6
+ 3269 0002 20       		.byte	32
+ 3270 0003 60       		.byte	96
+ 3271 0004 00000000 		.word	au8FontSystem3x6
+ 3272              		.text
+ 3273              	.Letext0:
+ 3274              		.file 1 "inc/smallfonts.h"
+ 3275              		.file 2 "src/smallfonts.c"
+ 3276              		.file 3 "/media/data/src/x-tools/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/.
+ 3277              		.section	.debug_info,"",%progbits
+ 3278              	.Ldebug_info0:
+ 3279 0000 FF010000 		.4byte	0x1ff
+ 3280 0004 0200     		.2byte	0x2
+ 3281 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 3282 000a 04       		.byte	0x4
+ 3283 000b 01       		.uleb128 0x1
+ 3284 000c 70010000 		.4byte	.LASF26
+ 3285 0010 01       		.byte	0x1
+ 3286 0011 00000000 		.4byte	.LASF27
+ 3287 0015 11000000 		.4byte	.LASF28
+ 3288 0019 00000000 		.4byte	.Ldebug_line0
+ 3289 001d 02       		.uleb128 0x2
+ 3290 001e 04       		.byte	0x4
+ 3291 001f 05       		.byte	0x5
+ 3292 0020 696E7400 		.ascii	"int\000"
+ 3293 0024 03       		.uleb128 0x3
+ 3294 0025 04       		.byte	0x4
+ 3295 0026 07       		.byte	0x7
+ 3296 0027 E2000000 		.4byte	.LASF0
+ 3297 002b 03       		.uleb128 0x3
+ 3298 002c 01       		.byte	0x1
+ 3299 002d 06       		.byte	0x6
+ 3300 002e D3010000 		.4byte	.LASF1
+ 3301 0032 04       		.uleb128 0x4
+ 3302 0033 29010000 		.4byte	.LASF29
+ 3303 0037 03       		.byte	0x3
+ 3304 0038 2A       		.byte	0x2a
+ 3305 0039 3D000000 		.4byte	0x3d
+ 3306 003d 03       		.uleb128 0x3
+ARM GAS  /tmp/ccIBqRvA.s 			page 59
+
+
+ 3307 003e 01       		.byte	0x1
+ 3308 003f 08       		.byte	0x8
+ 3309 0040 62000000 		.4byte	.LASF2
+ 3310 0044 03       		.uleb128 0x3
+ 3311 0045 02       		.byte	0x2
+ 3312 0046 05       		.byte	0x5
+ 3313 0047 5A010000 		.4byte	.LASF3
+ 3314 004b 03       		.uleb128 0x3
+ 3315 004c 02       		.byte	0x2
+ 3316 004d 07       		.byte	0x7
+ 3317 004e 82000000 		.4byte	.LASF4
+ 3318 0052 03       		.uleb128 0x3
+ 3319 0053 04       		.byte	0x4
+ 3320 0054 05       		.byte	0x5
+ 3321 0055 CA010000 		.4byte	.LASF5
+ 3322 0059 03       		.uleb128 0x3
+ 3323 005a 04       		.byte	0x4
+ 3324 005b 07       		.byte	0x7
+ 3325 005c 70000000 		.4byte	.LASF6
+ 3326 0060 03       		.uleb128 0x3
+ 3327 0061 08       		.byte	0x8
+ 3328 0062 05       		.byte	0x5
+ 3329 0063 3A010000 		.4byte	.LASF7
+ 3330 0067 03       		.uleb128 0x3
+ 3331 0068 08       		.byte	0x8
+ 3332 0069 07       		.byte	0x7
+ 3333 006a 12010000 		.4byte	.LASF8
+ 3334 006e 03       		.uleb128 0x3
+ 3335 006f 04       		.byte	0x4
+ 3336 0070 07       		.byte	0x7
+ 3337 0071 31010000 		.4byte	.LASF9
+ 3338 0075 03       		.uleb128 0x3
+ 3339 0076 01       		.byte	0x1
+ 3340 0077 08       		.byte	0x8
+ 3341 0078 48010000 		.4byte	.LASF10
+ 3342 007c 05       		.uleb128 0x5
+ 3343 007d 4A000000 		.4byte	.LASF30
+ 3344 0081 08       		.byte	0x8
+ 3345 0082 01       		.byte	0x1
+ 3346 0083 2F       		.byte	0x2f
+ 3347 0084 CF000000 		.4byte	0xcf
+ 3348 0088 06       		.uleb128 0x6
+ 3349 0089 95000000 		.4byte	.LASF11
+ 3350 008d 01       		.byte	0x1
+ 3351 008e 31       		.byte	0x31
+ 3352 008f 32000000 		.4byte	0x32
+ 3353 0093 02       		.byte	0x2
+ 3354 0094 23       		.byte	0x23
+ 3355 0095 00       		.uleb128 0
+ 3356 0096 06       		.uleb128 0x6
+ 3357 0097 09010000 		.4byte	.LASF12
+ 3358 009b 01       		.byte	0x1
+ 3359 009c 32       		.byte	0x32
+ 3360 009d 32000000 		.4byte	0x32
+ 3361 00a1 02       		.byte	0x2
+ 3362 00a2 23       		.byte	0x23
+ 3363 00a3 01       		.uleb128 0x1
+ARM GAS  /tmp/ccIBqRvA.s 			page 60
+
+
+ 3364 00a4 06       		.uleb128 0x6
+ 3365 00a5 64010000 		.4byte	.LASF13
+ 3366 00a9 01       		.byte	0x1
+ 3367 00aa 33       		.byte	0x33
+ 3368 00ab 32000000 		.4byte	0x32
+ 3369 00af 02       		.byte	0x2
+ 3370 00b0 23       		.byte	0x23
+ 3371 00b1 02       		.uleb128 0x2
+ 3372 00b2 06       		.uleb128 0x6
+ 3373 00b3 3F000000 		.4byte	.LASF14
+ 3374 00b7 01       		.byte	0x1
+ 3375 00b8 34       		.byte	0x34
+ 3376 00b9 32000000 		.4byte	0x32
+ 3377 00bd 02       		.byte	0x2
+ 3378 00be 23       		.byte	0x23
+ 3379 00bf 03       		.uleb128 0x3
+ 3380 00c0 06       		.uleb128 0x6
+ 3381 00c1 4D010000 		.4byte	.LASF15
+ 3382 00c5 01       		.byte	0x1
+ 3383 00c6 35       		.byte	0x35
+ 3384 00c7 CF000000 		.4byte	0xcf
+ 3385 00cb 02       		.byte	0x2
+ 3386 00cc 23       		.byte	0x23
+ 3387 00cd 04       		.uleb128 0x4
+ 3388 00ce 00       		.byte	0
+ 3389 00cf 07       		.uleb128 0x7
+ 3390 00d0 04       		.byte	0x4
+ 3391 00d1 D5000000 		.4byte	0xd5
+ 3392 00d5 08       		.uleb128 0x8
+ 3393 00d6 32000000 		.4byte	0x32
+ 3394 00da 09       		.uleb128 0x9
+ 3395 00db C2000000 		.4byte	.LASF16
+ 3396 00df 02       		.byte	0x2
+ 3397 00e0 29       		.byte	0x29
+ 3398 00e1 EC000000 		.4byte	0xec
+ 3399 00e5 01       		.byte	0x1
+ 3400 00e6 05       		.byte	0x5
+ 3401 00e7 03       		.byte	0x3
+ 3402 00e8 00000000 		.4byte	Font_System3x6
+ 3403 00ec 08       		.uleb128 0x8
+ 3404 00ed 7C000000 		.4byte	0x7c
+ 3405 00f1 09       		.uleb128 0x9
+ 3406 00f2 B3000000 		.4byte	.LASF17
+ 3407 00f6 02       		.byte	0x2
+ 3408 00f7 2A       		.byte	0x2a
+ 3409 00f8 EC000000 		.4byte	0xec
+ 3410 00fc 01       		.byte	0x1
+ 3411 00fd 05       		.byte	0x5
+ 3412 00fe 03       		.byte	0x3
+ 3413 00ff 00000000 		.4byte	Font_System5x8
+ 3414 0103 09       		.uleb128 0x9
+ 3415 0104 53000000 		.4byte	.LASF18
+ 3416 0108 02       		.byte	0x2
+ 3417 0109 2B       		.byte	0x2b
+ 3418 010a EC000000 		.4byte	0xec
+ 3419 010e 01       		.byte	0x1
+ 3420 010f 05       		.byte	0x5
+ARM GAS  /tmp/ccIBqRvA.s 			page 61
+
+
+ 3421 0110 03       		.byte	0x3
+ 3422 0111 00000000 		.4byte	Font_System7x8
+ 3423 0115 09       		.uleb128 0x9
+ 3424 0116 AA000000 		.4byte	.LASF19
+ 3425 011a 02       		.byte	0x2
+ 3426 011b 2C       		.byte	0x2c
+ 3427 011c EC000000 		.4byte	0xec
+ 3428 0120 01       		.byte	0x1
+ 3429 0121 05       		.byte	0x5
+ 3430 0122 03       		.byte	0x3
+ 3431 0123 00000000 		.4byte	Font_8x8
+ 3432 0127 09       		.uleb128 0x9
+ 3433 0128 9D000000 		.4byte	.LASF20
+ 3434 012c 02       		.byte	0x2
+ 3435 012d 2D       		.byte	0x2d
+ 3436 012e EC000000 		.4byte	0xec
+ 3437 0132 01       		.byte	0x1
+ 3438 0133 05       		.byte	0x5
+ 3439 0134 03       		.byte	0x3
+ 3440 0135 00000000 		.4byte	Font_8x8Thin
+ 3441 0139 0A       		.uleb128 0xa
+ 3442 013a 32000000 		.4byte	0x32
+ 3443 013e 49010000 		.4byte	0x149
+ 3444 0142 0B       		.uleb128 0xb
+ 3445 0143 6E000000 		.4byte	0x6e
+ 3446 0147 C2       		.byte	0xc2
+ 3447 0148 00       		.byte	0
+ 3448 0149 09       		.uleb128 0x9
+ 3449 014a 2E000000 		.4byte	.LASF21
+ 3450 014e 02       		.byte	0x2
+ 3451 014f 30       		.byte	0x30
+ 3452 0150 5B010000 		.4byte	0x15b
+ 3453 0154 01       		.byte	0x1
+ 3454 0155 05       		.byte	0x5
+ 3455 0156 03       		.byte	0x3
+ 3456 0157 00000000 		.4byte	au8FontSystem3x6
+ 3457 015b 08       		.uleb128 0x8
+ 3458 015c 39010000 		.4byte	0x139
+ 3459 0160 0A       		.uleb128 0xa
+ 3460 0161 32000000 		.4byte	0x32
+ 3461 0165 71010000 		.4byte	0x171
+ 3462 0169 0C       		.uleb128 0xc
+ 3463 016a 6E000000 		.4byte	0x6e
+ 3464 016e E401     		.2byte	0x1e4
+ 3465 0170 00       		.byte	0
+ 3466 0171 09       		.uleb128 0x9
+ 3467 0172 B9010000 		.4byte	.LASF22
+ 3468 0176 02       		.byte	0x2
+ 3469 0177 75       		.byte	0x75
+ 3470 0178 83010000 		.4byte	0x183
+ 3471 017c 01       		.byte	0x1
+ 3472 017d 05       		.byte	0x5
+ 3473 017e 03       		.byte	0x3
+ 3474 017f 00000000 		.4byte	au8FontSystem5x8
+ 3475 0183 08       		.uleb128 0x8
+ 3476 0184 60010000 		.4byte	0x160
+ 3477 0188 0A       		.uleb128 0xa
+ARM GAS  /tmp/ccIBqRvA.s 			page 62
+
+
+ 3478 0189 32000000 		.4byte	0x32
+ 3479 018d 99010000 		.4byte	0x199
+ 3480 0191 0C       		.uleb128 0xc
+ 3481 0192 6E000000 		.4byte	0x6e
+ 3482 0196 A602     		.2byte	0x2a6
+ 3483 0198 00       		.byte	0
+ 3484 0199 09       		.uleb128 0x9
+ 3485 019a D1000000 		.4byte	.LASF23
+ 3486 019e 02       		.byte	0x2
+ 3487 019f DB       		.byte	0xdb
+ 3488 01a0 AB010000 		.4byte	0x1ab
+ 3489 01a4 01       		.byte	0x1
+ 3490 01a5 05       		.byte	0x5
+ 3491 01a6 03       		.byte	0x3
+ 3492 01a7 00000000 		.4byte	au8FontSystem7x8
+ 3493 01ab 08       		.uleb128 0x8
+ 3494 01ac 88010000 		.4byte	0x188
+ 3495 01b0 0A       		.uleb128 0xa
+ 3496 01b1 32000000 		.4byte	0x32
+ 3497 01b5 C1010000 		.4byte	0x1c1
+ 3498 01b9 0C       		.uleb128 0xc
+ 3499 01ba 6E000000 		.4byte	0x6e
+ 3500 01be 0F03     		.2byte	0x30f
+ 3501 01c0 00       		.byte	0
+ 3502 01c1 0D       		.uleb128 0xd
+ 3503 01c2 EF000000 		.4byte	.LASF24
+ 3504 01c6 02       		.byte	0x2
+ 3505 01c7 4101     		.2byte	0x141
+ 3506 01c9 D4010000 		.4byte	0x1d4
+ 3507 01cd 01       		.byte	0x1
+ 3508 01ce 05       		.byte	0x5
+ 3509 01cf 03       		.byte	0x3
+ 3510 01d0 00000000 		.4byte	au8Font8x8
+ 3511 01d4 08       		.uleb128 0x8
+ 3512 01d5 B0010000 		.4byte	0x1b0
+ 3513 01d9 0A       		.uleb128 0xa
+ 3514 01da 32000000 		.4byte	0x32
+ 3515 01de EA010000 		.4byte	0x1ea
+ 3516 01e2 0C       		.uleb128 0xc
+ 3517 01e3 6E000000 		.4byte	0x6e
+ 3518 01e7 0704     		.2byte	0x407
+ 3519 01e9 00       		.byte	0
+ 3520 01ea 0D       		.uleb128 0xd
+ 3521 01eb FA000000 		.4byte	.LASF25
+ 3522 01ef 02       		.byte	0x2
+ 3523 01f0 A701     		.2byte	0x1a7
+ 3524 01f2 FD010000 		.4byte	0x1fd
+ 3525 01f6 01       		.byte	0x1
+ 3526 01f7 05       		.byte	0x5
+ 3527 01f8 03       		.byte	0x3
+ 3528 01f9 00000000 		.4byte	au8Font8x8Thin
+ 3529 01fd 08       		.uleb128 0x8
+ 3530 01fe D9010000 		.4byte	0x1d9
+ 3531 0202 00       		.byte	0
+ 3532              		.section	.debug_abbrev,"",%progbits
+ 3533              	.Ldebug_abbrev0:
+ 3534 0000 01       		.uleb128 0x1
+ARM GAS  /tmp/ccIBqRvA.s 			page 63
+
+
+ 3535 0001 11       		.uleb128 0x11
+ 3536 0002 01       		.byte	0x1
+ 3537 0003 25       		.uleb128 0x25
+ 3538 0004 0E       		.uleb128 0xe
+ 3539 0005 13       		.uleb128 0x13
+ 3540 0006 0B       		.uleb128 0xb
+ 3541 0007 03       		.uleb128 0x3
+ 3542 0008 0E       		.uleb128 0xe
+ 3543 0009 1B       		.uleb128 0x1b
+ 3544 000a 0E       		.uleb128 0xe
+ 3545 000b 10       		.uleb128 0x10
+ 3546 000c 06       		.uleb128 0x6
+ 3547 000d 00       		.byte	0
+ 3548 000e 00       		.byte	0
+ 3549 000f 02       		.uleb128 0x2
+ 3550 0010 24       		.uleb128 0x24
+ 3551 0011 00       		.byte	0
+ 3552 0012 0B       		.uleb128 0xb
+ 3553 0013 0B       		.uleb128 0xb
+ 3554 0014 3E       		.uleb128 0x3e
+ 3555 0015 0B       		.uleb128 0xb
+ 3556 0016 03       		.uleb128 0x3
+ 3557 0017 08       		.uleb128 0x8
+ 3558 0018 00       		.byte	0
+ 3559 0019 00       		.byte	0
+ 3560 001a 03       		.uleb128 0x3
+ 3561 001b 24       		.uleb128 0x24
+ 3562 001c 00       		.byte	0
+ 3563 001d 0B       		.uleb128 0xb
+ 3564 001e 0B       		.uleb128 0xb
+ 3565 001f 3E       		.uleb128 0x3e
+ 3566 0020 0B       		.uleb128 0xb
+ 3567 0021 03       		.uleb128 0x3
+ 3568 0022 0E       		.uleb128 0xe
+ 3569 0023 00       		.byte	0
+ 3570 0024 00       		.byte	0
+ 3571 0025 04       		.uleb128 0x4
+ 3572 0026 16       		.uleb128 0x16
+ 3573 0027 00       		.byte	0
+ 3574 0028 03       		.uleb128 0x3
+ 3575 0029 0E       		.uleb128 0xe
+ 3576 002a 3A       		.uleb128 0x3a
+ 3577 002b 0B       		.uleb128 0xb
+ 3578 002c 3B       		.uleb128 0x3b
+ 3579 002d 0B       		.uleb128 0xb
+ 3580 002e 49       		.uleb128 0x49
+ 3581 002f 13       		.uleb128 0x13
+ 3582 0030 00       		.byte	0
+ 3583 0031 00       		.byte	0
+ 3584 0032 05       		.uleb128 0x5
+ 3585 0033 13       		.uleb128 0x13
+ 3586 0034 01       		.byte	0x1
+ 3587 0035 03       		.uleb128 0x3
+ 3588 0036 0E       		.uleb128 0xe
+ 3589 0037 0B       		.uleb128 0xb
+ 3590 0038 0B       		.uleb128 0xb
+ 3591 0039 3A       		.uleb128 0x3a
+ARM GAS  /tmp/ccIBqRvA.s 			page 64
+
+
+ 3592 003a 0B       		.uleb128 0xb
+ 3593 003b 3B       		.uleb128 0x3b
+ 3594 003c 0B       		.uleb128 0xb
+ 3595 003d 01       		.uleb128 0x1
+ 3596 003e 13       		.uleb128 0x13
+ 3597 003f 00       		.byte	0
+ 3598 0040 00       		.byte	0
+ 3599 0041 06       		.uleb128 0x6
+ 3600 0042 0D       		.uleb128 0xd
+ 3601 0043 00       		.byte	0
+ 3602 0044 03       		.uleb128 0x3
+ 3603 0045 0E       		.uleb128 0xe
+ 3604 0046 3A       		.uleb128 0x3a
+ 3605 0047 0B       		.uleb128 0xb
+ 3606 0048 3B       		.uleb128 0x3b
+ 3607 0049 0B       		.uleb128 0xb
+ 3608 004a 49       		.uleb128 0x49
+ 3609 004b 13       		.uleb128 0x13
+ 3610 004c 38       		.uleb128 0x38
+ 3611 004d 0A       		.uleb128 0xa
+ 3612 004e 00       		.byte	0
+ 3613 004f 00       		.byte	0
+ 3614 0050 07       		.uleb128 0x7
+ 3615 0051 0F       		.uleb128 0xf
+ 3616 0052 00       		.byte	0
+ 3617 0053 0B       		.uleb128 0xb
+ 3618 0054 0B       		.uleb128 0xb
+ 3619 0055 49       		.uleb128 0x49
+ 3620 0056 13       		.uleb128 0x13
+ 3621 0057 00       		.byte	0
+ 3622 0058 00       		.byte	0
+ 3623 0059 08       		.uleb128 0x8
+ 3624 005a 26       		.uleb128 0x26
+ 3625 005b 00       		.byte	0
+ 3626 005c 49       		.uleb128 0x49
+ 3627 005d 13       		.uleb128 0x13
+ 3628 005e 00       		.byte	0
+ 3629 005f 00       		.byte	0
+ 3630 0060 09       		.uleb128 0x9
+ 3631 0061 34       		.uleb128 0x34
+ 3632 0062 00       		.byte	0
+ 3633 0063 03       		.uleb128 0x3
+ 3634 0064 0E       		.uleb128 0xe
+ 3635 0065 3A       		.uleb128 0x3a
+ 3636 0066 0B       		.uleb128 0xb
+ 3637 0067 3B       		.uleb128 0x3b
+ 3638 0068 0B       		.uleb128 0xb
+ 3639 0069 49       		.uleb128 0x49
+ 3640 006a 13       		.uleb128 0x13
+ 3641 006b 3F       		.uleb128 0x3f
+ 3642 006c 0C       		.uleb128 0xc
+ 3643 006d 02       		.uleb128 0x2
+ 3644 006e 0A       		.uleb128 0xa
+ 3645 006f 00       		.byte	0
+ 3646 0070 00       		.byte	0
+ 3647 0071 0A       		.uleb128 0xa
+ 3648 0072 01       		.uleb128 0x1
+ARM GAS  /tmp/ccIBqRvA.s 			page 65
+
+
+ 3649 0073 01       		.byte	0x1
+ 3650 0074 49       		.uleb128 0x49
+ 3651 0075 13       		.uleb128 0x13
+ 3652 0076 01       		.uleb128 0x1
+ 3653 0077 13       		.uleb128 0x13
+ 3654 0078 00       		.byte	0
+ 3655 0079 00       		.byte	0
+ 3656 007a 0B       		.uleb128 0xb
+ 3657 007b 21       		.uleb128 0x21
+ 3658 007c 00       		.byte	0
+ 3659 007d 49       		.uleb128 0x49
+ 3660 007e 13       		.uleb128 0x13
+ 3661 007f 2F       		.uleb128 0x2f
+ 3662 0080 0B       		.uleb128 0xb
+ 3663 0081 00       		.byte	0
+ 3664 0082 00       		.byte	0
+ 3665 0083 0C       		.uleb128 0xc
+ 3666 0084 21       		.uleb128 0x21
+ 3667 0085 00       		.byte	0
+ 3668 0086 49       		.uleb128 0x49
+ 3669 0087 13       		.uleb128 0x13
+ 3670 0088 2F       		.uleb128 0x2f
+ 3671 0089 05       		.uleb128 0x5
+ 3672 008a 00       		.byte	0
+ 3673 008b 00       		.byte	0
+ 3674 008c 0D       		.uleb128 0xd
+ 3675 008d 34       		.uleb128 0x34
+ 3676 008e 00       		.byte	0
+ 3677 008f 03       		.uleb128 0x3
+ 3678 0090 0E       		.uleb128 0xe
+ 3679 0091 3A       		.uleb128 0x3a
+ 3680 0092 0B       		.uleb128 0xb
+ 3681 0093 3B       		.uleb128 0x3b
+ 3682 0094 05       		.uleb128 0x5
+ 3683 0095 49       		.uleb128 0x49
+ 3684 0096 13       		.uleb128 0x13
+ 3685 0097 3F       		.uleb128 0x3f
+ 3686 0098 0C       		.uleb128 0xc
+ 3687 0099 02       		.uleb128 0x2
+ 3688 009a 0A       		.uleb128 0xa
+ 3689 009b 00       		.byte	0
+ 3690 009c 00       		.byte	0
+ 3691 009d 00       		.byte	0
+ 3692              		.section	.debug_aranges,"",%progbits
+ 3693 0000 14000000 		.4byte	0x14
+ 3694 0004 0200     		.2byte	0x2
+ 3695 0006 00000000 		.4byte	.Ldebug_info0
+ 3696 000a 04       		.byte	0x4
+ 3697 000b 00       		.byte	0
+ 3698 000c 0000     		.2byte	0
+ 3699 000e 0000     		.2byte	0
+ 3700 0010 00000000 		.4byte	0
+ 3701 0014 00000000 		.4byte	0
+ 3702              		.section	.debug_line,"",%progbits
+ 3703              	.Ldebug_line0:
+ 3704 0000 C7000000 		.section	.debug_str,"MS",%progbits,1
+ 3704      0200C100 
+ARM GAS  /tmp/ccIBqRvA.s 			page 66
+
+
+ 3704      00000201 
+ 3704      FB0E0D00 
+ 3704      01010101 
+ 3705              	.LASF27:
+ 3706 0000 7372632F 		.ascii	"src/smallfonts.c\000"
+ 3706      736D616C 
+ 3706      6C666F6E 
+ 3706      74732E63 
+ 3706      00
+ 3707              	.LASF28:
+ 3708 0011 2F6D6564 		.ascii	"/media/data/src/OpenTCS/code\000"
+ 3708      69612F64 
+ 3708      6174612F 
+ 3708      7372632F 
+ 3708      4F70656E 
+ 3709              	.LASF21:
+ 3710 002e 61753846 		.ascii	"au8FontSystem3x6\000"
+ 3710      6F6E7453 
+ 3710      79737465 
+ 3710      6D337836 
+ 3710      00
+ 3711              	.LASF14:
+ 3712 003f 75384C61 		.ascii	"u8LastChar\000"
+ 3712      73744368 
+ 3712      617200
+ 3713              	.LASF30:
+ 3714 004a 464F4E54 		.ascii	"FONT_DEF\000"
+ 3714      5F444546 
+ 3714      00
+ 3715              	.LASF18:
+ 3716 0053 466F6E74 		.ascii	"Font_System7x8\000"
+ 3716      5F537973 
+ 3716      74656D37 
+ 3716      783800
+ 3717              	.LASF2:
+ 3718 0062 756E7369 		.ascii	"unsigned char\000"
+ 3718      676E6564 
+ 3718      20636861 
+ 3718      7200
+ 3719              	.LASF6:
+ 3720 0070 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3720      20756E73 
+ 3720      69676E65 
+ 3720      6420696E 
+ 3720      7400
+ 3721              	.LASF4:
+ 3722 0082 73686F72 		.ascii	"short unsigned int\000"
+ 3722      7420756E 
+ 3722      7369676E 
+ 3722      65642069 
+ 3722      6E7400
+ 3723              	.LASF11:
+ 3724 0095 75385769 		.ascii	"u8Width\000"
+ 3724      64746800 
+ 3725              	.LASF20:
+ 3726 009d 466F6E74 		.ascii	"Font_8x8Thin\000"
+ 3726      5F387838 
+ARM GAS  /tmp/ccIBqRvA.s 			page 67
+
+
+ 3726      5468696E 
+ 3726      00
+ 3727              	.LASF19:
+ 3728 00aa 466F6E74 		.ascii	"Font_8x8\000"
+ 3728      5F387838 
+ 3728      00
+ 3729              	.LASF17:
+ 3730 00b3 466F6E74 		.ascii	"Font_System5x8\000"
+ 3730      5F537973 
+ 3730      74656D35 
+ 3730      783800
+ 3731              	.LASF16:
+ 3732 00c2 466F6E74 		.ascii	"Font_System3x6\000"
+ 3732      5F537973 
+ 3732      74656D33 
+ 3732      783600
+ 3733              	.LASF23:
+ 3734 00d1 61753846 		.ascii	"au8FontSystem7x8\000"
+ 3734      6F6E7453 
+ 3734      79737465 
+ 3734      6D377838 
+ 3734      00
+ 3735              	.LASF0:
+ 3736 00e2 756E7369 		.ascii	"unsigned int\000"
+ 3736      676E6564 
+ 3736      20696E74 
+ 3736      00
+ 3737              	.LASF24:
+ 3738 00ef 61753846 		.ascii	"au8Font8x8\000"
+ 3738      6F6E7438 
+ 3738      783800
+ 3739              	.LASF25:
+ 3740 00fa 61753846 		.ascii	"au8Font8x8Thin\000"
+ 3740      6F6E7438 
+ 3740      78385468 
+ 3740      696E00
+ 3741              	.LASF12:
+ 3742 0109 75384865 		.ascii	"u8Height\000"
+ 3742      69676874 
+ 3742      00
+ 3743              	.LASF8:
+ 3744 0112 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3744      206C6F6E 
+ 3744      6720756E 
+ 3744      7369676E 
+ 3744      65642069 
+ 3745              	.LASF29:
+ 3746 0129 75696E74 		.ascii	"uint8_t\000"
+ 3746      385F7400 
+ 3747              	.LASF9:
+ 3748 0131 73697A65 		.ascii	"sizetype\000"
+ 3748      74797065 
+ 3748      00
+ 3749              	.LASF7:
+ 3750 013a 6C6F6E67 		.ascii	"long long int\000"
+ 3750      206C6F6E 
+ 3750      6720696E 
+ARM GAS  /tmp/ccIBqRvA.s 			page 68
+
+
+ 3750      7400
+ 3751              	.LASF10:
+ 3752 0148 63686172 		.ascii	"char\000"
+ 3752      00
+ 3753              	.LASF15:
+ 3754 014d 61753846 		.ascii	"au8FontTable\000"
+ 3754      6F6E7454 
+ 3754      61626C65 
+ 3754      00
+ 3755              	.LASF3:
+ 3756 015a 73686F72 		.ascii	"short int\000"
+ 3756      7420696E 
+ 3756      7400
+ 3757              	.LASF13:
+ 3758 0164 75384669 		.ascii	"u8FirstChar\000"
+ 3758      72737443 
+ 3758      68617200 
+ 3759              	.LASF26:
+ 3760 0170 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 3760      4320342E 
+ 3760      372E3320 
+ 3760      32303133 
+ 3760      30333132 
+ 3761 01a3 616E6368 		.ascii	"anch revision 196615]\000"
+ 3761      20726576 
+ 3761      6973696F 
+ 3761      6E203139 
+ 3761      36363135 
+ 3762              	.LASF22:
+ 3763 01b9 61753846 		.ascii	"au8FontSystem5x8\000"
+ 3763      6F6E7453 
+ 3763      79737465 
+ 3763      6D357838 
+ 3763      00
+ 3764              	.LASF5:
+ 3765 01ca 6C6F6E67 		.ascii	"long int\000"
+ 3765      20696E74 
+ 3765      00
+ 3766              	.LASF1:
+ 3767 01d3 7369676E 		.ascii	"signed char\000"
+ 3767      65642063 
+ 3767      68617200 
+ 3768              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br
+ARM GAS  /tmp/ccIBqRvA.s 			page 69
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 smallfonts.c
+     /tmp/ccIBqRvA.s:1516   .rodata.au8Font8x8Thin:00000000 au8Font8x8Thin
+     /tmp/ccIBqRvA.s:529    .rodata.au8Font8x8:00000000 au8Font8x8
+     /tmp/ccIBqRvA.s:2562   .rodata.au8FontSystem7x8:00000000 au8FontSystem7x8
+     /tmp/ccIBqRvA.s:30     .rodata.au8FontSystem5x8:00000000 au8FontSystem5x8
+     /tmp/ccIBqRvA.s:1317   .rodata.au8FontSystem3x6:00000000 au8FontSystem3x6
+     /tmp/ccIBqRvA.s:520    .rodata.Font_8x8Thin:00000000 Font_8x8Thin
+     /tmp/ccIBqRvA.s:3256   .rodata.Font_8x8:00000000 Font_8x8
+     /tmp/ccIBqRvA.s:3246   .rodata.Font_System7x8:00000000 Font_System7x8
+     /tmp/ccIBqRvA.s:2553   .rodata.Font_System5x8:00000000 Font_System5x8
+     /tmp/ccIBqRvA.s:3266   .rodata.Font_System3x6:00000000 Font_System3x6
+     /tmp/ccIBqRvA.s:517    .rodata.Font_8x8Thin:00000000 $d
+     /tmp/ccIBqRvA.s:2550   .rodata.Font_System5x8:00000000 $d
+     /tmp/ccIBqRvA.s:3243   .rodata.Font_System7x8:00000000 $d
+     /tmp/ccIBqRvA.s:3253   .rodata.Font_8x8:00000000 $d
+     /tmp/ccIBqRvA.s:3263   .rodata.Font_System3x6:00000000 $d
+
+NO UNDEFINED SYMBOLS

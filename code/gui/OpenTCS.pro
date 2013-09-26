@@ -16,13 +16,18 @@ SOURCES += src/main.cpp\
         src/mainwindow.cpp \
     src/ftdi.cpp \
     src/tcscom.cpp \
-    src/bootloader.cpp
+    src/bootloader.cpp \
+    src/pb_encode.c \
+    src/pb_decode.c
 
 HEADERS  += inc/mainwindow.h \
     inc/ftdi.h \
     inc/structs.h \
     inc/tcscom.h \
-    inc/bootloader.h
+    inc/bootloader.h \
+    inc/pb_encode.h \
+    inc/pb_decode.h \
+    inc/pb.h
 
 FORMS    += ui/mainwindow.ui
 
