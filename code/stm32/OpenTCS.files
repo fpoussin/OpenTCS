@@ -212,8 +212,8 @@ lib/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.c
 lib/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.c
 lib/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_wwdg.c
 src/serial_protocol.c
-inc/pb_encode.h
-inc/pb_decode.h
-inc/pb.h
-src/pb_encode.c
-src/pb_decode.c
+../common/inc/pb_encode.h
+../common/inc/pb_decode.h
+../common/inc/pb.h
+../common/src/pb_encode.c
+../common/src/pb_decode.c

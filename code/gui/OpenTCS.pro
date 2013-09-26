@@ -17,19 +17,19 @@ SOURCES += src/main.cpp\
     src/ftdi.cpp \
     src/tcscom.cpp \
     src/bootloader.cpp \
-    src/pb_encode.c \
-    src/pb_decode.c
+    ../common/src/pb_encode.c \
+    ../common/src/pb_decode.c
 
 HEADERS  += inc/mainwindow.h \
     inc/ftdi.h \
     inc/structs.h \
     inc/tcscom.h \
     inc/bootloader.h \
-    inc/pb_encode.h \
-    inc/pb_decode.h \
-    inc/pb.h
+    ../common/inc/pb_encode.h \
+    ../common/inc/pb_decode.h \
+    ../common/inc/pb.h
 
 FORMS    += ui/mainwindow.ui
 
-INCLUDEPATH += inc
+INCLUDEPATH += inc ../common/inc
 LIBS += -L/usr/local/lib -lftd2xx
