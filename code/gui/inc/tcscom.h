@@ -31,21 +31,17 @@ public slots:
     bool connect(void);
     bool disconnect(void);
 
-    void setSettings(void);
-    void getSettings(void);
+    bool setSettings(const settings_t* settings);
+    bool getSettings(settings_t* settings);
 
-    void getInfo(void);
-    void getDiag(void);
+    bool getInfo(status_t* status);
+    bool getDiag(sensors_t* sensors);
 
 private slots:
     quint8 doChecksum(quint8 * buf, quint8 len);
 
 private:
     ftdi ftdi_device;
-    settings_t settings;
-    status_t status;
-    sensors_t sensors;
-    light_settings_t light_settings;
     quint8 pb_obuffer[256];
     quint8 pb_ibuffer[256];
     pb_ostream_t pb_ostream;

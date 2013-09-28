@@ -42,6 +42,7 @@ void MainWindow::connect()
         ui->b_set->setEnabled(true);
         ui->b_get->setEnabled(true);
         ui->b_update->setEnabled(true);
+
     }
     else ui->statusBar->showMessage("Connection failed");
 
@@ -85,6 +86,15 @@ void MainWindow::saveConfig()
 
 void MainWindow::getConfig()
 {
+
+}
+
+void MainWindow::getAll()
+{
+
+    tcs.getDiag(&this->sensors);
+    tcs.getInfo(&this->status);
+    tcs.getSettings(&this->settings);
 
 }
 

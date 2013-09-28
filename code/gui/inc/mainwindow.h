@@ -27,6 +27,7 @@ private slots:
     void saveConfig(void);
 
     void getConfig(void);
+    void getAll(void);
     void applyConfig(void);
 
 private:
@@ -35,6 +36,10 @@ private:
     tcscom tcs;
     bool connected;
 
+    settings_t settings;
+    status_t status;
+    sensors_t sensors;
+    light_settings_t light_settings;
 };
 
 #endif // MAINWINDOW_H

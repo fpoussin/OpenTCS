@@ -18,7 +18,7 @@ bool tcscom::disconnect()
     return this->ftdi_device.disconnect();
 }
 
-void tcscom::setSettings()
+bool tcscom::setSettings(const settings_t* settings)
 {
     quint8 cmd[4] = {SER_MAGIC1, SER_MAGIC2, CMD_SAVE_SETTINGS, 0};
     quint8 cs;
@@ -34,7 +34,7 @@ void tcscom::setSettings()
     this->ftdi_device.write(&cs);
 }
 
-void tcscom::getSettings()
+bool tcscom::getSettings(settings_t* settings)
 {
     settings_t settings_tmp;
     quint8 cmd[5] = {SER_MAGIC1, SER_MAGIC2, CMD_SEND_SETTINGS, sizeof(cmd), 0};
@@ -52,10 +52,10 @@ void tcscom::getSettings()
 
     pb_decode(&pb_istream, settings_t_fields, &settings_tmp);
 
-    settings = settings_tmp;
+    *settings = settings_tmp;
 }
 
-void tcscom::getInfo()
+bool tcscom::getInfo(status_t* status)
 {
     status_t status_tmp;
     quint8 cmd[5] = {SER_MAGIC1, SER_MAGIC2, CMD_SEND_SETTINGS, sizeof(cmd), 0};
@@ -73,10 +73,10 @@ void tcscom::getInfo()
 
     pb_decode(&pb_istream, status_t_fields, &status_tmp);
 
-    status = status_tmp;
+    *status = status_tmp;
 }
 
-void tcscom::getDiag()
+bool tcscom::getDiag(sensors_t* sensors)
 {
     sensors_t sensors_tmp;
     quint8 cmd[5] = {SER_MAGIC1, SER_MAGIC2, CMD_SEND_SETTINGS, sizeof(cmd), 0};
@@ -94,7 +94,7 @@ void tcscom::getDiag()
 
     pb_decode(&pb_istream, sensors_t_fields, &sensors_tmp);
 
-    sensors = sensors_tmp;
+    *sensors = sensors_tmp;
 }
 
 quint8 tcscom::doChecksum(quint8 *buf, quint8 len)
