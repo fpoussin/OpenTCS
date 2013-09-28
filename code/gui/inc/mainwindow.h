@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include "bootloader.h"
+#include "tcscom.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +31,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    bootloader bl;
+    tcscom tcs;
+    bool connected;
 
 };
 

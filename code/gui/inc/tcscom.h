@@ -28,8 +28,8 @@ public:
 signals:
     
 public slots:
-    void connect(void);
-    void disconnect(void);
+    bool connect(void);
+    bool disconnect(void);
 
     void setSettings(void);
     void getSettings(void);

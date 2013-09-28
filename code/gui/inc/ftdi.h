@@ -24,6 +24,7 @@ public:
     bool resetBootloader(void);
     bool resetNormal(void);
 
+    bool isConnected(void) { return connected; }
     
 signals:
     
@@ -33,6 +34,7 @@ private slots:
     bool purge(void);
 
 private:
+    bool                connected;
     qint32              iNumDevs;
     qint8 *             pcBufLD[1];
     qint8               cBufLD[64];

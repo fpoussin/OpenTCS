@@ -7,16 +7,12 @@ bootloader::bootloader()
 
 bool bootloader::connect()
 {
-    this->ftdi_device.connect();
-
-    return false;
+    return this->ftdi_device.connect();
 }
 
 bool bootloader::disconnect()
 {
-    this->ftdi_device.disconnect();
-
-    return false;
+    return this->ftdi_device.disconnect();
 }
 
 bool bootloader::writeFile(QFile *file)

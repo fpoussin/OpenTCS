@@ -3,6 +3,7 @@
 ftdi::ftdi(QObject *parent) :
     QObject(parent)
 {
+    this->connected = false;
     iNumDevs = 0;
     pcBufLD[0] = cBufLD;
 
@@ -13,11 +14,16 @@ ftdi::ftdi(QObject *parent) :
 
 bool ftdi::connect(void)
 {
-
-    this->ftStatus = FT_ListDevices(pcBufLD, &iNumDevs, FT_LIST_ALL | FT_OPEN_BY_SERIAL_NUMBER);
+    ftStatus = FT_ListDevices(pcBufLD, &iNumDevs, FT_LIST_ALL | FT_OPEN_BY_SERIAL_NUMBER);
 
     if(ftStatus != FT_OK) {
         qWarning("Error: FT_ListDevices(%d)\n", (int)ftStatus);
+        return true;
+    }
+
+    if (!iNumDevs)
+    {
+        qWarning("Error: No FTDI devices found\n");
         return true;
     }
 
@@ -40,19 +46,25 @@ bool ftdi::connect(void)
         return true;
     }
 
+    this->connected = true;
     return this->resetBootloader();
 }
 
 bool ftdi::disconnect()
 {
-    this->setCBUS(0);
+    if (this->connected)
+        this->setCBUS(0);
 
+    this->connected = false;
     return FT_Close(ftHandle) == FT_OK;
 }
 
 bool ftdi::write(quint8 * buf, quint32 len)
 {
     quint32 dwBytesWritten;
+    if (!this->connected)
+        return true;
+
     ftStatus = FT_Write(ftHandle, buf, len, &dwBytesWritten);
     if (ftStatus != FT_OK) {
         qWarning("Error FT_Write(%d)\n", (int)ftStatus);
@@ -64,6 +76,9 @@ bool ftdi::write(quint8 * buf, quint32 len)
 bool ftdi::read(quint8 * buf, quint32 len)
 {
     quint32 dwBytesRead;
+    if (!this->connected)
+        return true;
+
     ftStatus = FT_Read(ftHandle, buf, len, &dwBytesRead);
     if (ftStatus != FT_OK) {
         qWarning("Error FT_Read(%d)\n", (int)ftStatus);
@@ -75,6 +90,8 @@ bool ftdi::read(quint8 * buf, quint32 len)
 bool ftdi::readAll(quint8 * buf, quint32 max_len)
 {
     quint32 len = 0;
+    if (!this->connected)
+        return true;
 
     ftStatus = FT_GetQueueStatus(ftHandle, &len);
 
@@ -93,6 +110,9 @@ bool ftdi::readAll(quint8 * buf, quint32 max_len)
 
 bool ftdi::purge()
 {
+    if (!this->connected)
+        return true;
+
     ftStatus = FT_Purge(ftHandle, FT_PURGE_RX | FT_PURGE_TX); // Purge both Rx and Tx buffers
     if (ftStatus != FT_OK) {
         qWarning("Error FT_Purge(%d)\n", (int)ftStatus);
@@ -107,6 +127,9 @@ bool ftdi::setCBUSMux(bool en)
     char ManufacturerId[64];
     char Description[64];
     char SerialNumber[64];
+
+    if (!this->connected)
+        return true;
 
     ftStatus = FT_EEPROM_Read(ftHandle, &eepromDATA, sizeof(eepromDATA),
     Manufacturer, ManufacturerId, Description, SerialNumber);
@@ -197,6 +220,9 @@ bool ftdi::resetNormal()
 
 bool ftdi::setCBUS(int mask)
 {
+    if (!this->connected)
+        return true;
+
     if(FT_SetBitMode(ftHandle, mask, FT_BITMODE_CBUS_BITBANG) != FT_OK) {
         qWarning("Failed to set CBUS bit mask: %d\n", mask);
         return true;

@@ -8,14 +8,14 @@ tcscom::tcscom(QObject *parent) :
     pb_ostream = pb_ostream_from_buffer(pb_obuffer, sizeof(pb_obuffer));
 }
 
-void tcscom::connect()
+bool tcscom::connect()
 {
-    this->ftdi_device.connect();
+    return this->ftdi_device.connect();
 }
 
-void tcscom::disconnect()
+bool tcscom::disconnect()
 {
-    this->ftdi_device.disconnect();
+    return this->ftdi_device.disconnect();
 }
 
 void tcscom::setSettings()
