@@ -66,7 +66,7 @@ bool ftdi::disconnect()
 
 bool ftdi::write(quint8 * buf, quint32 len)
 {
-    quint32 dwBytesWritten;
+    DWORD dwBytesWritten;
     if (!this->connected)
         return true;
 
@@ -80,7 +80,7 @@ bool ftdi::write(quint8 * buf, quint32 len)
 
 bool ftdi::read(quint8 * buf, quint32 len)
 {
-    quint32 dwBytesRead;
+    DWORD dwBytesRead;
     if (!this->connected)
         return true;
 
@@ -94,7 +94,7 @@ bool ftdi::read(quint8 * buf, quint32 len)
 
 bool ftdi::readAll(quint8 * buf, quint32 max_len)
 {
-    quint32 len = 0;
+    DWORD len = 0;
     if (!this->connected)
         return true;
 

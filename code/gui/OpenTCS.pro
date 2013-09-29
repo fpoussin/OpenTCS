@@ -30,9 +30,18 @@ HEADERS  += inc/mainwindow.h \
     ../common/inc/pb_decode.h \
     ../common/inc/pb.h \
     ../common/inc/nanopb.pb.h \
-    ../common/inc/messages.pb.h
+    ../common/inc/messages.pb.h \
+    inc/ftd2xx.h
 
 FORMS    += ui/mainwindow.ui
 
 INCLUDEPATH += inc ../common/inc
-LIBS += -L/usr/local/lib -lftd2xx
+
+unix {
+    LIBS += -L/usr/local/lib -lftd2xx
+}
+ win32 {
+     DEFINES += FTD2XX_EXPORTS
+     INCLUDEPATH += inc/win32
+     CONFIG += embed_manifest_exe
+ }

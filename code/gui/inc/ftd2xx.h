@@ -55,7 +55,7 @@ kernel & user mode
 #define FTD2XX_API __declspec(dllimport)
 #endif
 
-#ifndef _WINDOWS
+#ifndef WIN32
 #include <pthread.h>
 #include "WinTypes.h"
 /** Substitute for HANDLE returned by Windows CreateEvent API */
@@ -68,6 +68,9 @@ typedef struct _EVENT_HANDLE{
 #undef FTD2XX_API
 #define FTD2XX_API
 #endif /* FTD2XX_API */
+#else
+#include <windows.h>
+#pragma comment(lib, "ftd2xx")
 #endif /* _WINDOWS */
 
 typedef PVOID	FT_HANDLE;

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDebug>
 
+#include "compat.h"
 #include "ftd2xx.h"
 
 #define CBUS2MASK(a, b, c, d) (0xF0|(0x0F&((1&a)|(2&(b<<1))|(4&(c<<2))|(8&(d<<3)))))

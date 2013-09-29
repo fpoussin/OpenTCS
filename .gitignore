@@ -6,3 +6,4 @@
 
 code/build/
 code/.dep/
+*.user
