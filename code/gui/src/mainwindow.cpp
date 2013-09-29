@@ -3,7 +3,9 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    bl(&ftdi_device, this),
+    tcs(&ftdi_device, this)
 {
     ui->setupUi(this);
 
@@ -86,19 +88,16 @@ void MainWindow::saveConfig()
 
 void MainWindow::getConfig()
 {
-
+    tcs.getSettings(&this->settings);
 }
 
-void MainWindow::getAll()
+void MainWindow::getData()
 {
-
     tcs.getDiag(&this->sensors);
     tcs.getInfo(&this->status);
-    tcs.getSettings(&this->settings);
-
 }
 
 void MainWindow::applyConfig()
 {
-
+    tcs.setSettings(&this->settings);
 }

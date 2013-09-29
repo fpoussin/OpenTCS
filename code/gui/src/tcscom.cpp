@@ -1,21 +1,26 @@
 #include "tcscom.h"
 
-tcscom::tcscom(QObject *parent) :
+tcscom::tcscom(ftdi *device, QObject *parent) :
     QObject(parent)
 {
-
+    this->ftdi_device = device;
     pb_istream = pb_istream_from_buffer(pb_ibuffer, sizeof(pb_ibuffer));
     pb_ostream = pb_ostream_from_buffer(pb_obuffer, sizeof(pb_obuffer));
 }
 
+tcscom::~tcscom()
+{
+
+}
+
 bool tcscom::connect()
 {
-    return this->ftdi_device.connect();
+    return this->ftdi_device->connect();
 }
 
 bool tcscom::disconnect()
 {
-    return this->ftdi_device.disconnect();
+    return this->ftdi_device->disconnect();
 }
 
 bool tcscom::setSettings(const settings_t* settings)
@@ -29,9 +34,11 @@ bool tcscom::setSettings(const settings_t* settings)
     cs = doChecksum(cmd, sizeof(cmd));
     cs += doChecksum((quint8*)&pb_obuffer, len);
 
-    this->ftdi_device.write(cmd, sizeof(cmd));
-    this->ftdi_device.write((quint8*)&pb_obuffer, len);
-    this->ftdi_device.write(&cs);
+    this->ftdi_device->write(cmd, sizeof(cmd));
+    this->ftdi_device->write((quint8*)&pb_obuffer, len);
+    this->ftdi_device->write(&cs);
+
+    return false;
 }
 
 bool tcscom::getSettings(settings_t* settings)
@@ -42,17 +49,19 @@ bool tcscom::getSettings(settings_t* settings)
     quint8 cs;
 
     cmd[4] = doChecksum(cmd, sizeof(cmd));
-    this->ftdi_device.write(cmd, sizeof(cmd));
+    this->ftdi_device->write(cmd, sizeof(cmd));
 
-    this->ftdi_device.read(info, sizeof(info));
+    this->ftdi_device->read(info, sizeof(info));
     quint8 len = info[3]-4;
 
-    this->ftdi_device.read((quint8*)&pb_ibuffer, len);
-    this->ftdi_device.read(&cs);
+    this->ftdi_device->read((quint8*)&pb_ibuffer, len);
+    this->ftdi_device->read(&cs);
 
     pb_decode(&pb_istream, settings_t_fields, &settings_tmp);
 
     *settings = settings_tmp;
+
+    return false;
 }
 
 bool tcscom::getInfo(status_t* status)
@@ -63,17 +72,19 @@ bool tcscom::getInfo(status_t* status)
     quint8 cs;
 
     cmd[4] = doChecksum(cmd, sizeof(cmd));
-    this->ftdi_device.write(cmd, sizeof(cmd));
+    this->ftdi_device->write(cmd, sizeof(cmd));
 
-    this->ftdi_device.read(info, sizeof(info));
+    this->ftdi_device->read(info, sizeof(info));
     quint8 len = info[3]-4;
 
-    this->ftdi_device.read((quint8*)&pb_ibuffer, len);
-    this->ftdi_device.read(&cs);
+    this->ftdi_device->read((quint8*)&pb_ibuffer, len);
+    this->ftdi_device->read(&cs);
 
     pb_decode(&pb_istream, status_t_fields, &status_tmp);
 
     *status = status_tmp;
+
+    return false;
 }
 
 bool tcscom::getDiag(sensors_t* sensors)
@@ -84,17 +95,19 @@ bool tcscom::getDiag(sensors_t* sensors)
     quint8 cs;
 
     cmd[4] = doChecksum(cmd, sizeof(cmd));
-    this->ftdi_device.write(cmd, sizeof(cmd));
+    this->ftdi_device->write(cmd, sizeof(cmd));
 
-    this->ftdi_device.read(info, sizeof(info));
+    this->ftdi_device->read(info, sizeof(info));
     quint8 len = info[3]-4;
 
-    this->ftdi_device.read((quint8*)&pb_ibuffer, len);
-    this->ftdi_device.read(&cs);
+    this->ftdi_device->read((quint8*)&pb_ibuffer, len);
+    this->ftdi_device->read(&cs);
 
     pb_decode(&pb_istream, sensors_t_fields, &sensors_tmp);
 
     *sensors = sensors_tmp;
+
+    return false;
 }
 
 quint8 tcscom::doChecksum(quint8 *buf, quint8 len)

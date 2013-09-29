@@ -13,6 +13,7 @@ class ftdi : public QObject
     Q_OBJECT
 public:
     explicit ftdi(QObject *parent = 0);
+    ~ftdi();
     bool connect(void);
     bool disconnect(void);
     bool write(quint8 * buf, quint32 len = 1);

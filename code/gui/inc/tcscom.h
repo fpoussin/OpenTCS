@@ -23,7 +23,8 @@ class tcscom : public QObject
 {
     Q_OBJECT
 public:
-    explicit tcscom(QObject *parent = 0);
+    explicit tcscom(ftdi* device, QObject *parent = 0);
+    ~tcscom();
     
 signals:
     
@@ -41,9 +42,9 @@ private slots:
     quint8 doChecksum(quint8 * buf, quint8 len);
 
 private:
-    ftdi ftdi_device;
-    quint8 pb_obuffer[256];
-    quint8 pb_ibuffer[256];
+    ftdi*        ftdi_device;
+    quint8       pb_obuffer[256];
+    quint8       pb_ibuffer[256];
     pb_ostream_t pb_ostream;
     pb_istream_t pb_istream;
 };

@@ -12,6 +12,11 @@ ftdi::ftdi(QObject *parent) :
     eepromDATA.common.deviceType = FT_DEVICE_X_SERIES;
 }
 
+ftdi::~ftdi()
+{
+    this->disconnect();
+}
+
 bool ftdi::connect(void)
 {
     ftStatus = FT_ListDevices(pcBufLD, &iNumDevs, FT_LIST_ALL | FT_OPEN_BY_SERIAL_NUMBER);

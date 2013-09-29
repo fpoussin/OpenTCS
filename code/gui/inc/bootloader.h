@@ -16,7 +16,7 @@
 
 class bootloader : public QObject
 {
-
+    Q_OBJECT
 struct {
         quint8 get;
         quint8 gvr;
@@ -32,7 +32,8 @@ struct {
 } cmd;
 
 public:
-    bootloader();
+    explicit bootloader(ftdi* device, QObject *parent = 0);
+    ~bootloader();
     bool connect(void);
     bool disconnect(void);
     bool writeFile(QFile * file);
@@ -51,7 +52,7 @@ private slots:
     quint8 calcChecksum(const quint32 val);
 
 private:
-    ftdi            ftdi_device;
+    ftdi*           ftdi_device;
     quint8          rx_buff[1024];
     quint8          tx_buff[1024];
     quint8          bl_version;

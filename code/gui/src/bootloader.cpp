@@ -1,18 +1,24 @@
 #include "bootloader.h"
 
-bootloader::bootloader()
+bootloader::bootloader(ftdi *device, QObject *parent) :
+    QObject(parent)
+{
+    this->ftdi_device = device;
+}
+
+bootloader::~bootloader()
 {
 
 }
 
 bool bootloader::connect()
 {
-    return this->ftdi_device.connect();
+    return this->ftdi_device->connect();
 }
 
 bool bootloader::disconnect()
 {
-    return this->ftdi_device.disconnect();
+    return this->ftdi_device->disconnect();
 }
 
 bool bootloader::writeFile(QFile *file)
@@ -22,13 +28,13 @@ bool bootloader::writeFile(QFile *file)
     QByteArray data = file->readAll();
     file->close();
 
-    this->ftdi_device.resetBootloader();
+    this->ftdi_device->resetBootloader();
 
     this->unlockFlash();
 
     res = this->writeMem(STM32_FLASH_ADDR, (quint8*)data.data(), data.length());
 
-    this->ftdi_device.resetNormal();
+    this->ftdi_device->resetNormal();
 
     return res;
 }
@@ -41,23 +47,23 @@ bool bootloader::init()
 
     this->sendCommand(STM32_CMD_GET);
 
-    ftdi_device.read(&len); len++;
-    ftdi_device.read(&this->bl_version); len--;
-    ftdi_device.read(&cmd.get); len--;
-    ftdi_device.read(&cmd.gvr); len--;
-    ftdi_device.read(&cmd.gid); len--;
-    ftdi_device.read(&cmd.rm); len--;
-    ftdi_device.read(&cmd.go); len--;
-    ftdi_device.read(&cmd.wm); len--;
-    ftdi_device.read(&cmd.er); len--;
-    ftdi_device.read(&cmd.wp); len--;
-    ftdi_device.read(&cmd.uw); len--;
-    ftdi_device.read(&cmd.rp); len--;
-    ftdi_device.read(&cmd.ur); len--;
+    ftdi_device->read(&len); len++;
+    ftdi_device->read(&this->bl_version); len--;
+    ftdi_device->read(&cmd.get); len--;
+    ftdi_device->read(&cmd.gvr); len--;
+    ftdi_device->read(&cmd.gid); len--;
+    ftdi_device->read(&cmd.rm); len--;
+    ftdi_device->read(&cmd.go); len--;
+    ftdi_device->read(&cmd.wm); len--;
+    ftdi_device->read(&cmd.er); len--;
+    ftdi_device->read(&cmd.wp); len--;
+    ftdi_device->read(&cmd.uw); len--;
+    ftdi_device->read(&cmd.rp); len--;
+    ftdi_device->read(&cmd.ur); len--;
 
-    while(len-- > 0) ftdi_device.read(&dummy);
+    while(len-- > 0) ftdi_device->read(&dummy);
 
-    ftdi_device.read(&ack);
+    ftdi_device->read(&ack);
 
     return (ack != STM32_ACK);
 }
@@ -66,10 +72,10 @@ bool bootloader::sendCommand(quint8 cmd)
 {
     quint8 cmd_xor = cmd^0xFF;
     quint8 ack;
-    ftdi_device.write(&cmd);
-    ftdi_device.write(&cmd_xor);
+    ftdi_device->write(&cmd);
+    ftdi_device->write(&cmd_xor);
 
-    ftdi_device.read(&ack);
+    ftdi_device->read(&ack);
 
     return (ack != STM32_ACK);
 }
@@ -96,19 +102,19 @@ bool bootloader::readMem(quint32 address, quint8 *data, quint32 len)
     checksum = this->calcChecksum(address);
 
     this->sendCommand(cmd.rm);
-    ftdi_device.write(addr, 4);
-    ftdi_device.write(&checksum);
+    ftdi_device->write(addr, 4);
+    ftdi_device->write(&checksum);
 
-    ftdi_device.read(&ack);
+    ftdi_device->read(&ack);
 
     len2 = len - 1;
-    ftdi_device.write(&len2);
+    ftdi_device->write(&len2);
     len2 ^= 0xFF;
-    ftdi_device.write(&len2);
+    ftdi_device->write(&len2);
 
-    ftdi_device.read(&ack);
+    ftdi_device->read(&ack);
 
-    ftdi_device.read(data, len);
+    ftdi_device->read(data, len);
 
     return (ack != STM32_ACK);
 }
@@ -128,22 +134,22 @@ bool bootloader::writeMem(quint32 address, quint8 *data, quint32 len)
     checksum = this->calcChecksum(address);
 
     this->sendCommand(cmd.wm);
-    ftdi_device.write(addr, 4);
-    ftdi_device.write(&checksum);
+    ftdi_device->write(addr, 4);
+    ftdi_device->write(&checksum);
 
-    ftdi_device.read(&ack);
+    ftdi_device->read(&ack);
 
     checksum = len - 1 + (len % 4);
-    ftdi_device.write(&checksum);
+    ftdi_device->write(&checksum);
 
     /* write the data and build the checksum */
     quint32 i;
     for(i = 0; i < len; ++i)
             checksum ^= data[i];
 
-    ftdi_device.write(data, len);
-    ftdi_device.write(&checksum);
-    ftdi_device.read(&ack);
+    ftdi_device->write(data, len);
+    ftdi_device->write(&checksum);
+    ftdi_device->read(&ack);
 
     return (ack != STM32_ACK);
 }
@@ -155,8 +161,8 @@ bool bootloader::eraseMem()
 
     this->sendCommand(cmd.er);
 
-    ftdi_device.write(pages, 3);
-    ftdi_device.read(&ack);
+    ftdi_device->write(pages, 3);
+    ftdi_device->read(&ack);
 
     return (ack != STM32_ACK);
 }

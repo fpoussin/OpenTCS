@@ -27,11 +27,12 @@ private slots:
     void saveConfig(void);
 
     void getConfig(void);
-    void getAll(void);
+    void getData(void);
     void applyConfig(void);
 
 private:
     Ui::MainWindow *ui;
+    ftdi ftdi_device;
     bootloader bl;
     tcscom tcs;
     bool connected;
