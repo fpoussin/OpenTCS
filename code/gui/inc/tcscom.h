@@ -19,6 +19,17 @@
 #define CMD_SEND_SETTINGS 0x03
 #define CMD_SAVE_SETTINGS 0x04
 
+#define SETTINGS_FUNCTION_TC 0x1
+#define SETTINGS_FUNCTION_SHIFTER 0x2
+#define SETTINGS_FUNCTION_LED 0x4
+
+#define SETTINGS_CUT_DISABLED 0x0
+#define SETTINGS_CUT_NORMAL 0x1
+#define SETTINGS_CUT_PROGRESSIVE 0x2
+
+#define SETTINGS_SENSOR_NORMAL 0
+#define SETTINGS_SENSOR_REVERSE 1
+
 class tcscom : public QObject
 {
     Q_OBJECT
@@ -29,9 +40,6 @@ public:
 signals:
     
 public slots:
-    bool connect(void);
-    bool disconnect(void);
-
     bool setSettings(const settings_t* settings);
     bool getSettings(settings_t* settings);
 

@@ -11,16 +11,6 @@ bootloader::~bootloader()
 
 }
 
-bool bootloader::connect()
-{
-    return this->ftdi_device->connect();
-}
-
-bool bootloader::disconnect()
-{
-    return this->ftdi_device->disconnect();
-}
-
 bool bootloader::writeFile(QFile *file)
 {
     bool res;
@@ -42,8 +32,6 @@ bool bootloader::writeFile(QFile *file)
 bool bootloader::init()
 {
     quint8 len, dummy, ack;
-
-    this->connect();
 
     this->sendCommand(STM32_CMD_GET);
 

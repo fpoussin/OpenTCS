@@ -44,7 +44,7 @@ bool ftdi::connect(void)
         return true;
     }
 
-    FT_SetTimeouts(ftHandle, 3000, 3000);	// 3 second read timeout
+    FT_SetTimeouts(ftHandle, 2000, 2000);	// 2 second read timeout
 
     if((ftStatus = FT_SetBaudRate(ftHandle, 115200)) != FT_OK) {
         qWarning("Error FT_SetBaudRate(%d), cBufLD[i] = %s\n", (int)ftStatus, cBufLD);
@@ -54,6 +54,7 @@ bool ftdi::connect(void)
     qDebug("Connected");
 
     this->connected = true;
+    this->purge();
     return this->resetBootloader();
 }
 
@@ -65,6 +66,7 @@ bool ftdi::disconnect()
     qDebug("Disconnected");
 
     this->connected = false;
+    this->purge();
     return FT_Close(ftHandle) == FT_OK;
 }
 
@@ -74,6 +76,7 @@ bool ftdi::write(quint8 * buf, quint32 len)
     if (!this->connected)
         return true;
 
+    this->purge();
     ftStatus = FT_Write(ftHandle, buf, len, &dwBytesWritten);
     if (ftStatus != FT_OK) {
         qWarning("Error FT_Write(%d)\n", (int)ftStatus);

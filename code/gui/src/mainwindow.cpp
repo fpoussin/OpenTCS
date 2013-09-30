@@ -24,8 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    tcs.disconnect();
-    bl.disconnect();
+    ftdi_device.disconnect();
 
     delete ui;
 }
@@ -34,7 +33,7 @@ void MainWindow::connect()
 {
     ui->statusBar->showMessage("Connecting...");
 
-    if (tcs.connect() == 0)
+    if (ftdi_device.connect() == 0)
     {
         ui->statusBar->showMessage("Connected");
         this->connected = true;
@@ -89,12 +88,26 @@ void MainWindow::saveConfig()
 void MainWindow::getConfig()
 {
     tcs.getSettings(&this->settings);
+
+    ui->cb_shifter->setChecked((settings.data.functions & SETTINGS_FUNCTION_SHIFTER));
+    ui->cb_shiftlight->setChecked((settings.data.functions & SETTINGS_FUNCTION_LED));
+    ui->cb_tc->setChecked((settings.data.functions & SETTINGS_FUNCTION_TC));
+
+    ui->sb_minrpm->setValue(settings.data.min_rpm);
+//    ui->sb_tcsens->setValue(settings.data.tc_base_gain);
+    ui->sb_threshold->setValue(settings.data.sensor_threshold);
 }
 
 void MainWindow::getData()
 {
     tcs.getDiag(&this->sensors);
     tcs.getInfo(&this->status);
+
+    ui->le_rpm->setText(QString::number(sensors.rpm));
+    ui->le_fspd->setText(QString::number(sensors.speed));
+    ui->le_shift_sensor->setText(QString::number(sensors.strain_gauge));
+    ui->le_tcswitch->setText(QString::number(sensors.tc_switch));
+    ui->le_vbat->setText(QString::number(sensors.vbat));
 }
 
 void MainWindow::applyConfig()

@@ -34,8 +34,6 @@ struct {
 public:
     explicit bootloader(ftdi* device, QObject *parent = 0);
     ~bootloader();
-    bool connect(void);
-    bool disconnect(void);
     bool writeFile(QFile * file);
 
 public slots:

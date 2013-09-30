@@ -31,7 +31,8 @@ HEADERS  += inc/mainwindow.h \
     ../common/inc/pb.h \
     ../common/inc/nanopb.pb.h \
     ../common/inc/messages.pb.h \
-    inc/ftd2xx.h
+    inc/ftd2xx.h \
+    inc/compat.h
 
 FORMS    += ui/mainwindow.ui
 

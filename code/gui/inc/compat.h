@@ -30,13 +30,18 @@ This file is part of QSTLink2.
 #endif
 
 #ifdef WIN32
+    #define msleep(x) Sleep(x)
     #define usleep(num) Sleep(num/1000)
+#else
+    #define msleep(x) usleep(x*1000)
 #endif
+
 
 #define QtInfoMsg QtWarningMsg // Little hack to have an "info" level of output.
 #define qInformal() qWarning()
 
-#define PrintError() qCritical ("In %s, at %s:%d", Q_FUNC_INFO, __FILE__, __LINE__)
+#define PrintError() qWarning ("In %s, at %s:%d", Q_FUNC_INFO, __FILE__, __LINE__)
+#define PrintErrorDetails(s) qWarning ("%s, in %s, at %s:%d", s, Q_FUNC_INFO, __FILE__, __LINE__)
 #define PrintFuncName() qDebug() << "***[" << Q_FUNC_INFO << "]***"
 
 #endif // COMPAT_H
