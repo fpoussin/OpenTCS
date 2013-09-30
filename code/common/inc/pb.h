@@ -173,6 +173,8 @@ typedef uint8_t pb_type_t;
 #define PB_HTYPE(x) ((x) & PB_HTYPE_MASK)
 #define PB_LTYPE(x) ((x) & PB_LTYPE_MASK)
 
+#define PB_FIELD_16BIT
+
 /* This structure is used in auto-generated constants
  * to specify struct fields.
  * You can change field sizes if you need structures
