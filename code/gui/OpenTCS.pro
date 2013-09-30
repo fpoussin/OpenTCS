@@ -41,6 +41,7 @@ unix {
     LIBS += -L/usr/local/lib -lftd2xx
 }
  win32 {
+     CONFIG += console
      DEFINES += FTD2XX_EXPORTS
      INCLUDEPATH += inc/win32
      CONFIG += embed_manifest_exe

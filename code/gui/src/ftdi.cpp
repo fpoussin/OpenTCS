@@ -51,6 +51,8 @@ bool ftdi::connect(void)
         return true;
     }
 
+    qDebug("Connected");
+
     this->connected = true;
     return this->resetBootloader();
 }
@@ -59,6 +61,8 @@ bool ftdi::disconnect()
 {
     if (this->connected)
         this->setCBUS(0);
+
+    qDebug("Disconnected");
 
     this->connected = false;
     return FT_Close(ftHandle) == FT_OK;
