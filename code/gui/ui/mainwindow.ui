@@ -144,7 +144,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Update...</string>
+        <string>Update FW...</string>
        </property>
       </widget>
      </item>
@@ -235,6 +235,12 @@
      <property name="suffix">
       <string> rpm</string>
      </property>
+     <property name="maximum">
+      <number>12000</number>
+     </property>
+     <property name="singleStep">
+      <number>100</number>
+     </property>
     </widget>
     <widget class="QLabel" name="l_minrpm">
      <property name="geometry">
@@ -260,6 +266,12 @@
        <width>131</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="maximum">
+      <number>65535</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
      </property>
     </widget>
     <widget class="QLabel" name="l_tcsens">
@@ -287,6 +299,12 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="maximum">
+      <number>65535</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
     </widget>
     <widget class="QRadioButton" name="rb_progressive">
      <property name="geometry">
@@ -296,6 +314,9 @@
        <width>98</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="toolTip">
+      <string>Cuts cylinders one by one</string>
      </property>
      <property name="text">
       <string>Progressive</string>
@@ -310,6 +331,9 @@
        <height>21</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>Cuts all cylinders at once</string>
+     </property>
      <property name="text">
       <string>Normal</string>
      </property>
@@ -321,7 +345,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>260</y>
+       <y>270</y>
        <width>121</width>
        <height>20</height>
       </rect>
@@ -449,79 +473,66 @@
     <widget class="QLabel" name="l_2g_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>60</y>
-       <width>10</width>
+       <width>31</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>2</string>
+      <string>2-&gt;3</string>
      </property>
     </widget>
     <widget class="QLabel" name="l_5g_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>120</y>
-       <width>10</width>
+       <width>31</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>5</string>
+      <string>5-&gt;6</string>
      </property>
     </widget>
     <widget class="QLabel" name="l_1g_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>40</y>
-       <width>10</width>
+       <width>31</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>1</string>
+      <string>1-&gt;2</string>
      </property>
     </widget>
     <widget class="QLabel" name="l_3g_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>80</y>
-       <width>10</width>
+       <width>31</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>3</string>
+      <string>3-&gt;4</string>
      </property>
     </widget>
     <widget class="QLabel" name="l_4g_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>100</y>
-       <width>10</width>
+       <width>31</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>4</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="l_6g_4">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>140</y>
-       <width>10</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>6</string>
+      <string>4-&gt;5</string>
      </property>
     </widget>
     <widget class="QLabel" name="l_gears_4">
@@ -552,6 +563,12 @@
      <property name="suffix">
       <string> ms</string>
      </property>
+     <property name="maximum">
+      <number>120</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
+     </property>
     </widget>
     <widget class="QSpinBox" name="sp_2cg">
      <property name="geometry">
@@ -564,6 +581,12 @@
      </property>
      <property name="suffix">
       <string> ms</string>
+     </property>
+     <property name="maximum">
+      <number>120</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_3cg">
@@ -578,6 +601,12 @@
      <property name="suffix">
       <string> ms</string>
      </property>
+     <property name="maximum">
+      <number>120</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
+     </property>
     </widget>
     <widget class="QSpinBox" name="sp_4cg">
      <property name="geometry">
@@ -590,6 +619,12 @@
      </property>
      <property name="suffix">
       <string> ms</string>
+     </property>
+     <property name="maximum">
+      <number>120</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_5cg">
@@ -604,18 +639,11 @@
      <property name="suffix">
       <string> ms</string>
      </property>
-    </widget>
-    <widget class="QSpinBox" name="sp_6cg">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>140</y>
-       <width>71</width>
-       <height>23</height>
-      </rect>
+     <property name="maximum">
+      <number>120</number>
      </property>
-     <property name="suffix">
-      <string> ms</string>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_2tcg">
@@ -628,7 +656,13 @@
       </rect>
      </property>
      <property name="suffix">
-      <string> ms</string>
+      <string>  %</string>
+     </property>
+     <property name="minimum">
+      <number>-99</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_4tcg">
@@ -641,7 +675,13 @@
       </rect>
      </property>
      <property name="suffix">
-      <string> ms</string>
+      <string>  %</string>
+     </property>
+     <property name="minimum">
+      <number>-99</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_6tcg">
@@ -654,7 +694,13 @@
       </rect>
      </property>
      <property name="suffix">
-      <string> ms</string>
+      <string>  %</string>
+     </property>
+     <property name="minimum">
+      <number>-99</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_1tcg">
@@ -667,7 +713,13 @@
       </rect>
      </property>
      <property name="suffix">
-      <string> ms</string>
+      <string> %</string>
+     </property>
+     <property name="minimum">
+      <number>-99</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_3tcg">
@@ -680,7 +732,13 @@
       </rect>
      </property>
      <property name="suffix">
-      <string> ms</string>
+      <string>  %</string>
+     </property>
+     <property name="minimum">
+      <number>-99</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
     <widget class="QSpinBox" name="sp_5tcg">
@@ -693,7 +751,13 @@
       </rect>
      </property>
      <property name="suffix">
-      <string> ms</string>
+      <string>  %</string>
+     </property>
+     <property name="minimum">
+      <number>-99</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
     </widget>
    </widget>
