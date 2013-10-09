@@ -12,8 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->b_connect, SIGNAL(clicked()), this, SLOT(connect()));
     QObject::connect(ui->b_disconnect, SIGNAL(clicked()), this, SLOT(disconnect()));
     QObject::connect(ui->b_update, SIGNAL(clicked()), this, SLOT(update()));
-    QObject::connect(ui->b_load, SIGNAL(clicked()), this, SLOT(loadConfig()));
-    QObject::connect(ui->b_save, SIGNAL(clicked()), this, SLOT(saveConfig()));
+    QObject::connect(ui->b_import, SIGNAL(clicked()), this, SLOT(importConfig()));
+    QObject::connect(ui->b_export, SIGNAL(clicked()), this, SLOT(exportConfig()));
     QObject::connect(ui->b_get, SIGNAL(clicked()), this, SLOT(getConfig()));
     QObject::connect(ui->b_set, SIGNAL(clicked()), this, SLOT(applyConfig()));
 
@@ -71,14 +71,14 @@ void MainWindow::update()
     QFile file(filename);
 }
 
-void MainWindow::loadConfig()
+void MainWindow::importConfig()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open config file"), "", tr("XML Files (*.xml)"));
 
     QFile file(filename);
 }
 
-void MainWindow::saveConfig()
+void MainWindow::exportConfig()
 {
     QString filename = QFileDialog::getSaveFileName(this, tr("Save config file"), "", tr("XML Files (*.xml)"));
 

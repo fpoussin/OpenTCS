@@ -23,8 +23,8 @@ private slots:
     void connect(void);
     void disconnect(void);
     void update(void);
-    void loadConfig(void);
-    void saveConfig(void);
+    void importConfig(void);
+    void exportConfig(void);
 
     void getConfig(void);
     void getData(void);

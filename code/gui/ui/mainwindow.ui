@@ -94,7 +94,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="b_load">
+      <widget class="QPushButton" name="b_import">
        <property name="minimumSize">
         <size>
          <width>50</width>
@@ -102,12 +102,12 @@
         </size>
        </property>
        <property name="text">
-        <string>Load...</string>
+        <string>Import...</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="b_save">
+      <widget class="QPushButton" name="b_export">
        <property name="minimumSize">
         <size>
          <width>50</width>
@@ -115,7 +115,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Save...</string>
+        <string>Export...</string>
        </property>
       </widget>
      </item>
@@ -172,7 +172,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>50</y>
+       <y>40</y>
        <width>151</width>
        <height>21</height>
       </rect>
@@ -185,7 +185,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>60</y>
        <width>141</width>
        <height>21</height>
       </rect>
@@ -198,7 +198,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>110</y>
+       <y>80</y>
        <width>141</width>
        <height>21</height>
       </rect>
@@ -227,17 +227,20 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>180</y>
+       <y>130</y>
        <width>131</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="suffix">
+      <string> rpm</string>
      </property>
     </widget>
     <widget class="QLabel" name="l_minrpm">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>160</y>
+       <y>110</y>
        <width>151</width>
        <height>20</height>
       </rect>
@@ -253,7 +256,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>230</y>
+       <y>180</y>
        <width>131</width>
        <height>25</height>
       </rect>
@@ -263,7 +266,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>210</y>
+       <y>160</y>
        <width>151</width>
        <height>20</height>
       </rect>
@@ -279,10 +282,55 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>280</y>
+       <y>230</y>
        <width>131</width>
        <height>25</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rb_progressive">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>310</y>
+       <width>98</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Progressive</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rb_normal">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>290</y>
+       <width>98</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Normal</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_cutmode">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>260</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cut mode/time</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -292,7 +340,7 @@
       <x>200</x>
       <y>60</y>
       <width>120</width>
-      <height>181</height>
+      <height>341</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -304,107 +352,27 @@
     <property name="lineWidth">
      <number>2</number>
     </property>
-    <widget class="QLabel" name="l_gears">
+    <widget class="QLabel" name="l_gears_3">
      <property name="geometry">
       <rect>
-       <x>6</x>
-       <y>10</y>
-       <width>111</width>
+       <x>0</x>
+       <y>170</y>
+       <width>121</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>Gears Ratio</string>
+      <string>TC Gear Trim</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="le_1g">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>40</y>
-       <width>71</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="le_2g">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>60</y>
-       <width>71</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="le_3g">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>80</y>
-       <width>71</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="le_4g">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>100</y>
-       <width>71</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="le_5g">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>120</y>
-       <width>71</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="l_1g">
+    <widget class="QLabel" name="l_1g_3">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>40</y>
+       <y>200</y>
        <width>10</width>
        <height>23</height>
       </rect>
@@ -413,7 +381,72 @@
       <string>1</string>
      </property>
     </widget>
-    <widget class="QLabel" name="l_2g">
+    <widget class="QLabel" name="l_2g_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>220</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_6g_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>300</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>6</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_4g_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>260</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_3g_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>240</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_5g_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>280</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_2g_4">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -426,33 +459,7 @@
       <string>2</string>
      </property>
     </widget>
-    <widget class="QLabel" name="l_3g">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>80</y>
-       <width>10</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>3</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="l_4g">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>10</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>4</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="l_5g">
+    <widget class="QLabel" name="l_5g_4">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -465,7 +472,46 @@
       <string>5</string>
      </property>
     </widget>
-    <widget class="QLabel" name="l_6g">
+    <widget class="QLabel" name="l_1g_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_3g_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_4g_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_6g_4">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -478,7 +524,88 @@
       <string>6</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="le_6g">
+    <widget class="QLabel" name="l_gears_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cut time per gear</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_1cg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_2cg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>60</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_3cg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_4cg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>100</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_5cg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_6cg">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -487,11 +614,86 @@
        <height>23</height>
       </rect>
      </property>
-     <property name="text">
-      <string/>
+     <property name="suffix">
+      <string> ms</string>
      </property>
-     <property name="placeholderText">
-      <string>0</string>
+    </widget>
+    <widget class="QSpinBox" name="sp_2tcg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>220</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_4tcg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>260</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_6tcg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>300</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_1tcg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>200</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_3tcg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>240</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sp_5tcg">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>280</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> ms</string>
      </property>
     </widget>
    </widget>
@@ -499,7 +701,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>330</y>
+      <y>270</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -518,7 +720,7 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>360</y>
+      <y>370</y>
       <width>51</width>
       <height>30</height>
      </rect>
@@ -540,7 +742,7 @@
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>360</y>
+      <y>370</y>
       <width>50</width>
       <height>30</height>
      </rect>
@@ -561,7 +763,7 @@
       <x>480</x>
       <y>60</y>
       <width>111</width>
-      <height>151</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -591,12 +793,12 @@
       <rect>
        <x>10</x>
        <y>40</y>
-       <width>61</width>
+       <width>71</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>Version:</string>
+      <string>FW Version:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -605,7 +807,7 @@
     <widget class="QLabel" name="vl_version">
      <property name="geometry">
       <rect>
-       <x>60</x>
+       <x>70</x>
        <y>40</y>
        <width>41</width>
        <height>20</height>
@@ -878,14 +1080,39 @@
       <string>0</string>
      </property>
     </widget>
+    <zorder>l_sensors</zorder>
+    <zorder>l_rpm</zorder>
+    <zorder>l_frspd</zorder>
+    <zorder>l_tcswitch</zorder>
+    <zorder>l_shiftsensor</zorder>
+    <zorder>l_rrspd</zorder>
+    <zorder>le_rpm</zorder>
+    <zorder>le_fspd</zorder>
+    <zorder>le_rspd</zorder>
+    <zorder>le_tcswitch</zorder>
+    <zorder>le_shift_sensor</zorder>
+    <zorder>l_vbat</zorder>
+    <zorder>le_vbat</zorder>
+    <zorder>l_6g</zorder>
+    <zorder>l_gears</zorder>
+    <zorder>l_1g</zorder>
+    <zorder>l_2g</zorder>
+    <zorder>l_4g</zorder>
+    <zorder>le_1gr</zorder>
+    <zorder>l_3g</zorder>
+    <zorder>le_6gr</zorder>
+    <zorder>le_4gr</zorder>
+    <zorder>l_5g</zorder>
+    <zorder>le_3gr</zorder>
+    <zorder>le_5gr</zorder>
    </widget>
    <widget class="QFrame" name="frame_5">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>250</y>
-      <width>120</width>
-      <height>151</height>
+      <x>479</x>
+      <y>200</y>
+      <width>111</width>
+      <height>161</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -894,72 +1121,194 @@
     <property name="frameShadow">
      <enum>QFrame::Sunken</enum>
     </property>
-    <widget class="QRadioButton" name="rb_normal">
+    <widget class="QLineEdit" name="le_2gr">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>98</width>
-       <height>21</height>
+       <x>30</x>
+       <y>50</y>
+       <width>71</width>
+       <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>Normal</string>
+      <string/>
      </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="rb_progressive">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>98</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Progressive</string>
+     <property name="placeholderText">
+      <string>0</string>
      </property>
     </widget>
-    <widget class="QLabel" name="l_cutmode">
+    <widget class="QLabel" name="l_gears">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>-4</x>
        <y>10</y>
-       <width>121</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>Cut mode/time</string>
+      <string>Gears Ratio</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QSpinBox" name="spinBox">
+    <widget class="QLabel" name="l_1g">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>100</y>
-       <width>81</width>
-       <height>25</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="l_cutms">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>100</y>
-       <width>20</width>
-       <height>25</height>
+       <y>30</y>
+       <width>10</width>
+       <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>ms</string>
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_6g">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>6</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_2g">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_4g">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_1gr">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_3g">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_6gr">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>130</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_4gr">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="l_5g">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>10</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_3gr">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_5gr">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>110</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>0</string>
      </property>
     </widget>
    </widget>
