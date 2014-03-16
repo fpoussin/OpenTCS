@@ -2899,126 +2899,6 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="con-coax">
-<description>&lt;b&gt;Coax Connectors&lt;/b&gt;&lt;p&gt;
-Radiall  and M/A COM.&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="BU-SMA-G">
-<description>FEMALE &lt;b&gt;SMA CONNECTOR&lt;/b&gt;&lt;p&gt;
-Radiall&lt;p&gt;
-distributor RS 193-9117</description>
-<wire x1="-1.1" y1="3.4" x2="1.1" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="3.4" y1="1.1" x2="3.4" y2="-1.1" width="0.2032" layer="21"/>
-<wire x1="1.1" y1="-3.4" x2="-1.1" y2="-3.4" width="0.2032" layer="21"/>
-<wire x1="-3.4" y1="-1.1" x2="-3.4" y2="1.1" width="0.2032" layer="21"/>
-<wire x1="-3.4" y1="3.4" x2="3.4" y2="3.4" width="0.2032" layer="51"/>
-<wire x1="3.4" y1="3.4" x2="3.4" y2="-3.4" width="0.2032" layer="51"/>
-<wire x1="3.4" y1="-3.4" x2="-3.4" y2="-3.4" width="0.2032" layer="51"/>
-<wire x1="-3.4" y1="-3.4" x2="-3.4" y2="3.4" width="0.2032" layer="51"/>
-<wire x1="5.4" y1="3.3" x2="6.3" y2="3.3" width="0.2032" layer="21"/>
-<wire x1="6.3" y1="3.3" x2="6.3" y2="2.9" width="0.2032" layer="21"/>
-<wire x1="6.3" y1="2.9" x2="7.1" y2="2.9" width="0.2032" layer="21"/>
-<wire x1="7.1" y1="2.9" x2="7.1" y2="3.3" width="0.2032" layer="21"/>
-<wire x1="7.1" y1="3.3" x2="8" y2="3.3" width="0.2032" layer="21"/>
-<wire x1="15" y1="3.4" x2="15.3" y2="2.9" width="0.2032" layer="21"/>
-<wire x1="15.3" y1="2.9" x2="15.9" y2="2.9" width="0.2032" layer="21"/>
-<wire x1="15.9" y1="-2.9" x2="15.9" y2="2.9" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="3.4" x2="15" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="5.4" y1="-3.3" x2="6.3" y2="-3.3" width="0.2032" layer="21"/>
-<wire x1="6.3" y1="-3.3" x2="6.3" y2="-2.9" width="0.2032" layer="21"/>
-<wire x1="6.3" y1="-2.9" x2="7.1" y2="-2.9" width="0.2032" layer="21"/>
-<wire x1="7.1" y1="-2.9" x2="7.1" y2="-3.3" width="0.2032" layer="21"/>
-<wire x1="7.1" y1="-3.3" x2="8" y2="-3.3" width="0.2032" layer="21"/>
-<wire x1="15" y1="-3.4" x2="15.3" y2="-2.9" width="0.2032" layer="21"/>
-<wire x1="15.3" y1="-2.9" x2="15.9" y2="-2.9" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="-3.4" x2="15" y2="-3.4" width="0.2032" layer="21"/>
-<wire x1="15.3" y1="-2.9" x2="15.3" y2="2.9" width="0.2032" layer="21"/>
-<wire x1="5.4" y1="-3.9" x2="5.4" y2="-3.3" width="0.2032" layer="21"/>
-<wire x1="5.4" y1="-3.3" x2="5.4" y2="3.3" width="0.2032" layer="21"/>
-<wire x1="5.4" y1="3.3" x2="5.4" y2="3.9" width="0.2032" layer="21"/>
-<wire x1="8" y1="4.4" x2="8.9" y2="4.4" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="-4.4" x2="8" y2="-4.4" width="0.2032" layer="21"/>
-<wire x1="8" y1="-2.2" x2="8" y2="2.2" width="0.2032" layer="21"/>
-<wire x1="8" y1="-2.2" x2="8.9" y2="-2.2" width="0.2032" layer="21"/>
-<wire x1="8" y1="-2.2" x2="8" y2="-3.3" width="0.2032" layer="21"/>
-<wire x1="8" y1="-3.3" x2="8" y2="-4.4" width="0.2032" layer="21"/>
-<wire x1="8" y1="2.2" x2="8.9" y2="2.2" width="0.2032" layer="21"/>
-<wire x1="8" y1="2.2" x2="8" y2="3.3" width="0.2032" layer="21"/>
-<wire x1="8" y1="3.3" x2="8" y2="4.4" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="2.2" x2="8.9" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="3.4" x2="8.9" y2="4.4" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="2.2" x2="8.9" y2="-2.2" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="-4.4" x2="8.9" y2="-3.4" width="0.2032" layer="21"/>
-<wire x1="8.9" y1="-3.4" x2="8.9" y2="-2.2" width="0.2032" layer="21"/>
-<wire x1="3.4" y1="3.9" x2="5.4" y2="3.9" width="0.2032" layer="21"/>
-<wire x1="3.4" y1="-3.9" x2="5.4" y2="-3.9" width="0.2032" layer="21"/>
-<wire x1="3.4" y1="3.9" x2="3.4" y2="3.4" width="0.2032" layer="51"/>
-<wire x1="3.4" y1="-3.4" x2="3.4" y2="-3.9" width="0.2032" layer="51"/>
-<wire x1="6.3" y1="2.9" x2="6.3" y2="-2.9" width="0.2032" layer="21"/>
-<wire x1="7.1" y1="2.9" x2="7.1" y2="-2.9" width="0.2032" layer="21"/>
-<pad name="1" x="0" y="0" drill="1.27"/>
-<pad name="2" x="-2.5499" y="2.5499" drill="1.778"/>
-<pad name="3" x="2.5499" y="2.5499" drill="1.778"/>
-<pad name="4" x="2.5499" y="-2.5499" drill="1.778"/>
-<pad name="5" x="-2.5499" y="-2.5499" drill="1.778"/>
-<text x="-2.54" y="4.445" size="1.27" layer="25">&gt;NAME</text>
-<text x="-3.175" y="-5.715" size="1.27" layer="27">&gt;VALUE</text>
-</package>
-</packages>
-<symbols>
-<symbol name="BNC-FGND">
-<wire x1="0" y1="-2.54" x2="-0.762" y2="-1.778" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-0.508" y2="0" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="0.508" x2="-0.762" y2="0.508" width="0.254" layer="94"/>
-<wire x1="-0.762" y1="0.508" x2="-0.508" y2="0" width="0.254" layer="94"/>
-<wire x1="-0.508" y1="0" x2="-0.762" y2="-0.508" width="0.254" layer="94"/>
-<wire x1="-0.762" y1="-0.508" x2="-2.54" y2="-0.508" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="2.54" x2="0" y2="0.508" width="0.3048" layer="94" curve="-79.611142" cap="flat"/>
-<wire x1="-2.54" y1="-2.54" x2="0" y2="-0.508" width="0.3048" layer="94" curve="79.611142" cap="flat"/>
-<text x="-2.54" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
-<text x="-2.54" y="3.302" size="1.778" layer="95">&gt;NAME</text>
-<pin name="1" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
-<pin name="GND" x="2.54" y="-2.54" visible="off" length="short" direction="pwr" rot="R180"/>
-</symbol>
-<symbol name="GND">
-<text x="-1.524" y="1.778" size="1.778" layer="95">&gt;NAME</text>
-<pin name="GND" x="-2.54" y="0" length="short" direction="pwr"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="BU-SMA-G" prefix="X">
-<description>FEMALE &lt;b&gt;SMA CONNECTOR&lt;/b&gt;&lt;p&gt;
-Radiall&lt;p&gt;
-distributor RS 193-9117</description>
-<gates>
-<gate name="G1" symbol="BNC-FGND" x="0" y="0"/>
-<gate name="G2" symbol="GND" x="25.4" y="2.54" addlevel="request"/>
-<gate name="G3" symbol="GND" x="25.4" y="0" addlevel="request"/>
-<gate name="G4" symbol="GND" x="25.4" y="-2.54" addlevel="request"/>
-</gates>
-<devices>
-<device name="" package="BU-SMA-G">
-<connects>
-<connect gate="G1" pin="1" pad="1"/>
-<connect gate="G1" pin="GND" pad="2"/>
-<connect gate="G2" pin="GND" pad="3"/>
-<connect gate="G3" pin="GND" pad="4"/>
-<connect gate="G4" pin="GND" pad="5"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="MF" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OC_FARNELL" value="unknown" constant="no"/>
-<attribute name="OC_NEWARK" value="unknown" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="ftdichip">
 <description>&lt;b&gt;FTDI (TM) CHIP&lt;/b&gt; Future Technology Devices International Ltd.&lt;p&gt;
 http://www.ftdichip.com</description>
@@ -6852,10 +6732,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V4" library="supply1" deviceset="+3V3" device=""/>
 <part name="R11" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="100K"/>
-<part name="R12" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="120R"/>
 <part name="R13" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="120R"/>
 <part name="R14" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="120R"/>
-<part name="X1" library="con-coax" deviceset="BU-SMA-G" device=""/>
 <part name="+3V2" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="C11" library="SparkFun-Capacitors" deviceset="CAP" device="0603-CAP" value="1uF"/>
@@ -6908,7 +6786,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="R22" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="1K"/>
 <part name="R23" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="1K"/>
 <part name="R24" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="1K"/>
-<part name="JP3" library="SparkFun-Connectors" deviceset="M03" device="JST-PTH"/>
+<part name="JP3" library="SparkFun-Connectors" deviceset="M03" device="PTH"/>
 <part name="GND27" library="supply1" deviceset="GND" device=""/>
 <part name="Q5" library="SparkFun-DiscreteSemi" deviceset="TRANSISTOR_NPN" device="MMBT2222A" value="MMBT2222A">
 <attribute name="PROD_ID" value="TRANS-08049"/>
@@ -6916,7 +6794,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 </part>
 <part name="P+7" library="supply1" deviceset="VCC" device=""/>
 <part name="R26" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="1K"/>
-<part name="JP2" library="SparkFun-Connectors" deviceset="M03" device="JST-PTH"/>
+<part name="JP2" library="SparkFun-Connectors" deviceset="M03" device="PTH"/>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
 <part name="Q6" library="SparkFun-DiscreteSemi" deviceset="TRANSISTOR_NPN" device="MMBT2222A" value="MMBT2222A">
 <attribute name="PROD_ID" value="TRANS-08049"/>
@@ -6928,7 +6806,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="P+9" library="supply1" deviceset="+12V" device=""/>
 <part name="JP6" library="SparkFun-Connectors" deviceset="M06" device="3.5MM-6"/>
 <part name="GND31" library="supply1" deviceset="GND" device=""/>
-<part name="JP7" library="SparkFun-Connectors" deviceset="M04" device="JST-PTH"/>
+<part name="JP7" library="SparkFun-Connectors" deviceset="M04" device="PTH"/>
 <part name="Q7" library="SparkFun-DiscreteSemi" deviceset="TRANSISTOR_NPN" device="MMBT2222A" value="MMBT2222A">
 <attribute name="VALUE" value="MMBT2222A"/>
 </part>
@@ -6992,6 +6870,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND38" library="supply1" deviceset="GND" device=""/>
 <part name="R39" library="SparkFun-Resistors" deviceset="RESISTOR" device="0603-RES" value="10K"/>
 <part name="JP5" library="SparkFun-Connectors" deviceset="M01" device="PTH" value="M01PTH"/>
+<part name="JP8" library="SparkFun-Connectors" deviceset="M03" device="PTH"/>
 </parts>
 <sheets>
 <sheet>
@@ -7077,13 +6956,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="+3V3" gate="G$1" x="80.01" y="196.85"/>
 <instance part="+3V4" gate="G$1" x="30.48" y="196.85"/>
 <instance part="R11" gate="G$1" x="59.69" y="200.66" rot="R180"/>
-<instance part="R12" gate="G$1" x="138.43" y="191.77"/>
 <instance part="R13" gate="G$1" x="128.27" y="181.61" rot="R270"/>
 <instance part="R14" gate="G$1" x="138.43" y="171.45"/>
-<instance part="X1" gate="G1" x="151.13" y="182.88" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="154.94" y="177.8" size="1.778" layer="96" rot="MR90"/>
-<attribute name="NAME" x="153.67" y="186.182" size="1.778" layer="95" rot="MR0"/>
-</instance>
 <instance part="+3V2" gate="G$1" x="128.27" y="196.85"/>
 <instance part="GND7" gate="1" x="148.59" y="166.37"/>
 <instance part="C11" gate="G$1" x="231.14" y="12.7" rot="R270"/>
@@ -7223,6 +7097,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="GND38" gate="1" x="325.12" y="137.16"/>
 <instance part="R39" gate="G$1" x="314.96" y="144.78" rot="R180"/>
 <instance part="JP5" gate="G$1" x="341.63" y="152.4" rot="R180"/>
+<instance part="JP8" gate="G$1" x="156.21" y="189.23" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -7307,8 +7182,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="146.05" y1="173.99" x2="148.59" y2="176.53" width="0.1524" layer="91"/>
 <wire x1="146.05" y1="173.99" x2="148.59" y2="171.45" width="0.1524" layer="91"/>
 <junction x="146.05" y="173.99"/>
-<pinref part="X1" gate="G1" pin="GND"/>
 <wire x1="148.59" y1="180.34" x2="148.59" y2="176.53" width="0.1524" layer="91"/>
+<pinref part="JP8" gate="G$1" pin="3"/>
+<wire x1="148.59" y1="186.69" x2="148.59" y2="180.34" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="VSS"/>
@@ -7622,7 +7498,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="139.7" y1="13.97" x2="139.7" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R12" gate="G$1" pin="1"/>
 <pinref part="R13" gate="G$1" pin="1"/>
 <wire x1="128.27" y1="191.77" x2="128.27" y2="194.31" width="0.1524" layer="91"/>
 <wire x1="133.35" y1="191.77" x2="130.81" y2="189.23" width="0.1524" layer="91"/>
@@ -7630,6 +7505,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="130.81" y1="189.23" x2="128.27" y2="191.77" width="0.1524" layer="91"/>
 <junction x="130.81" y="189.23"/>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
+<pinref part="JP8" gate="G$1" pin="1"/>
+<wire x1="133.35" y1="191.77" x2="148.59" y2="191.77" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R19" gate="G$1" pin="2"/>
@@ -8020,14 +7897,10 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="40.64" y="177.8" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R12" gate="G$1" pin="2"/>
 <label x="140.97" y="185.42" size="1.778" layer="95" rot="R180"/>
-<wire x1="143.51" y1="191.77" x2="146.05" y2="189.23" width="0.1524" layer="91"/>
-<junction x="146.05" y="189.23"/>
-<wire x1="146.05" y1="189.23" x2="148.59" y2="186.69" width="0.1524" layer="91"/>
-<pinref part="X1" gate="G1" pin="1"/>
-<wire x1="148.59" y1="186.69" x2="148.59" y2="182.88" width="0.1524" layer="91"/>
 <wire x1="146.05" y1="189.23" x2="140.97" y2="184.15" width="0.1524" layer="91"/>
+<pinref part="JP8" gate="G$1" pin="2"/>
+<wire x1="148.59" y1="189.23" x2="146.05" y2="189.23" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
